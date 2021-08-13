@@ -4,7 +4,6 @@
   "main": "index.js",
   "dependencies": {
     "@iamtraction/google-translate": "^1.1.2",
-    "@willtda/discord-backup": "^1.0.1",
     "canvacord": "^5.2.0",
     "dayjs": "^1.10.6",
     "discord-backup": "^2.5.0",
@@ -21,10 +20,7 @@
     "discord-pages": "^1.0.2",
     "discord-paginationembed": "^2.1.0",
     "discord-reply": "^0.1.2",
-    "discord-together": "^1.1.14",
     "discord.js": "^12.5.3",
-    "discord.js-collector": "^1.8.2",
-    "discord.js-commando": "^0.12.2",
     "express": "^4.17.1",
     "fs": "^0.0.1-security",
     "gamer-discord-utils": "^2.0.2",
