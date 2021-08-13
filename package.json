@@ -52,7 +52,7 @@
     "start": "npm install discord.js@12.5.3 --force"
   },
   "engines": {
-    "node": "16.x"
+    "node": "15.x"
   },
   "keywords": [],
   "author": "",
