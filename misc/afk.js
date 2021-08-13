@@ -4,7 +4,6 @@ const moment = require('moment')
 
 module.exports = {
   commands: 'afk',
-  category: 'afk',
   subCommands: 'clear list',
   callback: async (message, arguments, text, client) => {
     if(arguments[0] && arguments[0].toLowerCase() === 'list'){
