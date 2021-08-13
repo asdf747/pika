@@ -43,9 +43,9 @@ moment.updateLocale('en', {
     }
 });
 
-client.settings = [
-  "owner" = "538352367654141952"
-]
+client.settings = {
+  owner: "538352367654141952"
+}
 
 const { GiveawaysManager } = require('discord-giveaways');
 client.giveawaysManager = new GiveawaysManager(client, {
