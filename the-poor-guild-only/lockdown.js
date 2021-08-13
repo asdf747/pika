@@ -1,7 +1,6 @@
 const Lockdown = require('../models/lockdown')
 const { MessageEmbed } = require('discord.js')
 const Pagination = require('discord-paginationembed')
-const { CollectorUtils } = require('discord.js-collector-utils')
 const config = require('../config.json')
 const db = require('quick.db')
 
