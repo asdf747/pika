@@ -8,7 +8,7 @@ const loadCommands7 = require('../donations-thepoor/load-commands')
 const loadCommands8 = require('../the-poor-guild-only/load-commands')
 const { MessageEmbed } = require('discord.js')
 const db = require('quick.db')
-const config = require('../../config.json')
+const config = require('../config.json')
 const { MessageMenu, MessageMenuOption } = require('discord-buttons')
 const REQUIRED = require('../models/toggle')
 
