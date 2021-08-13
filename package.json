@@ -8,6 +8,7 @@
     "dayjs": "^1.10.6",
     "discord-backup": "^2.5.0",
     "discord-buttons": "^4.0.0",
+    "discord-embeds-pages-buttons": "^1.1.10",
     "discord-gamecord": "^1.0.5",
     "discord-giveaways": "^4.5.1",
     "discord-image-generation": "^1.4.7",
