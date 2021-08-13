@@ -169,7 +169,7 @@ const track = new Discord.MessageEmbed()
           if(!message.member.roles.cache.some(r => (r.id === '783745136873439302' || r.id === '783745205684666419'))) return message.channel.send(`You need "${role11.name}" or "${role22.name}" to be able to use this command.`)
         }
         if(category === 'afk'){
-            if(!member.roles.cache.some(r => (r.id === '846634087451590666' || r.id === '783925157168152606' || r.id === '784328545085554698' || r.id === '784335970333622304' || r.id === '786510942477221919' || r.id === '783745292590645269' || r.id === '792793362989187132' || r.id === '786951848891383839' || r.id === '822101979807088640' || r.id === '817393794835415111'))) return
+            if(!member.roles.cache.some(r => (r.id === '846634087451590666' || r.id === '783925157168152606' || r.id === '784328545085554698' || r.id === '784335970333622304' || r.id === '786510942477221919' || r.id === '783745292590645269' || r.id === '792793362989187132' || r.id === '786951848891383839' || r.id === '822101979807088640' || r.id === '817393794835415111' || r.id === '794965963938070559' || r.id === '784335970333622304'))) return
         }
 
         // Ensure the user has the required permissions
