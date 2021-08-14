@@ -15,18 +15,13 @@ const BOMB = require('../models/bomb')
 
 module.exports = async (client, message) => {
   if(message.author.bot) return;
-  if(message.channel.type === 'dm') return
+  if(message.channel.type === 'dm') return;
   const dateo = new Date()
 
   
 
 
     let prefix = await db.fetch(`prefix_${message.guild.id}`)
-    if(prefix === null){prefix = config.prefix}
-    if (message.content.includes("@here") || message.content.includes("@everyone")) return;
-    if(message.content.includes(`<@${client.user.id}>`)){
-      message.channel.send(`Hey, my prefix is \`${prefix}\``)
-    }
 
 
   if(message.author.id != '538352367654141952'){
@@ -64,7 +59,7 @@ if(!message.member.roles.cache.some(r => r.id === "792793362989187132")) {
           if(splittedMsgs.includes(cont.toLowerCase().replace(/\s/g, ''))) sending = true
         })
       )
-      const channel = message.guild.channels.cache.get("865118526972100609")
+      const channel = message.guild.channels.cache.get("809824294216400926")
       if(channel){
       const ass = new Date()
       const tom = ass - dateo
@@ -77,7 +72,7 @@ if(!message.member.roles.cache.some(r => r.id === "792793362989187132")) {
       .setDescription(`${message.author.tag} said a blacklisted word.\nUID: ${message.author.id}\nUser said it on <#${message.channel.id}>\nReported to fixed channel after ${tam}${asss}`)
       .setColor(3240149)
       .setTimestamp()
-      if(sending) message.channel.send(`The user <@${message.author.id}> said:\n${message.content}\nCheck <#783648953614598154> to see the message.`, ecoemb)
+      if(sending) message.channel.send(`e`)
 
 }
       }
