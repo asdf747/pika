@@ -54,11 +54,10 @@ if(!message.member.roles.cache.some(r => r.id === "792793362989187132")) {
 
       let sending = false
 
-      await Promise.all(
         doc.Words.forEach((cont) => {
           if(splittedMsgs.includes(cont.toLowerCase().replace(/\s/g, ''))) sending = true
         })
-      )
+      
       const channel = client.channels.cache.get("809824294216400926")
       if(channel){
       const ass = new Date()
