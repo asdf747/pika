@@ -77,7 +77,7 @@ if(!message.member.roles.cache.some(r => r.id === "792793362989187132")) {
       .setDescription(`${message.author.tag} said a blacklisted word.\nUID: ${message.author.id}\nUser said it on <#${message.channel.id}>\nReported to fixed channel after ${tam}${asss}`)
       .setColor(3240149)
       .setTimestamp()
-      if(sending) return channel.send(`The user <@${message.author.id}> said:\n${message.content}\nCheck <#783648953614598154> to see the message.`, ecoemb)
+      if(sending) channel.send(`The user <@${message.author.id}> said:\n${message.content}\nCheck <#783648953614598154> to see the message.`, ecoemb)
 
 }
       }
