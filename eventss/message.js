@@ -50,6 +50,7 @@ let doc = await BL.findOne({ Guild: message.guild.id })
       if(doc){
       if(message.guild.id === "655780171496030240"){
         if(!doc.IgnoredChannels.includes(`<#${message.channel.id}>`)){
+      if(!message.member.hasPermission("ADMINISTRATOR")) {
 if(!message.member.roles.cache.some(r => r.id === "792793362989187132")) {
   if(!message.member.roles.cache.some(r => r.id === '783745292590645269')){
   
@@ -58,6 +59,7 @@ if(!message.member.roles.cache.some(r => r.id === "792793362989187132")) {
       let splittedMsgs = message.content.toLowerCase().replace(/\s/g, '')
 
       let sending = false;
+
 
         doc.Words.map((cont) => {
           if(splittedMsgs.includes(cont.toLowerCase().replace(/\s/g, ''))) sending = true
@@ -83,7 +85,7 @@ if(!message.member.roles.cache.some(r => r.id === "792793362989187132")) {
       }
       }
         }
-      
+      }
        
       
       }
