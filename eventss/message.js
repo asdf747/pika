@@ -15,13 +15,18 @@ const BOMB = require('../models/bomb')
 
 module.exports = async (client, message) => {
   if(message.author.bot) return;
-  if(message.channel.type === 'dm') return;
+  if(message.channel.type === 'dm') return
   const dateo = new Date()
 
   
 
 
     let prefix = await db.fetch(`prefix_${message.guild.id}`)
+    if(prefix === null){prefix = config.prefix}
+    if (message.content.includes("@here") || message.content.includes("@everyone")) return;
+    if(message.content.includes(`<@${client.user.id}>`)){
+      message.channel.send(`Hey, my prefix is \`${prefix}\``)
+    }
 
 
   if(message.author.id != '538352367654141952'){
@@ -45,20 +50,20 @@ let doc = await BL.findOne({ Guild: message.guild.id })
       if(doc){
       if(message.guild.id === "655780171496030240"){
         if(!doc.IgnoredChannels.includes(`<#${message.channel.id}>`)){
+      if(!message.member.hasPermission("ADMINISTRATOR")) {
 if(!message.member.roles.cache.some(r => r.id === "792793362989187132")) {
   if(!message.member.roles.cache.some(r => r.id === '783745292590645269')){
   
-      if(doc.Words.length){
+      if(!doc.Words.join('\n') === ""){
       
       let splittedMsgs = message.content.toLowerCase().replace(/\s/g, '')
 
-      let sending = false
+      let sending = false;
 
-        doc.Words.forEach((cont) => {
+        doc.Words.map((cont) => {
           if(splittedMsgs.includes(cont.toLowerCase().replace(/\s/g, ''))) sending = true
         })
-      
-      const channel = client.channels.cache.get("809824294216400926")
+      const channel = message.guild.channels.cache.get("865118526972100609")
       if(channel){
       const ass = new Date()
       const tom = ass - dateo
@@ -71,17 +76,17 @@ if(!message.member.roles.cache.some(r => r.id === "792793362989187132")) {
       .setDescription(`${message.author.tag} said a blacklisted word.\nUID: ${message.author.id}\nUser said it on <#${message.channel.id}>\nReported to fixed channel after ${tam}${asss}`)
       .setColor(3240149)
       .setTimestamp()
-      if(sending) message.channel.send(`e`)
+      if(sending) return channel.send(`The user <@${message.author.id}> said:\n${message.content}\nCheck <#783648953614598154> to see the message.`, ecoemb)
 
 }
       }
       }
       }
       }
-        
+        }
       }
        
-    
+      
       }
 
 
