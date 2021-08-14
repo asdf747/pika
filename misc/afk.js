@@ -6,6 +6,43 @@ module.exports = {
   commands: 'afk',
   subCommands: 'clear list',
   callback: async (message, arguments, text, client) => {
+    if(arguments[0] && arguments[0].toLowerCase() === 'set'){
+      let msg = 'AFK'
+      if(arguments[1]) msg = arguments.slice(1).join(' ')
+  
+      await AFK.findOne({ Guild: message.guild.id }, async (err, data) => {
+        if(data){
+          let exi = false
+          data.Afks.map(m => {
+            if(m.User === message.author.id) exi = true
+          })
+          if(exi) return
+          let obj = {
+            User: message.author.id,
+            Date: new Date(),
+            Msg: msg
+          }
+          data.Afks.push(obj)
+          data.save()
+          if(message.member.roles.highest.position < message.guild.me.roles.highest.position) message.member.setNickname(`[AFK] ${message.member.displayName}`)
+          message.channel.send(`${message.author} I set your AFK: ${msg}`)
+        }if(!data){
+        await new AFK({
+          Guild: message.guild.id,
+          Afks: [
+            {
+              User: message.author.id,
+              Date: new Date(),
+              Msg: msg
+            }
+          ]
+        }).save()
+        if(message.member.roles.highest.position < message.guild.me.roles.highest.position) message.member.setNickname(`[AFK] ${message.member.displayName}`)
+        message.channel.send(`${message.author} I set your AFK: ${msg}`)
+        }
+      })
+      return
+    }
     if(arguments[0] && arguments[0].toLowerCase() === 'list'){
       if(!message.member.hasPermission('ADMINISTRATOR')) return
       await AFK.findOne({ Guild: message.guild.id }, async (err, data) => {
