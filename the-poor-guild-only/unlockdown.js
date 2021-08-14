@@ -7,7 +7,33 @@ const db = require('quick.db')
 module.exports = {
   commands: ['unlockdown', 'ud'],
   permissions: "MANAGE_CHANNELS",
+  subCommands: 'server',
   callback: async (message, arguments, text, client) => {
+    if(arguments[0] && arguments[0].toLowerCase() === 'server'){
+      const folt = x => {
+        return (x.author.id === message.author.id)
+      }
+      const ms = await message.channel.send("Are you sure you want to unlock the server?")
+      const very = await message.channel.awaitMessages(folt, {max: 1, time: 10000});
+
+      if(!very.size) return message.channel.send("Timeout.")
+
+      let choce = very.first().content.toLowerCase()
+      if(choce === 'yes') console.log('ass')
+      else if(choce === 'no') return message.channel.send("Cancelled action")
+      else return message.channel.send('Invalid option')
+
+    await message.guild.members.cache.forEach(memo => {
+      const rol = message.guild.roles.cache.get('876124352796581918')
+      if(rol){
+        if(memo.roles.cache.some(r => r.id === '876124352796581918')){
+          memo.roles.remove(rol)
+        }
+      }
+    })
+    await message.channel.send(":white_check_mark: | Task done!")
+    return
+    }
     let prefixx = await db.fetch(`prefix_${message.guild.id}`)
     if(prefixx === null){prefixx = config.prefix}
 
@@ -27,7 +53,7 @@ module.exports = {
 
           let choice = verify.first().content.toLowerCase()
           if(choice === 'yes') console.log('ass')
-          else if(choice === 'no') return
+          else if(choice === 'no') return message.channel.send("Cancelled action")
           else return message.channel.send('Invalid option')
 
           

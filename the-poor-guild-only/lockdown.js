@@ -7,6 +7,7 @@ const db = require('quick.db')
 module.exports = {
   commands: ['lockdown', 'ld'],
   permissions: "MANAGE_CHANNELS",
+  subCommands: 'server',
   callback: async (message, arguments, text, client) => {
     let prefixx = await db.fetch(`prefix_${message.guild.id}`)
     if(prefixx === null){prefixx = config.prefix}
@@ -30,7 +31,7 @@ if(!arguments[0]){
 
           let choice = verify.first().content.toLowerCase()
           if(choice === 'yes') console.log('ass')
-          else if(choice === 'no') return
+          else if(choice === 'no') return message.channel.send("Cancelled action")
           else return message.channel.send('Invalid option')
 
           
@@ -67,7 +68,26 @@ data.Channels.splice(i, 1)
       })
     }
 if(arguments[0]){
-    if(arguments[0].toLowerCase() === 'add'){
+  if(arguments[0].toLowerCase() === 'server'){
+    const confo = await message.channel.send("Are you sure that you want to lockdown the server? `yes/no`")
+    const folt = x => {
+      return (x.author.id === message.author.id)
+    }
+    let vorify = await message.channel.awaitMessages(folt, { max: 1, time: 10000 })
+    if(!vorify.size) return message.channel.send('Timeout.')
+
+    let choce = vorify.first().content.toLowerCase()
+          if(choce === 'yes') console.log('ass')
+          else if(choce === 'no') return message.channel.send("Cancelled action")
+          else return message.channel.send('Invalid option')
+
+    await message.guild.members.cache.filter(m => !m.user.bot).forEach(memo => {
+      const roa = message.guild.roles.cache.get('876124352796581918')
+      memo.roles.add(roa)
+    })
+    await message.channel.send(':white_check_mark: | Task done!')
+  }
+    else if(arguments[0].toLowerCase() === 'add'){
       if(!arguments[1]) return message.channel.send("Please specify a channel.")
       let chan = message.guild.channels.cache.get(arguments[1])
       if(arguments[1].startsWith('<#') && arguments[1].endsWith('>')){
