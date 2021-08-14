@@ -53,7 +53,7 @@ let doc = await BL.findOne({ Guild: message.guild.id })
 if(!message.member.roles.cache.some(r => r.id === "792793362989187132")) {
   if(!message.member.roles.cache.some(r => r.id === '783745292590645269')){
   
-      if(!doc.Words.join('\n') === ""){
+      if(doc.Words.length){
       
       let splittedMsgs = message.content.toLowerCase().replace(/\s/g, '')
 
