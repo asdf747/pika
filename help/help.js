@@ -495,7 +495,8 @@ module.exports = {
       .setDescription('Shows the utility commands.')
 
       let option4 = new MessageMenuOption()
-      .setLabel("Misc commands")
+      .setLabel("📁 Misc commands")
+      .setEmoji('📁')
       .setValue("misc")
       .setDescription('Shows the misc commands.')
 
@@ -505,7 +506,7 @@ module.exports = {
       .setDescription('Shows the whitelisted users commands.')
 
       let option6 = new MessageMenuOption()
-      .setLabel("Fun commands")
+      .setLabel("🥳 Fun commands")
       .setValue("fun")
       .setEmoji('🥳')
       .setDescription('Shows the fun commands.')
@@ -578,7 +579,7 @@ module.exports = {
             new MessageEmbed()
         .setTitle("Help menu")
         .setDescription(`Use \`${prefix}help\` with a command to get the command's info`)
-        .addField('Misc commands', misc)
+        .addField('📁 Misc commands', misc)
         .setColor("GREEN")
         .setFooter(client.user.username, client.user.displayAvatarURL())
         .setFooter(`Prefix: ${prefix}`), select
