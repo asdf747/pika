@@ -10,13 +10,12 @@ module.exports = {
   callback: async (message, arguments, text, client) => {
     let prefix = await db.fetch(`prefix_${message.guild.id}`)
     if(message.content.split(' ')[0] === `${prefix}role`  && arguments[0] === 'info' && !arguments[1]) return message.channel.send("Please enter a role.")
-    if(message.content.split(' ')[0] === `${prefix}ri` && !arguments[0]) return message.channel.send("Please enter a role.")
     if(prefix === null) prefix = config.prefix
     let gg = 1
     if(message.content.split(' ')[0].toLowerCase() === `${prefix}ri`) gg = 0
     if(!arguments[gg]) return message.channel.send("Please enter a role.")
     let role = message.guild.roles.cache.find(r => r.name.toLowerCase().includes(arguments.slice(gg).join(' ').toLowerCase()))
-    if(Number(arguments[1])){
+    if(Number(arguments[gg])){
       role = message.guild.roles.cache.find(r => r.id === arguments[gg])
     }
     if(arguments[gg].startsWith('<@&')){
