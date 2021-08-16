@@ -15,6 +15,16 @@ let validgos = 0
 let duration = ms(arguments[1])
 if(!duration) return message.channel.send("Please enter a valid duration")
 let reason = `Banned by ${message.author.tag}`
+let higher = false
+
+let higherbot = false
+users.forEach(user => {
+    const us = message.guild.members.cache.get(user)
+    if(us && us.roles.highest.position > message.guild.me.roles.highest.position) higherbot = true
+    if(us && us.roles.highest.position > message.member.roles.highest.position) higher = true
+})
+if(higher) return message.channel.send(":x: This user is higher than you")
+if(higherbot) return message.channel.send(":x: This user is higher than me")
 if(arguments[2]) reason = arguments.slice(2).join(' ')
 users.forEach(async user => {
     let bob = true
