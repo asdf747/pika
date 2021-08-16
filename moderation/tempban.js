@@ -1,4 +1,4 @@
-const TEMP = require('../../models/tempban')
+const TEMP = require('../models/tempban')
 const schedule = require('node-schedule')
 const ms = require('ms')
 const moment = require('moment')
