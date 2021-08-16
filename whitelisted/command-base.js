@@ -116,8 +116,7 @@ module.exports = (client, commandOptions) => {
 
           const track = new Discord.MessageEmbed()
           .setAuthor(message.author.tag, message.author.displayAvatarURL())
-          .setTitle(`[${typeof commands === 'string' ? commands : commands[0]}](${message.url})`)
-          .setDescription(`${message}`)
+          .setDescription(`**[${typeof commands === 'string' ? commands : commands[0]}](${message.url})**\n\`\`\`${message}\`\`\``)
           .setFooter(`ID: ${message.author.id}`)
           .setTimestamp()
 
