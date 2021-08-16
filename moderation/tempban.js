@@ -11,7 +11,7 @@ module.exports = {
     callback: async (message, arguments, text, client) => {
 const users = arguments[0].split(',')
 let validusers = []
-let validuserstags = []
+let validgos = 0
 let duration = ms(arguments[1])
 if(!duration) return message.channel.send("Please enter a valid duration")
 let reason = `Banned by ${message.author.tag}`
@@ -23,6 +23,7 @@ users.forEach(async user => {
     .then(use => {
         if(use.tag !== undefined){
             validusers = true
+            validgos++
         }
 
     }).catch(async () => {bob = false})
