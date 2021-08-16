@@ -55,7 +55,7 @@ client.giveawaysManager = new GiveawaysManager(client, {
         botsCanWin: false,
         embedColor: 8571344,
         embedColorEnd: "#000000",
-        endedGiveawaysLifetime: 86400000,
+        endedGiveawaysLifetime: 864000000,
         reaction: "🎉"
     }
 });
