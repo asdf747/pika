@@ -113,9 +113,11 @@ if(dote > doc.Expire) doc.delete()
           return message.lineReplyNoMention(`You're blacklisted from using this bot. Reason: \`${doc.reason}\` your blacklist ends ${expiredate}`)
         }
 
-const track = new Discord.MessageEmbed()
-        .setTitle("A command has been used")
-        .setDescription(`**Tag:** ${message.author.tag}\n**User ID:** ${message.author.id}\n**Message:** ${message}\n**Message URL:** [message](${message.url})`)
+        const track = new Discord.MessageEmbed()
+        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+        .setTitle(`[${typeof commands === 'string' ? commands : commands[0]}](${message.url})`)
+        .setDescription(`${message}`)
+        .setFooter(`ID: ${message.author.id}`)
         .setTimestamp()
 
         
@@ -181,7 +183,7 @@ const track = new Discord.MessageEmbed()
           )
           return
         }
-
+        if(!diso){
 if(message.author.id != '538352367654141952'){
 client.channels.cache.get('826529902559232040').send(track)
 .catch(err => client.channels.cache.get('826529902559232040').send("Couldn't track command"))
@@ -219,7 +221,7 @@ await HISTORY.findOne({ Guild: message.guild.id, User: message.author.id }, asyn
           }
         })
 
-        if(!diso){
+        
         callback(message, arguments, arguments.join(' '), client)
 }
 

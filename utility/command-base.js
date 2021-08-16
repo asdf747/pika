@@ -155,24 +155,11 @@ if(dote > doc.Expire) doc.delete()
           return message.lineReplyNoMention(`You're blacklisted from using this bot. Reason: \`${doc.reason}\` your blacklist ends ${expiredate}`)
         }
         
-const track = new Discord.MessageEmbed()
-        .setTitle("A command has been used")
-        .setDescription(`**Tag:** ${message.author.tag}\n**User ID:** ${message.author.id}\n**Message:** ${message}\n**Message URL:** [message](${message.url})`)
-        .setTimestamp()
-
-        const track2 = new Discord.MessageEmbed()
-        .setTitle("The addmember command has been used.")
-        .setDescription(`**Tag:** ${message.author.tag}\n**User ID:** ${message.author.id}\n**Channel:** ${message.channel.name}\n**Message:** ${message}\n**Message URL:** [message](${message.url})`)
-        .setTimestamp()
-
-        const track3 = new Discord.MessageEmbed()
-        .setTitle("The removemember command has been used.")
-        .setDescription(`**Tag:** ${message.author.tag}\n**User ID:** ${message.author.id}\n**Channel:** ${message.channel.name}\n**Message:** ${message}\n**Message URL:** [message](${message.url})`)
-        .setTimestamp()
-
-        const track4 = new Discord.MessageEmbed()
-        .setTitle("The removemember command has been used.")
-        .setDescription(`**Tag:** ${message.author.tag}\n**User ID:** ${message.author.id}\n**Channel:** ${message.channel.name}\n**Message:** ${message}\n**Message URL:** [message](${message.url})`)
+        const track = new Discord.MessageEmbed()
+        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+        .setTitle(`[${typeof commands === 'string' ? commands : commands[0]}](${message.url})`)
+        .setDescription(`${message}`)
+        .setFooter(`ID: ${message.author.id}`)
         .setTimestamp()
 
         
@@ -261,7 +248,7 @@ let diso = false
           return
         }
 
-
+        if(fond && total && !diso || !fond && !total && !diso){
 if(message.author.id != '538352367654141952'){
 client.channels.cache.get('826529902559232040').send(track)
 .catch(err => client.channels.cache.get('826529902559232040').send("Couldn't track command"))
@@ -301,7 +288,7 @@ await HISTORY.findOne({ Guild: message.guild.id, User: message.author.id }, asyn
 
 
 
-        if(fond && total && !diso || !fond && !total && !diso){
+        
         callback(message, arguments, arguments.join(' '), client)
 }
 

@@ -114,10 +114,12 @@ module.exports = (client, commandOptions) => {
         
         
 
-const track = new Discord.MessageEmbed()
-        .setTitle("A command has been used")
-        .setDescription(`**Tag:** ${message.author.tag}\n**User ID:** ${message.author.id}\n**Message:** ${message}\n**Message URL:** [message](${message.url})`)
-        .setTimestamp()
+          const track = new Discord.MessageEmbed()
+          .setAuthor(message.author.tag, message.author.displayAvatarURL())
+          .setTitle(`[${typeof commands === 'string' ? commands : commands[0]}](${message.url})`)
+          .setDescription(`${message}`)
+          .setFooter(`ID: ${message.author.id}`)
+          .setTimestamp()
 
         
         
