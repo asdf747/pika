@@ -22,7 +22,7 @@ users.forEach(async user => {
     message.guild.members.ban(user, { reason })
     .then(use => {
         if(use.tag !== undefined){
-            validusers.push('e')
+            validusers = true
         }
 
     }).catch(async () => {bob = false})
@@ -41,7 +41,7 @@ users.forEach(async user => {
     })
 }
 })
-if(!validusers.length) return message.channel.send("Invalid user.")
+if(!validusers) return message.channel.send("Invalid user.")
 message.channel.send(`Banned **${validusers.length}** user${validusers.length !== 1 ? 's' : ''} ${moment(new Date(Date.now() + duration)).fromNow().replace('in', 'for')}`)
 
 
