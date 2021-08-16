@@ -32,7 +32,7 @@ users.forEach(async user => {
         Start: new Date(),
         End: new Date(Date.now() + duration),
         Reason: reason
-    }).save().then(async thingo => {n
+    }).save().then(async thingo => {
         schedule.scheduleJob(new Date(Date.now() + duration), function(){
             message.guild.members.unban(user, 'Automatic unban from tempban')
             thingo.delete()
@@ -41,7 +41,7 @@ users.forEach(async user => {
 }
 })
 if(!validusers.length) return message.channel.send("Invalid user.")
-message.channel.send(`Banned **${validuserstags[0]}** ${moment(new Date(Date.now() + duration)).fromNow().replace('in', 'for')}`)
+message.channel.send(`Banned **${validusers.length}** user${validusers.length !== 1 ? 's' : ''} ${moment(new Date(Date.now() + duration)).fromNow().replace('in', 'for')}`)
 
 
     }
