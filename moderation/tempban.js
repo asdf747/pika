@@ -21,8 +21,9 @@ users.forEach(async user => {
     
     message.guild.members.ban(user, { reason })
     .then(use => {
-        if(!use.id) return bob = false
+        if(use.tag !== undefined){
             validusers.push('e')
+        }
 
     }).catch(async () => {bob = false})
     if(bob) {
