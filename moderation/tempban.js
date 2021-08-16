@@ -6,6 +6,7 @@ const moment = require('moment')
 module.exports = {
     commands: 'tempban',
     minArgs: 2,
+    permissions: "BAN_MEMBERS",
     expectedArgs: '<user(s)> <duration> [reason]',
     callback: async (message, arguments, text, client) => {
         const users = arguments[0].split(',')
