@@ -212,7 +212,7 @@ roles.forEach((r, i) => {
 
       client.giveawaysManager.start(message.channel, {
         time: ms(timerDuration),
-        prize: '',
+        prize: ' ',
         exemptMembers: new Function('member', `return true`),
         winnerCount: 1,
         hostedBy: message.author,
