@@ -12,6 +12,7 @@ const loadCommands9 = require('../donations-thepoor/load-commands')
 const loadCommands10 = require('../fungame/load-commands')
 const Discord = require('discord.js')
 const schedule = require('node-schedule')
+const TEMP = require('../models/tempban')
 
 module.exports = async (client) => {
   
@@ -32,6 +33,19 @@ function getUsers() {
     });
   }
 }
+
+let temps = await TEMP.find()
+
+function temp(client, temps){
+  temps.forEach(user => {
+    schedule.scheduleJob(user.End, async function(){
+      client.guilds.cache.get(user.Guild).members.unban(user.User, 'Automatic unban from tempban')
+      user.delete()
+    })
+  })
+}
+
+await temp(client, temps)
     
     console.log(`Set bot's activity to ${activity}`)
     loadCommands(client)
