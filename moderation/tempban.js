@@ -25,6 +25,7 @@ users.forEach(async user => {
             validusers = true
             validgos++
         }
+        if(users.length === 1) message.channel.send(`Banned **${use.tag}** ${moment(new Date(Date.now() + duration)).fromNow().replace('in', 'for')}`)
 
     }).catch(async () => {bob = false})
     if(bob) {
@@ -42,8 +43,7 @@ users.forEach(async user => {
     })
 }
 })
-if(!validusers) return message.channel.send("Invalid user.")
-message.channel.send(`Banned **${validgos}** user${validusers.length !== 1 ? 's' : ''} ${moment(new Date(Date.now() + duration)).fromNow().replace('in', 'for')}`)
+if(users.length > 1) message.channel.send(`Banned **${users.length}** user${users.length !== 1 ? 's' : ''} ${moment(new Date(Date.now() + duration)).fromNow().replace('in', 'for')}`)
 
 
     }
