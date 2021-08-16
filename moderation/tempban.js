@@ -10,7 +10,7 @@ module.exports = {
     expectedArgs: '<user(s)> <duration> [reason]',
     callback: async (message, arguments, text, client) => {
 const users = arguments[0].split(',')
-let validusers = []
+let validusers = false
 let validgos = 0
 let duration = ms(arguments[1])
 if(!duration) return message.channel.send("Please enter a valid duration")
@@ -43,7 +43,7 @@ users.forEach(async user => {
 }
 })
 if(!validusers) return message.channel.send("Invalid user.")
-message.channel.send(`Banned **${validusers.length}** user${validusers.length !== 1 ? 's' : ''} ${moment(new Date(Date.now() + duration)).fromNow().replace('in', 'for')}`)
+message.channel.send(`Banned **${validgos}** user${validusers.length !== 1 ? 's' : ''} ${moment(new Date(Date.now() + duration)).fromNow().replace('in', 'for')}`)
 
 
     }
