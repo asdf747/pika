@@ -132,7 +132,9 @@ if(dote > doc.Expire) doc.delete()
         
         const track = new Discord.MessageEmbed()
         .setAuthor(message.author.tag, message.author.displayAvatarURL())
-        .setDescription(`**[${typeof commands === 'string' ? commands : commands[0]}](${message.url})**\n\`\`\`${message}\`\`\``)
+        .setTitle(`${typeof commands === 'string' ? commands : commands[0]}`)
+        .setURL(`${message.url}`)
+        .setDescription(`\`\`\`${message}\`\`\``)
         .setFooter(`ID: ${message.author.id}`)
         .setTimestamp()
 
