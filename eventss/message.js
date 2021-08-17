@@ -19,7 +19,10 @@ module.exports = async (client, message) => {
   const dateo = new Date()
 
   
-
+if(message.guild.id === '655780171496030240' && message.type === 'USER_PREMIUM_GUILD_SUBSCRIPTION'){
+  const golo = message.guild.roles.cache.get('789432483166945300')
+  message.member.roles.add(golo, 'Boosted.')
+}
 
     let prefix = await db.fetch(`prefix_${message.guild.id}`)
     if(prefix === null){prefix = config.prefix}
