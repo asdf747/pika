@@ -512,10 +512,10 @@ module.exports = {
       .setDescription('Shows the fun commands.')
 
       let option7 = new MessageMenuOption()
-      .setLabel("Giveaway commands")
+      .setLabel("Donations commands")
       .setEmoji('🎉')
       .setValue("donation")
-      .setDescription('Shows the giveaway commands.')
+      .setDescription('Shows the Donations commands.')
 
       let option8 = new MessageMenuOption()
       .setLabel("Guild only commands")
@@ -612,7 +612,7 @@ module.exports = {
             new MessageEmbed()
         .setTitle("Help menu")
         .setDescription(`Use \`${prefix}help\` with a command to get the command's info`)
-        .addField(':tada: Giveaway commands', donation)
+        .addField(':tada: Donations commands', donation)
         .setColor("GREEN")
         .setFooter(client.user.username, client.user.displayAvatarURL())
         .setFooter(`Prefix: ${prefix}`), select
