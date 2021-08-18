@@ -19,7 +19,7 @@ module.exports = {
                         Wallet: -removing,
                         InBank: removing
                     } })
-                    return message.channel.send(`Deposited **${Number(removing).toLocaleString("en-US")}** now your bank balance is **${data.InBank + amount}**.`)
+                    return message.channel.send(`Deposited **${Number(removing).toLocaleString("en-US")}** now your bank balance is **${data.InBank + removing}**.`)
                 }if(data.Wallet < data.Bank){
                     goving = data.Bank - data.InBank
                     if(goving <= 0) return message.channel.send("Your bank is full.")
@@ -29,7 +29,7 @@ module.exports = {
                         Wallet: -removing,
                         InBank: removing
                     } })
-                    return message.channel.send(`Deposited **${Number(removing).toLocaleString("en-US")}** now your bank balance is **${data.InBank + amount}**.`)
+                    return message.channel.send(`Deposited **${Number(removing).toLocaleString("en-US")}** now your bank balance is **${data.InBank + removing}**.`)
                 }
                 return;
                 }
