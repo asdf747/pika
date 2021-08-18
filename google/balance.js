@@ -11,20 +11,20 @@ module.exports = {
         message.channel.send(
           new MessageEmbed()
           .setTitle(`${user.username}'s balance`)
-          .setDescription(`**Walltet:** ${data.Wallet}\n**Bank:** ${data.InBank}/${data.Bank}`)
+          .setDescription(`**Wallet:** ${data.Wallet}\n**Bank:** ${data.InBank}/${data.Bank}`)
         )
       } else if(!data){
         await new bal({
           id: user.id,
           Wallet: 500,
           InBank: 0,
-          Bank: 0
+          Bank: 100
         }).save()
 
         message.channel.send(
           new MessageEmbed()
           .setTitle(`${user.username}'s balance`)
-          .setDescription(`**Walltet:** 500\n**Bank:** 0/0`)
+          .setDescription(`**Wallet:** 500\n**Bank:** 0/100`)
         )
 
       }

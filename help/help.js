@@ -8,6 +8,7 @@ const loadCommands5 = require('../whitelisted/load-commands')
 const loadCommands6 = require('../fun/load-commands')
 const loadCommands7 = require('../donations-thepoor/load-commands')
 const loadCommands8 = require('../the-poor-guild-only/load-commands')
+const loadCommands9 = require('../google/load-commands')
 const { MessageEmbed } = require('discord.js')
 const db = require('quick.db')
 const config = require('../config.json')
@@ -52,6 +53,7 @@ module.exports = {
     let hc = []
     let hd = []
     let ha = []
+    let ic = []
     const commands = loadCommands()
 
     for (const command of commands) {
@@ -412,9 +414,7 @@ module.exports = {
       const args = command.expectedArgs ? `${command.expectedArgs}` : ''
       const subcmds = command.subCommands ? `${command.subCommands}` : ''
       const description = command.description ? ` ${command.description}` : 'No description'
-      hc.push(mainCommand)
-      hd.push(description)
-      ha.push(args)
+      ic.push(mainCommand)
 
       allcmds.push(mainCommand)
       alldescs.push(description)
@@ -465,6 +465,10 @@ module.exports = {
     }).join(' ')
 
     const guildonly = hc.map((cmdd, i) => {
+      return `\`${cmdd}\``
+    }).join(' ')
+
+    const googleonly = ic.map((cmdd, i) => {
       return `\`${cmdd}\``
     }).join(' ')
     if (!arguments[0]) {
@@ -523,6 +527,12 @@ module.exports = {
       .setEmoji('❌')
       .setDescription('Shows the guild only commands.')
 
+      let option9 = new MessageMenuOption()
+      .setLabel("Guild only commands")
+      .setValue("google")
+      .setEmoji('❌')
+      .setDescription('Shows the guild only commands.')
+
       let select = new MessageMenu()
       .setID("selector")
       .setPlaceholder("Select a group")
@@ -534,6 +544,7 @@ module.exports = {
       if(message.guild.id === '655780171496030240' && message.member.hasPermission('BAN_MEMBERS')) select.addOption(option8)
       if(message.member.roles.cache.some(r => (r.id === '783745136873439302' || r.id === '783745205684666419'))) select.addOption(option7)
       if(whitelisted) select.addOption(option5)
+      if(message.guild.id === '854748129365721118') select.addOption(option9)
 
 
       const gall = new MessageEmbed()
@@ -624,6 +635,16 @@ module.exports = {
         .setTitle("Help menu")
         .setDescription(`Use \`${prefix}help\` with a command to get the command's info`)
         .addField('❌ Guild only commands', guildonly)
+        .setColor("GREEN")
+        .setFooter(client.user.username, client.user.displayAvatarURL())
+        .setFooter(`Prefix: ${prefix}`), select
+          )
+        }if(b.values[0] == 'google'){
+          sendMenu.edit(
+            new MessageEmbed()
+        .setTitle("Help menu")
+        .setDescription(`Use \`${prefix}help\` with a command to get the command's info`)
+        .addField('❌ Guild only commands', google)
         .setColor("GREEN")
         .setFooter(client.user.username, client.user.displayAvatarURL())
         .setFooter(`Prefix: ${prefix}`), select

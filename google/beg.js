@@ -5,6 +5,7 @@ const db = require('quick.db')
 module.exports = {
   commands: 'beg',
   description: 'beg for coins',
+  cooldown: 30,
   callback: async (message, arguments, text, client) => {
     let amount = Math.floor(Math.random() * 1000) + 1
 
