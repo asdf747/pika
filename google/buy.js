@@ -10,10 +10,12 @@ module.exports = {
     callback: async (message, arguments, text, client) => {
         let item = items.find(item => item.ID.includes(arguments[0]))
         if(!item) return message.channel.send("This item doesn't exist.")
-        let price = item.Price
         let amount = 1
-        if(arguments[1] && Number(arguments[1])) amount = Number(arguments[1])
-        if(arguments[1] && Number(arguments[1])) price = item.Price * Number(arguments[1])
+        if(arguments[1] && Number(arguments[1])){
+            if(Number(arguments[1]) < 1) return message.channel.send(`You can't buy less than 1 ${item.Name}`)
+            amount = Number(arguments[1])
+        }
+        let price = item.Price * amount
         await economy.findOne({ id: message.author.id }, async(err, data) => {
             if(data){
                 //checking if user has enough money to buy item
