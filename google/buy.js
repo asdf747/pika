@@ -7,12 +7,14 @@ module.exports = {
     description: "Buys an item",
     minArgs: 1,
     expectedArgs: '<item> [amount]',
+    cooldown: 3,
     callback: async (message, arguments, text, client) => {
         let item = items.find(item => item.ID.includes(arguments[0]))
         if(!item) return message.channel.send("This item doesn't exist.")
         let amount = 1
         if(arguments[1] && Number(arguments[1])){
             if(Number(arguments[1]) < 1) return message.channel.send(`You can't buy less than 1 ${item.Name}`)
+            if(arguments[1].includes('.')) return message.channel.send("Invalid amount.")
             amount = Number(arguments[1])
         }
         let price = item.Price * amount

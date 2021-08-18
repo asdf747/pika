@@ -12,7 +12,7 @@ module.exports = {
         message.channel.send(
           new MessageEmbed()
           .setTitle(`${user.username}'s balance`)
-          .setDescription(`**Wallet:** ${data.Wallet}\n**Bank:** ${data.InBank}/${data.Bank}`)
+          .setDescription(`**Wallet:** ${data.Wallet}\n**Bank:** ${data.InBank.toLocaleString("en-US")}/${data.Bank.toLocaleString("en-US")}`)
         )
       } else if(!data){
         await new bal({
