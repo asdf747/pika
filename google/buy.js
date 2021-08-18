@@ -23,7 +23,7 @@ module.exports = {
                 // checking if user already has item
                 let checking = data.Inventory.find(item => item.Name.toLowerCase() === item.Name.toLowerCase())
                 if(checking){
-                    await data.Update({ $inc: {Wallet: -price} })
+                    await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Wallet: -price} })
                     return message.channel.send(
                         new MessageEmbed()
                         .setAuthor(`Bought ${item.Name}`, message.author.displayAvatarURL())
@@ -51,6 +51,7 @@ module.exports = {
                     Bank: 100
                 }).save().then(async (e) => {
                     if(e.Wallet < price) return message.channel.send("You don't have enough money in your wallet.")
+                    await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Wallet: -price} })
                     let obj = {
                         Name: item.Name,
                         Count: amount
