@@ -716,6 +716,7 @@ module.exports = {
           if (ec.includes(cmd.toLowerCase()) && whitelisted === false) return include = false
           if (gc.includes(cmd.toLowerCase()) && !check) return include = false
           if (hc.includes(cmd.toLowerCase()) && message.guild.id !== '655780171496030240') return include = false
+          if (ic.includes(cmd.toLowerCase()) && message.guild.id !== '854748129365721118') return include = false
 
           
         }
