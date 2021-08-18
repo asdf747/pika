@@ -1,4 +1,4 @@
-const uses = require('../uses')
+
 const economy = require('../models/economy')
 const items = require('../shop.json')
 
