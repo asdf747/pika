@@ -17,8 +17,8 @@ module.exports = {
             }
             message.channel.send(
                 new MessageEmbed()
-                .setTitle(`${item.Name}`)
-                .setDescription(`${item.Description} ${counter !== 0 ? `(${counter} owned)` : ''}\n\n**Buy:** ${item.Price}\n**Sell:** ${item.Sell}`)
+                .setTitle(`${item.Name} ${counter !== 0 ? `(${counter} owned)` : ''}`)
+                .setDescription(`${item.Description}\n\n**Buy:** ${item.Price}\n**Sell:** ${item.Sell}`)
                 .setThumbnail(item.Image)
             )
             return

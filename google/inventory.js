@@ -11,7 +11,7 @@ module.exports = {
         await economy.findOne({ id: mem.id }, async (err, data) => {
             if(data){
                 let inv = data.Inventory.map(item => {
-                    let itemid = items.find(ite => ite.Name.toLowerCase() === item.toLowerCase()).ID[0]
+                    let itemid = items.find(ite => ite.Name.toLowerCase() === item.Name.toLowerCase()).ID[0]
                     return `${item.Name} - ${item.Count}\nID: \`${itemid}\``
                 })
                 if(!inv.length) inv = ['Empty']
