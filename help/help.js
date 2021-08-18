@@ -495,19 +495,19 @@ module.exports = {
       .setDescription('Shows the utility commands.')
 
       let option4 = new MessageMenuOption()
-      .setLabel("📁 Misc commands")
+      .setLabel("Misc commands")
       .setEmoji('📁')
       .setValue("misc")
       .setDescription('Shows the misc commands.')
 
       let option5 = new MessageMenuOption()
-      .setLabel(":white_check_mark: Whitelisted users commands")
+      .setLabel("Whitelisted users commands")
       .setValue("whitelist")
-      .setEmoji(':white_check_mark:')
+      .setEmoji('white_check_mark')
       .setDescription('Shows the whitelisted users commands.')
 
       let option6 = new MessageMenuOption()
-      .setLabel("🥳 Fun commands")
+      .setLabel("Fun commands")
       .setValue("fun")
       .setEmoji('🥳')
       .setDescription('Shows the fun commands.')
