@@ -51,7 +51,12 @@ module.exports = {
             avatar: client.user.displayAvatarURL()
           }).then(async webhook => {
             await ReactionLogs.findOneAndUpdate({ Guild: message.guild.id }, { $set: {Channel: channel.id, ID: `${webhook.id}`, TOKEN: `${webhook.token}`} })
-            message.channel.send(`Set reaction logs channel to **#${channel.name}**`)
+            message.channel.send(
+              new MessageEmbed()
+              .setTitle("Set reaction logs channel.")
+              .setDescription(`**Channel:** <#${channel.id}>`)
+              .setFooter(`ID: ${channel.id}`)
+            )
           })
           
         } else if(!data){
@@ -65,7 +70,12 @@ module.exports = {
               ID: `${webhook.id}`,
               TOKEN: `${webhook.token}`
             }).save()
-            message.channel.send(`Set reaction logs channel to **#${channel.name}**`)
+            message.channel.send(
+              new MessageEmbed()
+              .setTitle("Set reaction logs channel.")
+              .setDescription(`**Channel:** <#${channel.id}>`)
+              .setFooter(`ID: ${channel.id}`)
+            )
           })
          
         }
