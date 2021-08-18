@@ -6,7 +6,7 @@ module.exports = {
     commands: 'shop',
     callback: async(message, arguments, text, client) => {
         if(arguments[0]){
-            let item = shop.find(thing => thing.ID.includes(arguments[0].toLowerCase()))
+            let item = shop.find(item => item.ID.includes(arguments[0].toLowerCase()))
             if(!item) return message.channel.send("This item doens't exist.")
             message.channel.send(
                 new MessageEmbed()
