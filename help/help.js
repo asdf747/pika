@@ -591,7 +591,7 @@ module.exports = {
             new MessageEmbed()
         .setTitle("Help menu")
         .setDescription(`Use \`${prefix}help\` with a command to get the command's info`)
-        .addField('Whitelisted users commands', whitelist)
+        .addField('✔️ Whitelisted users commands', whitelist)
         .setColor("GREEN")
         .setFooter(client.user.username, client.user.displayAvatarURL())
         .setFooter(`Prefix: ${prefix}`), select
