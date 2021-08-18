@@ -23,8 +23,8 @@ module.exports = {
           await new eco({
             id: message.author.id,
             Wallet: 500,
-            InBank: 100,
-            Bank: 0
+            InBank: 0,
+            Bank: 100
           }).save().then(async lol => {
             await eco.findOneAndUpdate({ id: message.author.id }, { $inc: {Wallet: amount} })
             message.channel.send(
