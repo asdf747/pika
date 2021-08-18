@@ -24,7 +24,8 @@ module.exports = {
                     goving = data.Bank - data.InBank
                     if(goving <= 0) return message.channel.send("Your bank is full.")
                     removing = data.Bank - data.InBank
-                    if(removing > data.Wallet) removing = data.Bank - data.InBank - data.Wallet 
+                    gosa = data.Bank - data.InBank - data.Wallet
+                    if(removing > data.Wallet) removing = data.Wallet
                     await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {
                         Wallet: -removing,
                         InBank: removing
