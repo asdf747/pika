@@ -12,8 +12,8 @@ module.exports = {
         if(!item) return message.channel.send("This item doesn't exist.")
         let price = item.Price
         let amount = 1
-        if(arguments[1] && Number(arguments[1])) amount = Number(arguments[2])
-        if(arguments[1] && Number(arguments[1])) price = item.Price * Number(arguments[2])
+        if(arguments[1] && Number(arguments[1])) amount = Number(arguments[1])
+        if(arguments[1] && Number(arguments[1])) price = item.Price * Number(arguments[1])
         await economy.findOne({ id: message.author.id }, async(err, data) => {
             if(data){
                 //checking if user has enough money to buy item
