@@ -35,10 +35,10 @@ module.exports = {
     .setChannel(message.channel)
     .setElementsPerPage(8)
     .setPageIndicator(true)
-    .formatField(`${data.Donations.length} donations.`, el => el);
+    .formatField(`${data.Donations.length} donation${data.Donations.length !== 1 ? 's' : ''}.`, el => el);
 
 FieldsEmbed.embed
-  .setTitle(`${member.user.tag}'${member.user.username.endsWith('s') ? '' : 's'} donation${data.Donations.length !== 1 ? 's' : ''}.`)
+  .setTitle(`${member.user.tag}'s donations.`)
   .setColor(65535)
   .setFooter(`ID: ${member.user.id}`)
 
