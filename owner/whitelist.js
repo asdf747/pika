@@ -25,7 +25,7 @@ module.exports = {
         const Expire = ms(arguments[2])
         if(!Expire) return message.lineReplyNoMention("Please specify an expire duration.")
         const expiredate = moment(new Date(Date.now() + Expire)).fromNow()
-        new UserInfo({ id: user.id, Expire, Permanent: false }).save()
+        new UserInfo({ id: user.id, Expire: new Date(Date.now() + Expire), Permanent: false }).save()
         .then(() => message.lineReplyNoMention(
           new MessageEmbed()
         .setTitle(":white_check_mark: | Whitelisted user!")
