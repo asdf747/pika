@@ -1,4 +1,4 @@
-function pp(client, message, arguments, economy){
+async function pp(client, message, arguments, economy){
     await economy.findOne({ id: message.author.id }, async(err, data) => {
         if(data){
             data.Inventory.update({ Name: "PP" }, { $inc: {Count: -1} })
