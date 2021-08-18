@@ -40,7 +40,7 @@ module.exports = {
                     Wallet: 500,
                     InBank: 0,
                     Bank: 100
-                }).save().then(() => {
+                }).save().then(async () => {
                     let pp = data.Bank - data.InBank
                     let amount = Number(arguments[0])
                     if(!amount) return message.channel.send("Enter a valid amount.")
