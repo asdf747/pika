@@ -7,7 +7,7 @@ module.exports = {
   description: 'beg for coins',
   cooldown: 30,
   callback: async (message, arguments, text, client) => {
-    let amount = Math.floor(Math.random() * 500) + 1
+    let amount = Math.floor(Math.random() * 100) + 1
 
 
       await eco.findOne({ id: message.author.id }, async (err, data) => {
@@ -23,7 +23,7 @@ module.exports = {
           await new eco({
             id: message.author.id,
             Wallet: 0,
-            InBank: 0,
+            InBank: 100,
             Bank: 0
           }).save()
           eco = require('../models/economy')
