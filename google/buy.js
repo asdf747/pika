@@ -47,15 +47,15 @@ module.exports = {
                     id: message.author.id,
                     Wallet: 500,
                     InBank: 0,
-                    Bank: 100,
-                    Inventory: [
-                        {
-                            Name: item.Name,
-                            Count: amount
-                        }
-                    ]
-                }).save().then(() => {
-                    if(data.Wallet < price) return message.channel.send("You don't have enough money in your wallet.")
+                    Bank: 100
+                }).save().then(async (e) => {
+                    if(e.Wallet < price) return message.channel.send("You don't have enough money in your wallet.")
+                    let obj = {
+                        Name: item.Name,
+                        Count: amount
+                    }
+                    e.Inventory.push(obj)
+                    e.save()
                     message.channel.send(
                         new MessageEmbed()
                         .setAuthor(`Bought ${item.Name}`, message.author.displayAvatarURL())
