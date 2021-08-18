@@ -9,7 +9,7 @@ module.exports = {
         if(arguments[0]){
             let item = shop.find(item => item.ID.includes(arguments[0].toLowerCase()))
             if(!item) return message.channel.send("This item doens't exist.")
-            let finding = economy.findOne({ id: message.author.id })
+            let finding = await economy.findOne({ id: message.author.id })
             let counter = 0
             if(finding && finding.Inventory.length){
                 counting = finding.Inventory.find(item => item.Name.toLowerCase() === item.Name.toLowerCase())
