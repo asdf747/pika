@@ -501,8 +501,9 @@ module.exports = {
       .setDescription('Shows the misc commands.')
 
       let option5 = new MessageMenuOption()
-      .setLabel("Whitelisted users commands")
+      .setLabel("✔️ Whitelisted users commands")
       .setValue("whitelist")
+      .setEmoji('✔️')
       .setDescription('Shows the whitelisted users commands.')
 
       let option6 = new MessageMenuOption()
