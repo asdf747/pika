@@ -1,13 +1,34 @@
-const express = require('express')
-const app = express()
+const express = require("express");
+const app = express();
+const request = require("request");
+const bodyParser = require("body-parser");
 
-app.get("/", (req, res) => {
-  res.send("Starting.")
-})
-app.listen(3000, () => {
-  console.log("Starting Pika...")
-})
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
+app.post("/webhook", async (req, res) => {
+ const Payload = req.body;
+//Respond To Heroku Webhook
+ res.sendStatus(200);
+
+ const options = {
+  method: "POST",
+  url:
+   "https://discord.com/api/webhooks/877462472645296158/rvOnQ_lGpio-qrdSSZxiAd4LoBA87G5E6Zvr0fTG0LUX0ZnrXnVfpHlsdul6qNfgMd4k",
+  headers: {
+   "Content-type": "application/json",
+  },
+//Format JSON DATA
+  body: JSON.stringify({
+   content: `This is A Webhook notification!A build for your app ${Payload.data.app.name} was just triggered`,
+  }),
+ };
+ request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response);
+ });
+});
+app.listen(3000, () => console.log("App is running on port 3000!"));
 const Discord = require('discord.js')
 require('discord-reply');
 const client = new Discord.Client({ intents: Discord.Intents.ALL, getAllUsers: true, shards: 'auto', restTimeOffset: 0, fetchAllMembers: true});
