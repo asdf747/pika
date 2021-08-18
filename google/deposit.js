@@ -15,14 +15,20 @@ module.exports = {
                 if(data.Wallet >= data.Bank){
                     removing = data.Bank - data.InBank
                     if(removing <= 0) return message.channel.send("Your bank is full.")
-                    await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Wallet: -removing, InBank: removing} })
+                    await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {
+                        Wallet: -removing,
+                        InBank: removing
+                    } })
                     return message.channel.send(`Deposited **${Number(removing).toLocaleString("en-US")}** now your bank balance is **${data.InBank}**.`)
                 }if(data.Wallet < data.Bank){
                     goving = data.Bank - data.InBank
                     if(goving <= 0) return message.channel.send("Your bank is full.")
                     removing = data.Bank - data.InBank
                     if(removing > data.Wallet) removing = data.Bank - data.InBank - data.Wallet 
-                    await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Wallet: -removing, InBank: removing} })
+                    await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {
+                        Wallet: -removing,
+                        InBank: removing
+                    } })
                     return message.channel.send(`Deposited **${Number(removing).toLocaleString("en-US")}** now your bank balance is **${data.InBank}**.`)
                 }
                 }
@@ -46,7 +52,10 @@ module.exports = {
                     if(!amount) return message.channel.send("Enter a valid amount.")
                     if(amount > data.Wallet) return message.channel.send("You don't have this much in your wallet.")
                     if(amount > pp) return message.channel.send("You can't deposit this amount.")
-                    await economy.findOne({ id: message.author.id }, { $inc: {Wallet: -amount, InBank: amount} })
+                    await economy.findOne({ id: message.author.id }, { $inc: {
+                        Wallet: -amount,
+                        InBank: amount
+                    } })
                     return message.channel.send(`Deposited **${Number(amount).toLocaleString("en-US")}** now your bank balance is **${data.InBank}**.`)
                 })
             }
