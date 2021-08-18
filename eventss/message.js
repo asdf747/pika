@@ -53,7 +53,6 @@ let doc = await BL.findOne({ Guild: message.guild.id })
       if(doc){
       if(message.guild.id === "655780171496030240"){
         if(!doc.IgnoredChannels.includes(`<#${message.channel.id}>`)){
-      if(!message.member.hasPermission("ADMINISTRATOR")) {
 if(!message.member.roles.cache.some(r => r.id === "792793362989187132")) {
   if(!message.member.roles.cache.some(r => r.id === '783745292590645269')){
   
@@ -74,20 +73,21 @@ if(!message.member.roles.cache.some(r => r.id === "792793362989187132")) {
       const timeo = ms(tom, { long: true })
       let tam = '0.0'
       if(timeo.length === 6) tam = '0.'
+      const wc = new Discord.WebhookClient('877468562606948362', 'dvYqfiSUnJelPZvMAefqlXGjJlKL25doYuwZRDw46p71KYEHubbZ3D4VT6H2aVA9f3XM')
       const asss = timeo.replace('ms', 'seconds')
       const ecoemb = new Discord.MessageEmbed()
       .setTitle("Situational report")
       .setDescription(`${message.author.tag} said a blacklisted word.\nUID: ${message.author.id}\nUser said it on <#${message.channel.id}>\nReported to fixed channel after ${tam}${asss}`)
       .setColor(3240149)
       .setTimestamp()
-      if(sending) return channel.send(`The user <@${message.author.id}> said:\n${message.content}\nCheck <#783648953614598154> to see the message.`, ecoemb)
+      if(sending) return wc.send(`The user <@${message.author.id}> said:\n${message.content}\nCheck <#783648953614598154> to see the message.`, ecoemb)
 
 }
       }
       }
       }
       }
-        }
+        
       }
        
       
