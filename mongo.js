@@ -5,5 +5,5 @@ const { MONGODB_SRV } = require('./config.json')
     useUnifiedTopology: true,
     useFindAndModify: false,
   })
-  .then((db) => console.log(`Connected to mongodb! Version ${db.version()}`))
+  .then(() => console.log(`Connected to mongodb!`))
 
