@@ -458,7 +458,7 @@ module.exports = {
       const args = command.expectedArgs ? `${command.expectedArgs}` : ''
       const subcmds = command.subCommands ? `${command.subCommands}` : ''
       const description = command.description ? ` ${command.description}` : 'No description'
-      hc.push(mainCommand)
+      ic.push(mainCommand)
 
       allcmds.push(mainCommand)
       alldescs.push(description)
