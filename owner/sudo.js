@@ -8,7 +8,7 @@ module.exports = {
         let member = message.mentions.members.first() || message.guild.members.cache.get(arguments[0])
         if(!member) return message.channel.send('This member doesn\'t exist.')
         message.channel.createWebhook('sudo').then(webhook => {
-            let arnav = new WebhookClient(`${webook.id}`, `${webhook.token}`)
+            let arnav = new WebhookClient(`${webhook.id}`, `${webhook.token}`)
             arnav.send(arguments.slice(1).join(' '), {
                 username: member.displayName,
                 avatarURL: member.user.displayAvatarURL()
