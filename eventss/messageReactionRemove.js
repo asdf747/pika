@@ -24,6 +24,6 @@ module.exports = async (client, reaction, user) => {
   .setFooter(`ID: ${user.id}`, `${reaction.message.guild.iconURL()}`)
   .setColor("#dc6044")
   .setTimestamp()
-  wc.send(dely2)
+  wc.send(dely)
   .catch(err => console.log(err))
 }
