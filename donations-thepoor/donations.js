@@ -38,7 +38,7 @@ module.exports = {
     .formatField(`${data.Donations.length} donations.`, el => el);
 
 FieldsEmbed.embed
-  .setTitle(`${member.user.tag}'s donations.`)
+  .setTitle(`${member.user.tag}'${member.user.username.endsWith('s') ? '' : 's'} donation${data.Donations.length !== 1 ? 's' : ''}.`)
   .setColor(65535)
   .setFooter(`ID: ${member.user.id}`)
 
