@@ -247,8 +247,9 @@ const track = new Discord.MessageEmbed()
           
           return
         }
-        if (cooldown > 0 && lasttime !== null && cooldown - (Date.now() - lasttime) > 0){
-            let timeObj = ms(cooldown - (Date.now() - lasttime))
+        let clearedcool = cooldown * 1000
+        if (cooldown > 0 && lasttime !== null && clearedcool - (Date.now() - lasttime) > 0){
+            let timeObj = ms(clearedcool - (Date.now() - lasttime))
             return message.channel.send(
                 new Discord.MessageEmbed()
                 .setAuthor(message.author.tag, message.author.displayAvatarURL())
@@ -298,7 +299,7 @@ await HISTORY.findOne({ Guild: message.guild.id, User: message.author.id }, asyn
 
 
         callback(message, arguments, arguments.join(' '), client)
-        db.set(`${typeof commands === 'string' ? commands : commands[0]}_${message.author.id}`, new Date())
+        db.set(`${typeof commands === 'string' ? commands : commands[0]}_${message.author.id}`, Date.now())
 }
 
         return
