@@ -19,7 +19,7 @@ module.exports = {
                         Wallet: -removing,
                         InBank: removing
                     } })
-                    return message.channel.send(`Deposited **${Number(removing).toLocaleString("en-US")}** now your bank balance is **${data.InBank}**.`)
+                    return message.channel.send(`Deposited **${Number(removing).toLocaleString("en-US")}** now your bank balance is **${data.InBank + amount}**.`)
                 }if(data.Wallet < data.Bank){
                     goving = data.Bank - data.InBank
                     if(goving <= 0) return message.channel.send("Your bank is full.")
@@ -29,7 +29,7 @@ module.exports = {
                         Wallet: -removing,
                         InBank: removing
                     } })
-                    return message.channel.send(`Deposited **${Number(removing).toLocaleString("en-US")}** now your bank balance is **${data.InBank}**.`)
+                    return message.channel.send(`Deposited **${Number(removing).toLocaleString("en-US")}** now your bank balance is **${data.InBank + amount}**.`)
                 }
                 return;
                 }
@@ -39,7 +39,7 @@ module.exports = {
                 if(amount > data.Wallet) return message.channel.send("You don't have this much in your wallet.")
                 if(amount > pp) return message.channel.send("You can't deposit this amount.")
                 await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Wallet: -amount, InBank: amount} })
-                return message.channel.send(`Deposited **${Number(amount).toLocaleString("en-US")}** now your bank balance is **${data.InBank}**.`)
+                return message.channel.send(`Deposited **${Number(amount).toLocaleString("en-US")}** now your bank balance is **${data.InBank + amount}**.`)
                 
             }if(!data){
                 await new economy({
@@ -57,7 +57,7 @@ module.exports = {
                         Wallet: -amount,
                         InBank: amount
                     } })
-                    return message.channel.send(`Deposited **${Number(amount).toLocaleString("en-US")}** now your bank balance is **${data.InBank}**.`)
+                    return message.channel.send(`Deposited **${Number(amount).toLocaleString("en-US")}** now your bank balance is **${data.InBank + amount}**.`)
                 })
             }
         })
