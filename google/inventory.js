@@ -1,6 +1,7 @@
 const economy = require('../models/economy')
 const { MessageEmbed } = require('discord.js')
 const Pagination = require('discord-paginationembed')
+const items = require('../shop.json')
 
 module.exports = {
     commands: ['inventory', 'inv'],
@@ -9,7 +10,10 @@ module.exports = {
         let mem = message.mentions.members.first() || message.guild.members.cache.get(arguments[0]) || message.member
         await economy.findOne({ id: mem.id }, async (err, data) => {
             if(data){
-                let inv = data.Inventory.map(item => `${item.Name} - ${item.Count}\nID: \`${item.ID}\``)
+                let inv = data.Inventory.map(item => {
+                    let itemid = items.find(ite => ite.Name.toLowerCase() === item.toLowerCase()).ID[0]
+                    return `${item.Name} - ${item.Count}\nID: \`${itemid}\``
+                })
                 if(!inv.length) inv = ['Empty']
                 const FieldsEmbed = new Pagination.FieldsEmbed()
     .setArray(inv)
