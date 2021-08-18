@@ -38,7 +38,7 @@ module.exports = {
       let channel = message.guild.channels.cache.get(arguments[1])
     if(arguments[1].startsWith('<#')){
       if(arguments[1].endsWith('>')){
-      let channelid = arguments[0].replace('<#', '').replace('>', '')
+      channelid = arguments[1].replace('<#', '').replace('>', '')
        channel = message.guild.channels.cache.get(channelid)
       }
     }
