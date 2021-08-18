@@ -11,7 +11,12 @@ module.exports = {
         if(!item) return message.channel.send("This item doesn't exist.")
         switch(arguments[0]){
             case 'pp':
-                await uses.pp(client, message, arguments, economy);
+                await economy.findOne({ id: message.author.id }, async(err, data) => {
+                    if(data){
+                        await data.Inventory.updateOne({ Name: "PP" }, { $inc: {Count: -1} })
+                        message.channel.send("You just lost a pp lololol")
+                    }
+                })
             
         }
     }
