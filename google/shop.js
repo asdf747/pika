@@ -35,6 +35,7 @@ module.exports = {
 
 FieldsEmbed.embed
   .setTitle(`Shop`)
+  .setTimestamp()
 
 FieldsEmbed.build();
     }

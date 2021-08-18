@@ -31,6 +31,7 @@ module.exports = {
                         .setAuthor(`Bought ${item.Name}`, message.author.displayAvatarURL())
                         .setDescription(`You bought ${amount} **${item.Name}** and paid \`${price.toLocaleString("en-US")}\``)
                         .setColor("GREEN")
+                        .setTimestamp()
                     )
                 }
                 let obj = {
@@ -44,6 +45,7 @@ module.exports = {
                     .setAuthor(`Bought ${item.Name}`, message.author.displayAvatarURL())
                     .setDescription(`You bought ${amount} **${item.Name}** and paid \`${price.toLocaleString("en-US")}\``)
                     .setColor("GREEN")
+                    .setTimestamp()
                 )
             }if(!data){
                 await new economy({
@@ -65,6 +67,7 @@ module.exports = {
                         .setAuthor(`Bought ${item.Name}`, message.author.displayAvatarURL())
                         .setDescription(`You bought ${amount} **${item.Name}** and paid \`${price.toLocaleString("en-US")}\``)
                         .setColor("GREEN")
+                        .setTimestamp()
                     )
                 })
             }
