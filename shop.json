@@ -4,6 +4,7 @@
         "ID:": ["PP"],
         "Price": 69,
         "Sell": 10,
-        "Description": "Something that neon doesn't have"
+        "Description": "Something that neon doesn't have",
+        "Shop": true
     }
 ]
