@@ -4,6 +4,7 @@ const Pagination = require('discord-paginationembed')
 
 module.exports = {
     commands: ['inventory', 'inv'],
+    description: "Displays the user's inventory.",
     callback: async (message, arguments, text, client) => {
         let mem = message.mentions.members.first() || message.guild.members.cache.get(arguments[0]) || message.member
         await economy.findOne({ id: mem.id }, async (err, data) => {
