@@ -503,7 +503,6 @@ module.exports = {
       let option5 = new MessageMenuOption()
       .setLabel("Whitelisted users commands")
       .setValue("whitelist")
-      .setEmoji('white_check_mark')
       .setDescription('Shows the whitelisted users commands.')
 
       let option6 = new MessageMenuOption()
