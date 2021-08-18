@@ -501,9 +501,9 @@ module.exports = {
       .setDescription('Shows the misc commands.')
 
       let option5 = new MessageMenuOption()
-      .setLabel("✔️ Whitelisted users commands")
+      .setLabel(":white_check_mark: Whitelisted users commands")
       .setValue("whitelist")
-      .setEmoji('✔️')
+      .setEmoji(':white_check_mark:')
       .setDescription('Shows the whitelisted users commands.')
 
       let option6 = new MessageMenuOption()
@@ -591,7 +591,7 @@ module.exports = {
             new MessageEmbed()
         .setTitle("Help menu")
         .setDescription(`Use \`${prefix}help\` with a command to get the command's info`)
-        .addField('✔️ Whitelisted users commands', whitelist)
+        .addField(':white_check_mark: Whitelisted users commands', whitelist)
         .setColor("GREEN")
         .setFooter(client.user.username, client.user.displayAvatarURL())
         .setFooter(`Prefix: ${prefix}`), select

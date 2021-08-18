@@ -9,7 +9,8 @@ module.exports = {
   commands: 'whitelist',
   description: 'Whitelists/unwhitelists a user.',
   minArgs: 2,
-  expectedArgs: 'add/remove/check <user> [Duration]',
+  expectedArgs: 'add <user> [duration]',
+  subCommands: 'remove check',
   callback: async (message, arguments, text, client) => {
     const user = message.mentions.users.first() || client.users.cache.get(arguments[0])
     if(!user) return message.lineReplyNoMention('Invalid user.')
@@ -21,9 +22,9 @@ module.exports = {
       if(whiteliste) whiteliste.delete()
       if(blackliste) blackliste.delete()
       if(arguments[2]){
-        const Expire = day(arguments[2]).valueOf()
-        if(!Expire) return message.lineReplyNoMention("Please specify an expire date.")
-        const expiredate = moment(Expire).fromNow()
+        const Expire = ms(arguments[2])
+        if(!Expire) return message.lineReplyNoMention("Please specify an expire duration.")
+        const expiredate = moment(new Date(Date.now() + Expire)).fromNow()
         new UserInfo({ id: user.id, Expire, Permanent: false }).save()
         .then(() => message.lineReplyNoMention(
           new MessageEmbed()
@@ -62,7 +63,7 @@ const penis = await UserInfo.findOne({ id: user.id })
       else if(!whiteliste) return message.lineReplyNoMention("This user is not whitelisted.")
       else if(!whiteliste.Permenant && dot > whiteliste.expire) {
         whiteliste.delete()
-        return message.lineReplyNoMention("This user's whitelist expired.")
+        return message.lineReplyNoMention("This user is not whitelisted.")
       }
     } else return message.lineReplyNoMention("Invalid arguments.")
     }
