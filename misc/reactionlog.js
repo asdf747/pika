@@ -32,7 +32,9 @@ module.exports = {
     }
       let doc = await ReactionLogs.findOne({ Guild: message.guild.id })
       if(!doc) return message.channel.send("There is no channel set.")
+      let col = new WebhookClient(`${doc.ID}`, `${doc.TOKEN}`)
       doc.delete()
+      col.delete()
       message.channel.send(`Removed the reaction logs channel.`)
     } else{
       let channel = message.guild.channels.cache.get(arguments[1])
