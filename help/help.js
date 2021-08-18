@@ -414,7 +414,51 @@ module.exports = {
       const args = command.expectedArgs ? `${command.expectedArgs}` : ''
       const subcmds = command.subCommands ? `${command.subCommands}` : ''
       const description = command.description ? ` ${command.description}` : 'No description'
-      ic.push(mainCommand)
+      hc.push(mainCommand)
+
+      allcmds.push(mainCommand)
+      alldescs.push(description)
+      allargus.push(args)
+      allalias.push(aliases)
+      allsub.push(subcmds)
+
+    }
+
+    const commands9 = loadCommands9()
+    for (const command of commands9) {
+      let permissions = command.permission
+
+      if (permissions) {
+        let hasPermission = true
+        if (typeof permissions === 'string') {
+          permissions = [permissions]
+        }
+
+        for (const permission of permissions) {
+          if (!message.member.hasPermission(permission)) {
+            hasPermission = false
+            break
+          }
+        }
+
+        if (!hasPermission) {
+          continue
+        }
+      }
+
+      // Format the text
+      const mainCommand =
+        typeof command.commands === 'string'
+          ? command.commands
+          : command.commands[0]
+          const aliases =
+        typeof command.commands === 'string'
+          ? ``
+          : `${command.commands.slice(1).join(' ')}`
+      const args = command.expectedArgs ? `${command.expectedArgs}` : ''
+      const subcmds = command.subCommands ? `${command.subCommands}` : ''
+      const description = command.description ? ` ${command.description}` : 'No description'
+      hc.push(mainCommand)
 
       allcmds.push(mainCommand)
       alldescs.push(description)
