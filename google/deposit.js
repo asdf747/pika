@@ -38,7 +38,7 @@ module.exports = {
                 if(!amount) return message.channel.send("Enter a valid amount.")
                 if(amount > data.Wallet) return message.channel.send("You don't have this much in your wallet.")
                 if(amount > pp) return message.channel.send("You can't deposit this amount.")
-                await economy.findOne({ id: message.author.id }, { $inc: {Wallet: -amount, InBank: amount} })
+                await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Wallet: -amount, InBank: amount} })
                 return message.channel.send(`Deposited **${Number(amount).toLocaleString("en-US")}** now your bank balance is **${data.InBank}**.`)
                 
             }if(!data){
@@ -53,7 +53,7 @@ module.exports = {
                     if(!amount) return message.channel.send("Enter a valid amount.")
                     if(amount > gg.Wallet) return message.channel.send("You don't have this much in your wallet.")
                     if(amount > pp) return message.channel.send("You can't deposit this amount.")
-                    await economy.findOne({ id: message.author.id }, { $inc: {
+                    await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {
                         Wallet: -amount,
                         InBank: amount
                     } })
