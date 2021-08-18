@@ -9,7 +9,10 @@ module.exports = {
     callback: async(message, arguments, text, client) => {
         let item = items.find(item => item.ID.includes(arguments[0].toLowerCase()))
         if(!item) return message.channel.send("This item doesn't exist.")
-        let name = item.ID[0]
-     await uses.name(client, message, arguments, economy)
+        switch(arguments[0]){
+            case 'pp':
+                await uses.pp(client, message, arguments, economy);
+            
+        }
     }
 }
