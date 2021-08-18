@@ -1,6 +1,7 @@
 const shop = require('../shop.json')
 const Pagination = require('discord-paginationembed')
 const { MessageEmbed } = require('discord.js')
+const economy = require('../models/economy')
 
 module.exports = {
     commands: 'shop',
@@ -8,10 +9,16 @@ module.exports = {
         if(arguments[0]){
             let item = shop.find(item => item.ID.includes(arguments[0].toLowerCase()))
             if(!item) return message.channel.send("This item doens't exist.")
+            let finding = economy.findOne({ id: message.author.id })
+            let counter = 0
+            if(finding && finding.Inventory.length){
+                counting = finding.Inventory.find(item => item.Name.toLowerCase() === item.Name.toLowerCase())
+                counter = counting.Count
+            }
             message.channel.send(
                 new MessageEmbed()
                 .setTitle(`${item.Name}`)
-                .setDescription(`${item.Description}\n\n**Buy:** ${item.Price}\n**Sell:** ${item.Sell}`)
+                .setDescription(`${item.Description} ${counter !== 0 ? `(${counter} owned)` : ''}\n\n**Buy:** ${item.Price}\n**Sell:** ${item.Sell}`)
                 .setThumbnail(item.Image)
             )
             return
