@@ -6,12 +6,12 @@ module.exports = {
     expectedArgs: '<amount>',
     cooldown: 3,
     callback: async(message, arguments, text, client) => {
-        if(!Number(arguments[0]) && !arguments[0].toLowerCase().includes(['all', 'max'])) return message.channel.send("Enter a valid amount.")
+        if(!Number(arguments[0]) && !['all', 'max'].includes(arguments[0].toLowerCase())) return message.channel.send("Enter a valid amount.")
         
         await economy.findOne({ id: message.author.id }, async (err, data) => {
             if(data){
                 if(data.Wallet <= 0) return message.channel.send("There is nothing to deposit.")
-                if(arguments[0].includes(['all', 'max'])){
+                if(['all', 'max'].includes(arguments[0].toLowerCase())){
                 if(data.Wallet >= data.Bank){
                     removing = data.Bank - data.InBank
                     if(removing <= 0) return message.channel.send("Your bank is full.")
