@@ -3,6 +3,7 @@ const { MessageEmbed } = require('discord.js')
 
 module.exports = {
   commands: ['balance', 'bal'],
+  description: "Displays the user's balance.",
   callback: async (message, arguments, text, client) => {
     const user = message.mentions.users.first() || client.users.cache.get(arguments[0]) || message.author
 
