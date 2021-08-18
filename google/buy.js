@@ -23,6 +23,7 @@ module.exports = {
                 // checking if user already has item
                 let checking = data.Inventory.find(item => item.Name.toLowerCase() === item.Name.toLowerCase())
                 if(checking){
+                    await data.Update({ $inc: {Wallet: -price} })
                     return message.channel.send(
                         new MessageEmbed()
                         .setAuthor(`Bought ${item.Name}`, message.author.displayAvatarURL())
