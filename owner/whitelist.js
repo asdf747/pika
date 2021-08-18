@@ -2,7 +2,7 @@ const db = require('quick.db')
 const { MessageEmbed } = require('discord.js')
 const UserInfo = require('../models/whitelist')
 const Blacklist = require('../models/blacklist')
-const day = require('dayjs')
+const ms = require('ms')
 const moment = require('moment')
 
 module.exports = {
