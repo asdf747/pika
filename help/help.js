@@ -644,7 +644,7 @@ module.exports = {
             new MessageEmbed()
         .setTitle("Help menu")
         .setDescription(`Use \`${prefix}help\` with a command to get the command's info`)
-        .addField('❌ Guild only commands', google)
+        .addField('❌ Guild only commands', googleonly)
         .setColor("GREEN")
         .setFooter(client.user.username, client.user.displayAvatarURL())
         .setFooter(`Prefix: ${prefix}`), select
