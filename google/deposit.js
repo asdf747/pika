@@ -34,6 +34,21 @@ module.exports = {
                 await economy.findOne({ id: message.author.id }, { $inc: {Wallet: -amount, InBank: amount} })
                 return message.channel.send(`Deposited **${Number(amount).toLocaleString("en-US")}** now your bank balance is **${data.InBank}**.`)
                 
+            }if(!data){
+                await new economy({
+                    id: message.author.id,
+                    Wallet: 500,
+                    InBank: 0,
+                    Bank: 100
+                }).save().then(() => {
+                    let pp = data.Bank - data.InBank
+                    let amount = Number(arguments[0])
+                    if(!amount) return message.channel.send("Enter a valid amount.")
+                    if(amount > data.Wallet) return message.channel.send("You don't have this much in your wallet.")
+                    if(amount > pp) return message.channel.send("You can't deposit this amount.")
+                    await economy.findOne({ id: message.author.id }, { $inc: {Wallet: -amount, InBank: amount} })
+                    return message.channel.send(`Deposited **${Number(amount).toLocaleString("en-US")}** now your bank balance is **${data.InBank}**.`)
+                })
             }
         })
     }
