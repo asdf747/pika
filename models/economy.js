@@ -4,7 +4,8 @@ const eco = Schema({
   id: String,
   Wallet: Number,
   InBank: Number,
-  Bank: Number
+  Bank: Number,
+  Inventory: Array
 })
 
 module.exports = model('economy', eco)
