@@ -6,6 +6,7 @@ const moment = require('moment')
 const REQUIRED = require('../models/toggle')
 const HISTORY = require('../models/history')
 const TOGGLE = require('../models/dis')
+const ms = require('ms')
 
 const validatePermissions = (permissions) => {
   const validPermissions = [
