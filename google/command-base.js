@@ -6,7 +6,7 @@ const moment = require('moment')
 const REQUIRED = require('../models/toggle')
 const HISTORY = require('../models/history')
 const TOGGLE = require('../models/dis')
-const ms = require('ms')
+const { convertMS } = require('discordutility')
 
 const validatePermissions = (permissions) => {
   const validPermissions = [
@@ -249,12 +249,12 @@ const track = new Discord.MessageEmbed()
         }
         let clearedcool = cooldown * 1000
         if (cooldown > 0 && lasttime !== null && clearedcool - (Date.now() - lasttime) > 0){
-            let timeObj = ms(clearedcool - (Date.now() - lasttime))
+            let timeObj = convertMS(clearedcool - (Date.now() - lasttime))
             return message.channel.send(
                 new Discord.MessageEmbed()
                 .setAuthor(message.author.tag, message.author.displayAvatarURL())
                 .setTitle("Cooldown!")
-                .setDescription(`:x: You need to wait \`${timeObj.seconds}\` to use this command.`)
+                .setDescription(`:x: You need to wait \`${timeObj.s}\` to use this command.`)
             )
         }
         if(fond && total && !diso && message.guild.id === '854748129365721118' || !fond && !total && !diso && message.guild.id === '854748129365721118'){
