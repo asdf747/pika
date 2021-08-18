@@ -5,6 +5,8 @@
         "Price": 69,
         "Sell": 10,
         "Description": "Something that neon doesn't have",
-        "Shop": true
+        "Shop": true,
+        "Emoji": "<:penis:877589942140813333>",
+        "Image": "https://cdn.discordapp.com/emojis/877589942140813333.png?v=1"
     }
 ]
