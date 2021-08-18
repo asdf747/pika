@@ -22,7 +22,7 @@ module.exports = {
         } if(!data){
           await new eco({
             id: message.author.id,
-            Wallet: 0,
+            Wallet: 500,
             InBank: 100,
             Bank: 0
           }).save().then(async lol => {
