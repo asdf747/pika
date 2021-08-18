@@ -25,15 +25,17 @@ module.exports = {
             Wallet: 0,
             InBank: 100,
             Bank: 0
-          }).save()
-          eco = require('../models/economy')
-          await eco.findOneAndUpdate({ id: message.author.id }, { $inc: {Wallet: amount} })
-          message.channel.send(
-            new MessageEmbed()
-            .setAuthor(message.author.username, message.author.displayAvatarURL())
-            .setColor("BLUE")
-            .setDescription(`You begged and got **${amount} coins**!`)
-          )
+          }).save().then(lol => {
+            await eco.findOneAndUpdate({ id: message.author.id }, { $inc: {Wallet: amount} })
+            message.channel.send(
+              new MessageEmbed()
+              .setAuthor(message.author.username, message.author.displayAvatarURL())
+              .setColor("BLUE")
+              .setDescription(`You begged and got **${amount} coins**!`)
+            )
+          })
+          
+          
 
         }
       })
