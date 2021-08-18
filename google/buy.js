@@ -55,7 +55,7 @@ module.exports = {
                         }
                     ]
                 }).save().then(() => {
-                    if(500 < price) return message.channel.send("You don't have enough money in your wallet.")
+                    if(data.Wallet < price) return message.channel.send("You don't have enough money in your wallet.")
                     message.channel.send(
                         new MessageEmbed()
                         .setAuthor(`Bought ${item.Name}`, message.author.displayAvatarURL())
