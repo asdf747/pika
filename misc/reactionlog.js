@@ -47,13 +47,13 @@ module.exports = {
         if(data){
           let gaos = new WebhookClient(`${data.ID}`, `${data.TOKEN}`)
           if(gaos) gaos.delete()
-          channel.createWebhook('Pika reaction logging').then(async webhook => {
+          channel.createWebhook('Pika reaction logging', client.user.displayAvatarURL()).then(async webhook => {
             await ReactionLogs.findOneAndUpdate({ Guild: message.guild.id }, { $set: {Channel: channel.id, ID: `${webhook.id}`, TOKEN: `${webhook.token}`} })
             message.channel.send(`Set reaction logs channel to **#${channel.name}**`)
           })
           
         } else if(!data){
-          channel.createWebhook('Pika reaction logging').then(async webhook => {
+          channel.createWebhook('Pika reaction logging', client.user.displayAvatarURL()).then(async webhook => {
             await new ReactionLogs({
               Guild: message.guild.id,
               Channel: channel.id,
