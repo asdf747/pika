@@ -254,7 +254,7 @@ const track = new Discord.MessageEmbed()
                 new Discord.MessageEmbed()
                 .setAuthor(message.author.tag, message.author.displayAvatarURL())
                 .setTitle("Cooldown!")
-                .setDescription(`:x: You need to wait \`${timeObj.s}\` to use this command.`)
+                .setDescription(`:x: You need to wait \`${timeObj.s} second${timeObj.s !== 1 ? 's' : ''}\` to use this command.`)
             )
         }
         if(fond && total && !diso && message.guild.id === '854748129365721118' || !fond && !total && !diso && message.guild.id === '854748129365721118'){
