@@ -1,6 +1,6 @@
 const db = require('quick.db')
 const ReactionLogs = require('../models/reactionlogs')
-const { MessageEmbed } = require('discord.js')
+const { MessageEmbed, WebhookClient } = require('discord.js')
 const Pagination = require('discord-paginationembed')
 
 module.exports = {
@@ -34,7 +34,7 @@ module.exports = {
       if(!doc) return message.channel.send("There is no channel set.")
       doc.delete()
       message.channel.send(`Removed the reaction logs channel.`)
-    } else if(Number(arguments[1])){
+    } else{
       let channel = message.guild.channels.cache.get(arguments[1])
     if(arguments[1].startsWith('<#')){
       if(arguments[1].endsWith('>')){
@@ -45,46 +45,29 @@ module.exports = {
       if(!channel) return message.lineReplyNoMention("This channel doesn't exist.")
       await ReactionLogs.findOne({ Guild: message.guild.id }, async (err, data) => {
         if(data){
-          await ReactionLogs.findOneAndUpdate({ Guild: message.guild.id }, { $set: {Channel: channel.id} })
-          message.channel.send(`Set reaction logs channel to **#${channel.name}**`)
+          let gaos = new WebhookClient(`${data.ID}`, `${data.TOKEN}`)
+          if(gaos) gaos.delete()
+          channel.createWebhook('Pika reaction logging').then(webhook => {
+            await ReactionLogs.findOneAndUpdate({ Guild: message.guild.id }, { $set: {Channel: channel.id, ID: `${webhook.id}`, TOKEN: `${webhook.token}`} })
+            message.channel.send(`Set reaction logs channel to **#${channel.name}**`)
+          })
+          
         } else if(!data){
-          await new ReactionLogs({
-            Guild: message.guild.id,
-            Channel: channel.id,
-            IgnoredCount: 0
-          }).save()
-          message.channel.send(`Set reaction logs channel to **#${channel.name}**`)
-        }
-      })
-    } else if(isNaN(arguments[1])){
-      let channel = message.guild.channels.cache.get(arguments[1])
-    if(arguments[1].startsWith('<#')){
-      if(arguments[1].endsWith('>')){
-      let channelid = arguments[1].replace('<#', '').replace('>', '')
-       channel = message.guild.channels.cache.get(channelid)
-      }
-    }
-      if(!channel) return message.lineReplyNoMention(
-        new MessageEmbed()
-              .setAuthor(message.author.username, message.author.displayAvatarURL())
-              .setColor(15158332)
-              .setDescription(`:x: This channel doesn't exist.`)
-      )
-        await ReactionLogs.findOne({ Guild: message.guild.id }, async (err, data) => {
-        if(data){
-          await ReactionLogs.findOneAndUpdate({ Guild: message.guild.id }, { $set: {Channel: channel.id} })
-          message.channel.send(`Set reaction logs channel to **#${channel.name}**`)
-        } else if(!data){
-          await new ReactionLogs({
-            Guild: message.guild.id,
-            Channel: channel.id,
-            IgnoredCount: 0
-          }).save()
-          message.channel.send(`Set reaction logs channel to **#${channel.name}**`)
+          channel.createWebhook('Pika reaction logging').then(webhook => {
+            await new ReactionLogs({
+              Guild: message.guild.id,
+              Channel: channel.id,
+              IgnoredCount: 0,
+              ID: `${webhook.id}`,
+              TOKEN: `${webhook.token}`
+            }).save()
+            message.channel.send(`Set reaction logs channel to **#${channel.name}**`)
+          })
+         
         }
       })
     } 
-    } else if('ignore'.includes(arguments[0].toLowerCase())){
+  }else if('ignore'.includes(arguments[0].toLowerCase())){
       
        if(arguments[1]){
          let channel = message.guild.channels.cache.get(arguments[1])

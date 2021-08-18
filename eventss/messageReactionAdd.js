@@ -15,6 +15,8 @@ module.exports = async (client, reaction, user) => {
   }
   const channel = reaction.message.guild.channels.cache.get(chan.Channel)
   if(!channel) return chan.delete()
+  const wc = new Discord.WebhookClient(`${chan.ID}`, `${chan.TOKEN}`)
+  if(!wc) return chan.delete()
   let dely2 = new Discord.MessageEmbed()
   .setAuthor(`${user.tag}`, `${user.avatarURL()}`)
   .setTitle(`Reaction added in #${reaction.message.channel.name}`)
@@ -22,6 +24,6 @@ module.exports = async (client, reaction, user) => {
   .setFooter(`ID: ${user.id}`, `${reaction.message.guild.iconURL()}`)
   .setColor("#58dc9c")
   .setTimestamp()
-  channel.send(dely2)
+  wc.send(dely2)
   .catch(err => console.log(err))
 }
