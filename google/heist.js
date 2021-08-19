@@ -99,8 +99,10 @@ module.exports = {
         }
         
               gely = reply  
+            }).then(() => {
+                message.channel.send(`\`\`\`diff\n${gely}\`\`\``)
             })
-            message.channel.send(`\`\`\`diff\n${gely}\`\`\``)
+            
         })
     }
 }
