@@ -12,14 +12,16 @@ module.exports = {
             let finding = await economy.findOne({ id: message.author.id })
             let counter = 0
             if(finding && finding.Inventory.length){
-                counting = finding.Inventory.find(item => item.Name.toLowerCase() === item.Name.toLowerCase())
+                counting = await finding.Inventory.find(ite => ite.Name.toLowerCase() === item.Name.toLowerCase())
                 counter = counting.Count
             }
             message.channel.send(
                 new MessageEmbed()
                 .setTitle(`${item.Name} ${counter >= 1 ? `(${counter} owned)` : ''}`)
-                .setDescription(`${item.Description}\n\n**Buy:** ${item.Price}\n**Sell:** ${item.Sell}`)
+                .setDescription(`${item.Description}\n\n**Buy:** ${parseInt(item.Price).toLocaleString("en-US")}\n**Sell:** ${item.Sell}`)
                 .setThumbnail(item.Image)
+                .setTimestamp()
+                .setColor("BLUE")
             )
             return
         }
@@ -36,6 +38,7 @@ module.exports = {
 FieldsEmbed.embed
   .setTitle(`Shop`)
   .setTimestamp()
+  .setColor("BLUE")
 
 FieldsEmbed.build();
     }
