@@ -68,6 +68,7 @@ return
     if(member.id === message.author.id) return message.channel.send("why would you do this to yourself")
     const db = require('quick.db')
     await db.set(`unlucky_${member.id}`, new Date())
+    await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Unlucky cookie" }, { $inc: {"Inventory.$.Count": -1} })
     return message.channel.send(`You used the unlucky cookie on ${member.user.username} now he can't rob or join heists for 15 minutes`)
 }
 
