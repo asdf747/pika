@@ -11,9 +11,9 @@ module.exports = {
     expectedArgs: '<member>',
     callback: async(message, arguments, text, client) => {
         let unlucky = await db.fetch(`unlucky_${message.author.id}`)
-        if(unlucky !== null){
+        if(unlucky){
             let dur = moment.duration(new Date() - unlucky).as('minutes')
-            if(dir < 15) return message.channel.send("someone used the unlucky cookie on you so you can't rob or join heists lol")
+            if(dur < 15) return message.channel.send("someone used the unlucky cookie on you so you can't rob or join heists lol")
         }
         let egg = await settings.findOne({ id: message.author.id })
         let settingsauthor = 'false'

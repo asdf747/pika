@@ -2,6 +2,7 @@ const { listenerCount } = require('events')
 const economy = require('../models/economy')
 const settings = require('../models/settings')
 const db = require('quick.db')
+const moment = require('moment')
 
 module.exports = {
     commands: ['bankrob', 'heist'],
@@ -11,7 +12,7 @@ module.exports = {
         let unlucky = await db.fetch(`unlucky_${message.author.id}`)
         if(unlucky !== null){
             let dur = moment.duration(new Date() - unlucky).as('minutes')
-            if(dir < 15) return message.channel.send("someone used the unlucky cookie on you so you can't rob or join heists lol")
+            if(dur < 15) return message.channel.send("someone used the unlucky cookie on you so you can't rob or join heists lol")
         }
         let oe = await settings.findOne({ id: message.author.id })
         let settingsauthor = 'false'
@@ -40,8 +41,8 @@ module.exports = {
         db.set(`inheist_${message.author.id}`, true)
 
         members.on('collect', async m => {
-            if(joined.includes(m.author.id)) return message.lineReply("You already joined")
-            if(m.author.id === member.id) return message.lineReply("you can't join a heist against yourself dumbo")
+            if(joined.includes(m.author.id)) return m.lineReply("You already joined")
+            if(m.author.id === member.id) return m.lineReply("you can't join a heist against yourself dumbo")
             let checking_database = await economy.findOne({ id: m.author.id })
             // checking if member has 2,000 in wallet
             let member_wallet = 500
