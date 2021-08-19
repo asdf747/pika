@@ -11,7 +11,7 @@ module.exports = {
       if(data){
         message.channel.send(
           new MessageEmbed()
-          .setTitle(`${user.username}'s balance`)
+          .setTitle(`${user.username}${user.username.endsWith('s') ? '\'' : '\'s'} balance`)
           .setDescription(`**Wallet:** ${parseInt(data.Wallet).toLocaleString("en-US")}\n**Bank:** ${parseInt(data.InBank).toLocaleString("en-US")}/${parseInt(data.Bank).toLocaleString("en-US")}`)
           .setTimestamp()
           .setColor("BLUE")
@@ -26,7 +26,7 @@ module.exports = {
 
         message.channel.send(
           new MessageEmbed()
-          .setTitle(`${user.username}'s balance`)
+          .setTitle(`${user.username}${user.username.endsWith('s') ? '\'' : '\'s'} balance`)
           .setDescription(`**Wallet:** 500\n**Bank:** 0/100`)
           .setTimestamp()
           .setColor("BLUE")
