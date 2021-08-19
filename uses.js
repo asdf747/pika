@@ -1,4 +1,4 @@
-async function lucky(client, message, arguments, economy){
+     async function lucky(client, message, arguments, economy){
 let prizes = []
 for (let i = 0; i < 30; i++){
     prizes.push('pp')
@@ -37,13 +37,13 @@ switch(final){
     case "unlucky":
         await economy.findOne({ id: message.author.id }, async (err, data) => {
             if(data){
-                let ass = data.Inventory.find(item => item.Name.toLowerCase() === 'pp')
+                let ass = data.Inventory.find(item => item.Name.toLowerCase() === 'Unlucky cookie')
                 if(ass){
-                    await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Lucky crate" }, { $inc: {"Inventory.$.Count": amount} })
+                    await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Unlucky cookie" }, { $inc: {"Inventory.$.Count": amount} })
                     return message.channel.send(`You opened the <:emoji_12:877912311719927839> lucky crate box and got **${amount} ${final}**`)
                 }
                 let obj = {
-                    Name: "Luck crate",
+                    Name: "Unlucky cookie",
                     Count: amount
                 }
                 if(!ass){
@@ -62,7 +62,7 @@ await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Lucky crat
 return
 }
 
-async function unlucky(client, message, arguments, economy){
+    async function unlucky(client, message, arguments, economy){
     let member = message.mentions.members.first() || message.guild.members.cache.get(arguments[0])
     if(!member) return message.channel.send("does this member even exist")
     const db = require('quick.db')
