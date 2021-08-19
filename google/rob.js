@@ -16,9 +16,9 @@ module.exports = {
         if(!member) return message.channel.send("i can't find this member")
         if(member.id === message.author.id) return message.channel.send("Why tf would you rob yourself")
         if(member.user.bot) return message.channel.send("you can't rob bots lol")
-        let o = await settings.findOne({ id: member.id })
-        let settingsmember = o.Passive
-        if(!o) settingsmember = 'false'
+        let og = await settings.findOne({ id: member.id })
+        let settingsmember = og.Passive
+        if(!og) settingsmember = 'false'
         if(settingsmember) return message.channel.send("This member is in passive mode")
         let chances = []
         for (let i = 0; i < 21; i++){
