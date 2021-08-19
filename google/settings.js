@@ -31,7 +31,7 @@ module.exports = {
                     await new gos({
                         id: message.author.id,
                         Passive: value
-                    }).Passive()
+                    }).save()
                 }else{
                     await settings.findOneAndUpdate({ id: message.author.id }, { Passive: value })
                 }
