@@ -29,10 +29,10 @@ module.exports = {
         }
         let walletmembe = await economy.findOne({ id: member.id })
         let walletautho = await economy.findOne({ id: message.author.id })
-        let walletmember = walletmembe.Wallet
-        let walletauthor = walletautho.Wallet
-        if(!walletmembe) walletmember = 500
-        if(!walletautho) walletauthor = 500
+        let walletmember = 500
+        let walletauthor = 500
+        if(walletmembe) walletmember = walletmembe.Wallet
+        if(walletautho) walletauthor = walletautho.Wallet
         if(walletauthor <= 500) return message.channel.send("You need more than 500 coins to rob someone")
         if(walletmember < 500) return message.channel.send("This member doesn't even have 500 coins")
         let putting = walletmember / 2

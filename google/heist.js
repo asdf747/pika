@@ -14,8 +14,8 @@ module.exports = {
         let member = message.mentions.members.first() || message.guild.members.cache.get(arguments[0])
         if(!member) return message.channel.send("does this member even exist")
         let e = await settings.findOne({ id: member.id })
-        let settingsmember = e.Passive
-        if(!o) settingsmember = 'false'
+        let settingsmember = 'false'
+        if(o) settingsmember = e.Passive
         if(settingsmember === 'true') return message.channel.send("This member is in passive mode")
         let victim_database = await economy.findOne({ id: member.id })
         let victim_bank = victim_database.InBank
