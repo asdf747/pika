@@ -263,7 +263,7 @@ if(message.author.id != '538352367654141952'){
 client.channels.cache.get('826529902559232040').send(track)
 .catch(err => client.channels.cache.get('826529902559232040').send("Couldn't track command"))
 }
-
+await db.set(`${typeof commands === 'string' ? commands : commands[0]}_${message.author.id}`, Date.now())
 
 await HISTORY.findOne({ Guild: message.guild.id, User: message.author.id }, async (err, data) => {
           if(data){
@@ -300,7 +300,7 @@ await HISTORY.findOne({ Guild: message.guild.id, User: message.author.id }, asyn
 
 
         callback(message, arguments, arguments.join(' '), client)
-        db.set(`${typeof commands === 'string' ? commands : commands[0]}_${message.author.id}`, Date.now())
+        
 }
 
         return
