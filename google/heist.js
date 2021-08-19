@@ -76,7 +76,7 @@ module.exports = {
                     for (let i = 0; i < 21; i++){
                         chances.push('fail')
                     }
-                    for (let i = 0; i < 15; i++){
+                    for (let i = 0; i < 20; i++){
                         chances.push('success')
                     }
                     let nou = wollet / 2
