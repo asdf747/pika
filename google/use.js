@@ -14,10 +14,5 @@ module.exports = {
         let doc = await economy.findOne({ id: message.author.id })
         if(!doc || !doc.Inventory.find(ite => ite.Name.toLowerCase() === item.Name.toLowerCase()) || doc.Inventory.find(ite => ite.Name.toLowerCase() === item.Name.toLowerCase()).Count < 1) return message.channel.send("You don't own this item")
         if(!item.Useable) return message.channel.send("You can't use this item.")
-        switch(item.ID[0].toLowerCase()){
-            case 'pp':
-                await uses.pp(client, message, arguments, economy);
-            
-        }
     }
 }
