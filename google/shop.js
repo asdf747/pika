@@ -23,7 +23,7 @@ module.exports = {
             )
             return
         }
-        let items = shop.filter(item => item.Shop).map(item => `**${item.Emoji} ${item.Name}** - ${item.Price}\n${item.Description}\n`)
+        let items = shop.filter(item => item.Shop).map(item => `**${item.Emoji} ${item.Name}** - ${parseInt(item.Price).toLocaleString("en-Us")}\n${item.Description}\n`)
         if(!items.length) items = ["Empty"]
     const FieldsEmbed = new Pagination.FieldsEmbed()
     .setArray(items)
