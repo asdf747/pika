@@ -13,7 +13,7 @@ module.exports = {
             case 'pp':
                 await economy.findOne({ id: message.author.id }, async (err, data) => {
                     if(data){
-                        await economy.findOneAndUpdate({ id: message.author.id }, { $gas: { Wallet: 0 } })
+                        await data.Inventory.where({ Name: "PP" }).updateOne({ $set: {Count: 0}  }).setOptions({ overwrite: true });
                         message.channel.send(`aaa `)
                     }
                 })
