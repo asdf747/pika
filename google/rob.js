@@ -21,8 +21,8 @@ module.exports = {
         for (let i = 0; i < 15; i++){
             chances.push('success')
         }
-        let walletmember = economy.findOne({ id: member.id })
-        let walletauthor = economy.findOne({ id: message.author.id })
+        let walletmember = economy.findOne({ id: member.id }).Wallet
+        let walletauthor = economy.findOne({ id: message.author.id }).Wallet
         if(!walletmember) walletmember = 500
         if(!walletauthor) walletauthor = 500
         if(walletauthor <= 500) return message.channel.send("You need more than 500 coins to rob someone")
