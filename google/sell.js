@@ -5,6 +5,8 @@ const { MessageEmbed } = require('discord.js')
 module.exports = {
     commands: 'sell',
     minArgs: 1,
+    description: "Sells an item",
+    cooldown: 3,
     expectedArgs: '<item> [amount]',
     callback: async(message, arguments, text, client) => {
         let item = items.find(item => item.ID.includes(arguments[0].toLowerCase()))
