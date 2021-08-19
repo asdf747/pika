@@ -18,8 +18,8 @@ module.exports = {
                 .setDescription(`U0se \`${prefix}settings [setting] [true/false]\` to change a value of a setting\n\n**Passive:** \`passive\` - ${doc && doc.Passive ? 'Enabled' : 'Disabled'}\n*Toggles whether or not passive mode will be on.*`)
             )
         }
-        let settings = ['passive']
-        if(!settings.includes(arguments[0].toLowerCase())) return message.channel.send("This setting doesn't even exist bruh.")
+        let available = ['passive']
+        if(!available.includes(arguments[0].toLowerCase())) return message.channel.send("This setting doesn't even exist bruh.")
         switch(arguments[0].toLowerCase()){
             case 'passive':
                 if(!arguments[1]) return message.channel.send("Please enter a valid value")
