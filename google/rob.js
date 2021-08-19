@@ -8,14 +8,14 @@ module.exports = {
     cooldown: 120,
     expectedArgs: '<member>',
     callback: async(message, arguments, text, client) => {
-        let e = settings.findOne({ id: message.author.id })
+        let e = await settings.findOne({ id: message.author.id })
         let settingsauthor = e.Passive
         if(!e) settingsauthor = 'false'
         if(settingsauthor === 'true') return message.channel.send("You can't rob while in passive mode.")
         let member = message.mentions.members.first() || message.guild.members.cache.get(arguments[0])
         if(!member) return message.channel.send("i can't find this member")
         if(member.user.bot) return message.channel.send("you can't rob bots lol")
-        let o = settings.findOne({ id: member.id })
+        let o = await settings.findOne({ id: member.id })
         let settingsmember = o.Passive
         if(!o) settingsmember = 'false'
         if(settingsmember) return message.channel.send("This member is in passive mode")
