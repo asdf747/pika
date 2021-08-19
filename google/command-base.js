@@ -254,6 +254,7 @@ const track = new Discord.MessageEmbed()
                 new Discord.MessageEmbed()
                 .setAuthor(message.author.tag, message.author.displayAvatarURL())
                 .setTitle("Cooldown!")
+                .setColor(15158332)
                 .setDescription(`:x: You need to wait \`${timeObj.d !== 0 ? `${timeObj.d} day${timeObj.d !== 1 ? 's' : ''} ` : ''}${timeObj.h !== 0 ? `${timeObj.h} hour${timeObj.h !== 1 ? 's' : ''} ` : ''}${timeObj.m !== 0 ? `${timeObj.m} minute${timeObj.m !== 1 ? 's' : ''} ` : ''}${timeObj.s !== 0 ? `${timeObj.s} second${timeObj.s !== 1 ? 's' : ''}` : ''}\` to use this command.`)
             )
         }
