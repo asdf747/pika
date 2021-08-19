@@ -92,7 +92,7 @@ module.exports = {
                 let lmao = victim_bank / joined.length
                 await economy.findOneAndUpdate({ id: joined[i] }, { $inc: {Wallet: victim_bank / joined.length} })
                 await economy.findOneAndUpdate({ id: member.id }, { $inc: {InBank: -victim_bank / joined.length} })
-                db.set(`inheist_${msg}`, false)
+                db.set(`inheist_${joined[i]}`, false)
                 gely += `+ ${client.users.cache.get(joined[i]).tag} got ${victim_bank / joined.length}\n`
             }
         
