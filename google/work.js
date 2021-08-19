@@ -7,7 +7,7 @@ const db = new Database("mongodb+srv://lol:fofo29112007@golgo.t3bmd.mongodb.net/
 module.exports = {
     commands: 'work',
     description: "Work to gain money.",
-    cooldown: 3600,
+    cooldown: 18000,
     callback: async(message, arguments, text, client) => {
         let bonus = await db.fetch(`bonus_work_${message.author.id}`)
         if(!bonus) await db.set(`bonus_work_${message.author.id}`)
