@@ -26,6 +26,7 @@ module.exports = {
                 let checking = data.Inventory.find(item => item.Name.toLowerCase() === item.Name.toLowerCase())
                 if(checking){
                     await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Wallet: -price} })
+                    await economy.updateOne({ "id": message.author.id, "Inventory.Name": "PP" }, { $inc: {"Inventory.$.Count": amount} })
                     return message.channel.send(
                         new MessageEmbed()
                         .setAuthor(`Bought ${item.Name}`, message.author.displayAvatarURL())
