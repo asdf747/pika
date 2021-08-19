@@ -5,7 +5,7 @@ module.exports = {
     minArgs: 1,
     expectedArgs: '<amount>',
     callback: async (message, arguments, text, client) => {
-        if(['all', 'max']){
+        if(['all', 'max'].includes(arguments[0].toLowerCase())){
             await economy.findOne({ id: message.author.id }, async(err, data) => {
                 if(data){
                     if(data.InBank <= 0) return message.channel.send("You don't have anything to withdraw.")
