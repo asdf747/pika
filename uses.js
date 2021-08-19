@@ -31,6 +31,7 @@ switch(final){
                 }
             }
         })
+        break
 
 
     case "unlucky":
@@ -54,9 +55,11 @@ switch(final){
                 }
             }
         })
+        break
 }
 
 await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Lucky crate" }, { $inc: {"Inventory.$.Count": -1} })
+return
 }
 
 async function unlucky(client, message, arguments, economy){
