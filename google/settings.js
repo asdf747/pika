@@ -10,8 +10,12 @@ module.exports = {
         let prefix = await db.fetch(`prefix_${message.guild.id}`)
         if(!prefix) prefix = config.prefix
         if(!arguments[0]){
-            let doc = settings.findOne({ id: message.author.id }).Passive
-            if(!doc) doc = false
+            let lol = await settings.findOne({ id: message.author.id })
+            if(lol) lol = true
+            if(!lol) lol = false
+            let doc = ''
+            if(lol) doc = await settings.findOne({ id: message.author.id }).Passive
+            if(!lol) doc = false
             return message.channel.send(
                 new MessageEmbed()
                 .setTitle(`${message.author.username}${message.author.username.endsWith('s') ? '\'' : '\'s'} settings`)
