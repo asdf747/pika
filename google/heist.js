@@ -44,7 +44,7 @@ module.exports = {
             let total = 0
             await message.channel.send("Heist ended.")
             if(joined.length === 0) return message.channel.send("Nobody joined the heist")
-            if(joined.length > 100) {
+            if(joined.length < 5) {
                 await joined.forEach(async mas => {
                     total++
                     await economy.findOneAndUpdate({ id: mas }, { $inc: {Wallet: -2000} })
@@ -72,15 +72,15 @@ module.exports = {
         let final = chances[checkingchance]
         if(final === 'fail'){
             await economy.findOneAndUpdate({ id: msg }, { $inc: {Wallet: -lose} })
-            reply += `${client.users.cache.get(msg).tag} lost ${lose} coins\n`
+            reply += `# ${client.users.cache.get(msg).tag} lost ${lose} coins\n`
         }
         if(final === 'success'){
             let lmao = -victim_bank / joined.length
             await economy.findOneAndUpdate({ id: msg }, { $inc: {Wallet: victim_bank / joined.length} })
             await economy.findOneAndUpdate({ id: member.id }, { $inc: {InBank: -lmao} })
-            reply += `${client.users.cache.get(msg).tag} got ${victim_bank / joined.length}\n`
+            reply += `+ ${client.users.cache.get(msg).tag} got ${victim_bank / joined.length}\n`
         }
-        message.channel.send(`\`\`\`${reply}\`\`\``)
+        message.channel.send(`\`\`\`diff\n${reply}\`\`\``)
                 }
             })
         })
