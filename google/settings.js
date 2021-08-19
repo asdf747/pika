@@ -5,6 +5,7 @@ const db = require('quick.db')
 
 module.exports = {
     commands: 'settings',
+    cooldown: 3,
     callback: async(message, arguments, text, client) => {
         let prefix = await db.fetch(`prefix_${message.guild.id}`)
         if(!prefix) prefix = config.prefix
