@@ -41,12 +41,13 @@ switch(final){
                 if(ass){
                     await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Unlucky cookie" }, { $inc: {"Inventory.$.Count": amount} })
                     return message.channel.send(`You opened the <:emoji_12:877912311719927839> lucky crate box and got **${amount} ${final}**`)
-                }
+                }else{
+
+                
                 let obj = {
                     Name: "Unlucky cookie",
                     Count: amount
                 }
-                if(!ass){
 
                 
                 data.Inventory.push(obj)
