@@ -1,6 +1,7 @@
 
 const economy = require('../models/economy')
 const items = require('../shop.json')
+const uses = require('../uses')
 
 module.exports = {
     commands: 'use',
@@ -11,12 +12,7 @@ module.exports = {
         if(!item) return message.channel.send("This item doesn't exist.")
         switch(item.ID[0].toLowerCase()){
             case 'pp':
-                await economy.findOne({ id: message.author.id }, async (err, data) => {
-                    if(data){
-                        await economy.updateOne({ "id": message.author.id, "Inventory.Name": "PP" }, { $set: {"Inventory.$.Count": 0} })
-                        message.channel.send(`aaa `)
-                    }
-                })
+                message.channel.send(uses.pp(client, message, arguments, economy))
             
         }
     }
