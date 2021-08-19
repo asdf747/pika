@@ -42,6 +42,7 @@ module.exports = {
             joined.push(m.author.id)
         })
         members.on('end', async msgs => {
+            await message.channel.send("Heist ended.")
             if(msgs.size < 5) {
                 msgs.forEach(async mas => {
                     let chocking = await economy.findOne({ id: mas.author.id })
@@ -81,6 +82,7 @@ module.exports = {
             await economy.findOneAndUpdate({ id: member.id }, { $inc: {Wallet: -victim_bank / joined.length} })
             reply += `${client.users.cache.get(msg).tag} got ${victim_bank / joined.length}\n`
         }
+        message.channel.send(`\`\`\`${reply}\`\`\``)
                 }
             })
         })
