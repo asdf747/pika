@@ -9,6 +9,7 @@ module.exports = {
     cooldown: 3600,
     callback: async(message, arguments, text, client) => {
         let lastwork = await db.fetch(`last_work_${message.author.id}`)
+        if(!lastwork) await db.set(`last_work_${message.author.id}`, 1)
         if(lastwork !== null && moment.duration(Date.now() - lastwork).as('days') < 2) await db.add(`bonus_work_${message.author.id}`, 1)
         if(lastwork !== null && moment.duration(Date.now() - lastwork).as('days') >= 2) await db.set(`bonus_work_${message.author.id}`, 1)
         let bonus = await db.fetch(`bonus_work_${message.author.id}`)
