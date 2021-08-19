@@ -29,7 +29,6 @@ module.exports = {
         const filter = x => x.content.toLowerCase() === 'join heist' && x.author.id !== member.id
         const members = await message.channel.createMessageCollector(filter, { time: 60000 })
         let joined = []
-        let total = 0
 
         members.on('collect', async m => {
             if(joined.includes(m.author.id)) return message.lineReply("You already joined")
@@ -42,8 +41,9 @@ module.exports = {
             joined.push(m.author.id)
         })
         members.on('end', async msgs => {
+            let total = 0
             await message.channel.send("Heist ended.")
-            if(!joined.length) return message.channel.send("Nobody joined the heist")
+            if(joined.length === 0) return message.channel.send("Nobody joined the heist")
             if(joined.length < 5) {
                 await joined.forEach(async mas => {
                     let chocking = await economy.findOne({ id: mas })
