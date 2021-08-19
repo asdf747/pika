@@ -36,7 +36,7 @@ module.exports = {
                 }
                 let pp = data.Bank - data.InBank
                 let amount = Number(arguments[0])
-                if(!amount) return message.channel.send("Enter a valid amount.")
+                if(!amount || arguments[0].includes('.')) return message.channel.send("Enter a valid amount.")
                 if(amount > data.Wallet) return message.channel.send("You don't have this much in your wallet.")
                 if(amount > pp) return message.channel.send("You can't deposit this amount.")
                 await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Wallet: -amount, InBank: amount} })
