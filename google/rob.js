@@ -42,10 +42,11 @@ module.exports = {
             case 'fail':
                 await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Wallet: -500} })
                 await economy.findOneAndUpdate({ id: member.id }, { $inc: {Wallet: 500} })
-                message.channel.send("You got caught and paid the person you stole from **500 coins**")
+                return message.channel.send("You got caught and paid the person you stole from **500 coins**")
             case 'success':
                 await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Wallet: amount} })
-                message.channel.send(`You successfully stole **${amount} coins** from that person`)
+                await economy.findOneAndUpdate({ id: member.id }, { $inc: {Wallet: -amount} })
+                return message.channel.send(`You successfully stole **${amount} coins** from that person`)
         }
     }
 }
