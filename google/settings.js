@@ -10,17 +10,12 @@ module.exports = {
         let prefix = await db.fetch(`prefix_${message.guild.id}`)
         if(!prefix) prefix = config.prefix
         if(!arguments[0]){
-            let lol = await settings.findOne({ id: message.author.id })
-            if(lol) lol = true
-            if(!lol) lol = false
-            let doc = ''
-            if(lol) doc = await settings.findOne({ id: message.author.id }).Passive
-            if(!lol) doc = false
+            let doc = await settings.findOne({ id: message.author.id })
             return message.channel.send(
                 new MessageEmbed()
                 .setTitle(`${message.author.username}${message.author.username.endsWith('s') ? '\'' : '\'s'} settings`)
                 .setColor("BLUE")
-                .setDescription(`Use \`${prefix}settings [setting] [true/false]\` to change a value of a setting\n\n**Passive:** \`passive\` - ${doc === true ? 'Enabled' : 'Disabled'}\n*Toggles whether or not passive mode will be on.*`)
+                .setDescription(`Use \`${prefix}settings [setting] [true/false]\` to change a value of a setting\n\n**Passive:** \`passive\` - ${!doc ? 'Disabled' : 'Enabled'}\n*Toggles whether or not passive mode will be on.*`)
             )
         }
         let available = ['passive']
