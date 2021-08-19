@@ -7,15 +7,15 @@ module.exports = {
     minArgs: 1,
     expectedArgs: '<member>',
     callback: async(message, arguments, text, client) => {
-        let o = await settings.findOne({ id: message.author.id })
-        let settingsauthor = o.Passive
-        if(!o) settingsauthor = 'false'
+        let oe = await settings.findOne({ id: message.author.id })
+        let settingsauthor = 'false'
+        if(oe) settingsauthor = oe.Passive
         if(settingsauthor === 'true') return message.channel.send("You can't heist while being in passive mode")
         let mom = message.mentions.members.first() || message.guild.members.cache.get(arguments[0])
         if(!mom) return message.channel.send("does this member even exist")
         let egg = await settings.findOne({ id: mom.id })
-        let settingsmember = egg.Passive
-        if(!egg) settingsmember = 'false'
+        let settingsmember = 'false'
+        if(egg) settingsmember = egg.Passive
         if(settingsmember === 'true') return message.channel.send("This member is in passive mode")
         let victim_database = await economy.findOne({ id: member.id })
         let victim_bank = victim_database.InBank
