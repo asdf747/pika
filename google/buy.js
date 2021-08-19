@@ -10,7 +10,7 @@ module.exports = {
     cooldown: 3,
     callback: async (message, arguments, text, client) => {
         let item = items.find(item => item.ID.includes(arguments[0]))
-        if(!item) return message.channel.send("This item doesn't exist.")
+        if(!item || !item.Shop) return message.channel.send("This item doesn't exist in the shop.")
         let amount = 1
         if(arguments[1] && Number(arguments[1])){
             if(Number(arguments[1]) < 1) return message.channel.send(`You can't buy less than 1 ${item.Name}`)
