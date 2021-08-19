@@ -38,7 +38,7 @@ module.exports = {
             let member_wallet = 500
             if(checking_database) member_wallet = checking_database.Wallet
             if(member_wallet < 2000) return m.lineReply("You need to have **2,000 coins** in your wallet")
-            m.react(':bank:')
+            m.react('877589942140813333')
             joined.push(m.author.id)
         })
         members.on('end', async msgs => {
