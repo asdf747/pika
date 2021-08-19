@@ -3,7 +3,7 @@
         "Name": "PP",
         "ID": ["pp", "penis"],
         "Price": 69,
-        "Sell": 10,
+        "Sell": "???",
         "Description": "Something that neon doesn't have",
         "Shop": true,
         "Emoji": "<:penis:877589942140813333>",
