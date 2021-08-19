@@ -12,7 +12,7 @@
     },
     {
         "Name": "Lucky crate",
-        "ID": ["lucky"],
+        "ID": ["lucky", "crate"],
         "Price": 100000,
         "Sell": 50000,
         "Description": "A crate that gives a random item",
