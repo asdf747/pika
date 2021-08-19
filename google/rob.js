@@ -9,16 +9,16 @@ module.exports = {
     expectedArgs: '<member>',
     callback: async(message, arguments, text, client) => {
         let egg = await settings.findOne({ id: message.author.id })
-        let settingsauthor = egg.Passive
-        if(!egg) settingsauthor = 'false'
+        let settingsauthor = 'false'
+        if(egg) settingsauthor = egg.Passive
         if(settingsauthor === 'true') return message.channel.send("You can't rob while in passive mode.")
         let member = message.mentions.members.first() || message.guild.members.cache.get(arguments[0])
         if(!member) return message.channel.send("i can't find this member")
         if(member.id === message.author.id) return message.channel.send("Why tf would you rob yourself")
         if(member.user.bot) return message.channel.send("you can't rob bots lol")
         let og = await settings.findOne({ id: member.id })
-        let settingsmember = og.Passive
-        if(!og) settingsmember = 'false'
+        let settingsmember = 'false'
+        if(og) settingsmember = og.Passive
         if(settingsmember) return message.channel.send("This member is in passive mode")
         let chances = []
         for (let i = 0; i < 21; i++){
