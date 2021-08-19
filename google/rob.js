@@ -14,6 +14,7 @@ module.exports = {
         if(settingsauthor === 'true') return message.channel.send("You can't rob while in passive mode.")
         let member = message.mentions.members.first() || message.guild.members.cache.get(arguments[0])
         if(!member) return message.channel.send("i can't find this member")
+        if(member.id === message.author.id) return message.channel.send("Why tf would you rob yourself")
         if(member.user.bot) return message.channel.send("you can't rob bots lol")
         let o = await settings.findOne({ id: member.id })
         let settingsmember = o.Passive
