@@ -11,7 +11,7 @@ module.exports = {
     expectedArgs: '<member>',
     callback: async(message, arguments, text, client) => {
         let unlucky = await db.fetch(`unlucky_${message.author.id}`)
-        if(unlucky){
+        if(unlucky !== null){
             let dur = moment.duration(new Date() - unlucky).as('minutes')
             if(dur < 15) return message.channel.send("someone used the unlucky cookie on you so you can't rob or join heists lol")
         }
@@ -54,7 +54,7 @@ module.exports = {
             case 'success':
                 await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Wallet: amount} })
                 await economy.findOneAndUpdate({ id: member.id }, { $inc: {Wallet: -amount} })
-                return message.channel.send(`You successfully stole **${amount} coins** from that person`)
+                return message.channel.send(`You successfully stole **${parseInt(amount).toLocaleString("en-US")} coins** from that person`)
         }
     }
 }
