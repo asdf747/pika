@@ -68,10 +68,6 @@ module.exports = {
             }
             let reply = ''
             joined.forEach(async msg => {
-                let chocking = await economy.findOne({ id: msg })
-                let wollet = 500
-                if(chocking) wollet = chocking.Wallet
-                if(wollet >= 2000){
                     let chances = []
                     for (let i = 0; i < 21; i++){
                         chances.push('fail')
@@ -96,7 +92,7 @@ module.exports = {
             reply += `+ ${client.users.cache.get(msg).tag} got ${victim_bank / joined.length}\n`
         }
         
-                }
+                
             })
             message.channel.send(`\`\`\`diff\n${reply}\`\`\``)
         })
