@@ -68,6 +68,9 @@ module.exports = {
             }
             let reply = ''
             joined.forEach(async msg => {
+                let chocking = await economy.findOne({ id: msg })
+                let wollet = 500
+                if(chocking) wollet = chocking.Wallet
                     let chances = []
                     for (let i = 0; i < 21; i++){
                         chances.push('fail')
