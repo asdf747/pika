@@ -17,8 +17,10 @@ module.exports = {
         switch(item.ID[0]){
             case "lucky":
                 await uses.lucky(client, message, arguments, economy);
+                break
             case "unlucky":
                 await uses.unlucky(client, message, arguments, economy);
+                break
         }
     }
 }
