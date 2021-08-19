@@ -23,7 +23,7 @@ module.exports = {
         switch(arguments[0].toLowerCase()){
             case 'passive':
                 if(!arguments[1]) return message.channel.send("Please enter a valid value")
-                if(!arguments[1].toLowerCase() === 'true' && !arguments[1].toLowerCase() === 'false') return message.channel.send("Please enter a valid value")
+                if(arguments[1].toLowerCase() !== 'true' && arguments[1].toLowerCase() !== 'false') return message.channel.send("Please enter a valid value")
                 let value = true
                 if(arguments[1].toLowerCase() === 'false') value = false
                 let gos = settings.findOne({ id: message.author.id })
