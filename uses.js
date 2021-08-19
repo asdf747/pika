@@ -64,7 +64,8 @@ return
 
     async function unlucky(client, message, arguments, economy){
     let member = message.mentions.members.first() || message.guild.members.cache.get(arguments[0])
-    if(!member) return message.channel.send("does this member even exist")
+    if(!member) return message.channel.send("mention a member bruh")
+    if(member.id === message.author.id) return message.channel.send("why would you do this to yourself")
     const db = require('quick.db')
     db.set(`unlucky_${message.author.id}`, new Date())
     return message.channel.send(`You used the unlucky cookie on ${member.user.username} now he can't rob or join heists for 15 minutes`)
