@@ -19,7 +19,8 @@
         "Shop": true,
         "Emoji": "<:emoji_12:877912311719927839>",
         "Image": "https://cdn.discordapp.com/emojis/877912311719927839.png?v=1",
-        "Useable": true
+        "Useable": true,
+        "Items": ["Note", "PP", "Unlucky cookie"]
     },
     {
         "Name": "Unlucky cookie",
@@ -41,7 +42,7 @@
         "Shop": false,
         "Emoji": "<:emoji_14:877958079826759792>",
         "Image": "https://cdn.discordapp.com/emojis/877958079826759792.png?v=1",
-        "Useable": false,
-        "Items": ["Note", "PP", "Unlucky cookie"]
+        "Useable": false
+        
     }
 ]
