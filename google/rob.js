@@ -8,12 +8,13 @@ module.exports = {
     cooldown: 120,
     expectedArgs: '<member>',
     callback: async(message, arguments, text, client) => {
-        let settingsauthor = settings.findOne({ id: message.author.id })
-        if(settingsauthor && settingsauthor.Passive) return message.channel.send("You can't rob while in passive mode.")
+        let settingsauthor = settings.findOne({ id: message.author.id }).Passive
+        if(settingsauthor) return message.channel.send("You can't rob while in passive mode.")
         let member = message.mentions.members.first() || message.guild.members.cache.get(arguments[0])
         if(!member) return message.channel.send("i can't find this member")
-        let settingsmember = settings.findOne({ id: member.id })
-        if(settingsmember && settingsmember.Passive) return message.channel.send("This member is in passive mode")
+        if(member.user.bot) return message.channel.send("you can't rob bots lol")
+        let settingsmember = settings.findOne({ id: member.id }).Passive
+        if(settingsmember) return message.channel.send("This member is in passive mode")
         let chances = []
         for (let i = 0; i < 21; i++){
             chances.push('fail')
