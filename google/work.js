@@ -30,7 +30,7 @@ module.exports = {
                     Wallet: 500,
                     Bank: 100,
                     InBank: 0
-                }).save().then(() => {
+                }).save().then(async () => {
                     await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Wallet: amount} })
                 return message.channel.send(
                     new MessageEmbed()
