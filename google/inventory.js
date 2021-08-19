@@ -12,7 +12,7 @@ module.exports = {
             if(data){
                 let inv = data.Inventory.filter(item => item.Count >= 1).map(item => {
                     let itemo = items.find(ite => ite.Name.toLowerCase() === item.Name.toLowerCase())
-                    return `**${itemo.Emoji} ${item.Name}** - ${item.Count}\nID: \`${itemo.ID[0].toUpperCase()}\``
+                    return `**${itemo.Emoji} ${item.Name}** - ${item.Count}\nID: \`${itemo.ID[0].toUpperCase()}\`\n`
                 })
                 if(!inv.length) inv = ['Empty']
                 const FieldsEmbed = new Pagination.FieldsEmbed()
