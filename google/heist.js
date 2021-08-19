@@ -69,7 +69,7 @@ module.exports = {
             let gely = ''
 
             for (let i = 0; i < joined.length; i++){
-                let chocking = await economy.findOne({ id: msg })
+                let chocking = await economy.findOne({ id: joined[i] })
                 let wollet = 500
                 if(chocking) wollet = chocking.Wallet
                     let chances = []
