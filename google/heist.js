@@ -11,18 +11,18 @@ module.exports = {
         let settingsauthor = 'false'
         if(oe) settingsauthor = oe.Passive
         if(settingsauthor === 'true') return message.channel.send("You can't heist while being in passive mode")
-        let mom = message.mentions.members.first() || message.guild.members.cache.get(arguments[0])
-        if(!mom) return message.channel.send("does this member even exist")
-        let egg = await settings.findOne({ id: mom.id })
+        let member = message.mentions.members.first() || message.guild.members.cache.get(arguments[0])
+        if(!member) return message.channel.send("does this member even exist")
+        let egg = await settings.findOne({ id: member.id })
         let settingsmember = 'false'
         if(egg) settingsmember = egg.Passive
         if(settingsmember === 'true') return message.channel.send("This member is in passive mode")
         let victim_database = await economy.findOne({ id: member.id })
-        let victim_bank = victim_database.InBank
-        if(!victim_database) victim_bank = 0
+        let victim_bank = 0
+        if(victim_database) victim_bank = victim_database.InBank
         let author_database = await economy.findOne({ id: message.author.id })
-        let author_bank = author_database.Wallet
-        if(!author_database) author_bank = 0
+        let author_bank = 0
+        if(author_database) author_bank = author_database.Wallet
         if(victim_bank < 2000) return message.channel.send("the victim doesn't have enough money in his bank")
         if(author_bank < 2000) return message.channel.send("you need to withdraw ***2,000 coins** to join the heist")
         await message.channel.send(`**${message.author.tag}** is heisting **${member.user.tag}** say join heist to join`)
@@ -35,8 +35,8 @@ module.exports = {
             if(joined.includes(m.author.id)) return message.lineReply("You already joined")
             let checking_database = await economy.findOne({ id: m.author.id })
             // checking if member has 2,000 in wallet
-            let member_wallet = checking_database.Wallet
-            if(!checking_database) member_wallet = 500
+            let member_wallet = 500
+            if(checking_database) member_wallet = checking_database.Wallet
             if(member_wallet < 2000) return m.lineReply("You need to have **2,000 coins** in your wallet")
             m.react(':bank:')
             joined.push(m.author.id)
@@ -45,8 +45,8 @@ module.exports = {
             if(msgs.size < 5) {
                 msgs.forEach(async mas => {
                     let chocking = await economy.findOne({ id: mas.author.id })
-                let wollet = chocking.Wallet
-                if(!chocking) wollet = 500
+                let wollet = 500
+                if(chocking) wollet = chocking.Wallet
                 if(wollet <= 2000){
                     total++
                     await economy.findOneAndUpdate({ id: mas.author.id }, { $inc: {Wallet: -2000} })
@@ -58,8 +58,8 @@ module.exports = {
             let reply = ''
             joined.forEach(async msg => {
                 let chocking = await economy.findOne({ id: msg })
-                let wollet = chocking.Wallet
-                if(!chocking) wollet = 500
+                let wollet = 500
+                if(chocking) wollet = chocking.Wallet
                 if(wollet >= 2000){
                     let chances = []
                     for (let i = 0; i < 21; i++){
