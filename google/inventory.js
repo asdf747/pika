@@ -10,7 +10,7 @@ module.exports = {
         let mem = message.mentions.members.first() || message.guild.members.cache.get(arguments[0]) || message.member
         await economy.findOne({ id: mem.id }, async (err, data) => {
             if(data){
-                let inv = data.Inventory.map(item => {
+                let inv = data.Inventory.filter(item => item.Count >= 1).map(item => {
                     let itemid = items.find(ite => ite.Name.toLowerCase() === item.Name.toLowerCase()).ID[0]
                     return `${item.Name} - ${item.Count}\nID: \`${itemid}\``
                 })
