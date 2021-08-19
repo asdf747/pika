@@ -13,9 +13,9 @@ module.exports = {
         if(settingsauthor === 'true') return message.channel.send("You can't heist while being in passive mode")
         let member = message.mentions.members.first() || message.guild.members.cache.get(arguments[0])
         if(!member) return message.channel.send("does this member even exist")
-        let e = await settings.findOne({ id: member.id })
-        let settingsmember = 'false'
-        if(o) settingsmember = e.Passive
+        let egg = await settings.findOne({ id: member.id })
+        let settingsmember = egg.Passive
+        if(!egg) settingsmember = 'false'
         if(settingsmember === 'true') return message.channel.send("This member is in passive mode")
         let victim_database = await economy.findOne({ id: member.id })
         let victim_bank = victim_database.InBank
