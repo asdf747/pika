@@ -33,7 +33,8 @@
     "translate-google": "^1.4.3",
     "weky": "^2.1.0",
     "body-parser": "^1.19.0",
-    "discordutility": "^0.2.6"
+    "discordutility": "^0.2.6",
+    "quickmongo": "^3.0.2"
   },
   "devDependencies": {
     "node": "^16.6.1"
