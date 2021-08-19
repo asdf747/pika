@@ -21,8 +21,10 @@ module.exports = {
             .setThumbnail(item.Image)
             .setTimestamp()
             .setColor("BLUE")
+
+            if(item.Items) embed.addField(`Items:`, `${item.Items.map(ass => `\`${ass}\``).join(' ')}`)
+
             
-            if(item.Items) embed.addField(`Items:`, item.Items.map(ass => `\`${ass}\``).join(' '))
             message.channel.send(embed)
             return
         }
