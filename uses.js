@@ -37,7 +37,7 @@ switch(final){
     case "unlucky":
         await economy.findOne({ id: message.author.id }, async (err, data) => {
             if(data){
-                let ass = data.Inventory.find(item => item.Name.toLowerCase() === 'Unlucky cookie')
+                let ass = data.Inventory.find(item => item.Name.toLowerCase() === 'unlucky cookie')
                 if(ass){
                     await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Unlucky cookie" }, { $inc: {"Inventory.$.Count": amount} })
                     return message.channel.send(`You opened the <:emoji_12:877912311719927839> lucky crate box and got **${amount} ${final}**`)
