@@ -48,7 +48,7 @@ module.exports = {
             let member_wallet = 500
             if(checking_database) member_wallet = checking_database.Wallet
             if(member_wallet < 2000) return m.lineReply("You need to have **2,000 coins** in your wallet")
-            m.react('877589942140813333')
+            m.react('🏦')
             joined.push(m.author.id)
             db.set(`inheist_${m.author.id}`, true)
         })
@@ -66,7 +66,7 @@ module.exports = {
                 })
                 return message.channel.send(`Heist failed **${total}** people paid 2,000 to **${member.user.tag}**`)
             }
-            let reply = ''
+            let reply = []
             joined.forEach(async msg => {
                 let chocking = await economy.findOne({ id: msg })
                 let wollet = 500
@@ -85,19 +85,19 @@ module.exports = {
         if(final === 'fail'){
             db.set(`inheist_${msg}`, false)
             await economy.findOneAndUpdate({ id: msg }, { $inc: {Wallet: -lose} })
-            reply += `# ${client.users.cache.get(msg).tag} lost ${lose} coins\n`
+            reply.push(`# ${client.users.cache.get(msg).tag} lost ${lose} coins`)
         }
         if(final === 'success'){
             let lmao = -victim_bank / joined.length
             await economy.findOneAndUpdate({ id: msg }, { $inc: {Wallet: victim_bank / joined.length} })
             await economy.findOneAndUpdate({ id: member.id }, { $inc: {InBank: -lmao} })
             db.set(`inheist_${msg}`, false)
-            reply += `+ ${client.users.cache.get(msg).tag} got ${victim_bank / joined.length}\n`
+            reply.push(`+ ${client.users.cache.get(msg).tag} got ${victim_bank / joined.length}`)
         }
         
                 
             })
-            message.channel.send(`\`\`\`diff\n${reply}\`\`\``)
+            message.channel.send(`\`\`\`diff\n${reply.map(el => el).join('\n')}\`\`\``)
         })
     }
 }
