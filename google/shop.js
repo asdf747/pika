@@ -8,7 +8,7 @@ module.exports = {
     callback: async(message, arguments, text, client) => {
         if(arguments[0]){
             let item = shop.find(item => item.ID.includes(arguments[0].toLowerCase()))
-            if(!item) return message.channel.send("This item doens't exist.")
+            if(!item) return message.channel.send("This item doesn't exist.")
             let finding = await economy.findOne({ id: message.author.id })
             let counter = 0
             if(finding && finding.Inventory.length){
@@ -18,7 +18,7 @@ module.exports = {
             message.channel.send(
                 new MessageEmbed()
                 .setTitle(`${item.Name} ${counter >= 1 ? `(${counter} owned)` : ''}`)
-                .setDescription(`${item.Description}\n\n**Buy:** ${Number(item.Price).toLocaleString("en-US") || 'Not able to be purchased'}\n**Sell:** ${Number(item.Sell).toLocaleString("en-US") || 'Not able to be sold'}`)
+                .setDescription(`${item.Description}\n\n**Buy:** ${Number(item.Price) ? Number(item.Price).toLocaleString("en-US") : 'Not able to be purchased'}\n**Sell:** ${Number(item.Sell) ? Number(item.Sell).toLocaleString("en-US") : 'Not able to be sold'}`)
                 .setThumbnail(item.Image)
                 .setTimestamp()
                 .setColor("BLUE")
