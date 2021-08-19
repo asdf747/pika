@@ -11,9 +11,9 @@ module.exports = {
         let settingsauthor = o.Passive
         if(!o) settingsauthor = 'false'
         if(settingsauthor === 'true') return message.channel.send("You can't heist while being in passive mode")
-        let member = message.mentions.members.first() || message.guild.members.cache.get(arguments[0])
-        if(!member) return message.channel.send("does this member even exist")
-        let egg = await settings.findOne({ id: member.id })
+        let mom = message.mentions.members.first() || message.guild.members.cache.get(arguments[0])
+        if(!mom) return message.channel.send("does this member even exist")
+        let egg = await settings.findOne({ id: mom.id })
         let settingsmember = egg.Passive
         if(!egg) settingsmember = 'false'
         if(settingsmember === 'true') return message.channel.send("This member is in passive mode")
