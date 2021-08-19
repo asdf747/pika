@@ -16,7 +16,7 @@ module.exports = {
                 new MessageEmbed()
                 .setTitle(`${message.author.username}${message.author.username.endsWith('s') ? '\'' : '\'s'} settings`)
                 .setColor("BLUE")
-                .setDescription(`Use \`${prefix}settings [setting] [true/false]\` to change a value of a setting\n\n**Passive:** \`passive\` - ${doc ? 'Enabled' : 'Disabled'}\n*Toggles whether or not passive mode will be on.*`)
+                .setDescription(`Use \`${prefix}settings [setting] [true/false]\` to change a value of a setting\n\n**Passive:** \`passive\` - ${doc === true ? 'Enabled' : 'Disabled'}\n*Toggles whether or not passive mode will be on.*`)
             )
         }
         let available = ['passive']
