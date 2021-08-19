@@ -67,7 +67,7 @@ module.exports = {
                 return message.channel.send(`Heist failed **${total}** people paid 2,000 to **${member.user.tag}**`)
             }
             let reply = ''
-            joined.forEach(async msg => {
+            await joined.forEach(async msg => {
                 let chocking = await economy.findOne({ id: msg })
                 let wollet = 500
                 if(chocking) wollet = chocking.Wallet
@@ -90,7 +90,7 @@ module.exports = {
         if(final === 'success'){
             let lmao = victim_bank / joined.length
             await economy.findOneAndUpdate({ id: msg }, { $inc: {Wallet: victim_bank / joined.length} })
-            await economy.findOneAndUpdate({ id: member.id }, { $inc: {InBank: -lmao} })
+            await economy.findOneAndUpdate({ id: member.id }, { $inc: {InBank: -victim_bank / joined.length} })
             db.set(`inheist_${msg}`, false)
             reply += `+ ${client.users.cache.get(msg).tag} got ${victim_bank / joined.length}\n`
         }
