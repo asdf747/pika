@@ -6,6 +6,9 @@ for (let i = 0; i < 30; i++){
 for (let i = 0; i < 20; i++){
     prizes.push('unlucky')
 }
+for (let i = 0; i < 5; i++){
+    prizes.push('note')
+}
 let checkingprize = Math.floor(Math.random() * Math.floor(prizes.length)) 
 let final = prizes[checkingprize]
 let amount = Math.floor(Math.random() * 10) + 1
@@ -57,6 +60,26 @@ switch(final){
             }
         })
         break
+
+    case "note":
+        await economy.findOne({ id: message.author.id }, async (err, data) => {
+            if(data){
+                let ass = data.Inventory.find(item => item.Name.toLowerCase() === 'note')
+                if(ass){
+                    await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Note" }, { $inc: {"Inventory.$.Count": amount} })
+                    return message.channel.send(`You opened the <:emoji_12:877912311719927839> lucky crate box and got **${amount} ${final}**`)
+                }else{
+                    let obj = {
+                        Name: "Note",
+                        Count: amount
+                    }
+                    data.Inventory.push(obj)
+                    data.save()
+                    return message.channel.send(`You opened the <:emoji_12:877912311719927839> lucky crate box and got **${amount} ${final}**`)
+                }
+            }
+        })
+        break
 }
 
 await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Lucky crate" }, { $inc: {"Inventory.$.Count": -1} })
@@ -73,7 +96,14 @@ return
     return message.channel.send(`You used the unlucky cookie on ${member.user.username} now he can't rob or join heists for 15 minutes`)
 }
 
+async function note(client, message, arguments, economy){
+    let amount = Math.floor(Math.random() * 50000) + 1
+    await economy.findOneAndUpdate({ id: message.guild.id }, { $inc: {Bank: amount} })
+    return message.channel.send(`You used your note and got **${parseInt(amount).toLocaleString("en-US")} bank space**!`)
+}
+
 module.exports = {
     lucky,
-    unlucky
+    unlucky,
+    note
 }

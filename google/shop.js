@@ -15,14 +15,15 @@ module.exports = {
                 counting = await finding.Inventory.find(ite => ite.Name.toLowerCase() === item.Name.toLowerCase())
                 if(counting) counter = counting.Count
             }
-            message.channel.send(
-                new MessageEmbed()
-                .setTitle(`${item.Name} ${counter >= 1 ? `(${counter} owned)` : ''}`)
-                .setDescription(`${item.Description}\n\n**Buy:** ${Number(item.Price) ? Number(item.Price).toLocaleString("en-US") : 'Not able to be purchased'}\n**Sell:** ${Number(item.Sell) ? Number(item.Sell).toLocaleString("en-US") : 'Not able to be sold'}`)
-                .setThumbnail(item.Image)
-                .setTimestamp()
-                .setColor("BLUE")
-            )
+            let embed = new MessageEmbed()
+            .setTitle(`${item.Name} ${counter >= 1 ? `(${counter} owned)` : ''}`)
+            .setDescription(`${item.Description}\n\n**Buy:** ${Number(item.Price) ? Number(item.Price).toLocaleString("en-US") : 'Not able to be purchased'}\n**Sell:** ${Number(item.Sell) ? Number(item.Sell).toLocaleString("en-US") : 'Not able to be sold'}`)
+            .setThumbnail(item.Image)
+            .setTimestamp()
+            .setColor("BLUE")
+            
+            if(item.Items) embed.addField(`Items:`, item.Items.map(ass => `\`${ass}\``).join(' '))
+            message.channel.send(embed)
             return
         }
         let items = shop.filter(item => item.Shop).map(item => `**${item.Emoji} ${item.Name}** - ${parseInt(item.Price).toLocaleString("en-US")}\n${item.Description}\n`)

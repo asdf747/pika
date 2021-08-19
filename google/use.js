@@ -21,6 +21,9 @@ module.exports = {
             case "unlucky":
                 await uses.unlucky(client, message, arguments, economy);
                 break
+            case "note":
+                await uses.note(client, message, arguments, economy)
+                break
         }
     }
 }
