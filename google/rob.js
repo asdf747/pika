@@ -19,7 +19,7 @@ module.exports = {
         let og = await settings.findOne({ id: member.id })
         let settingsmember = 'false'
         if(og) settingsmember = og.Passive
-        if(settingsmember) return message.channel.send("This member is in passive mode")
+        if(settingsmember === 'true') return message.channel.send("This member is in passive mode")
         let chances = []
         for (let i = 0; i < 21; i++){
             chances.push('fail')

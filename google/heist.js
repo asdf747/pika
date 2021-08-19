@@ -75,8 +75,9 @@ module.exports = {
             reply += `${client.users.cache.get(msg).tag} lost ${lose} coins\n`
         }
         if(final === 'success'){
+            let lmao = -victim_bank / joined.length
             await economy.findOneAndUpdate({ id: msg }, { $inc: {Wallet: victim_bank / joined.length} })
-            await economy.findOneAndUpdate({ id: member.id }, { $inc: {Wallet: -victim_bank / joined.length} })
+            await economy.findOneAndUpdate({ id: member.id }, { $inc: {InBank: -lmao} })
             reply += `${client.users.cache.get(msg).tag} got ${victim_bank / joined.length}\n`
         }
         message.channel.send(`\`\`\`${reply}\`\`\``)
