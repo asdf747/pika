@@ -18,7 +18,7 @@ module.exports = {
             message.channel.send(
                 new MessageEmbed()
                 .setTitle(`${item.Name} ${counter >= 1 ? `(${counter} owned)` : ''}`)
-                .setDescription(`${item.Description}\n\n**Buy:** ${parseInt(item.Price).toLocaleString("en-US")}\n**Sell:** ${item.Sell}`)
+                .setDescription(`${item.Description}\n\n**Buy:** ${parseInt(item.Price).toLocaleString("en-US")}\n**Sell:** ${parseInt(item.Sell).toLocaleString("en-US")}`)
                 .setThumbnail(item.Image)
                 .setTimestamp()
                 .setColor("BLUE")
