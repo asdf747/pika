@@ -12,8 +12,8 @@ module.exports = {
             let finding = await economy.findOne({ id: message.author.id })
             let counter = 0
             if(finding && finding.Inventory.length){
-                counting = finding.Inventory.find(ite => ite.Name.toLowerCase() === item.Name.toLowerCase())
-                counter = counting.Count
+                counting = await finding.Inventory.find(ite => ite.Name.toLowerCase() === item.Name.toLowerCase())
+                if(counting) counter = counting.Count
             }
             message.channel.send(
                 new MessageEmbed()
