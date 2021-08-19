@@ -98,7 +98,7 @@ return
 
 async function note(client, message, arguments, economy){
     let amount = Math.floor(Math.random() * 50000) + 1
-    await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Bank: amount} })
+    await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Bank: parseInt(amount)} })
     await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Note" }, { $inc: {"Inventory.$.Count": -1} })
     return message.channel.send(`You used your note and got **${parseInt(amount).toLocaleString("en-US")} bank space**!`)
 }
