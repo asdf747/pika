@@ -95,9 +95,10 @@ module.exports = {
             db.set(`inheist_${msg}`, false)
             reply += `+ ${client.users.cache.get(msg).tag} got ${victim_bank / joined.length}\n`
         }
-        message.channel.send(`\`\`\`diff\n${reply}\`\`\``)
+        
                 }
             })
+            message.channel.send(`\`\`\`diff\n${reply}\`\`\``)
         })
     }
 }
