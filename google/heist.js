@@ -67,7 +67,7 @@ module.exports = {
                 return message.channel.send(`Heist failed **${total}** people paid 2,000 to **${member.user.tag}**`)
             }
             let reply = []
-            joined.forEach(async msg => {
+            await joined.forEach(async msg => {
                 let chocking = await economy.findOne({ id: msg })
                 let wollet = 500
                 if(chocking) wollet = chocking.Wallet
