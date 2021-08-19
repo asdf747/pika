@@ -22,12 +22,17 @@ switch(final){
                     Name: "PP",
                     Count: amount
                 }
+                if(!ass){
+
+                
                 data.Inventory.push(obj)
                 data.save()
                 return message.channel.send(`You opened the <:emoji_12:877912311719927839> lucky crate box and got **${amount} ${final}**`)
+                }
             }
         })
-        
+
+
     case "unlucky":
         await economy.findOne({ id: message.author.id }, async (err, data) => {
             if(data){
@@ -40,9 +45,13 @@ switch(final){
                     Name: "Luck crate",
                     Count: amount
                 }
+                if(!ass){
+
+                
                 data.Inventory.push(obj)
                 data.save()
                 return message.channel.send(`You opened the <:emoji_12:877912311719927839> lucky crate box and got **${amount} ${final}**`)
+                }
             }
         })
 }
