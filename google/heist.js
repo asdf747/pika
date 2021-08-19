@@ -26,7 +26,7 @@ module.exports = {
         if(victim_bank < 2000) return message.channel.send("the victim doesn't have enough money in his bank")
         if(author_bank < 2000) return message.channel.send("you need to withdraw ***2,000 coins** to join the heist")
         await message.channel.send(`**${message.author.tag}** is heisting **${member.user.tag}** say join heist to join`)
-        const filter = x => x.content.toLowerCase() === 'join heist'
+        const filter = x => x.content.toLowerCase() === 'join heist' && x.author.id !== member.id
         const members = await message.channel.createMessageCollector(filter, { time: 60000 })
         let joined = []
         let total = 0
@@ -44,7 +44,7 @@ module.exports = {
         members.on('end', async msgs => {
             await message.channel.send("Heist ended.")
             if(msgs.size < 5) {
-                msgs.forEach(async mas => {
+                await msgs.forEach(async mas => {
                     let chocking = await economy.findOne({ id: mas.author.id })
                 let wollet = 500
                 if(chocking) wollet = chocking.Wallet
@@ -52,9 +52,10 @@ module.exports = {
                     total++
                     await economy.findOneAndUpdate({ id: mas.author.id }, { $inc: {Wallet: -2000} })
                     await economy.findOneAndUpdate({ id: member.id }, { $inc: {Wallet: 2000} })
-                    return message.channel.send(`Heist failed **${total}** people paid 2,000 to **${member.user.tag}**`)
+                    
                 }
                 })
+                return message.channel.send(`Heist failed **${total}** people paid 2,000 to **${member.user.tag}**`)
             }
             let reply = ''
             joined.forEach(async msg => {
