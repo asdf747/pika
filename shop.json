@@ -9,5 +9,16 @@
         "Emoji": "<:penis:877589942140813333>",
         "Image": "https://cdn.discordapp.com/emojis/877589942140813333.png?v=1",
         "Useable": false
+    },
+    {
+        "Name": "Lucky crate",
+        "ID": ["lucky"],
+        "Price": 100000,
+        "Sell": 50000,
+        "Description": "",
+        "Shop": true,
+        "Emoji": "<:emoji_12:877912311719927839>",
+        "Image": "https://cdn.discordapp.com/emojis/877912311719927839.png?v=1",
+        "Useable": false
     }
 ]
