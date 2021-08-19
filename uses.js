@@ -27,6 +27,7 @@ switch(final){
                 return message.channel.send(`You opened the <:emoji_12:877912311719927839> lucky crate box and got **${amount} ${final}**`)
             }
         })
+        
     case "unlucky":
         await economy.findOne({ id: message.author.id }, async (err, data) => {
             if(data){
