@@ -11,11 +11,12 @@ module.exports = {
         if(!prefix) prefix = config.prefix
         if(!arguments[0]){
             let doc = await settings.findOne({ id: message.author.id }).Passive
+            if(!doc) doc = 'false'
             return message.channel.send(
                 new MessageEmbed()
                 .setTitle(`${message.author.username}${message.author.username.endsWith('s') ? '\'' : '\'s'} settings`)
                 .setColor("BLUE")
-                .setDescription(`Use \`${prefix}settings [setting] [true/false]\` to change a value of a setting\n\n**Passive:** \`passive\` - ${!doc ? 'Disabled' : 'Enabled'}\n*Toggles whether or not passive mode will be on.*`)
+                .setDescription(`Use \`${prefix}settings [setting] [true/false]\` to change a value of a setting\n\n**Passive:** \`passive\` - ${doc === 'false' ? 'Disabled' : 'Enabled'}\n*Toggles whether or not passive mode will be on.*`)
             )
         }
         let available = ['passive']
@@ -24,8 +25,8 @@ module.exports = {
             case 'passive':
                 if(!arguments[1]) return message.channel.send("Please enter a valid value")
                 if(arguments[1].toLowerCase() !== 'true' && arguments[1].toLowerCase() !== 'false') return message.channel.send("Please enter a valid value")
-                let value = true
-                if(arguments[1].toLowerCase() === 'false') value = false
+                let value = 'true'
+                if(arguments[1].toLowerCase() === 'false') value = 'false'
                 let gos = settings.findOne({ id: message.author.id }, async(err, data) => {
                     if(data){
                         await settings.findOneAndUpdate({ id: message.author.id }, { Passive: value })
