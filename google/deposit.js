@@ -1,4 +1,5 @@
 const economy = require('../models/economy')
+const db = require('quick.db')
 
 module.exports = {
     commands: ['deposit', 'dep'],
@@ -6,6 +7,8 @@ module.exports = {
     expectedArgs: '<amount>',
     cooldown: 3,
     callback: async(message, arguments, text, client) => {
+        let inheist = await db.fetch(`inheist_${message.author.id}`)
+        if(inheist !== null && inheist === true) return message.channel.send("You can't use this command while in heist.")
         if(!Number(arguments[0]) && !['all', 'max'].includes(arguments[0].toLowerCase())) return message.channel.send("Enter a valid amount.")
         
         await economy.findOne({ id: message.author.id }, async (err, data) => {

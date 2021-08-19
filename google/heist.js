@@ -1,6 +1,7 @@
 const { listenerCount } = require('events')
 const economy = require('../models/economy')
 const settings = require('../models/settings')
+const db = require('quick.db')
 
 module.exports = {
     commands: ['bankrob', 'heist'],
@@ -26,12 +27,15 @@ module.exports = {
         if(victim_bank < 2000) return message.channel.send("the victim doesn't have enough money in his bank")
         if(author_bank < 2000) return message.channel.send("you need to withdraw ***2,000 coins** to join the heist")
         await message.channel.send(`**${message.author.tag}** is heisting **${member.user.tag}** say join heist to join`)
-        const filter = x => x.content.toLowerCase() === 'join heist' && x.author.id !== member.id
+        const filter = x => x.content.toLowerCase() === 'join heist'
         const members = await message.channel.createMessageCollector(filter, { time: 60000 })
         let joined = []
+        joined.push(message.author.id)
+        db.set(`inheist_${message.author.id}`, true)
 
         members.on('collect', async m => {
             if(joined.includes(m.author.id)) return message.lineReply("You already joined")
+            if(m.author.id === member.id) return message.lineReply("why ")
             let checking_database = await economy.findOne({ id: m.author.id })
             // checking if member has 2,000 in wallet
             let member_wallet = 500
@@ -39,6 +43,7 @@ module.exports = {
             if(member_wallet < 2000) return m.lineReply("You need to have **2,000 coins** in your wallet")
             m.react('877589942140813333')
             joined.push(m.author.id)
+            db.set(`inheist_${m.author.id}`, true)
         })
         members.on('end', async msgs => {
             let total = 0
@@ -49,6 +54,7 @@ module.exports = {
                     total++
                     await economy.findOneAndUpdate({ id: mas }, { $inc: {Wallet: -2000} })
                     await economy.findOneAndUpdate({ id: member.id }, { $inc: {Wallet: 2000} })
+                    db.set(`inheist_${mas}`, false)
                     
                 })
                 return message.channel.send(`Heist failed **${total}** people paid 2,000 to **${member.user.tag}**`)
@@ -71,6 +77,7 @@ module.exports = {
                     let lose = Math.floor(Math.random() * nou) + 1
         let final = chances[checkingchance]
         if(final === 'fail'){
+            db.set(`inheist_${msg}`, false)
             await economy.findOneAndUpdate({ id: msg }, { $inc: {Wallet: -lose} })
             reply += `# ${client.users.cache.get(msg).tag} lost ${lose} coins\n`
         }
@@ -78,6 +85,7 @@ module.exports = {
             let lmao = -victim_bank / joined.length
             await economy.findOneAndUpdate({ id: msg }, { $inc: {Wallet: victim_bank / joined.length} })
             await economy.findOneAndUpdate({ id: member.id }, { $inc: {InBank: -lmao} })
+            db.set(`inheist_${msg}`, false)
             reply += `+ ${client.users.cache.get(msg).tag} got ${victim_bank / joined.length}\n`
         }
         message.channel.send(`\`\`\`diff\n${reply}\`\`\``)

@@ -18,14 +18,14 @@ module.exports = {
             message.channel.send(
                 new MessageEmbed()
                 .setTitle(`${item.Name} ${counter >= 1 ? `(${counter} owned)` : ''}`)
-                .setDescription(`${item.Description}\n\n**Buy:** ${parseInt(item.Price).toLocaleString("en-US")}\n**Sell:** ${parseInt(item.Sell).toLocaleString("en-US")}`)
+                .setDescription(`${item.Description}\n\n**Buy:** ${Number(item.Price).toLocaleString("en-US") || 'Not able to be purchased'}\n**Sell:** ${Number(item.Sell).toLocaleString("en-US") || 'Not able to be sold'}`)
                 .setThumbnail(item.Image)
                 .setTimestamp()
                 .setColor("BLUE")
             )
             return
         }
-        let items = shop.filter(item => item.Shop).map(item => `**${item.Emoji} ${item.Name}** - ${parseInt(item.Price).toLocaleString("en-Us")}\n${item.Description}\n`)
+        let items = shop.filter(item => item.Shop).map(item => `**${item.Emoji} ${item.Name}** - ${parseInt(item.Price).toLocaleString("en-US")}\n${item.Description}\n`)
         if(!items.length) items = ["Empty"]
     const FieldsEmbed = new Pagination.FieldsEmbed()
     .setArray(items)
