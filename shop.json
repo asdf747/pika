@@ -31,5 +31,16 @@
         "Emoji": "<:emoji_13:877912370876395571>",
         "Image": "https://cdn.discordapp.com/emojis/877912370876395571.png?v=1",
         "Useable": true
+    },
+    {
+        "Name": "Note",
+        "ID": ["note", "bank"],
+        "Price": "???",
+        "Sell": "???",
+        "Description": "Use it to get more bank space.",
+        "Shop": false,
+        "Emoji": "<:emoji_14:877958079826759792>",
+        "Image": "https://cdn.discordapp.com/emojis/877958079826759792.png?v=1",
+        "Useable": false
     }
 ]
