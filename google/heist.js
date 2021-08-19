@@ -8,12 +8,18 @@ module.exports = {
     minArgs: 1,
     expectedArgs: '<member>',
     callback: async(message, arguments, text, client) => {
+        let unlucky = await db.fetch(`unlucky_${message.author.id}`)
+        if(unlucky !== null){
+            let dur = moment.duration(new Date() - unlucky).as('minutes')
+            if(dir < 15) return message.channel.send("someone used the unlucky cookie on you so you can't rob or join heists lol")
+        }
         let oe = await settings.findOne({ id: message.author.id })
         let settingsauthor = 'false'
         if(oe) settingsauthor = oe.Passive
         if(settingsauthor === 'true') return message.channel.send("You can't heist while being in passive mode")
         let member = message.mentions.members.first() || message.guild.members.cache.get(arguments[0])
         if(!member) return message.channel.send("does this member even exist")
+        if(member.id === message.author.id) return message.channel.send("Why tf would you heist your self.")
         let egg = await settings.findOne({ id: member.id })
         let settingsmember = 'false'
         if(egg) settingsmember = egg.Passive
@@ -35,7 +41,7 @@ module.exports = {
 
         members.on('collect', async m => {
             if(joined.includes(m.author.id)) return message.lineReply("You already joined")
-            if(m.author.id === member.id) return message.lineReply("why ")
+            if(m.author.id === member.id) return message.lineReply("you can't join a heist against yourself dumbo")
             let checking_database = await economy.findOne({ id: m.author.id })
             // checking if member has 2,000 in wallet
             let member_wallet = 500

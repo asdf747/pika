@@ -1,5 +1,7 @@
 const economy = require('../models/economy')
 const settings = require('../models/settings')
+const db = require('quick.db')
+const moment = require('moment')
 
 module.exports = {
     commands: 'rob',
@@ -8,6 +10,11 @@ module.exports = {
     cooldown: 120,
     expectedArgs: '<member>',
     callback: async(message, arguments, text, client) => {
+        let unlucky = await db.fetch(`unlucky_${message.author.id}`)
+        if(unlucky !== null){
+            let dur = moment.duration(new Date() - unlucky).as('minutes')
+            if(dir < 15) return message.channel.send("someone used the unlucky cookie on you so you can't rob or join heists lol")
+        }
         let egg = await settings.findOne({ id: message.author.id })
         let settingsauthor = 'false'
         if(egg) settingsauthor = egg.Passive

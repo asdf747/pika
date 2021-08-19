@@ -19,6 +19,17 @@
         "Shop": true,
         "Emoji": "<:emoji_12:877912311719927839>",
         "Image": "https://cdn.discordapp.com/emojis/877912311719927839.png?v=1",
-        "Useable": false
+        "Useable": true
+    },
+    {
+        "Name": "Unlucky cookie",
+        "ID": ["unlucky"],
+        "Price": "???",
+        "Sell": "???",
+        "Description": "Use it and mention someone to prevent them from robbing or joining heists for 15 minutes.",
+        "Shop": false,
+        "Emoji": "<:emoji_13:877912370876395571>",
+        "Image": "https://cdn.discordapp.com/emojis/877912370876395571.png?v=1",
+        "Useable": true
     }
 ]

@@ -11,8 +11,8 @@ module.exports = {
         await economy.findOne({ id: mem.id }, async (err, data) => {
             if(data){
                 let inv = data.Inventory.filter(item => item.Count >= 1).map(item => {
-                    let itemid = items.find(ite => ite.Name.toLowerCase() === item.Name.toLowerCase()).ID[0]
-                    return `${item.Name} - ${item.Count}\nID: \`${itemid}\``
+                    let itemo = items.find(ite => ite.Name.toLowerCase() === item.Name.toLowerCase())
+                    return `**${itemo.Emoji} ${item.Name}** - ${item.Count}\nID: \`${itemo.ID[0].toUpperCase()}\``
                 })
                 if(!inv.length) inv = ['Empty']
                 const FieldsEmbed = new Pagination.FieldsEmbed()
