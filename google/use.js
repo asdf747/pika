@@ -13,7 +13,7 @@ module.exports = {
             case 'pp':
                 await economy.findOne({ id: message.author.id }, async (err, data) => {
                     if(data){
-                        await data.update({ "Inventory.Name": "PP" }, { $set: {"cart.$.Count": Number(0)} })
+                        await data.updateOne({ "Inventory.Name": "PP" }, { $set: {"cart.$.Count": Number(0)} })
                         message.channel.send(`aaa `)
                     }
                 })
