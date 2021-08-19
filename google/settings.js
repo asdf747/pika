@@ -11,8 +11,7 @@ module.exports = {
         if(!prefix) prefix = config.prefix
         if(!arguments[0]){
             let gas = await settings.findOne({ id: message.author.id })
-            let doc = 'false'
-            if(gas) doc = gas.Passive
+            let doc = gas.Passive || 'false'
             return message.channel.send(
                 new MessageEmbed()
                 .setTitle(`${message.author.username}${message.author.username.endsWith('s') ? '\'' : '\'s'} settings`)
