@@ -46,15 +46,10 @@ module.exports = {
             if(joined.length === 0) return message.channel.send("Nobody joined the heist")
             if(joined.length < 5) {
                 await joined.forEach(async mas => {
-                    let chocking = await economy.findOne({ id: mas })
-                let wollet = 500
-                if(chocking) wollet = chocking.Wallet
-                if(wollet <= 2000){
                     total++
                     await economy.findOneAndUpdate({ id: mas }, { $inc: {Wallet: -2000} })
                     await economy.findOneAndUpdate({ id: member.id }, { $inc: {Wallet: 2000} })
                     
-                }
                 })
                 return message.channel.send(`Heist failed **${total}** people paid 2,000 to **${member.user.tag}**`)
             }
