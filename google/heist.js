@@ -83,17 +83,19 @@ module.exports = {
                     let checkingchance = Math.floor(Math.random() * Math.floor(chances.length)) 
                     let lose = Math.floor(Math.random() * nou) + 1
         let final = chances[checkingchance]
-        if(final === 'fail'){
-            db.set(`inheist_${msg}`, false)
-            await economy.findOneAndUpdate({ id: msg }, { $inc: {Wallet: -lose} })
-     reply += `# ${client.users.cache.get(msg).tag} lost ${lose} coins\n`
-        }
-        if(final === 'success'){
-            let lmao = victim_bank / joined.length
-            await economy.findOneAndUpdate({ id: msg }, { $inc: {Wallet: victim_bank / joined.length} })
-            await economy.findOneAndUpdate({ id: member.id }, { $inc: {InBank: -victim_bank / joined.length} })
-            db.set(`inheist_${msg}`, false)
-         reply += `+ ${client.users.cache.get(msg).tag} got ${victim_bank / joined.length}\n`
+        switch(final){
+            case "fail":
+                db.set(`inheist_${msg}`, false)
+                await economy.findOneAndUpdate({ id: msg }, { $inc: {Wallet: -lose} })
+                 reply += `# ${client.users.cache.get(msg).tag} lost ${lose} coins\n`
+                 break
+            case "success":
+                let lmao = victim_bank / joined.length
+                await economy.findOneAndUpdate({ id: msg }, { $inc: {Wallet: victim_bank / joined.length} })
+                await economy.findOneAndUpdate({ id: member.id }, { $inc: {InBank: -victim_bank / joined.length} })
+                db.set(`inheist_${msg}`, false)
+                reply += `+ ${client.users.cache.get(msg).tag} got ${victim_bank / joined.length}\n`
+                break
         }
         
               gely = reply  
