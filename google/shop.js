@@ -41,8 +41,7 @@ module.exports = {
             color: "BLUE",
             footer: ' ',
             footerImage: ' ',
-            timestamp: true,
-            args: arguments[0]
+            timestamp: true
         }
 
         utils.createEmbedPages(client, message, items, options)
