@@ -12,10 +12,13 @@ const mongo = require('./mongo')
 require('events').EventEmitter.defaultMaxListeners = 0;
 const moment = require('moment')
 const backup = require("discord-backup");
-const { Database } = require("quickmongo");
+const quickmongo = require("quickmongo");
+quickmongo(client)
 
 
-client.db = new Database("mongodb+srv://lol:fofo29112007@golgo.t3bmd.mongodb.net/gg?retryWrites=true&w=majority");
+client.db = "mongodb+srv://lol:fofo29112007@golgo.t3bmd.mongodb.net/gg?retryWrites=true&w=majority"
+
+
 
 moment.updateLocale('en', {
     relativeTime : {
