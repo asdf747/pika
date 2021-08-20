@@ -81,4 +81,16 @@
         "Useable": true
         
     }
+    {
+        "Name": "Octopus",
+        "ID": ["octopus"],
+        "Price": "???",
+        "Sell": 1000,
+        "Description": "You can get this octopus from the diving command",
+        "Shop": false,
+        "Emoji": "<:octopus:878378232699842590>",
+        "Image": "https://cdn.discordapp.com/emojis/878378232699842590.png?v=1",
+        "Useable": false
+        
+    }
 ]

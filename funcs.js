@@ -22,3 +22,7 @@ async function die(member){
         }
     })
 }
+
+module.exports = {
+    die
+}
