@@ -68,5 +68,17 @@
         "Image": "https://cdn.discordapp.com/emojis/878290323183403038.png?v=1",
         "Useable": true
         
+    },
+    {
+        "Name": "Nuke",
+        "ID": ["nuke"],
+        "Price": 69000000,
+        "Sell": "???",
+        "Description": "Nuke 'em use this to prevent someone from using the currency commands for an hour",
+        "Shop": true,
+        "Emoji": "<:emoji_18:878310596540518430>",
+        "Image": "https://cdn.discordapp.com/emojis/878311297958182963.png?v=1",
+        "Useable": true
+        
     }
 ]
