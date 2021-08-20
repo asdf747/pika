@@ -44,5 +44,17 @@
         "Image": "https://cdn.discordapp.com/emojis/877958079826759792.png?v=1",
         "Useable": true
         
+    },
+    {
+        "Name": "Trophy",
+        "ID": ["trophy"],
+        "Price": "???",
+        "Sell": "???",
+        "Description": "Gives you a multiplier in gambling",
+        "Shop": false,
+        "Emoji": "<:trophy:878198091075977266>",
+        "Image": "https://cdn.discordapp.com/emojis/878198091075977266.png?v=1",
+        "Useable": false
+        
     }
 ]
