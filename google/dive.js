@@ -77,7 +77,7 @@ module.exports = {
                 )
                 break
             case "die":
-                await die(message.member)
+                await die(message.member, message)
                 return message.channel.send(
                     new MessageEmbed()
                     .setColor("RED")

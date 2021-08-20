@@ -1,4 +1,4 @@
-async function die(member){
+async function die(member, message){
     if(!message.guild.cache.get(member.id)) return console.log("This member doesn't exist")
     let economy = require('./models/economy')
     await economy.findOne({ id: member.id }, async(err, data) => {
