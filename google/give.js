@@ -22,8 +22,8 @@ module.exports = {
                     Wallet: 500,
                     Bank: 100,
                     InBank: 0
-                }).save().then(async () => {
-                    if(data.Wallet < amount) return message.channel.send("you don't even have that much in your wallet")
+                }).save().then(async (ass) => {
+                    if(ass.Wallet < amount) return message.channel.send("you don't even have that much in your wallet")
                 await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Wallet: -amount} })
                 await economy.findOneAndUpdate({ id: member.id }, { $inc: {Wallet: amount} })
                 message.lineReply(`You gave ${member.user.username} **${amount.toLocaleString("en-US")}**`)
