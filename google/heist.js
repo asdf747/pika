@@ -5,6 +5,7 @@ const { Database } = require("quickmongo");
 const Pagination = require('discord-paginationembed')
 const db = new Database("mongodb+srv://lol:fofo29112007@golgo.t3bmd.mongodb.net/gg?retryWrites=true&w=majority");
 const moment = require('moment')
+const { MessageEmbed } = require('discord.js')
 
 module.exports = {
     commands: ['bankrob', 'heist'],
@@ -65,7 +66,7 @@ module.exports = {
             let totalavail = 0
             await message.channel.send("Heist ended.")
             if(joined.length === 0) return message.channel.send("Nobody joined the heist")
-            if(joined.length < 2) {
+            if(joined.length < 5) {
                 await joined.forEach(async mas => {
                     total++
                     await economy.findOneAndUpdate({ id: mas }, { $inc: {Wallet: -2000} })
@@ -79,21 +80,14 @@ module.exports = {
 
             for (let i = 0; i < joined.length; i++){
                 if(totalavail >= 1){
-                    const FieldsEmbed = new Pagination.FieldsEmbed()
-    .setArray(gely)
-    .setAuthorizedUsers([message.author.id])
-    .setChannel(message.channel)
-    .setElementsPerPage(36)
-    .setPageIndicator(false)
-    .formatField('Result: ', el => el);
-
-FieldsEmbed.embed
-  .setTitle(`Heist results`)
-  .setTimestamp()
-  .setColor("GREEN")
-  .setThumbnail(message.guild.iconURL() || null)
-
-FieldsEmbed.build();
+                    message.channel.send(
+                        new MessageEmbed()
+                        .setTitle('Heist results')
+                        .setDescription(gely.map(a => a).join('\n'))
+                        .setTimestamp()
+                        .setColor("GREEN")
+                        .setThumbnail(message.guild.iconURL() || null)
+                    )
                     totalavail = 0
                     gely = []
                 }
@@ -129,21 +123,14 @@ FieldsEmbed.build();
             }
 
             if(gely.length){
-                const FieldsEmbed = new Pagination.FieldsEmbed()
-    .setArray(gely)
-    .setAuthorizedUsers([message.author.id])
-    .setChannel(message.channel)
-    .setElementsPerPage(36)
-    .setPageIndicator(false)
-    .formatField('Result: ', el => el);
-
-FieldsEmbed.embed
-  .setTitle(`Heist results`)
-  .setTimestamp()
-  .setColor("GREEN")
-  .setThumbnail(message.guild.iconURL() || null)
-
-FieldsEmbed.build();
+                message.channel.send(
+                    new MessageEmbed()
+                    .setTitle('Heist results')
+                    .setDescription(gely.map(a => a).join('\n'))
+                    .setTimestamp()
+                    .setColor("GREEN")
+                    .setThumbnail(message.guild.iconURL() || null)
+                )
             }
             
         })
