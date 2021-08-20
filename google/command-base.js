@@ -231,7 +231,7 @@ const track = new Discord.MessageEmbed()
         }
         let kek = true
         let nuke = await db.fetch(`nuke_${message.author.id}`)
-        if(nuke !== null && moment.duration(nuke).as("hours") < 1) {
+        if(nuke !== null && moment.duration(Date.now() - nuke).as("hours") < 1) {
           kek = false
           return message.channel.send("Someone use nuke on you so you can't use the currency commands for an hour")
         }
