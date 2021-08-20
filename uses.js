@@ -107,6 +107,7 @@ async function note(client, message, arguments, economy){
 }
 
 async function bomb(client, message, arguments, economy){
+    const Pagination = require('discord-paginationembed')
     await message.channel.send(`${message.author.username} dropped a coin bomb say \`collect\` to join`)
     const filter = x => x.content.toLowerCase() === 'collect' && x.author.id !== message.author.id
     const collect = await message.channel.createMessageCollector(filter, { time: 15000 })
@@ -117,7 +118,7 @@ async function bomb(client, message, arguments, economy){
         joined.push(m.author.id)
     })
     collect.on('end', async msgs => {
-        let reply = ''
+        let reply = []
         if(joined.length){
         for (let i = 0; i < joined.length; i++){
             await economy.findOne({ id: joined[i] }, async(err, data) => {
@@ -134,10 +135,24 @@ async function bomb(client, message, arguments, economy){
                     })
                 }
             })
-            reply += `+ ${client.users.cache.get(joined[i]).tag} got ${parseInt(5000 / joined.length).toLocaleString("en-US")}`
+            reply.push(`**+ ${client.users.cache.get(joined[i]).tag}**\n*got ${parseInt(5000 / joined.length).toLocaleString("en-US")}*\n`)
         }
     }
-        message.channel.send(`\`\`\`diff\n${reply}\`\`\``)
+    const FieldsEmbed = new Pagination.FieldsEmbed()
+    .setArray(reply)
+    .setAuthorizedUsers([message.author.id])
+    .setChannel(message.channel)
+    .setElementsPerPage(10)
+    .setPageIndicator(false)
+    .formatField('Result: ', el => el);
+
+FieldsEmbed.embed
+  .setTitle(`Bomb results`)
+  .setTimestamp()
+  .setColor("GREEN")
+  .setThumbnail(message.guild.iconURL() || null)
+
+FieldsEmbed.build()
         await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Coin bomb" }, { $inc: {"Inventory.$.Count": -1} })
     })
 }
