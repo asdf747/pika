@@ -7,7 +7,7 @@ module.exports = {
     cooldown: 5,
     callback: async (message, arguments, text, client) => {
         let amount = Number(arguments[0])
-        if(!amount || arguments[0].includes('.')) return message.channel.send("enter a valid amount when")
+        if(!amount || arguments[0].includes('.') || amount < 1) return message.channel.send("enter a valid amount when")
         let member = message.mentions.members.first() || message.guild.members.cache.get(arguments[1])
         if(!member) return message.channel.send("mention a valid member lol")
         await economy.findOne({ id: message.author.id }, async (err, data) => {
