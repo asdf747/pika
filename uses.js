@@ -138,21 +138,15 @@ async function bomb(client, message, arguments, economy){
             reply.push(`**+ ${client.users.cache.get(joined[i]).tag}**\n*got ${parseInt(5000 / joined.length).toLocaleString("en-US")}*\n`)
         }
     }
-    const FieldsEmbed = new Pagination.FieldsEmbed()
-    .setArray(reply)
-    .setAuthorizedUsers([message.author.id])
-    .setChannel(message.channel)
-    .setElementsPerPage(10)
-    .setPageIndicator(false)
-    .formatField('Result: ', el => el);
 
-FieldsEmbed.embed
-  .setTitle(`Bomb results`)
-  .setTimestamp()
-  .setColor("GREEN")
-  .setThumbnail(message.guild.iconURL() || null)
-
-FieldsEmbed.build()
+    message.channel.send(
+        new MessageEmbed()
+        .setTitle('Bomb results')
+        .setDescription(reply.map(a => a).join('\n'))
+        .setTimestamp()
+        .setColor("GREEN")
+        .setThumbnail(message.guild.iconURL() || null)
+    )
         await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Coin bomb" }, { $inc: {"Inventory.$.Count": -1} })
     })
 }
