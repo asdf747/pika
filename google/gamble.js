@@ -47,15 +47,15 @@ module.exports = {
                 break
             case "fail":
                 await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Wallet: -betting_amount} })
-                let golga =                     new MessageEmbed()
+                let gelga = new MessageEmbed()
                 .setTitle(`${message.author.username}${message.author.username.endsWith('s') ? '\'' : '\'s'} gambling game`)
                 .setThumbnail(message.author.displayAvatarURL())
                 .setColor("RED")
                 .setTimestamp()
                 .setDescription(`You lost **${parseInt(betting_amount).toLocaleString("en-US")} coins**\n\n**Your balance:** ${parseInt(author_wallet - betting_amount).toLocaleString("en-US")}`)
 
-                if(winchance === 30) golga.setFooter("Mutliplier: x2")
-                return message.channel.send(golga)
+                if(winchance === 30) gelga.setFooter("Mutliplier: x2")
+                return message.channel.send(gelga)
                 break
         }
     }
