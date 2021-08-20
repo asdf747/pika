@@ -1,7 +1,8 @@
 const { listenerCount } = require('events')
 const economy = require('../models/economy')
 const settings = require('../models/settings')
-const db = require('quick.db')
+const { Database } = require("quickmongo");
+const db = new Database("mongodb+srv://lol:fofo29112007@golgo.t3bmd.mongodb.net/gg?retryWrites=true&w=majority");
 const moment = require('moment')
 
 module.exports = {
@@ -41,6 +42,11 @@ module.exports = {
         db.set(`inheist_${message.author.id}`, true)
 
         members.on('collect', async m => {
+            let unlucky_collector = await db.fetch(`unlucky_${m.author.id}`)
+            if(unlucky_collector !== null){
+                let dur = moment.duration(Date.now() - unlucky_collector).as('minutes')
+                if(dur < 15) return message.channel.send("someone used the unlucky cookie on you so you can't rob or join heists lol")
+            }
             if(joined.includes(m.author.id)) return m.lineReply("You already joined")
             if(m.author.id === member.id) return m.lineReply("you can't join a heist against yourself dumbo")
             let checking_database = await economy.findOne({ id: m.author.id })

@@ -90,7 +90,8 @@ return
     let member = message.mentions.members.first() || message.guild.members.cache.get(arguments[0])
     if(!member) return message.channel.send("mention a member bruh")
     if(member.id === message.author.id) return message.channel.send("why would you do this to yourself")
-    const db = require('quick.db')
+    const { Database } = require("quickmongo");
+const db = new Database("mongodb+srv://lol:fofo29112007@golgo.t3bmd.mongodb.net/gg?retryWrites=true&w=majority");
     await db.set(`unlucky_${member.id}`, Date.now())
     await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Unlucky cookie" }, { $inc: {"Inventory.$.Count": -1} })
     return message.channel.send(`You used the unlucky cookie on ${member.user.username} now he can't rob or join heists for 15 minutes`)
