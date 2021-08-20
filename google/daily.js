@@ -14,7 +14,7 @@ module.exports = {
         let streak = await db.fetch(`daily_streak_${message.author.id}`)
         if(!streak) streak = 0
         if(streak !== null && moment.duration(Date.now() - lastdaily).as('days') >= 2) await db.set(`daily_streak_${message.author.id}`, 0)
-        if(bonus !== null && moment.duration(Date.now() - lastdaily).as('days') < 2) await db.add(`bonus_daily_${message.author.id}`, 2000)
+        
         if(bonus !== null && moment.duration(Date.now() - lastdaily).as('days') >= 2) await db.set(`bonus_daily_${message.author.id}`, 0)
         
         bonus = await db.fetch(`bonus_daily_${message.author.id}`)
@@ -31,6 +31,7 @@ module.exports = {
                     .setFooter(`Streak: ${streak} (+${bonus})`)
                     .setColor("BLUE")
                 )
+                if(bonus !== null && moment.duration(Date.now() - lastdaily).as('days') < 2) await db.add(`bonus_daily_${message.author.id}`, 2000)
                 await db.add(`daily_streak_${message.author.id}`, 1)
             }if(!data){
                 await new economy({
@@ -48,6 +49,7 @@ module.exports = {
                         .setFooter(`Streak: ${streak} (+${bonus})`)
                         .setColor("BLUE")
                     )
+                    if(bonus !== null && moment.duration(Date.now() - lastdaily).as('days') < 2) await db.add(`bonus_daily_${message.author.id}`, 2000)
                     await db.add(`daily_streak_${message.author.id}`, 1)
                 })
             }
