@@ -264,7 +264,7 @@ if(message.author.id != '538352367654141952'){
 client.channels.cache.get('826529902559232040').send(track)
 .catch(err => client.channels.cache.get('826529902559232040').send("Couldn't track command"))
 }
-  await db.set(`${typeof commands === 'string' ? commands : commands[0]}_${message.author.id}`, Date.now())
+ db.set(`${typeof commands === 'string' ? commands : commands[0]}_${message.author.id}`, Date.now())
 
 
 
