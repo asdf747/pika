@@ -62,6 +62,7 @@ module.exports = {
         })
         members.on('end', async msgs => {
             let total = 0
+            let totalavail = 0
             await message.channel.send("Heist ended.")
             if(joined.length === 0) return message.channel.send("Nobody joined the heist")
             if(joined.length < 5) {
@@ -77,6 +78,25 @@ module.exports = {
             let gely = []
 
             for (let i = 0; i < joined.length; i++){
+                if(totalavail >= 1){
+                    const FieldsEmbed = new Pagination.FieldsEmbed()
+    .setArray(gely)
+    .setAuthorizedUsers([message.author.id])
+    .setChannel(message.channel)
+    .setElementsPerPage(36)
+    .setPageIndicator(false)
+    .formatField('Result: ', el => el);
+
+FieldsEmbed.embed
+  .setTitle(`Heist results`)
+  .setTimestamp()
+  .setColor("GREEN")
+  .setThumbnail(message.guild.iconURL() || null)
+
+FieldsEmbed.build();
+                    totalavail = 0
+                    gely = []
+                }
                 let chocking = await economy.findOne({ id: joined[i] })
                 let wollet = 500
                 if(chocking) wollet = chocking.Wallet
@@ -103,10 +123,13 @@ module.exports = {
                 db.set(`inheist_${joined[i]}`, false)
                 gely.push(`**+ ${client.users.cache.get(joined[i]).tag}**\n*got ${parseInt(victim_bank / joined.length).toLocaleString("en-Us")} coins*\n`)
             }
+            totalavail++
+            total++
         
             }
 
-            const FieldsEmbed = new Pagination.FieldsEmbed()
+            if(gely.length){
+                const FieldsEmbed = new Pagination.FieldsEmbed()
     .setArray(gely)
     .setAuthorizedUsers([message.author.id])
     .setChannel(message.channel)
@@ -121,6 +144,7 @@ FieldsEmbed.embed
   .setThumbnail(message.guild.iconURL() || null)
 
 FieldsEmbed.build();
+            }
             
         })
     }
