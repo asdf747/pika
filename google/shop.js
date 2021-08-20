@@ -31,7 +31,7 @@ module.exports = {
             message.channel.send(embed)
             return
         }
-        let items = shop.filter(item => item.Shop).map(item => `**${item.Emoji} ${item.Name}** - ${parseInt(item.Price).toLocaleString("en-US")}\n${item.Description}\n`)
+        let items = shop.filter(item => item.Shop).map(item => `**${item.Emoji} ${item.Name}** - ${parseInt(item.Price).toLocaleString("en-US")}\n${item.Description}`)
         if(!items.length) items = ["Empty"]
 
         let options = {
