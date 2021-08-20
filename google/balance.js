@@ -12,7 +12,7 @@ module.exports = {
         message.channel.send(
           new MessageEmbed()
           .setTitle(`${user.username}${user.username.endsWith('s') ? '\'' : '\'s'} balance`)
-          .setDescription(`**Wallet:** ${parseInt(data.Wallet).toLocaleString("en-US")}\n**Bank:** ${parseInt(data.InBank).toLocaleString("en-US")}/${parseInt(data.Bank).toLocaleString("en-US")}`)
+          .setDescription(`**Wallet:** ${parseInt(data.Wallet).toLocaleString("en-US")}\n**Bank:** ${parseInt(data.InBank).toLocaleString("en-US")}${message.author.id === user.id ? `/${parseInt(data.Bank).toLocaleString("en-US")}` : ''}`)
           .setTimestamp()
           .setColor("BLUE")
         )
@@ -27,7 +27,7 @@ module.exports = {
         message.channel.send(
           new MessageEmbed()
           .setTitle(`${user.username}${user.username.endsWith('s') ? '\'' : '\'s'} balance`)
-          .setDescription(`**Wallet:** 500\n**Bank:** 0/100`)
+          .setDescription(`**Wallet:** 500\n**Bank:** 0${message.author.id === user.id ? '/100' : ''}`)
           .setTimestamp()
           .setColor("BLUE")
         )
