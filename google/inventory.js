@@ -22,8 +22,8 @@ module.exports = {
                     title: `${mem.user.tag}'s inventory.`,
                     joinBy: "\n\n",
                     color: "BLUE",
-                    footer: null,
-                    footerImage: null,
+                    footer: ' ',
+                    footerImage: ' ',
                     timestamp: true
                 }
 
@@ -33,8 +33,8 @@ module.exports = {
                 let inv = ['Empty']
                 let options = {
                     perpage: 10,
-                    footer: null,
-                    footerImage: null,
+                    footer: ' ',
+                    footerImage: ' ',
                     title: `${mem.user.tag}'s inventory.`,
                     joinBy: "\n\n",
                     color: "BLUE",
