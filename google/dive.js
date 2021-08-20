@@ -17,7 +17,7 @@ module.exports = {
         for (let i = 0; i < 95; i++){
             chances.push('win')
         }
-        for (let i = 0; i < 40; i++){
+        for (let i = 0; i < 25; i++){
             chances.push('die')
         }
         let checkingfinal = Math.floor(Math.random() * Math.floor(chances.length)) 
