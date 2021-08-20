@@ -3,6 +3,7 @@ const economy = require('../models/economy')
 module.exports = {
     commands: ['share', 'give'],
     minArgs: 2,
+    description: "Give a member coins",
     expectedArgs: "<amount> <member>",
     cooldown: 5,
     callback: async (message, arguments, text, client) => {
