@@ -1,6 +1,7 @@
 const economy = require('../models/economy')
 const { MessageEmbed } = require('discord.js')
 const moment = require('moment')
+const { Database } = require('quickmongo')
 const db = new Database(client.db)
 
 module.exports = {
