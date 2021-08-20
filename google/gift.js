@@ -21,7 +21,7 @@ module.exports = {
         let author_economy = await economy.findOne({ id: message.author.id })
         let author_inventory = false
         if(author_economy) author_inventory = author_economy.Inventory.find(thing => thing.Name.toLowerCase() === item.Name.toLowerCase())
-        if(!author_inventory) return message.channel.send("you don't own this item")
+        if(!author_inventory || author_inventory.Count < 1) return message.channel.send("you don't own this item")
         if(author_inventory.Count < amount) return message.channel.send("you don't have that much of this item")
         // calling the database
         await economy.findOne({ id: member.id }, async (err, data) => {
