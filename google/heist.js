@@ -78,7 +78,7 @@ module.exports = {
             let gely = []
 
             for (let i = 0; i < joined.length; i++){
-                if(totalavail >= 1){
+                if(totalavail >= 20){
                     message.channel.send(
                         new MessageEmbed()
                         .setTitle('Heist results')
