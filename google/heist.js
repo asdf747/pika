@@ -44,8 +44,8 @@ module.exports = {
         members.on('collect', async m => {
             let unlucky_collector = await db.fetch(`unlucky_${m.author.id}`)
             if(unlucky_collector !== null){
-                let dur = moment.duration(Date.now() - unlucky_collector).as('minutes')
-                if(dur < 15) return message.channel.send("someone used the unlucky cookie on you so you can't rob or join heists lol")
+                let durg = moment.duration(Date.now() - unlucky_collector).as('minutes')
+                if(durg < 15) return m.channel.send("someone used the unlucky cookie on you so you can't rob or join heists lol")
             }
             if(joined.includes(m.author.id)) return m.lineReply("You already joined")
             if(m.author.id === member.id) return m.lineReply("you can't join a heist against yourself dumbo")
