@@ -85,7 +85,7 @@
         "Name": "Octopus",
         "ID": ["octopus"],
         "Price": "???",
-        "Sell": 1000,
+        "Sell": 10000,
         "Description": "You can get this octopus from the diving command",
         "Shop": false,
         "Emoji": "<:octopus:878378232699842590>",
