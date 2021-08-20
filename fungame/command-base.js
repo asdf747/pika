@@ -1,4 +1,5 @@
-const db = require('quick.db')
+const { Database } = require("quickmongo");
+const db = new Database("mongodb+srv://lol:fofo29112007@golgo.t3bmd.mongodb.net/gg?retryWrites=true&w=majority");
 const Discord = require('discord.js')
 require('discord-reply')
 const Blacklist = require("../models/blacklist")
