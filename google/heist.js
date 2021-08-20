@@ -37,12 +37,13 @@ module.exports = {
         if(author_bank < 2000) return message.channel.send("you need to withdraw ***2,000 coins** to join the heist")
         await message.channel.send(`**${message.author.tag}** is heisting **${member.user.tag}** say join heist to join`)
         const filter = x => x.content.toLowerCase() === 'join heist'
-        const members = await message.channel.createMessageCollector(filter, { time: 60000, max: 36 })
+        const members = await message.channel.createMessageCollector(filter, { time: 60000 })
         let joined = []
         joined.push(message.author.id)
         db.set(`inheist_${message.author.id}`, true)
 
         members.on('collect', async m => {
+            if(joined.length >= 36) return 
             let unlucky_collector = await db.fetch(`unlucky_${m.author.id}`)
             if(unlucky_collector !== null){
                 let durg = moment.duration(Date.now() - unlucky_collector).as('minutes')
@@ -63,7 +64,7 @@ module.exports = {
             let total = 0
             await message.channel.send("Heist ended.")
             if(joined.length === 0) return message.channel.send("Nobody joined the heist")
-            if(joined.length < 2) {
+            if(joined.length < 5) {
                 await joined.forEach(async mas => {
                     total++
                     await economy.findOneAndUpdate({ id: mas }, { $inc: {Wallet: -2000} })
