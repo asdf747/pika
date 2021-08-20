@@ -135,6 +135,7 @@ async function bomb(client, message, arguments, economy){
             reply += `+ ${client.users.cache.get(joined[i]).tag} got ${parseInt(5000 / joined.length).toLocaleString("en-US")}`
         }
         message.channel.send(`\`\`\`diff\n${reply}\`\`\``)
+        await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Coin bomb" }, { $inc: {"Inventory.$.Count": -1} })
     })
 }
 
