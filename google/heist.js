@@ -37,7 +37,7 @@ module.exports = {
         if(author_bank < 2000) return message.channel.send("you need to withdraw ***2,000 coins** to join the heist")
         await message.channel.send(`**${message.author.tag}** is heisting **${member.user.tag}** say join heist to join`)
         const filter = x => x.content.toLowerCase() === 'join heist'
-        const members = await message.channel.createMessageCollector(filter, { time: 60000 })
+        const members = await message.channel.createMessageCollector(filter, { time: 60000, max: 36 })
         let joined = []
         joined.push(message.author.id)
         db.set(`inheist_${message.author.id}`, true)
@@ -109,7 +109,7 @@ module.exports = {
     .setArray(gely)
     .setAuthorizedUsers([message.author.id])
     .setChannel(message.channel)
-    .setElementsPerPage(25)
+    .setElementsPerPage(36)
     .setPageIndicator(false)
     .formatField('Result: ', el => el);
 
