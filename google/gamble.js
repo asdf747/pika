@@ -19,10 +19,12 @@ module.exports = {
         if(['all', 'max'].includes(arguments[0].toLowerCase())) betting_amount = 250000
         if(['all', 'max'].includes(arguments[0].toLowerCase()) && author_wallet < 250000) betting_amount = author_wallet
         let chances = []
+        let winchance = 19
+        if(author_data && author_data.Inventory.find(item => item.Name.toLowerCase() === 'trophy')) winchance = 24
         for (let i = 0; i < 21; i++){
             chances.push('fail')
         }
-        for (let i = 0; i < 19; i++){
+        for (let i = 0; i < winchance; i++){
             chances.push('win')
         }
         // picking a random chance
