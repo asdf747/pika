@@ -2,6 +2,7 @@ const { listenerCount } = require('events')
 const economy = require('../models/economy')
 const settings = require('../models/settings')
 const { Database } = require("quickmongo");
+const Pagination = require('discord-paginationembed')
 const db = new Database("mongodb+srv://lol:fofo29112007@golgo.t3bmd.mongodb.net/gg?retryWrites=true&w=majority");
 const moment = require('moment')
 
@@ -62,7 +63,7 @@ module.exports = {
             let total = 0
             await message.channel.send("Heist ended.")
             if(joined.length === 0) return message.channel.send("Nobody joined the heist")
-            if(joined.length < 2) {
+            if(joined.length < 1) {
                 await joined.forEach(async mas => {
                     total++
                     await economy.findOneAndUpdate({ id: mas }, { $inc: {Wallet: -2000} })
@@ -72,7 +73,7 @@ module.exports = {
                 })
                 return message.channel.send(`Heist failed **${total}** people paid 2,000 to **${member.user.tag}**`)
             }
-            let gely = ''
+            let gely = []
 
             for (let i = 0; i < joined.length; i++){
                 let chocking = await economy.findOne({ id: joined[i] })
@@ -92,19 +93,33 @@ module.exports = {
             if(final === 'fail'){
                 db.set(`inheist_${joined[i]}`, false)
                 await economy.findOneAndUpdate({ id: joined[i] }, { $inc: {Wallet: -lose} })
-                 gely += `# ${client.users.cache.get(joined[i]).tag} lost ${parseInt(lose).toLocaleString("en-US")} coins\n`
+                 gely.push(`**# ${client.users.cache.get(joined[i]).tag}**\n*lost ${parseInt(lose).toLocaleString("en-US")} coins*\n`)
             }
             if(final === 'success'){
                 let lmao = victim_bank / joined.length
                 await economy.findOneAndUpdate({ id: joined[i] }, { $inc: {Wallet: victim_bank / joined.length} })
                 await economy.findOneAndUpdate({ id: member.id }, { $inc: {InBank: -victim_bank / joined.length} })
                 db.set(`inheist_${joined[i]}`, false)
-                gely += `+ ${client.users.cache.get(joined[i]).tag} got ${parseInt(victim_bank / joined.length).toLocaleString("en-Us")}\n`
+                gely.push(`**+ ${client.users.cache.get(joined[i]).tag}**\n*got ${parseInt(victim_bank / joined.length).toLocaleString("en-Us")} coins*\n`)
             }
         
             }
 
-            message.channel.send(`\`\`\`diff\n${gely}\`\`\``)
+            const FieldsEmbed = new Pagination.FieldsEmbed()
+    .setArray(gely)
+    .setAuthorizedUsers([message.author.id])
+    .setChannel(message.channel)
+    .setElementsPerPage(25)
+    .setPageIndicator(false)
+    .formatField('Result: ', el => el);
+
+FieldsEmbed.embed
+  .setTitle(`Heist results`)
+  .setTimestamp()
+  .setColor("GREEN")
+  .setThumbnail(message.guild.iconURL || null)
+
+FieldsEmbed.build();
             
         })
     }
