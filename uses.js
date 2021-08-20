@@ -107,7 +107,7 @@ async function note(client, message, arguments, economy){
 }
 
 async function bomb(client, message, arguments, economy){
-    const Pagination = require('discord-paginationembed')
+    const { MessageEmbed } = require('discord.js')
     await message.channel.send(`${message.author.username} dropped a coin bomb say \`collect\` to join`)
     const filter = x => x.content.toLowerCase() === 'collect' && x.author.id !== message.author.id
     const collect = await message.channel.createMessageCollector(filter, { time: 15000 })
