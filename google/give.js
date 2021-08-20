@@ -16,7 +16,7 @@ module.exports = {
             let member_wallet = 500
             if(clocklo) member_wallet = clocklo.Wallet
             if(data){
-                if(arugments[0].toLowerCase() === 'all') amount = data.Wallet
+                if(arguments[0].toLowerCase() === 'all') amount = data.Wallet
                 if(amount === 0) return message.channel.send("you can't give 0 coins")
                 if(data.Wallet < amount) return message.channel.send("you don't even have that much in your wallet")
                 await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Wallet: -amount} })
