@@ -2,6 +2,7 @@ const economy = require('../models/economy')
 const { MessageEmbed } = require('discord.js')
 const Pagination = require('discord-paginationembed')
 const items = require('../shop.json')
+const utils = require('utils-discord')
 
 module.exports = {
     commands: ['inventory', 'inv'],
@@ -12,35 +13,31 @@ module.exports = {
             if(data){
                 let inv = data.Inventory.filter(item => item.Count >= 1).map(item => {
                     let itemo = items.find(ite => ite.Name.toLowerCase() === item.Name.toLowerCase())
-                    return `**${itemo.Emoji} ${item.Name}** - ${item.Count}\nID: \`${itemo.ID[0].toUpperCase()}\`\n`
+                    return `**${itemo.Emoji} ${item.Name}** - ${item.Count}\nID: \`${itemo.ID[0].toUpperCase()}\``
                 })
                 if(!inv.length) inv = ['Empty']
-                const FieldsEmbed = new Pagination.FieldsEmbed()
-    .setArray(inv)
-    .setAuthorizedUsers([message.author.id])
-    .setChannel(message.channel)
-    .setElementsPerPage(10)
-    .setPageIndicator(true)
-    .formatField('Items: ', el => el);
 
-FieldsEmbed.embed
-  .setTitle(`${mem.user.tag}'s inventory.`)
+                let options = {
+                    perpage: 10,
+                    title: `${mem.user.tag}'s inventory.`,
+                    joinBy: "\n\n",
+                    Color: "BLUE",
+                    timestamp: true
+                }
 
-FieldsEmbed.build();
+                utils.createEmbedPages(client, message, inv, options)
             }if(!data){
+                
                 let inv = ['Empty']
-                const FieldsEmbed = new Pagination.FieldsEmbed()
-    .setArray(inv)
-    .setAuthorizedUsers([message.author.id])
-    .setChannel(message.channel)
-    .setElementsPerPage(10)
-    .setPageIndicator(true)
-    .formatField('Items: ', el => el);
+                let options = {
+                    perpage: 10,
+                    title: `${mem.user.tag}'s inventory.`,
+                    joinBy: "\n\n",
+                    Color: "BLUE",
+                    timestamp: true
+                }
 
-FieldsEmbed.embed
-  .setTitle(`${mem.user.tag}'s inventory.`)
-
-FieldsEmbed.build();
+                utils.createEmbedPages(client, message, inv, options)
             }
         })
     }
