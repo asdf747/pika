@@ -11,6 +11,9 @@ module.exports = {
         let bonus = await db.fetch(`bonus_daily_${message.author.id}`)
         if(!bonus) await db.set(`bonus_daily_${message.author.id}`, 0)
         let lastdaily = await db.fetch(`daily_${message.author.id}`)
+        let streak = await db.fetch(`daily_streak_${message.author.id}`)
+        if(!streak) streak = 0
+        if(streak !== null && moment.duration(Date.now() - lastdaily).as('days') >= 2) await db.set(`daily_streak_${message.author.id}`, 0)
         if(bonus !== null && moment.duration(Date.now() - lastdaily).as('days') < 2) await db.add(`bonus_daily_${message.author.id}`, 2000)
         if(bonus !== null && moment.duration(Date.now() - lastdaily).as('days') >= 2) await db.set(`bonus_daily_${message.author.id}`, 0)
         
@@ -19,11 +22,12 @@ module.exports = {
         await economy.findOne({ id: message.author.id }, async(err, data) => {
             if(data){
                 await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Wallet: amount} })
+                await db.add(`daily_streak_${message.guild.id}`, 1)
                 message.channel.send(
                     new MessageEmbed()
                     .setTitle("Claimed daily")
                     .setDescription(`You've claimed your daily and got **${amount.toLocaleString("en-US")}**`)
-                    .setFooter(`Streak: ${bonus} (+${bonus})`)
+                    .setFooter(`Streak: ${streak} (+${bonus})`)
                     .setColor("BLUE")
                 )
             }if(!data){
@@ -38,7 +42,7 @@ module.exports = {
                         new MessageEmbed()
                         .setTitle("Claimed daily")
                         .setDescription(`You've claimed your daily and got **${amount.toLocaleString("en-US")}**`)
-                        .setFooter(`Streak: ${bonus} (+${bonus})`)
+                        .setFooter(`Streak: ${streak} (+${bonus})`)
                         .setColor("BLUE")
                     )
                 })
