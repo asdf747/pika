@@ -5,9 +5,9 @@ module.exports = {
     commands: 'daily',
     cooldown: 86400,
     callback: async(message, arguments, text, client) => {
-        let bonus = await db.fetch(`bonus_daily_${message.author.id}`)
-        if(!bonus) await db.set(`bonus_daily_${message.author.id}`)
-        let lastdaily = await db.fetch(`last_daily_${message.author.id}`)
+        let bonus = await client.db.fetch(`bonus_daily_${message.author.id}`)
+        if(!bonus) await client.db.set(`bonus_daily_${message.author.id}`)
+        let lastdaily = await client.db.fetch(`last_daily_${message.author.id}`)
         if(bonus !== null && moment.duration(Date.now() - lastdaily).as('days') < 2) await client.db.add(`bonus_daily_${message.author.id}`, 0)
         if(bonus !== null && moment.duration(Date.now() - lastdaily).as('days') >= 2) await client.db.set(`bonus_daily_${message.author.id}`, 2000)
         
