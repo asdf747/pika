@@ -8,7 +8,7 @@ module.exports = {
     cooldown: 5,
     callback: async (message, arguments, text, client) => {
         let amount = Number(arguments[0])
-        if(!amount || arguments[0].includes('.') || amount < 1) return message.channel.send("enter a valid amount when")
+        if(!amount && !['all'].includes(arguments[0].toLowerCase()) || arguments[0].includes('.') && !['all'].includes(arguments[0].toLowerCase()) || amount < 1 && !['all'].includes(arguments[0].toLowerCase())) return message.channel.send("enter a valid amount when")
         let member = message.mentions.members.first() || message.guild.members.cache.get(arguments[1])
         if(!member) return message.channel.send("mention a valid member lol")
         await economy.findOne({ id: message.author.id }, async (err, data) => {
@@ -16,6 +16,8 @@ module.exports = {
             let member_wallet = 500
             if(clocklo) member_wallet = clocklo.Wallet
             if(data){
+                if(arugments[0].toLowerCase() === 'all') amount = data.Wallet
+                if(amount === 0) return message.channel.send("you can't give 0 coins")
                 if(data.Wallet < amount) return message.channel.send("you don't even have that much in your wallet")
                 await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Wallet: -amount} })
                 await economy.findOneAndUpdate({ id: member.id }, { $inc: {Wallet: amount} })
