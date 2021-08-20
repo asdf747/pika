@@ -20,7 +20,7 @@ module.exports = {
         let money = item.Sell * amount
         if(doc.Inventory.find(ite => ite.Name.toLowerCase() === item.Name.toLowerCase()).Count < amount) return message.channel.send(`You don't have this many of **${item.Name}**`)
         await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Wallet: money} })
-        await economy.updateOne({ "id": message.author.id, 'Inventory.Name': item.Name }, { inc: {"Inventory.$.Count": -amount} })
+        await economy.updateOne({ "id": message.author.id, "Inventory.Name": item.Name }, { $inc: {"Inventory.$.Count": amount} })
         message.channel.send(
             new MessageEmbed()
             .setTitle("Sold item.")
