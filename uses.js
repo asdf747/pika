@@ -114,7 +114,7 @@ async function bomb(client, message, arguments, economy){
     collect.on('collect', async m => {
         if(joined.length >= 10) return
         if(joined.includes(m.id)) return
-        joined.push(m.id)
+        joined.push(m.author.id)
     })
     collect.on('end', async msgs => {
         let reply = ''
