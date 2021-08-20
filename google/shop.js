@@ -2,6 +2,7 @@ const shop = require('../shop.json')
 const Pagination = require('discord-paginationembed')
 const { MessageEmbed } = require('discord.js')
 const economy = require('../models/economy')
+const utils = require('utils-discord')
 
 module.exports = {
     commands: 'shop',
@@ -32,19 +33,18 @@ module.exports = {
         }
         let items = shop.filter(item => item.Shop).map(item => `**${item.Emoji} ${item.Name}** - ${parseInt(item.Price).toLocaleString("en-US")}\n${item.Description}\n`)
         if(!items.length) items = ["Empty"]
-    const FieldsEmbed = new Pagination.FieldsEmbed()
-    .setArray(items)
-    .setAuthorizedUsers([message.author.id])
-    .setChannel(message.channel)
-    .setElementsPerPage(5)
-    .setPageIndicator(true)
-    .formatField('Items: ', el => el);
 
-FieldsEmbed.embed
-  .setTitle(`Shop`)
-  .setTimestamp()
-  .setColor("BLUE")
+        let options = {
+            perpage: 5,
+            title: `Shop`,
+            joinBy: "\n\n",
+            color: "BLUE",
+            footer: ' ',
+            footerImage: ' ',
+            timestamp: true,
+            args: arguments[0]
+        }
 
-FieldsEmbed.build();
+        utils.createEmbedPages(client, message, items, options)
     }
 }
