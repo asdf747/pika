@@ -20,7 +20,7 @@ module.exports = {
         if(['all', 'max'].includes(arguments[0].toLowerCase()) && author_wallet < 250000) betting_amount = author_wallet
         let chances = []
         let winchance = 19
-        if(author_data && author_data.Inventory.find(item => item.Name.toLowerCase() === 'trophy')) winchance = 30
+        if(author_data && author_data.Inventory.find(item => item.Name.toLowerCase() === 'trophy').Count >= 1) winchance = 30
         for (let i = 0; i < 21; i++){
             chances.push('fail')
         }
