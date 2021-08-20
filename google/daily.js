@@ -1,5 +1,5 @@
 const economy = require('../models/economy')
-const { MessageEmbed } = require('disord.js')
+const { MessageEmbed } = require('discord.js')
 
 module.exports = {
     commands: 'daily',
