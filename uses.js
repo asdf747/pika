@@ -152,7 +152,7 @@ async function bomb(client, message, arguments, economy){
 }
 
 async function nuke(client, message, arguments, economy){
-    let member = message.mentions.members.first() || message.guild.members.cache.get(arugments[0])
+    let member = message.mentions.members.first() || message.guild.members.cache.get(arguments[0])
     if(!member) return message.channel.send("mention a valid member when")
     const { Database } = require("quickmongo");
 const db = new Database("mongodb+srv://lol:fofo29112007@golgo.t3bmd.mongodb.net/gg?retryWrites=true&w=majority");
