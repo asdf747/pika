@@ -115,7 +115,7 @@ async function bomb(client, message, arguments, economy){
         if(joined.includes(m.id)) return
         joined.push(m.id)
     })
-    collect.on('end', msgs => {
+    collect.on('end', async msgs => {
         let reply = ''
         for (let i = 0; i < joined.length; i++){
             await economy.findOne({ id: joined[i] }, async(err, data) => {
