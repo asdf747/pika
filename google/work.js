@@ -16,7 +16,7 @@ module.exports = {
         if(bonus !== null && moment.duration(Date.now() - lastwork).as('days') >= 2) await db.set(`bonus_work_${message.author.id}`, 1)
         
         bonus = await db.fetch(`bonus_work_${message.author.id}`)
-        let amount = Math.floor(Math.random() * 10000) + 1 * bonus
+        let amount = Math.floor(Math.random() * 15000) + 1 * bonus
         await economy.findOne({ id: message.author.id }, async(err, data) => {
             if(data){
                 await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Wallet: amount} })
