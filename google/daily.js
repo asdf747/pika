@@ -9,10 +9,10 @@ module.exports = {
     callback: async(message, arguments, text, client) => {
         const db = new Database(client.db)
         let bonus = await db.fetch(`bonus_daily_${message.author.id}`)
-        if(!bonus) await db.set(`bonus_daily_${message.author.id}`)
+        if(!bonus) await db.set(`bonus_daily_${message.author.id}`, 0)
         let lastdaily = await db.fetch(`daily_${message.author.id}`)
-        if(bonus !== null && moment.duration(Date.now() - lastdaily).as('days') < 2) await db.add(`bonus_daily_${message.author.id}`, 0)
-        if(bonus !== null && moment.duration(Date.now() - lastdaily).as('days') >= 2) await db.set(`bonus_daily_${message.author.id}`, 2000)
+        if(bonus !== null && moment.duration(Date.now() - lastdaily).as('days') < 2) await db.add(`bonus_daily_${message.author.id}`, 2000)
+        if(bonus !== null && moment.duration(Date.now() - lastdaily).as('days') >= 2) await db.set(`bonus_daily_${message.author.id}`, 0)
         
         bonus = await db.fetch(`bonus_work_${message.author.id}`)
         let amount = 10000 + bonus
