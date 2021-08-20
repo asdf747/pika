@@ -107,8 +107,9 @@ async function note(client, message, arguments, economy){
 }
 
 async function bomb(client, message, arguments, economy){
+    await message.channel.send(`${message.author.username} dropped a coin bomb say \`collect\` to join`)
     const filter = x => x.content.toLowerCase() === 'collect' && x.author.id !== message.author.id
-    const collect = await message.channel.createMessageCollector(filter, { time: 15000})
+    const collect = await message.channel.createMessageCollector(filter, { time: 15000 })
     let joined = []
     collect.on('collect', async m => {
         if(joined.length >= 10) return
@@ -117,6 +118,7 @@ async function bomb(client, message, arguments, economy){
     })
     collect.on('end', async msgs => {
         let reply = ''
+        if(joined.length){
         for (let i = 0; i < joined.length; i++){
             await economy.findOne({ id: joined[i] }, async(err, data) => {
                 if(data){
@@ -134,6 +136,7 @@ async function bomb(client, message, arguments, economy){
             })
             reply += `+ ${client.users.cache.get(joined[i]).tag} got ${parseInt(5000 / joined.length).toLocaleString("en-US")}`
         }
+    }
         message.channel.send(`\`\`\`diff\n${reply}\`\`\``)
         await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Coin bomb" }, { $inc: {"Inventory.$.Count": -1} })
     })
