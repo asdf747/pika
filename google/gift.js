@@ -5,6 +5,7 @@ module.exports = {
     commands: 'gift',
     expectedArgs: '<amount> <item> <user>',
     minArgs: 3,
+    description: "Gift a member an item",
     cooldown: 10,
     callback: async(message, arguments, text, client) => {
         let amount = Number(arguments[0])
