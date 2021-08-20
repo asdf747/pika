@@ -40,6 +40,7 @@ module.exports = {
                 }
                 data.Inventory.push(obj)
                 data.save()
+                await economy.updateOne({ "id": message.author.id, "Inventory.Name": item.Name }, { $inc: {"Inventory.$.Count": -amount} })
                 return message.lineReply(`You gave ${member.user.username} **${amount.toLocaleString("en-Us")} ${item.Name}**, Now they have **${parseInt(amount).toLocaleString("en-Us")}**`)
             }if(!data){
                 await new economy({
@@ -54,6 +55,7 @@ module.exports = {
                         }
                     ]
                 }).save().then(async () => {
+                    await economy.updateOne({ "id": message.author.id, "Inventory.Name": item.Name }, { $inc: {"Inventory.$.Count": -amount} })
                     return message.lineReply(`You gave ${member.user.username} **${amount.toLocaleString("en-Us")} ${item.Name}**, Now they have **${parseInt(amount).toLocaleString("en-Us")}**`) 
                 })
             }
