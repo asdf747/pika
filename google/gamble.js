@@ -20,7 +20,7 @@ module.exports = {
         if(['all', 'max'].includes(arguments[0].toLowerCase()) && author_wallet < 250000) betting_amount = author_wallet
         let chances = []
         let winchance = 19
-        if(author_data && author_data.Inventory.find(item => item.Name.toLowerCase() === 'trophy') && author_data.Inventory.find(item => item.Name.toLowerCase() === 'trophy').Count >= 1) winchance = 30
+        if(author_data && author_data.Inventory.find(item => item.Name.toLowerCase() === 'trophy') && author_data.Inventory.find(item => item.Name.toLowerCase() === 'trophy').Count >= 1) winchance = 25
         for (let i = 0; i < 21; i++){
             chances.push('fail')
         }
@@ -42,7 +42,7 @@ module.exports = {
                 .setTimestamp()
                 .setDescription(`You won **${parseInt(winamount).toLocaleString("en-US")} coins**\n\n**Your balance:** ${parseInt(author_wallet + winamount).toLocaleString("en-US")}`)
 
-                if(winchance === 30) golga.setFooter("Mutliplier: x2")
+                if(winchance === 25) golga.setFooter("Mutliplier: x2")
                 return message.channel.send(golga)
                 break
             case "fail":
@@ -54,7 +54,7 @@ module.exports = {
                 .setTimestamp()
                 .setDescription(`You lost **${parseInt(betting_amount).toLocaleString("en-US")} coins**\n\n**Your balance:** ${parseInt(author_wallet - betting_amount).toLocaleString("en-US")}`)
 
-                if(winchance === 30) gelga.setFooter("Mutliplier: x2")
+                if(winchance === 25) gelga.setFooter("Mutliplier: x2")
                 return message.channel.send(gelga)
                 break
         }
