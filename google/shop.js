@@ -16,13 +16,15 @@ module.exports = {
                 if(counting) counter = counting.Count
             }
             let embed = new MessageEmbed()
-            .setTitle(`${item.Name} ${counter >= 1 ? `(${counter} owned)` : ''}`)
+            .setTitle(`${item.Name}`)
             .setDescription(`${item.Description}\n\n**Buy:** ${Number(item.Price) ? Number(item.Price).toLocaleString("en-US") : 'Not able to be purchased'}\n**Sell:** ${Number(item.Sell) ? Number(item.Sell).toLocaleString("en-US") : 'Not able to be sold'}`)
             .setThumbnail(item.Image)
             .setTimestamp()
             .setColor("BLUE")
 
             if(item.Items) embed.addField(`Items:`, item.Items.map(ass => `\`${ass}\``).join(' '))
+
+            if(counter >= 1) embed.setFooter(`${counter} owned`)
 
 
             message.channel.send(embed)
