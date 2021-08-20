@@ -63,7 +63,7 @@ module.exports = {
             let total = 0
             await message.channel.send("Heist ended.")
             if(joined.length === 0) return message.channel.send("Nobody joined the heist")
-            if(joined.length < 1) {
+            if(joined.length < 2) {
                 await joined.forEach(async mas => {
                     total++
                     await economy.findOneAndUpdate({ id: mas }, { $inc: {Wallet: -2000} })
@@ -117,7 +117,7 @@ FieldsEmbed.embed
   .setTitle(`Heist results`)
   .setTimestamp()
   .setColor("GREEN")
-  .setThumbnail(message.guild.iconURL || null)
+  .setThumbnail(message.guild.iconURL() || null)
 
 FieldsEmbed.build();
             
