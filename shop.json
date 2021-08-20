@@ -49,7 +49,7 @@
         "Name": "Trophy",
         "ID": ["trophy"],
         "Price": "???",
-        "Sell": 5000,
+        "Sell": 50000,
         "Description": "Gives you a multiplier in gambling",
         "Shop": false,
         "Emoji": "<:trophy:878198091075977266>",

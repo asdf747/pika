@@ -25,7 +25,7 @@ module.exports = {
             new MessageEmbed()
             .setTitle("Sold item.")
             .setColor("GREEN")
-            .setDescription(`You sold **${item.Name}** for \`${parseInt(money).toLocaleString("en-US")}\``)
+            .setDescription(`You sold **${amount.toLocaleString("en-US")} ${item.Name}** for \`${parseInt(money).toLocaleString("en-US")}\``)
         )
     }
 }
