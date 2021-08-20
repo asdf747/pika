@@ -56,5 +56,17 @@
         "Image": "https://cdn.discordapp.com/emojis/878198091075977266.png?v=1",
         "Useable": false
         
+    },
+    {
+        "Name": "Coin bomb",
+        "ID": ["coin", "bomb"],
+        "Price": 1000,
+        "Sell": "???",
+        "Description": "Use this to give coins to poor people",
+        "Shop": true,
+        "Emoji": "<:emoji_17:878290323183403038>",
+        "Image": "https://cdn.discordapp.com/emojis/878290323183403038.png?v=1",
+        "Useable": true
+        
     }
 ]

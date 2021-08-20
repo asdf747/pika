@@ -102,11 +102,45 @@ async function note(client, message, arguments, economy){
     await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Bank: parseInt(amount)} })
     await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Note" }, { $inc: {"Inventory.$.Count": -1} })
     let cock = await economy.findOne({ id: message.author.id })
+ 
     return message.channel.send(`You used your note and got **${parseInt(amount).toLocaleString("en-US")} bank space**, Current bank space is **${parseInt(cock.Bank + amount).toLocaleString("en-US")}**`)
+}
+
+async function bomb(client, message, arguments, economy){
+    const filter = x => x.content.toLowerCase() === 'collect' && x.author.id !== message.author.id
+    const collect = await message.channel.createMessageCollector(filter, { time: 15000})
+    let joined = []
+    collect.on('collect', async m => {
+        if(joined.length >= 10) return
+        if(joined.includes(m.id)) return
+        joined.push(m.id)
+    })
+    collect.on('end', msgs => {
+        let reply = ''
+        for (let i = 0; i < joined.length; i++){
+            await economy.findOne({ id: joined[i] }, async(err, data) => {
+                if(data){
+                    await economy.findOneAndUpdate({ id: joined[i] }, { $inc: {Wallet: 5000 / joined.length} })
+                }if(!data){
+                    await new economy({
+                        id: joined[i],
+                        Wallet: 500,
+                        Bank: 100,
+                        InBank: 0
+                    }).save().then(async () => {
+                        await economy.findOneAndUpdate({ id: joined[i] }, { $inc: {Wallet: 5000 / joined.length} })
+                    })
+                }
+            })
+            reply += `+ ${client.users.cache.get(joined[i]).tag} got ${parseInt(5000 / joined.length).toLocaleString("en-US")}`
+        }
+        message.channel.send(`\`\`\`diff\n${reply}\`\`\``)
+    })
 }
 
 module.exports = {
     lucky,
     unlucky,
-    note
+    note,
+    bomb
 }
