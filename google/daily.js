@@ -23,7 +23,7 @@ module.exports = {
         await economy.findOne({ id: message.author.id }, async(err, data) => {
             if(data){
                 await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Wallet: amount} })
-                await db.add(`daily_streak_${message.guild.id}`, 1)
+                await db.add(`daily_streak_${message.author.id}`, 1)
                 message.channel.send(
                     new MessageEmbed()
                     .setTitle("Claimed daily")
@@ -39,6 +39,7 @@ module.exports = {
                     InBank: 0
                 }).save().then(async () => {
                     await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Wallet: amount} })
+                    await db.add(`daily_streak_${message.author.id}`, 1)
                     message.channel.send(
                         new MessageEmbed()
                         .setTitle("Claimed daily")
