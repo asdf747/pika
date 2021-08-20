@@ -14,6 +14,7 @@ module.exports = {
         if(author_data) author_wallet = author_data.Wallet
         if(author_wallet < 100) return message.channel.send("You need at least **100 coins** to gamble")
         if(amount < 100) return message.channel.send("You need at least **100 coins** to gamble")
+        if(amount > author_wallet) return message.channel.send("You don't have that much coins")
         let betting_amount = amount
         if(['all', 'max'].includes(arguments[0].toLowerCase())) betting_amount = 250000
         if(['all', 'max'].includes(arguments[0].toLowerCase()) && author_wallet < 250000) betting_amount = author_wallet
