@@ -158,6 +158,7 @@ async function nuke(client, message, arguments, economy){
 const db = new Database("mongodb+srv://lol:fofo29112007@golgo.t3bmd.mongodb.net/gg?retryWrites=true&w=majority");
 await db.set(`nuke_${message.author.id}`, Date.now())
 message.channel.send(`You've nuked ${member.user.username} now they can't use the currency commands for an hour`)
+await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Nuke" }, { $inc: {"Inventory.$.Count": -1} })
 }
 
 module.exports = {
