@@ -15,7 +15,7 @@ const backup = require("discord-backup");
 const quickmongo = require("quickmongo");
 const EventEmitter = require('events')
 
-require('./economyEvents/share')(client)
+require('./economyEvents/share.js')(client)
 client.economy = new EventEmitter()
 
 
