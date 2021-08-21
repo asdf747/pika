@@ -249,7 +249,7 @@ if(dote > doc.Expire) doc.delete()
       .setTimestamp()
       .setFooter(message.guild.name)
       .setThumbnail(message.guild.iconURL() || null)
-      .setDescription(`:x: Missing arguments please use the syntax below.\n\n\`\`\`${prefixx}${alias} ${expectedArgs}\`\`\`${description !== '' ? `\n\n**Description:**\n${description}\n\n` : ''}${subCommands.length ? `**Sub commands:**\n${subCommands.split(/[ ]+/).map(a => `\`${a}\``).join(' ')}\n\n` : ''}${permissions.length ? `**Required Permissions:**\n${permissions[0]}\n\n` : ''}${typeof commands === 'string' ? '' : `**Aliases:**\n${commands.slice(1).map(lol => `\`${lol}\``)}`}`)
+      .setDescription(`:x: Missing arguments please use the syntax below.\n\n\`\`\`${prefixx}${alias} ${expectedArgs}\`\`\`${description !== '' ? `\n\n**Description:**\n${description}\n\n` : ''}${subCommands.length ? `**Sub commands:**\n${subCommands.split(/[ ]+/).map(a => `\`${a}\``).join(' ')}\n\n` : ''}${permissions.length ? `**Required Permissions:**\n${permissions[0]}\n\n` : ''}${typeof commands !== 'string' ? '' : `**Aliases:**\n${commands.slice(1).map(lol => `\`${lol}\``)}`}`)
           )
           return
         }
