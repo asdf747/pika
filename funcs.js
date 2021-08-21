@@ -45,11 +45,16 @@ async function tempban(member, guild, duration, reason){
 }
 
 async function notify(member, Type, Description){
-    let Types = ['Death']
+    let Types = ['Death', 'Share', 'Gift']
+    let max_notifs_pages = 15
     if(!Types.includes(Type)) return console.log("Invalid notification type.")
     const economy = require('./models/economy')
     await economy.findOne({ id: member.id }, async (err, data) => {
         if(data){
+            if(data.Notifications.length >= 6 * max_notifs_pages){
+                data.splice(0, 1)
+                data.save()
+            }
             let obj = {
                 Type,
                 Description

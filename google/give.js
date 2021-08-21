@@ -1,4 +1,5 @@
 const economy = require('../models/economy')
+const { notify } = require('../funcs')
 
 module.exports = {
     commands: ['share', 'give'],
@@ -21,6 +22,7 @@ module.exports = {
                 if(data.Wallet < amount) return message.channel.send("you don't even have that much in your wallet")
                 await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Wallet: -amount} })
                 await economy.findOneAndUpdate({ id: member.id }, { $inc: {Wallet: amount} })
+                await notify(member, 'Share', `${message.author.tag} gave you **${amount.toLocaleString("en-US")} coins**`)
                 message.lineReply(`You gave ${member.user.username} **${amount.toLocaleString("en-US")}**, Now they have **${parseInt(member_wallet + amount).toLocaleString("en-US")}**`)
             }if(!data){
                 await new economy({
@@ -32,6 +34,7 @@ module.exports = {
                     if(ass.Wallet < amount) return message.channel.send("you don't even have that much in your wallet")
                 await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Wallet: -amount} })
                 await economy.findOneAndUpdate({ id: member.id }, { $inc: {Wallet: amount} })
+                await notify(member, 'Share', `${message.author.tag} gave you **${amount.toLocaleString("en-US")} coins**`)
                 message.lineReply(`You gave ${member.user.username} **${amount.toLocaleString("en-US")}**, Now they have **${parseInt(member_wallet + amount).toLocaleString("en-US")}**`)
                 })
             }
