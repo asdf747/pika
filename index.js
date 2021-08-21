@@ -14,8 +14,12 @@ const moment = require('moment')
 const backup = require("discord-backup");
 const quickmongo = require("quickmongo");
 const EventEmitter = require('events')
+const ass = require('./economyEvents/share.js')
 
-require('./economyEvents/share.js')(client)
+const loads = async () => {
+  await ass.run(client)
+}
+loads()
 client.economy = new EventEmitter()
 
 
