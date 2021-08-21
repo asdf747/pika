@@ -14,7 +14,7 @@ const moment = require('moment')
 const backup = require("discord-backup");
 const quickmongo = require("quickmongo");
 const EventEmitter = require('events')
-const conom = require('./economyEvents')
+const conom = require('./conomyEvents')
 
 client.economy = new EventEmitter()
 
@@ -214,6 +214,10 @@ const load = async () => {
   await loadEvents.run(client)
 }
 
+const load2 = async () => {
+  await conom.run(client)
+}
+
 client.snipes = new Discord.Collection();
 client.esnipes = new Discord.Collection();
 
@@ -227,4 +231,5 @@ client.esnipes = new Discord.Collection();
 
 
 load()
+load2()
 client.login('ODE4ODc2NjQ1NDAxNDI3OTg5.YEecTg.Mc4dqg0WLkMlL7JHq-LNCZh3xeY')
