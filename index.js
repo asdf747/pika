@@ -16,10 +16,6 @@ const quickmongo = require("quickmongo");
 const EventEmitter = require('events')
 const ass = require('./economyEvents/share.js')
 
-const loads = async () => {
-  await ass.run(client)
-}
-loads()
 client.economy = new EventEmitter()
 
 
