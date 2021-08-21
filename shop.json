@@ -70,22 +70,10 @@
         
     },
     {
-        "Name": "Nuke",
-        "ID": ["nuke"],
-        "Price": 69000000,
-        "Sell": "???",
-        "Description": "Nuke 'em use this to prevent someone from using the currency commands for an hour",
-        "Shop": true,
-        "Emoji": "<:emoji_18:878310596540518430>",
-        "Image": "https://cdn.discordapp.com/emojis/878311297958182963.png?v=1",
-        "Useable": true
-        
-    },
-    {
         "Name": "Octopus",
         "ID": ["octopus"],
         "Price": "???",
-        "Sell": 10000,
+        "Sell": 12000,
         "Description": "You can get this octopus from the diving command",
         "Shop": false,
         "Emoji": "<:octopus:878378232699842590>",
