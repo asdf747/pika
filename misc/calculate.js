@@ -12,7 +12,7 @@ module.exports = {
         .setTitle("Calculator")
         .setAuthor(message.author.tag, message.author.displayAvatarURL())
         .setThumbnail(message.guild.iconURL() || null)
-        .setDescription(`**Input:**\n\`\`\`${arguments.slice(0).join(' ')}\`\`\`\n\n**Output:**\n\`\`\`${calculator.calculate(arguments.slice(0).join(' '), true)}\`\`\``)
+        .setDescription(`**Input:**\n\`\`\`${arguments.slice(0).join(' ')}\`\`\`\n\n**Output:**\n\`\`\`${calculate(arguments.slice(0).join(' '), true)}\`\`\``)
         .setTimestamp()
     )
   }
