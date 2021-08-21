@@ -6,9 +6,7 @@ const eco = Schema({
   InBank: Number,
   Bank: Number,
   Inventory: Array,
-  Level: Number,
-  RequiredXP: Number,
-  XP: Number
+  Notifications: Array
 })
 
 module.exports = model('economy', eco)

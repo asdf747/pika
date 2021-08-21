@@ -1,5 +1,5 @@
 const economy = require('../models/economy')
-const { die } = require('../funcs')
+const { die, notify } = require('../funcs')
 const { MessageEmbed } = require('discord.js')
 
 module.exports = {

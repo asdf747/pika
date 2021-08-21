@@ -6,6 +6,7 @@ async function die(member, message){
             if(data.Wallet > 0){
                 let amount = Math.floor(Math.random() * data.Wallet / 2) + 1
                 await economy.findOneAndUpdate({ id: member.id }, { $inc: {Wallet: -amount} })
+                await notify(member, "Death", `You died and lost **${amount.toLocaleString("en-US")} coins**`)
             }
         }if(!data){
             await new economy({
@@ -17,10 +18,12 @@ async function die(member, message){
                 if(a.Wallet > 0){
                     let amount = Math.floor(Math.random() * a.Wallet / 2) + 1
                     await economy.findOneAndUpdate({ id: member.id }, { $inc: {Wallet: -amount} })
+                    await notify(member, "Death", `You died and lost **${amount.toLocaleString("en-US")} coins**`)
                 }
             })
         }
     })
+    
 }
 
 async function tempban(member, guild, duration, reason){
@@ -41,7 +44,37 @@ async function tempban(member, guild, duration, reason){
     })
 }
 
+async function notify(member, Type, Description){
+    let Types = ['Death']
+    if(!Types.includes(Type)) return console.log("Invalid notification type.")
+    const economy = require('./models/economy')
+    await economy.findOne({ id: member.id }, async (err, data) => {
+        if(data){
+            let obj = {
+                Type,
+                Description
+            }
+            data.Notifcations.push(obj)
+            data.save()
+        }if(!data){
+            await new economy({
+                id: member.id,
+                Wallet: 500,
+                Bank: 100,
+                InBank: 0,
+                Notifcations: [
+                    {
+                        Type,
+                        Description
+                    }
+                ]
+            }).save()
+        }
+    })
+}
+
 module.exports = {
     die,
-    tempban
+    tempban,
+    notify
 }
