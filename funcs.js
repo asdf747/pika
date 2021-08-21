@@ -4,7 +4,7 @@ async function die(member, message){
     await economy.findOne({ id: member.id }, async(err, data) => {
         if(data){
             if(data.Wallet > 0){
-                let amount = Math.floor(Math.random() * data.Wallet / 2) + 1
+                let amount = Math.floor(Math.random() * data.Wallet / 6) + 1
                 await economy.findOneAndUpdate({ id: member.id }, { $inc: {Wallet: -amount} })
                 await notify(member, "Death", `You died and lost **${amount.toLocaleString("en-US")} coins**`)
             }
@@ -16,7 +16,7 @@ async function die(member, message){
                 InBank: 0
             }).save().then(async (a) => {
                 if(a.Wallet > 0){
-                    let amount = Math.floor(Math.random() * a.Wallet / 2) + 1
+                    let amount = Math.floor(Math.random() * a.Wallet / 6) + 1
                     await economy.findOneAndUpdate({ id: member.id }, { $inc: {Wallet: -amount} })
                     await notify(member, "Death", `You died and lost **${amount.toLocaleString("en-US")} coins**`)
                 }
