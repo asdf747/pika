@@ -37,7 +37,8 @@
     "quickmongo": "^3.0.2",
     "mathematical-functions": "^1.0.0",
     "utils-discord": "^1.2.0",
-    "easy-calculation": "^1.0.2"
+    "easy-calculation": "^1.0.2",
+    "weird-to-normal-chars": "^1.6.0"
   },
   "devDependencies": {
     "node": "^16.6.1"
