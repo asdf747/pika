@@ -113,8 +113,8 @@ async function bomb(client, message, arguments, economy){
     const collect = await message.channel.createMessageCollector(filter, { time: 15000 })
     let joined = []
     collect.on('collect', async m => {
-        if(joined.length >= 10) return
-        if(joined.includes(m.id)) return
+        if(joined.length >= 10) collect.end()
+        if(joined.includes(m.author.id)) return
         joined.push(m.author.id)
     })
     collect.on('end', async msgs => {
@@ -151,20 +151,10 @@ async function bomb(client, message, arguments, economy){
     })
 }
 
-async function nuke(client, message, arguments, economy){
-    let member = message.mentions.members.first() || message.guild.members.cache.get(arguments[0])
-    if(!member) return message.channel.send("mention a valid member when")
-    const { Database } = require("quickmongo");
-const db = new Database("mongodb+srv://lol:fofo29112007@golgo.t3bmd.mongodb.net/gg?retryWrites=true&w=majority");
-await db.set(`nuke_${member.id}`, Date.now())
-message.channel.send(`You've nuked ${member.user.username} now they can't use the currency commands for an hour`)
-await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Nuke" }, { $inc: {"Inventory.$.Count": -1} })
-}
 
 module.exports = {
     lucky,
     unlucky,
     note,
-    bomb,
-    nuke
+    bomb
 }

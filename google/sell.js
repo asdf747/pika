@@ -17,6 +17,7 @@ module.exports = {
         if(item.Sell === "???") return message.channel.send("You can't sell this item")
         let amount = 1
         if(arguments[1] && Number(arguments[1]) && !arguments[1].includes('.') && Number(arguments[1]) >= 1) amount = Number(arguments[1])
+        if(arguments[1] && arguments[1].toLowerCase() === 'all') amount = doc.Inventory.find(ite => ite.Name.toLowerCase() === item.Name.toLowerCase()).Count
         let money = item.Sell * amount
         if(doc.Inventory.find(ite => ite.Name.toLowerCase() === item.Name.toLowerCase()).Count < amount) return message.channel.send(`You don't have this many of **${item.Name}**`)
         await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Wallet: money} })
