@@ -9,7 +9,7 @@ module.exports = {
         const emojis = message.guild.emojis.cache.map(emoji => {
             let gas = ''
             let fetch_author = emoji.fetchAuthor().then(ass => gas = ass.tag)
-return `${emoji.toString()}\n**Name:** ${emoji.name}\n**Animated:** ${emoji.Animated}\n**Creator:** ${gas}\n**Created at:** ${moment(emoji.createdTimestamp).format('l')}`
+return `${emoji.toString()}\n**Name:** ${emoji.name}\n**Animated:** ${emoji.Animated}\n**Created at:** ${moment(emoji.createdTimestamp).format('l')}`
         })
 
         let options = {
