@@ -38,7 +38,8 @@
     "mathematical-functions": "^1.0.0",
     "utils-discord": "^1.2.0",
     "easy-calculation": "^1.0.2",
-    "weird-to-normal-chars": "^1.6.0"
+    "weird-to-normal-chars": "^1.6.0",
+    "replace-special-characters": "^1.2.5"
   },
   "devDependencies": {
     "node": "^16.6.1"
