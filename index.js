@@ -171,8 +171,13 @@ client.guilds.cache.get(giveaway.guildID).channels.cache.get(giveaway.channelID)
 
 
 client.economy.on('share', async function (giver, gived, amount){
-  await funcs.notify(gived, "Share", `${giver.user.tag} gave you **${amount.toLocaleString("en-US")} coins**`)
+  await funcs.notify(gived, "Share", `${giver.user.tag} gave you **${amount.toLocaleString("en-US")} coin${coins !== 1 ? 's' : ''}**`)
 })
+
+client.economy.on('gift', async function (giver, gived, amount, item){
+  await funcs.notify(gived, "Gift", `${giver.user.tag} gave you **${amount.toLocaleString("en-US")} ${item}**`)
+})
+
 
 
 client.giveawaysManager.on("giveawayEnded", (giveaway, winners) => {
