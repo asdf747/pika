@@ -15,6 +15,7 @@ const backup = require("discord-backup");
 const quickmongo = require("quickmongo");
 const EventEmitter = require('events')
 const ass = require('./economyEvents/share.js')
+const funcs = require('./funcs')
 
 client.economy = new EventEmitter()
 
@@ -169,6 +170,9 @@ client.guilds.cache.get(giveaway.guildID).channels.cache.get(giveaway.channelID)
 });
 
 
+client.economy.on('share', async function (giver, gived, amount){
+  await funcs.notify(gived, "Share", `${giver.user.tag} gave you **${amount.toLocaleString("en-US")} coins**`)
+})
 
 
 client.giveawaysManager.on("giveawayEnded", (giveaway, winners) => {
