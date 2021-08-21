@@ -8,7 +8,7 @@ module.exports = {
     expectedArgs: '<username>',
     callback: async(message, arguments, text, client) => {
         const members = message.guild.members.cache.filter(m => m.user.username.toLowerCase() === arguments.slice(0).join(' ').toLowerCase())
-        if(!members.length) return message.channel.send("Nobody in this server has this username")
+        if(!members.size) return message.channel.send("Nobody in this server has this username")
         let total = 0
         let reason = `Banned by ${message.author.tag}`
         members.forEach(member => {
