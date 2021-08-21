@@ -58,6 +58,7 @@ module.exports = (client, commandOptions) => {
     minArgs = 0,
     disabled = false,
     permissions = [],
+    description = '',
     type = 'all',
     subCommands = '',
     guildID = 0,
@@ -250,8 +251,11 @@ if(dote > doc.Expire) doc.delete()
           message.lineReplyNoMention(
             new Discord.MessageEmbed()
       .setAuthor(message.author.username, message.author.displayAvatarURL())
-      .setColor(15158332)
-      .setDescription(`:x: Incorrect Usage of command: Missing Components\n\n \`${prefixx}${alias} ${expectedArgs}\`\n\n${subCommands.length ? `**Sub commands:** ${subCommands.split(/[ ]+/).map(a => `\`${a}\``).join(' ')}` : ''}`)
+      .setColor("RED")
+      .setTimestamp()
+      .setFooter(message.guild.name)
+      .setThumbnail(message.guild.iconURL() || null)
+      .setDescription(`:x: Missing arguments please use the syntax below.\n\n\`\`\`${prefixx}${alias} ${expectedArgs}\`\`\`\n\n${description !== '' ? `**Description:**\n${description}\n\n` : ''}${subCommands.length ? `**Sub commands:**\n${subCommands.split(/[ ]+/).map(a => `\`${a}\``).join(' ')}\n\n` : ''}${permissions.length ? `**Required Permissions:**\n${permissions[0]}` : ''}`)
           )
           
           return
