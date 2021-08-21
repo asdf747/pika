@@ -23,6 +23,25 @@ async function die(member, message){
     })
 }
 
+async function tempban(member, guild, duration, reason){
+    const TEMP = require('./models/tempban')
+    const schedule = require('node-schedule')
+    guild.members.ban(member.id, { reason })
+    await new TEMP({
+        Guild: guild.id,
+        User: member.id,
+        Start: new Date(),
+        End: new Date(Date.now() + duration),
+        Reason: reason
+    }).save().then(async thingo => {
+        schedule.scheduleJob(new Date(Date.now() + duration), function(){
+            guild.members.unban(member.id, 'Automatic unban from tempban')
+            thingo.delete()
+        })
+    })
+}
+
 module.exports = {
-    die
+    die,
+    tempban
 }
