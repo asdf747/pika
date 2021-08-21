@@ -44,7 +44,7 @@ module.exports = {
         db.set(`inheist_${message.author.id}`, true)
 
         members.on('collect', async m => {
-            if(m.user.bot) return
+            if(m.author.bot) return
             let unlucky_collector = await db.fetch(`unlucky_${m.author.id}`)
             if(unlucky_collector !== null){
                 let durg = moment.duration(Date.now() - unlucky_collector).as('minutes')
