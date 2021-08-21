@@ -5,7 +5,7 @@ module.exports = {
     commands: ['notifications', 'notifs'],
     callback: async(message, arguments, text, client) => {
         let notifs = await economy.findOne({ id: message.author.id })
-        if(!notifs || !notifs.length) return message.channel.send("You don't have any notifications yet")
+        if(!notifs || !notifs.Notifications.length) return message.channel.send("You don't have any notifications yet")
         const notifs_array = notifs.map((notify, i) => `**${i} ${notify.Type}**\n*${notify.Description}*`)
 
         let options = {

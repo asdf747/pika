@@ -54,7 +54,7 @@ async function notify(member, Type, Description){
                 Type,
                 Description
             }
-            data.Notifcations.push(obj)
+            data.Notifications.push(obj)
             data.save()
         }if(!data){
             await new economy({
@@ -62,7 +62,7 @@ async function notify(member, Type, Description){
                 Wallet: 500,
                 Bank: 100,
                 InBank: 0,
-                Notifcations: [
+                Notifications: [
                     {
                         Type,
                         Description
