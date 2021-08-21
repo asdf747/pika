@@ -64,7 +64,6 @@ module.exports = (client, commandOptions) => {
     permissions = [],
     permissionsbot = [],
     requiredRoles = [],
-    description = '',
     callback,
   } = commandOptions
 
