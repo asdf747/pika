@@ -8,3 +8,4 @@ e.on('share', async function (giver, gived, amount){
 })
     
 
+
