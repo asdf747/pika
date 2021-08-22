@@ -82,7 +82,7 @@ async function set(key, value){
     let modl = require('./models/jsons')
     await modl.findOne({ ID: key }, async (err, data) => {
         if(data){
-            await modl.updateOne({ "ID": key }, { $set: {Data: value} })
+            await modl.findOneAndUpdate({ ID: key }, { $set: {Data: value} })
         }
         if(!data){
             await new modl({
@@ -94,9 +94,9 @@ async function set(key, value){
 }
 
 async function fetch(key){
+    const utils = require('utils-discord')
     let modl = require('./models/jsons')
-    let cock = await modl.find({ ID: key })
-    return cock.Data
+    utils.mongoFind(guildSchema, {ID: key})
 }
 
 module.exports = {
