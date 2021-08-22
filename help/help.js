@@ -10,8 +10,7 @@ const loadCommands7 = require('../donations-thepoor/load-commands')
 const loadCommands8 = require('../the-poor-guild-only/load-commands')
 const loadCommands9 = require('../google/load-commands')
 const { MessageEmbed } = require('discord.js')
-const { Database } = require("quickmongo");
-const db = new Database("mongodb+srv://lol:fofo29112007@golgo.t3bmd.mongodb.net/gg?retryWrites=true&w=majority");
+const db = require('../funcs')
 const config = require('../config.json')
 const UserInfo = require('../models/whitelist')
 const { MessageMenu, MessageMenuOption } = require('discord-buttons')
