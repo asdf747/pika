@@ -12,7 +12,6 @@ const mongo = require('./mongo')
 require('events').EventEmitter.defaultMaxListeners = 0;
 const moment = require('moment')
 const backup = require("discord-backup");
-const quickmongo = require("quickmongo");
 const EventEmitter = require('events')
 const ass = require('./economyEvents/share.js')
 const funcs = require('./funcs')
@@ -20,7 +19,6 @@ const funcs = require('./funcs')
 client.economy = new EventEmitter()
 
 
-client.db = "mongodb+srv://lol:fofo29112007@golgo.t3bmd.mongodb.net/gg?retryWrites=true&w=majority"
 
 
 
