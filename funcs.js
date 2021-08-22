@@ -96,7 +96,13 @@ async function set(key, value){
 async function fetch(key){
     const utils = require('utils-discord')
     let modl = require('./models/jsons')
-    utils.mongoFind(modl, {ID: key})
+    await modl.findOne({ ID: key }, async(err ,data) => {
+        if(data){
+            return data.Data
+        }if(!data){
+            return undefined
+        }
+    })
 }
 
 module.exports = {
