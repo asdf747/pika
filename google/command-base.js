@@ -98,8 +98,8 @@ module.exports = (client, commandOptions) => {
     if(message.channel.type === 'dm') return
     if (message.author.bot) return;
     let config = require('../config.json')
-    
-    let prefixx = await fetch(`prefix_${message.guild.id}`)
+    let mod = require('../prefixes.json')
+    let prefixx = await mod.find(med => med.Guild === message.guild.id).Prefix
     if(!prefixx){prefixx = config.prefix}
 
 
@@ -328,25 +328,3 @@ HISTORY.findOne({ Guild: message.guild.id, User: message.author.id }, async (err
   
 }
 
-async function set(key, value){
-  let modl = require('../models/jsons')
-  await modl.findOne({ ID: key }, async (err, data) => {
-      if(data){
-          await modl.findOneAndUpdate({ ID: key }, { $set: {Data: value} })
-      }
-      if(!data){
-          await new modl({
-              ID: key,
-              Data: value
-          }).save()
-      }
-  })
-}
-
-async function fetch(key){
-  const utils = require('utils-discord')
-  let modl = require('../models/jsons')
-  let gas = await modl.findOne({ ID: key })
-  if(!gas) return undefined
-  return gas.Data
-}
