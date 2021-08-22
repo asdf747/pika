@@ -80,12 +80,12 @@ async function notify(member, Type, Description){
 
 async function set(key, value){
     let modl = require('./models/jsons')
- await modl.findOne({ ID: key }, async (err, data) => {
+    await modl.findOne({ ID: key }, async (err, data) => {
         if(data){
-          await modl.updateOne({ "ID": key }, { $set: {Data: value} })
+            await modl.updateOne({ "ID": key }, { $set: {Data: value} })
         }
         if(!data){
-          await new modl({
+            await new modl({
                 ID: key,
                 Data: value
             }).save()
