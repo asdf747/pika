@@ -15,7 +15,7 @@ module.exports = {
         const msglogs = await msg.findOne({ Guild: message.guild.id })
         const alt = await db.fetch(`alt_detector_${message.guild.id}`)
         if(arguments[0]){
-            let things = ['reactionlogs', 'messagelogs', 'alt detector', 'prefix']
+            let things = ['reactionlogs', 'messagelogs', 'altdetector', 'prefix']
             if(!things.includes(arguments[0].toLowerCase())) return message.channel.send("This settings doesn't exist")
             switch(arguments[0].toLowerCase()){
                 case "reactionlogs":
@@ -27,12 +27,12 @@ module.exports = {
                 case "prefix":
                     message.channel.send(`Use \`${prefix}setprefix <prefix>\` instead`)
                     break
-                case "alt detector":
+                case "altdetector":
                     let options = ['true', 'false']
-                    if(!arguments[2]) return message.channel.send("Enter a value")
-                    if(!options.includes(arguments[2].toLowerCase())) return message.channel.send("Invalid value the only values are `true/false`")
+                    if(!arguments[1]) return message.channel.send("Enter a value")
+                    if(!options.includes(arguments[1].toLowerCase())) return message.channel.send("Invalid value the only values are `true/false`")
                     let value = false
-                    if(arguments[2].toLowerCase() === 'true') value = true
+                    if(arguments[1].toLowerCase() === 'true') value = true
                     await db.set(`alt_detector_${message.guild.id}`, value)
                     message.channel.send(':white_check_mark: | Turned on alt detector system')
                     break
