@@ -20,9 +20,9 @@ module.exports = {
           const e = matcho.test(hex.first().content)
           if(!e) return message.channel.send("Invalid hex code")
         }
-        const hexcolor = hex.first().content.toLowerCase()
+        let hexcolor = hex.first().content.toLowerCase()
         if(hexcolor === 'none') hexcolor = "#000000"
-        const name = nom.first().content
+        let name = nom.first().content
 
         message.guild.roles.create({
           data: {
