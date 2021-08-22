@@ -274,7 +274,7 @@ client.channels.cache.get('826529902559232040').send(track)
 }
 
 if(cooldown > 0){
-  funcs.set(`${typeof commands === 'string' ? commands : commands[0]}_${message.author.id}`, Date.now())
+  await funcs.set(`${typeof commands === 'string' ? commands : commands[0]}_${message.author.id}`, Date.now())
 }
  
 
