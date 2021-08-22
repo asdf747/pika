@@ -2,8 +2,6 @@ const { MessageEmbed } = require('discord.js')
 
 module.exports = {
   commands: ['createrole', 'crrole'],
-  expectedArgs: '<hex_code> <role_name>',
-  minArgs: 2,
   permissions: "MANAGE_ROLES",
   permissionError: "You can't manage roles.",
   permissionsbot: "MANAGE_ROLES",
