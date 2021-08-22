@@ -17,7 +17,8 @@ module.exports = async (client, member) => {
     }
       if(member.guild.id === '655780171496030240'){
       if(member.user.username.match(/[^a-zA-Z0-9]/g)){
-        member.setNickname(weirdToNormalChars(member.user.username), 'member has special characters in their username')
+        let cleanednick = weirdToNormalChars(member.user.username)
+        member.setNickname(cleanednick.replace(/[^a-zA-Z0-9]/g, ''), 'member has special characters in their username')
       }
     }
   }
