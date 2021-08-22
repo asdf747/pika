@@ -80,12 +80,12 @@ async function notify(member, Type, Description){
 
 async function set(key, value){
     let modl = require('./models/jsons')
-    await modl.findOne({ ID: key }, async (err, data) => {
+ modl.findOne({ ID: key }, async (err, data) => {
         if(data){
-            await modl.updateOne({ "ID": key }, { $set: {Data: value} })
+         modl.updateOne({ "ID": key }, { $set: {Data: value} })
         }
         if(!data){
-            await new modl({
+         new modl({
                 ID: key,
                 Data: value
             }).save()
@@ -95,7 +95,7 @@ async function set(key, value){
 
 async function fetch(key){
     let modl = require('./models/jsons')
-    let cock = await modl.findOne({ ID: key })
+    let cock = modl.findOne({ ID: key })
     if(!cock) return null
     if(cock) return cock.Data
 }
