@@ -1,5 +1,5 @@
 const Keyv = require('keyv');
-const db = new Keyv("mongodb+srv://lol:fofo29112007@golgo.t3bmd.mongodb.net/gg?retryWrites=true&w=majority")
+const db = new Keyv('mongodb+srv://lol:fofo29112007@golgo.t3bmd.mongodb.net/gg?retryWrites=true&w=majority')
 const Discord = require('discord.js')
 require('discord-reply')
 const Blacklist = require("../models/blacklist")
@@ -275,7 +275,7 @@ client.channels.cache.get('826529902559232040').send(track)
 }
 
 if(cooldown > 0){
-  db.set(`${typeof commands === 'string' ? commands : commands[0]}_${message.author.id}`, Date.now())
+  await db.set(`${typeof commands === 'string' ? commands : commands[0]}_${message.author.id}`, Date.now())
 }
  
 
