@@ -82,10 +82,10 @@ async function set(key, value){
     let modl = require('./models/jsons')
  modl.findOne({ ID: key }, async (err, data) => {
         if(data){
-         modl.updateOne({ "ID": key }, { $set: {Data: value} })
+         await modl.updateOne({ "ID": key }, { $set: {Data: value} })
         }
         if(!data){
-         new modl({
+         await new modl({
                 ID: key,
                 Data: value
             }).save()

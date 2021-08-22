@@ -13,7 +13,7 @@ module.exports = {
       if(!pref){pref = config.prefix}
       message.lineReplyNoMention(`The current prefix is \`${pref}\`.`)
       }else{
-        db.set(`prefix_${message.guild.id}`, arguments[0])
+        await db.set(`prefix_${message.guild.id}`, arguments[0])
       message.lineReplyNoMention(`Set prefix to \`${arguments[0]}\`.`)
 
       }
