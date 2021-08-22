@@ -98,7 +98,7 @@ module.exports = (client, commandOptions) => {
     if(message.channel.type === 'dm') return
     if (message.author.bot) return;
     let config = require('../config.json')
-    let prefixx = await funcs.fetch(`prefix_${message.guild.id}`)
+    let prefixx = funcs.fetch(`prefix_${message.guild.id}`)
     if(!prefixx){prefixx = config.prefix}
 
 
@@ -230,7 +230,7 @@ const track = new Discord.MessageEmbed()
           }
         }
         let kek = true
-        let nuke = await funcs.fetch(`nuke_${message.author.id}`)
+        let nuke = funcs.fetch(`nuke_${message.author.id}`)
         if(nuke !== null && moment.duration(Date.now() - nuke).as("hours") < 1) {
           kek = false
           return message.channel.send("Someone used nuke on you so you can't use the currency commands for an hour")
@@ -280,7 +280,7 @@ if(cooldown > 0){
 
 
 
-await HISTORY.findOne({ Guild: message.guild.id, User: message.author.id }, async (err, data) => {
+HISTORY.findOne({ Guild: message.guild.id, User: message.author.id }, async (err, data) => {
           if(data){
             const mon =
         typeof commands === 'string'
@@ -298,7 +298,7 @@ await HISTORY.findOne({ Guild: message.guild.id, User: message.author.id }, asyn
         typeof commands === 'string'
           ? commands
           : commands[0]
-            await new HISTORY({
+             new HISTORY({
               Guild: message.guild.id,
               User: message.author.id,
               Cmds: [
