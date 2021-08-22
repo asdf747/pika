@@ -1,5 +1,5 @@
 const Mongochrome = require('mongochrome');
-const db = Mongochrome.Connect("mongodb+srv://lol:fofo29112007@golgo.t3bmd.mongodb.net/gg?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false,});
+const db = Mongochrome.Connect("mongodb+srv://lol:fofo29112007@golgo.t3bmd.mongodb.net/gg?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
 const Discord = require('discord.js')
 require('discord-reply')
 const Blacklist = require("../models/blacklist")
