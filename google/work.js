@@ -1,8 +1,7 @@
 const { MessageEmbed } = require('discord.js')
 const economy = require('../models/economy')
 const moment = require('moment')
-const { Database } = require("quickmongo");
-const db = new Database("mongodb+srv://lol:fofo29112007@golgo.t3bmd.mongodb.net/gg?retryWrites=true&w=majority");
+const db = require('../funcs')
 
 module.exports = {
     commands: 'work',

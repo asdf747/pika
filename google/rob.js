@@ -1,7 +1,6 @@
 const economy = require('../models/economy')
 const settings = require('../models/settings')
-const { Database } = require("quickmongo");
-const db = new Database("mongodb+srv://lol:fofo29112007@golgo.t3bmd.mongodb.net/gg?retryWrites=true&w=majority");
+const db = require('../funcs')
 const moment = require('moment')
 
 module.exports = {

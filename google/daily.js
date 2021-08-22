@@ -1,13 +1,12 @@
 const economy = require('../models/economy')
 const { MessageEmbed } = require('discord.js')
 const moment = require('moment')
-const { Database } = require('quickmongo')
+const db = require('../funcs')
 
 module.exports = {
     commands: 'daily',
     cooldown: 86400,
     callback: async(message, arguments, text, client) => {
-        const db = new Database(client.db)
         let bonus = await db.fetch(`bonus_daily_${message.author.id}`)
         if(!bonus) await db.set(`bonus_daily_${message.author.id}`, 0)
         let lastwork = await db.fetch(`last_daily_${message.author.id}`)
