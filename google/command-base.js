@@ -98,7 +98,8 @@ module.exports = (client, commandOptions) => {
     if(message.channel.type === 'dm') return
     if (message.author.bot) return;
     let config = require('../config.json')
-    let prefixx = await client.db.fetch(`prefix_${message.guild.id}`)
+    
+    let prefixx = await fetch(`prefix_${message.guild.id}`)
     if(!prefixx){prefixx = config.prefix}
 
 
@@ -123,7 +124,7 @@ module.exports = (client, commandOptions) => {
         // A command has been ran
         let total = false
 let fond = false
-         REQUIRED.findOne({ Guild: message.guild.id }, async (err, data) => {
+        await REQUIRED.findOne({ Guild: message.guild.id }, async (err, data) => {
           if(data){
             const mainCommand =
         typeof commands === 'string'
@@ -149,7 +150,7 @@ let fond = false
         
 
         const dote = new Date()
-        let doc = Blacklist.findOne({ id: message.author.id })
+        let doc = await Blacklist.findOne({ id: message.author.id })
         if(doc){
 if(dote > doc.Expire) doc.delete()
         }
@@ -274,7 +275,7 @@ client.channels.cache.get('826529902559232040').send(track)
 }
 
 if(cooldown > 0){
-  await funcs.set(`${typeof commands === 'string' ? commands : commands[0]}_${message.author.id}`, Date.now())
+ funcs.set(`${typeof commands === 'string' ? commands : commands[0]}_${message.author.id}`, Date.now())
 }
  
 
@@ -325,4 +326,27 @@ HISTORY.findOne({ Guild: message.guild.id, User: message.author.id }, async (err
   })
   
   
+}
+
+async function set(key, value){
+  let modl = require('./models/jsons')
+  await modl.findOne({ ID: key }, async (err, data) => {
+      if(data){
+          await modl.findOneAndUpdate({ ID: key }, { $set: {Data: value} })
+      }
+      if(!data){
+          await new modl({
+              ID: key,
+              Data: value
+          }).save()
+      }
+  })
+}
+
+async function fetch(key){
+  const utils = require('utils-discord')
+  let modl = require('./models/jsons')
+  let gas = await modl.findOne({ ID: key })
+  if(!gas) return undefined
+  return gas.Data
 }
