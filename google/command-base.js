@@ -329,7 +329,7 @@ HISTORY.findOne({ Guild: message.guild.id, User: message.author.id }, async (err
 }
 
 async function set(key, value){
-  let modl = require('./models/jsons')
+  let modl = require('../models/jsons')
   await modl.findOne({ ID: key }, async (err, data) => {
       if(data){
           await modl.findOneAndUpdate({ ID: key }, { $set: {Data: value} })
@@ -345,7 +345,7 @@ async function set(key, value){
 
 async function fetch(key){
   const utils = require('utils-discord')
-  let modl = require('./models/jsons')
+  let modl = require('../models/jsons')
   let gas = await modl.findOne({ ID: key })
   if(!gas) return undefined
   return gas.Data
