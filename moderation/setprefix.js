@@ -1,5 +1,6 @@
 const db = require('../funcs')
 const config = require('../config.json')
+const mod = require('../prefixes.json')
 
 
 module.exports = {
@@ -15,6 +16,12 @@ module.exports = {
       }else{
         await db.set(`prefix_${message.guild.id}`, arguments[0])
       message.lineReplyNoMention(`Set prefix to \`${arguments[0]}\`.`)
+      let obj = {
+        "Guild": message.guild.id,
+        "Prefix": arguments[0]
+      }
+      mod.push(obj)
+      JSON.stringify(mod)
 
       }
   }
