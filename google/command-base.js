@@ -6,7 +6,7 @@ const REQUIRED = require('../models/toggle')
 const HISTORY = require('../models/history')
 const TOGGLE = require('../models/dis')
 const { convertMS } = require('discordutility')
-const funcs = require('../funcs')
+const db = require('../funcs')
 
 const validatePermissions = (permissions) => {
   const validPermissions = [
