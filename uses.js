@@ -156,7 +156,7 @@ async function bomb(client, message, arguments, economy){
 async function cell(client, message, arguments, economy){
     const utils = require('utils-discord')
     const msg = await message.channel.send("**Options:**\n`a`: Notifications\n`e`: Exit")
-    const collcot = await message.channel.awaitMessages(x => x.author.id === message.author.id, { time: 7000 })
+    const collcot = await message.channel.awaitMessages(x => x.author.id === message.author.id, { time: 7000, max: 1 })
     if(!collcot.size && msg) msg.delete()
     let choices = ['a', 'e']
     let choice = collcot.first().content.toLowerCase()
