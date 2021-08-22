@@ -96,13 +96,9 @@ async function set(key, value){
 async function fetch(key){
     const utils = require('utils-discord')
     let modl = require('./models/jsons')
-    await modl.findOne({ ID: key }, async(err ,data) => {
-        if(data){
-            return data.Data
-        }if(!data){
-            return undefined
-        }
-    })
+    let gas = await modl.findOne({ ID: key })
+    if(!gas) return undefined
+    return gas.Data
 }
 
 module.exports = {
