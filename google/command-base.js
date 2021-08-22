@@ -99,7 +99,7 @@ module.exports = (client, commandOptions) => {
     if (message.author.bot) return;
     let config = require('../config.json')
     let mod = require('../prefixes.json')
-    let prefixx = await mod.find(med => med.Guild === message.guild.id).Prefix
+    let prefixx = await db.fetch(`prefix_${message.guild.id}`)
     if(!prefixx){prefixx = config.prefix}
 
 
@@ -280,7 +280,7 @@ if(cooldown > 0){
  
 
 
-HISTORY.findOne({ Guild: message.guild.id, User: message.author.id }, async (err, data) => {
+await HISTORY.findOne({ Guild: message.guild.id, User: message.author.id }, async (err, data) => {
           if(data){
             const mon =
         typeof commands === 'string'
