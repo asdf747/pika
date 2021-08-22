@@ -9,50 +9,39 @@ module.exports = {
   permissionsbot: "MANAGE_ROLES",
   description: 'Creates a role.',
   callback: async (message, arguments, text, client) => {
-        const name = arguments.slice(1).join(" ");
-        
-        if(arguments[0].toLowerCase() === "none"){
-        message.guild.roles.create({
-            data: {
-              name: name,
-              color: "#000000",
-            },
-            reason: `Action done by ${message.author.id}`,
-          })
-            .then(role => message.lineReplyNoMention(
-              new MessageEmbed()
-              .setTitle("Role created!")
-              .setDescription(`**Name:** ${role.name}\n**Color:** ${role.hexColor}`)
-              .setColor(`${role.hexColor}`)
-              .setFooter(`ID: ${role.id}`)
-            ))
-            .catch(err => message.lineReplyNoMention(
-              new MessageEmbed()
-            .setAuthor(message.author.username, message.author.displayAvatarURL())
-            .setColor(15158332)
-            .setDescription(`:x: An error has occured!\n\n \`${err}\``)
-            ));
-        }else{ if(!arguments[0].startsWith('#')) return message.lineReplyNoMention("Invalid hex code.") 
+    await message.channel.send("Please enter a name for the role")
+        const nom = message.channel.awaitMessages(x => x.author.id === message.author.id, { time: 15000, max: 1 })
+        if(!nom.size) return message.channel.send("Timeout")
+
+        await message.channel.send("Now enter a hex code enter none if no hex code")
+        const hex = message.channel.awaitMessages(x => x.author.id === message.author.id, { time: 15000, max: 1 })
+        if(!hex.size) return message.channel.send("Timeout")
+        if(!hex.first().content.toLowerCase() === 'none'){
+          const matcho = /^#[0-9A-F]{6}$/i
+          if(!hex.first().content.startsWith('#')) matcho = /^[0-9A-F]{6}$/i
+          const e = matcho.test(hex.first().content)
+          if(!e) return message.channel.send("Invalid hex code")
+        }
+        const hexcolor = hex.first().content.toLowerCase()
+        if(hexcolor === 'none') hexcolor = "#000000"
+        const name = nom.first().content
+
         message.guild.roles.create({
           data: {
-            name: name,
-            color: arguments[0],
+            name,
+            color: `#${hexcolor.replace('#','')}`
           },
-          reason: `Action done by ${message.author.id}`,
+          reason: `Created by ${message.author.tag}`
+        }).then(role => {
+          message.channel.send(
+            new MessageEmbed()
+            .setTitle("Created role")
+            .setDescription(`**Name:** ${role.name}\n**Color:** ${role.hexColor}`)
+            .setTimestamp()
+            .setFooter(`ID: ${role.id}`)
+            .setColor(role.hexColor)
+          )
         })
-          .then(role => message.lineReplyNoMention(
-            new MessageEmbed()
-              .setTitle("Role created!")
-              .setDescription(`**Name:** ${role.name}\n**Color:** ${role.hexColor}`)
-              .setColor(`${role.hexColor}`)
-              .setFooter(`ID: ${role.id}`)
-          ))
-          .catch(err => message.lineReplyNoMention(
-            new MessageEmbed()
-            .setAuthor(message.author.username, message.author.displayAvatarURL())
-            .setColor(15158332)
-            .setDescription(`:x: An error has occured!\n\n \`${err}\``)
-          ));}
 
   }
 }

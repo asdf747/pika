@@ -7,7 +7,7 @@ const db = require('quick.db')
 module.exports = {
   commands: ['lockdown', 'ld'],
   permissions: "MANAGE_CHANNELS",
-  subCommands: 'server',
+  subCommands: 'server add remove list',
   callback: async (message, arguments, text, client) => {
     let prefixx = await db.fetch(`prefix_${message.guild.id}`)
     if(prefixx === null){prefixx = config.prefix}
