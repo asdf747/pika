@@ -1,5 +1,5 @@
-const { Database } = require("quickmongo");
-const db = new Database("mongodb+srv://lol:fofo29112007@golgo.t3bmd.mongodb.net/gg?retryWrites=true&w=majority");
+const Keyv = require('keyv');
+const db = new Keyv("mongodb+srv://lol:fofo29112007@golgo.t3bmd.mongodb.net/gg?retryWrites=true&w=majority")
 const Discord = require('discord.js')
 require('discord-reply')
 const Blacklist = require("../models/blacklist")
@@ -99,7 +99,7 @@ module.exports = (client, commandOptions) => {
     if(message.channel.type === 'dm') return
     if (message.author.bot) return;
     let config = require('../config.json')
-    let prefixx = await db.fetch(`prefix_${message.guild.id}`)
+    let prefixx = await db.get(`prefix_${message.guild.id}`)
     if(!prefixx){prefixx = config.prefix}
 
 
@@ -161,7 +161,7 @@ if(dote > doc.Expire) doc.delete()
           return message.lineReplyNoMention(`You're blacklisted from using this bot. Reason: \`${doc.reason}\` your blacklist ends ${expiredate}`)
         }
 
-        let lasttime = await db.fetch(`${typeof commands === 'string' ? commands : commands[0]}_${message.author.id}`)
+        let lasttime = await db.get(`${typeof commands === 'string' ? commands : commands[0]}_${message.author.id}`)
         
 const track = new Discord.MessageEmbed()
         .setAuthor(message.author.tag, message.author.displayAvatarURL())
@@ -231,7 +231,7 @@ const track = new Discord.MessageEmbed()
           }
         }
         let kek = true
-        let nuke = await db.fetch(`nuke_${message.author.id}`)
+        let nuke = await db.get(`nuke_${message.author.id}`)
         if(nuke !== null && moment.duration(Date.now() - nuke).as("hours") < 1) {
           kek = false
           return message.channel.send("Someone used nuke on you so you can't use the currency commands for an hour")

@@ -40,7 +40,7 @@
     "easy-calculation": "^1.0.2",
     "weird-to-normal-chars": "^1.6.0",
     "replace-special-characters": "^1.2.5",
-    "mongochrome": "^0.0.3"
+    "keyv": "^4.0.3"
   },
   "devDependencies": {
     "node": "^16.6.1"
