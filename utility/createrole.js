@@ -8,11 +8,11 @@ module.exports = {
   description: 'Creates a role.',
   callback: async (message, arguments, text, client) => {
     await message.channel.send("Please enter a name for the role")
-        const nom = message.channel.awaitMessages(x => x.author.id === message.author.id, { time: 15000, max: 1 })
+        const nom = await message.channel.awaitMessages(x => x.author.id === message.author.id, { time: 15000, max: 1 })
         if(!nom.size) return message.channel.send("Timeout")
 
         await message.channel.send("Now enter a hex code enter none if no hex code")
-        const hex = message.channel.awaitMessages(x => x.author.id === message.author.id, { time: 15000, max: 1 })
+        const hex = await message.channel.awaitMessages(x => x.author.id === message.author.id, { time: 15000, max: 1 })
         if(!hex.size) return message.channel.send("Timeout")
         if(!hex.first().content.toLowerCase() === 'none'){
           const matcho = /^#[0-9A-F]{6}$/i
