@@ -98,7 +98,7 @@ module.exports = (client, commandOptions) => {
     if(message.channel.type === 'dm') return
     if (message.author.bot) return;
     let config = require('../config.json')
-    let prefixx = client.db.fetch(`prefix_${message.guild.id}`)
+    let prefixx = await client.db.fetch(`prefix_${message.guild.id}`)
     if(!prefixx){prefixx = config.prefix}
 
 
@@ -123,7 +123,7 @@ module.exports = (client, commandOptions) => {
         // A command has been ran
         let total = false
 let fond = false
-        await REQUIRED.findOne({ Guild: message.guild.id }, async (err, data) => {
+         REQUIRED.findOne({ Guild: message.guild.id }, async (err, data) => {
           if(data){
             const mainCommand =
         typeof commands === 'string'
@@ -149,7 +149,7 @@ let fond = false
         
 
         const dote = new Date()
-        let doc = await Blacklist.findOne({ id: message.author.id })
+        let doc = Blacklist.findOne({ id: message.author.id })
         if(doc){
 if(dote > doc.Expire) doc.delete()
         }
