@@ -89,6 +89,9 @@ return
     async function unlucky(client, message, arguments, economy){
     let member = message.mentions.members.first() || message.guild.members.cache.get(arguments[0])
     if(!member) return message.channel.send("mention a member bruh")
+    const moment = require('moment')
+    const lol = await db.fetch(`unlucky_${member.id}`)
+    if(lol !== null && moment.duration(Date.now() - lol).as("minutes") < 15) return message.channel.send("someone already used the unlucky cookie on this person")
     if(member.id === message.author.id) return message.channel.send("why would you do this to yourself")
     const { Database } = require("quickmongo");
 const db = new Database("mongodb+srv://lol:fofo29112007@golgo.t3bmd.mongodb.net/gg?retryWrites=true&w=majority");
