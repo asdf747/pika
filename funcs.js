@@ -95,7 +95,9 @@ async function set(key, value){
 
 async function fetch(key){
     let modl = require('./models/jsons')
-    let cock =  modl.findOne({ ID: key }).then(e => {return e.Data})
+    let cock =  modl.findOne({ ID: key })
+    if(!cock) return undefined
+    return cock.Data
 }
 
 module.exports = {
