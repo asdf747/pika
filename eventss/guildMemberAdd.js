@@ -1,8 +1,7 @@
 const moment = require('moment')
 const { tempban } = require('../funcs')
 const { weirdToNormalChars } = require('weird-to-normal-chars')
-const { Database } = require("quickmongo");
-const db = new Database("mongodb+srv://lol:fofo29112007@golgo.t3bmd.mongodb.net/gg?retryWrites=true&w=majority")
+const db = require('../funcs')
 
 module.exports = async (client, member) => {
   let alt = await db.fetch(`alt_detector_${member.guild.id}`)
