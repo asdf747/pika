@@ -29,10 +29,10 @@ module.exports = {
                     break
                 case "alt detector":
                     let options = ['true', 'false']
-                    if(!arguments[1]) return message.channel.send("Enter a value")
-                    if(!options.includes(arguments[1].toLowerCase())) return message.channel.send("Invalid value the only values are `true/false`")
+                    if(!arguments[2]) return message.channel.send("Enter a value")
+                    if(!options.includes(arguments[2].toLowerCase())) return message.channel.send("Invalid value the only values are `true/false`")
                     let value = false
-                    if(arguments[1].toLowerCase() === 'true') value = true
+                    if(arguments[2].toLowerCase() === 'true') value = true
                     await db.set(`alt_detector_${message.guild.id}`, value)
                     message.channel.send(':white_check_mark: | Turned on alt detector system')
                     break
