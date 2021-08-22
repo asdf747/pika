@@ -23,7 +23,7 @@ module.exports = {
     let whitelisted = true
     if (!doc) whitelisted = false
     let prefix = await db.fetch(`prefix_${message.guild.id}`)
-    if (prefix === null) prefix = config.prefix
+    if (!prefix) prefix = config.prefix
     let allcmds = []
     let alldescs = []
     let allargus = []
