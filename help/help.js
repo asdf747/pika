@@ -8,7 +8,6 @@ const loadCommands5 = require('../whitelisted/load-commands')
 const loadCommands6 = require('../fun/load-commands')
 const loadCommands7 = require('../donations-thepoor/load-commands')
 const loadCommands8 = require('../the-poor-guild-only/load-commands')
-const loadCommands9 = require('../google/load-commands')
 const { MessageEmbed } = require('discord.js')
 const { Database } = require("quickmongo");
 const db = new Database("mongodb+srv://lol:fofo29112007@golgo.t3bmd.mongodb.net/gg?retryWrites=true&w=majority");
@@ -425,49 +424,6 @@ module.exports = {
 
     }
 
-    const commands9 = loadCommands9()
-    for (const command of commands9) {
-      let permissions = command.permission
-
-      if (permissions) {
-        let hasPermission = true
-        if (typeof permissions === 'string') {
-          permissions = [permissions]
-        }
-
-        for (const permission of permissions) {
-          if (!message.member.hasPermission(permission)) {
-            hasPermission = false
-            break
-          }
-        }
-
-        if (!hasPermission) {
-          continue
-        }
-      }
-
-      // Format the text
-      const mainCommand =
-        typeof command.commands === 'string'
-          ? command.commands
-          : command.commands[0]
-          const aliases =
-        typeof command.commands === 'string'
-          ? ``
-          : `${command.commands.slice(1).join(' ')}`
-      const args = command.expectedArgs ? `${command.expectedArgs}` : ''
-      const subcmds = command.subCommands ? `${command.subCommands}` : ''
-      const description = command.description ? ` ${command.description}` : 'No description'
-      ic.push(mainCommand)
-
-      allcmds.push(mainCommand)
-      alldescs.push(description)
-      allargus.push(args)
-      allalias.push(aliases)
-      allsub.push(subcmds)
-
-    }
 
 
 
@@ -513,9 +469,6 @@ module.exports = {
       return `\`${cmdd}\``
     }).join(' ')
 
-    const googleonly = ic.map((cmdd, i) => {
-      return `\`${cmdd}\``
-    }).join(' ')
     if (!arguments[0]) {
       const uti = new MessageEmbed()
         .setTitle("Help menu")
@@ -572,11 +525,6 @@ module.exports = {
       .setEmoji('❌')
       .setDescription('Shows the guild only commands.')
 
-      let option9 = new MessageMenuOption()
-      .setLabel("Guild only commands")
-      .setValue("google")
-      .setEmoji('❌')
-      .setDescription('Shows the guild only commands.')
 
       let select = new MessageMenu()
       .setID("selector")
@@ -589,7 +537,6 @@ module.exports = {
       if(message.guild.id === '655780171496030240' && message.member.hasPermission('BAN_MEMBERS')) select.addOption(option8)
       if(message.member.roles.cache.some(r => (r.id === '783745136873439302' || r.id === '783745205684666419'))) select.addOption(option7)
       if(whitelisted) select.addOption(option5)
-      if(message.guild.id === '854748129365721118') select.addOption(option9)
 
 
       const gall = new MessageEmbed()
@@ -680,16 +627,6 @@ module.exports = {
         .setTitle("Help menu")
         .setDescription(`Use \`${prefix}help\` with a command to get the command's info`)
         .addField('❌ Guild only commands', guildonly)
-        .setColor("GREEN")
-        .setFooter(client.user.username, client.user.displayAvatarURL())
-        .setFooter(`Prefix: ${prefix}`), select
-          )
-        }if(b.values[0] == 'google'){
-          sendMenu.edit(
-            new MessageEmbed()
-        .setTitle("Help menu")
-        .setDescription(`Use \`${prefix}help\` with a command to get the command's info`)
-        .addField('❌ Guild only commands', googleonly)
         .setColor("GREEN")
         .setFooter(client.user.username, client.user.displayAvatarURL())
         .setFooter(`Prefix: ${prefix}`), select
