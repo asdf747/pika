@@ -96,7 +96,7 @@ async function set(key, value){
 async function fetch(key){
     const utils = require('utils-discord')
     let modl = require('./models/jsons')
-    utils.mongoFind(guildSchema, {ID: key})
+    utils.mongoFind(modl, {ID: key})
 }
 
 module.exports = {
