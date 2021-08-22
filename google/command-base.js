@@ -99,7 +99,7 @@ module.exports = (client, commandOptions) => {
     if (message.author.bot) return;
     let config = require('../config.json')
     let mod = require('../prefixes.json')
-    let prefixxo = await mod.find(med => med.Guild === message.guild.id).Prefix
+    let prefixxo = await mod.find(med => med.Guild === message.guild.id)
     let prefixx = config.prefix
     if(prefixxo) prefixx = prefixxo.Prefix
 
