@@ -79,13 +79,20 @@ async function notify(member, Type, Description){
 }
 
 async function set(key, value){
-    let modl = require('./models/jsons')
-    await modl.findOne({ ID: key }, async (err, data) => {
+    const mongoose = require('mongoose')
+
+    const jsons = mongoose.Schema({
+        ID: String,
+        Data: mongoose.Mixed
+    })
+    
+    const no = module.exports = mongoose.model('json', jsons)
+    await no.findOne({ ID: key }, async (err, data) => {
         if(data){
-            await modl.updateOne({ "ID": key }, { $set: {Data: value} })
+            await no.updateOne({ "ID": key }, { $set: {Data: value} })
         }
         if(!data){
-            await new modl({
+            await new no({
                 ID: key,
                 Data: value
             }).save()
@@ -94,8 +101,15 @@ async function set(key, value){
 }
 
 async function fetch(key){
-    let modl = require('./models/jsons')
-    let cock = await modl.find({ ID: key })
+    const mongoose = require('mongoose')
+
+const jsons = mongoose.Schema({
+    ID: String,
+    Data: mongoose.Mixed
+})
+
+const no = module.exports = mongoose.model('json', jsons)
+    let cock = no.find({ ID: key })
     return cock.Data
 }
 
