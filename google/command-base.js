@@ -1,5 +1,5 @@
-const Mongochrome = require('mongochrome');
-const db = Mongochrome.Connect("mongodb+srv://lol:fofo29112007@golgo.t3bmd.mongodb.net/gg?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
+const { Database } = require("quickmongo");
+const db = new Database("mongodb+srv://lol:fofo29112007@golgo.t3bmd.mongodb.net/gg?retryWrites=true&w=majority");
 const Discord = require('discord.js')
 require('discord-reply')
 const Blacklist = require("../models/blacklist")
@@ -99,7 +99,7 @@ module.exports = (client, commandOptions) => {
     if(message.channel.type === 'dm') return
     if (message.author.bot) return;
     let config = require('../config.json')
-    let prefixx = await db('jsons').get(`prefix_${message.guild.id}`)
+    let prefixx = await db.fetch(`prefix_${message.guild.id}`)
     if(!prefixx){prefixx = config.prefix}
 
 
