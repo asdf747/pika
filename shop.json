@@ -116,5 +116,17 @@
         "Image": "https://cdn.discordapp.com/emojis/878383125560979477.png?v=1",
         "Useable": false
         
+    },
+    {
+        "Name": "Cellphone",
+        "ID": ["cell", "phone"],
+        "Price": 1000,
+        "Sell": 500,
+        "Description": "Use this cellphone to get access to notifications",
+        "Shop": true,
+        "Emoji": "<:emoji_29:878984815016296469>",
+        "Image": "https://cdn.discordapp.com/emojis/878984815016296469.png?v=1",
+        "Useable": true
+        
     }
 ]

@@ -154,10 +154,45 @@ async function bomb(client, message, arguments, economy){
     })
 }
 
+async function cell(client, message, arguments, economy){
+    const utils = require('utils-discord')
+    const msg = await message.channel.send("**Options:**\n`a`: Notifications\n`e`: Exit")
+    const collcot = await message.channel.awaitMessages(x => x.author.id === message.author.id, { time: 7000 })
+    if(!collcot.size && msg) msg.delete()
+    let choices = ['a', 'e']
+    let choice = collcot.first().content.toLowerCase()
+    if(!choices.includes(choice)) return message.channel.send("This isn't even an option")
+    switch(choice){
+        case "a":
+            let notifs = await economy.findOne({ id: message.author.id })
+        if(!notifs || !notifs.Notifications.length) return message.channel.send("You don't have any notifications yet")
+        const notifs_array = notifs.Notifications.reverse().map((notify, i) => `** ${i+1}. ${notify.Type}**\n*${notify.Description}*`)
+
+        let options = {
+            perpage: 6,
+            title: `${message.author.tag}'s notifications`,
+            joinBy: "\n\n",
+            color: "BLUE",
+            footer: ' ',
+            footerImage: ' ',
+            timestamp: true
+        }
+
+        utils.createEmbedPages(client, message, notifs_array, options)
+        msg.delete()
+        break
+        case "e":
+            return message.channel.send('exited phone')
+            break
+    }
+    
+}
+
 
 module.exports = {
     lucky,
     unlucky,
     note,
-    bomb
+    bomb,
+    cell
 }

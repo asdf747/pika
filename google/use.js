@@ -27,6 +27,9 @@ module.exports = {
             case "coin":
                 await uses.bomb(client, message, arguments, economy)
                 break
+            case "cell":
+                await uses.cell(client, message, arguments, economy)
+                break
         }
     }
 }
