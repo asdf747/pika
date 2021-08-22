@@ -19,7 +19,7 @@ const funcs = require('./funcs')
 client.economy = new EventEmitter()
 
 
-
+client.db = require('./funcs')
 
 
 moment.updateLocale('en', {
