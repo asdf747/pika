@@ -78,8 +78,31 @@ async function notify(member, Type, Description){
     })
 }
 
+async function set(key, value){
+    let modl = require('./models/jsons')
+    await modl.findOne({ ID: key }, async (err, data) => {
+        if(data){
+            await modl.updateOne({ "ID": key }, { $set: {Data: value} })
+        }
+        if(!data){
+            await new modl({
+                ID: key,
+                Data: value
+            }).save()
+        }
+    })
+}
+
+async function fetch(key){
+    let modl = require('./models/jsons')
+    let cock = await modl.findOne({ ID: key })
+    if(!cock) return null
+    if(cock) return cock.Data
+}
+
 module.exports = {
     die,
     tempban,
-    notify
+    notify,
+    set
 }
