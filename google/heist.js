@@ -1,7 +1,6 @@
 const { listenerCount } = require('events')
 const economy = require('../models/economy')
 const settings = require('../models/settings')
-const { Database } = require("quickmongo");
 const db = require('../funcs')
 const moment = require('moment')
 const { MessageEmbed } = require('discord.js')
