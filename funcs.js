@@ -104,5 +104,6 @@ module.exports = {
     die,
     tempban,
     notify,
-    set
+    set,
+    fetch
 }
