@@ -279,7 +279,6 @@ if(cooldown > 0){
  
 
 
-
 HISTORY.findOne({ Guild: message.guild.id, User: message.author.id }, async (err, data) => {
           if(data){
             const mon =
