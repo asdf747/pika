@@ -6,7 +6,7 @@ const REQUIRED = require('../models/toggle')
 const HISTORY = require('../models/history')
 const TOGGLE = require('../models/dis')
 const { convertMS } = require('discordutility')
-const funcs = require('../funcs')
+const db = require('../funcs')
 
 const validatePermissions = (permissions) => {
   const validPermissions = [
@@ -99,8 +99,7 @@ module.exports = (client, commandOptions) => {
     if (message.author.bot) return;
     let config = require('../config.json')
     let mod = require('../prefixes.json')
-    let prefixxo = await mod.find(med => med.Guild === message.guild.id)
-    let prefixx = config.prefix
+    let prefixx = await db.fetch(`prefix_${message.guild.id}`)
     if(prefixxo) prefixx = prefixxo.Prefix
 
 
@@ -281,7 +280,7 @@ if(cooldown > 0){
  
 
 
-HISTORY.findOne({ Guild: message.guild.id, User: message.author.id }, async (err, data) => {
+await HISTORY.findOne({ Guild: message.guild.id, User: message.author.id }, async (err, data) => {
           if(data){
             const mon =
         typeof commands === 'string'
