@@ -100,7 +100,7 @@ module.exports = (client, commandOptions) => {
     let config = require('../config.json')
     let mod = require('../prefixes.json')
     let prefixx = await db.fetch(`prefix_${message.guild.id}`)
-    if(prefixx) prefixx = prefixxo.Prefix
+    if(!prefixx) prefixx = config.prefix
 
 
 
