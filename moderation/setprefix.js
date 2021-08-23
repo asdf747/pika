@@ -15,6 +15,10 @@ module.exports = {
       }else{
         await db.set(client, `prefix_${message.guild.id}`, arguments[0])
       message.lineReplyNoMention(`Set prefix to \`${arguments[0]}\`.`)
+      let obj = {
+        Prefix: arguments[0]
+      }
+      client.prefixes.set(message.guild.id, obj)
       
       }
   }
