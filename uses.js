@@ -100,15 +100,17 @@ const db = require('./funcs')
 }
 
 async function note(client, message, arguments, economy){
+    let no = await economy.findOne({ id: message.author.id })
+    let inv = no.Inventory.find(item => item.Name === 'Note').Count
     let amount = Math.floor(Math.random() * 1000) + 1
     let uses = 1
-    if(arguments[1] && Number(arguments[1]) && !arguments[1].includes('.') && Number(arguments[1]) >= 1) uses = Number(arguments[1])
+    if(arguments[1] && Number(arguments[1]) && !arguments[1].includes('.') && Number(arguments[1]) >= 1 && amount <= inv) uses = Number(arguments[1])
     amount = amount * uses
     await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Bank: parseInt(amount)} })
-    await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Note" }, { $inc: {"Inventory.$.Count": -1} })
+    await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Note" }, { $inc: {"Inventory.$.Count": -uses} })
     let cock = await economy.findOne({ id: message.author.id })
  
-    return message.channel.send(`You used your note and got **${parseInt(amount).toLocaleString("en-US")} bank space**, Current bank space is **${parseInt(cock.Bank + amount).toLocaleString("en-US")}**`)
+    return message.channel.send(`You used ${Number(uses).toLocaleString("en-US")} note and got **${parseInt(amount).toLocaleString("en-US")} bank space**, Current bank space is **${parseInt(cock.Bank + amount).toLocaleString("en-US")}**`)
 }
 
 
