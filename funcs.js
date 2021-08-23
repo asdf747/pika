@@ -195,5 +195,5 @@ module.exports = {
     durationString,
     add,
     temprole,
-    getrole
+    getRole
 }
