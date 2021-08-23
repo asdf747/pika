@@ -19,7 +19,7 @@ const no = require('../models/jsons')
 
 module.exports = async (client) => {
   let gos = await no.find()
-  gos.filter(no => no.ID.startsWith('prefix_')).forEach(pref => {
+  gos.filter(na => na.ID.startsWith('prefix_')).forEach(pref => {
     let nop = pref.ID.replace('prefix_','')
     let no = client.prefixes.get(nop) || []
     no.unshift({
