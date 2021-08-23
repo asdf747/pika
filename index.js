@@ -236,6 +236,5 @@ client.prefixes = new Discord.Collection();
 
 
 
-
 load()
 client.login('ODE4ODc2NjQ1NDAxNDI3OTg5.YEecTg.Mc4dqg0WLkMlL7JHq-LNCZh3xeY')
