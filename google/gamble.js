@@ -8,7 +8,7 @@ module.exports = {
     expectedArgs: '<amount>',
     callback: async(message, arguments, text, client) => {
         let amount = Number(arguments[0])
-        if(!amount && !['all', 'max'].includes(arguments[0].toLowerCase()) || amount < 1 && !['all', 'max'].includes(arguments[0].toLowerCase()) || arguments[0].includes('.')) return message.channel.send("Enter a valid amount")
+        if(!amount && !['all', 'max'].includes(arguments[0].toLowerCase()) && arguments[0].toLowerCase() !== 'half' || amount < 1 && !['all', 'max'].includes(arguments[0].toLowerCase()) && arguments[0].toLowerCase() !== 'half' || arguments[0].includes('.')) return message.channel.send("Enter a valid amount")
         let author_data = await economy.findOne({ id: message.author.id })
         let author_wallet = 500
         if(author_data) author_wallet = author_data.Wallet
