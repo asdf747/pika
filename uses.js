@@ -101,10 +101,10 @@ const db = require('./funcs')
 
 async function note(client, message, arguments, economy){
     let no = await economy.findOne({ id: message.author.id })
-    let inv = no.Inventory.find(item => item.Name === 'Note').Count
-    let amount = Math.floor(Math.random() * 1000) + 1
+    let inv = await no.Inventory.find(item => item.Name === 'Note').Count
+    let amount = Math.floor(Math.random() * 5000) + 1
     let uses = 1
-    if(arguments[1] && Number(arguments[1]) && !arguments[1].includes('.') && Number(arguments[1]) >= 1 && amount <= inv) uses = Number(arguments[1])
+    if(arguments[1] && Number(arguments[1]) && !arguments[1].includes('.') && Number(arguments[1]) >= 1 && Number(arguments[1]) <= inv) uses = Number(arguments[1])
     amount = amount * uses
     await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Bank: parseInt(amount)} })
     await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Note" }, { $inc: {"Inventory.$.Count": -uses} })
