@@ -255,7 +255,7 @@ const track = new Discord.MessageEmbed()
         let lasttime = await db.fetch(client, `${typeof commands === 'string' ? commands : commands[0]}_${message.author.id}`)
         if(cooldown > 0 && lasttime !== null && cool - (Date.now() - lasttime) > 0){
           const timeObj = convertMS(cool - (Date.now() - lasttime))
-          let noa = db.durationString(cool - (Date.now() - lasttime))
+          let noa = await db.durationString(cool - (Date.now() - lasttime));
           return message.channel.send(
             new Discord.MessageEmbed()
             .setAuthor(message.author.tag, message.author.displayAvatarURL())
