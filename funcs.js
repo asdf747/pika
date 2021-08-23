@@ -108,11 +108,28 @@ async function durationString(duration){
     return string
 }
 
+async function add(key, value){
+    let modl = require('./models/jsons')
+    await modl.findOne({ ID: key }, async(err, data) => {
+        if(data){
+            let no = data.Data + value
+            await modl.findOneAndUpdate({ ID: key }, { $inc: {Data: no} })
+        }
+        if(!data){
+            await new modl({
+                ID: key,
+                Data: value
+            }).save()
+        }
+    })
+}
+
 module.exports = {
     die,
     tempban,
     notify,
     set,
     fetch,
-    durationString
+    durationString,
+    add
 }
