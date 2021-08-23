@@ -79,36 +79,26 @@ async function notify(member, Type, Description){
 }
 
 async function set(client, key, value){
-    const mongojs = require('mongojs')
-    const dob = mongojs('mongodb+srv://dbbb:fofo29112007@bot.ibj0v.mongodb.net/DiscordBot?retryWrites=true&w=majority', ['lol'])
-const e = dob.collection('lol')
-    e.findOne({
-        ID: key
-    }, async function(err, doc) {
-        if(doc){
-            await e.findOne({ ID: key }).updateOne({$set: {Data: value}})
-            await e.save()
+    let modl = require('./models/jsons')
+    await modl.findOne({ ID: key }, async (err, data) => {
+        if(data){
+            await modl.findOneAndUpdate({ ID: key }, { $set: {Data: value} })
         }
-        if(!doc){
-            await e.insert({ ID: key, Data: value })
-            await e.save()
+        if(!data){
+            await new modl({
+                ID: key,
+                Data: value
+            }).save()
         }
     })
 }
 
 async function fetch(client, key){
-    const mongojs = require('mongojs')
-const dob = mongojs('mongodb+srv://dbbb:fofo29112007@bot.ibj0v.mongodb.net/DiscordBot?retryWrites=true&w=majority', ['lol'])
-const e = dob.collection('lol')
-    e.findOne({ ID: key }, function(err, data) {
-        if(data){
-            return data.Data
-        }
-        if(!data){
-            return undefined
-        }
-        
-    })
+    const utils = require('utils-discord')
+    let modl = require('./models/jsons')
+    let gas = await modl.findOne({ ID: key })
+    if(!gas) return undefined
+    return gas.Data
 }
 
 module.exports = {
