@@ -82,7 +82,7 @@ async function set(client, key, value){
     const mongojs = require('mongojs')
 const dob = mongojs('mydb', ['lol'])
 const e = dob.collection('lol')
-    e.lol.findOne({
+    e.findOne({
         ID: key
     }, async function(err, doc) {
         if(doc){
