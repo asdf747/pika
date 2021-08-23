@@ -146,8 +146,10 @@ async function temprole(guild, member, role, duration){
                 End: new Date(Date.now() + duration)
             }).save().then(array => {
                 schedule.scheduleJob(new Date(Date.now() + duration), function(){
+                    if(array){
                     mem.roles.remove(rol, 'Delayed role')
                     array.delete()
+                    }
                 })
             })
         }if(!data){
@@ -159,8 +161,10 @@ async function temprole(guild, member, role, duration){
                 End: new Date(Date.now() + duration)
             }).save().then(array => {
                 schedule.scheduleJob(new Date(Date.now() + duration), function(){
+                    if(array){
                     mem.roles.remove(rol, 'Delayed role')
                     array.delete()
+                    }
                 })
             })
         }
