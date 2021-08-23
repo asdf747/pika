@@ -255,14 +255,16 @@ const track = new Discord.MessageEmbed()
         let lasttime = await db.fetch(client, `${typeof commands === 'string' ? commands : commands[0]}_${message.author.id}`)
         if(cooldown > 0 && lasttime !== null && cool - (Date.now() - lasttime) > 0){
           const timeObj = convertMS(cool - (Date.now() - lasttime))
+          db.durationString(cool - (Date.now() - lasttime)).then(dartion => {
           return message.channel.send(
             new Discord.MessageEmbed()
             .setAuthor(message.author.tag, message.author.displayAvatarURL())
             .setTitle("Cooldown!")
             .setTimestamp()
             .setColor(15158332)
-            .setDescription(`:x: You're on a cooldown you need to wait \`${db.durationString(cool - (Date.now() - lasttime))}\` to be able to use this command again`)
+            .setDescription(`:x: You're on a cooldown you need to wait \`${dartion}\` to be able to use this command again`)
           )
+        })
         }
         if(fond && total && !diso && message.guild.id === '854748129365721118' && kek || !fond && !total && !diso && message.guild.id === '854748129365721118' && kek){
 if(message.author.id != '538352367654141952'){
