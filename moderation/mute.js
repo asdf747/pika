@@ -10,7 +10,7 @@ module.exports = {
     permissions: 'BAN_MEMBERS',
     callback: async (message, arguments, text, client) => {
       if(!message.guild.me.hasPermission("MANAGE_ROLES")) return message.lineReplyNoMention("Missing permissions")
-      let prefix = client.prefixes.get(message.guild.id)[0] || config.prefix
+      let prefix = client.prefixes.get(message.guild.id)[0].Prefix || config.prefix
       const check = await db.fetch(client, `muterole_${message.guild.id}`)
       if(!check) return message.channel.send(`Please set the mute role using \`${prefix}serversettings muterole <role>\``)
      const role = message.guild.roles.cache.find(r => r.id === check)
