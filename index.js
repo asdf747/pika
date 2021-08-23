@@ -21,7 +21,7 @@ const dob = mongojs('mydb')
 client.economy = new EventEmitter()
 
 
-client.db = mongojs('mydb', ['jsons'])
+client.db = mongojs('mydb', ['pp']).collection('pp')
 
 moment.updateLocale('en', {
     relativeTime : {
