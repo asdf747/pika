@@ -16,12 +16,12 @@ module.exports = {
       }else{
         await db.set(`prefix_${message.guild.id}`, arguments[0])
       message.lineReplyNoMention(`Set prefix to \`${arguments[0]}\`.`)
-      let obj = {
-        "Gulid": message.guild.id,
-        "Prefix": arguments[0]
+      const obj = {
+        Gulid: message.guild.id,
+        Prefix: arguments[0]
       }
 
-      fs.writeFile('../prefixes.json', JSON.stringify(obj), (err) => {
+      fs.writeFile('../prefixes.json', JSON.stringify(obj, null, 2), (err) => {
         if (err){
           console.log(err)
         } else {
