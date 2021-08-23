@@ -99,7 +99,7 @@ module.exports = (client, commandOptions) => {
     let config = require('../config.json')
     let prefixxp = await client.prefixes.get(message.guild.id)
     let prefixx = config.prefix
-    if(prefixxp){prefixx = prefixxp.Prefix}
+    if(prefixxp){prefixx = prefixxp[0].Prefix}
 
 
 
