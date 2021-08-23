@@ -81,7 +81,7 @@ async function notify(member, Type, Description){
 async function set(key, value){
     client.db.findOne({
         ID: key
-    }, function(err, doc) {
+    }, async function(err, doc) {
         if(doc){
             await client.db.update({ID: key}, {$set: {Data: value}})
             client.db.save()
