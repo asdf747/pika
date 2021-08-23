@@ -21,8 +21,8 @@ module.exports = async (client) => {
   let gos = await no.find()
   gos.filter(na => na.ID.startsWith('prefix_')).forEach(pref => {
     let nop = pref.ID.replace('prefix_','')
-    let no = client.prefixes.get(nop) || []
-    no.unshift({
+    let nopp = client.prefixes.get(nop) || []
+    nopp.unshift({
       Prefix: pref.Data
     })
   })
