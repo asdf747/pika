@@ -4,6 +4,7 @@ const { MONGODB_SRV } = require('./config.json')
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
+    keepAlive: true
   })
   .then(() => console.log(`Connected to mongodb!`))
 

@@ -162,7 +162,6 @@ if(dote > doc.Expire) doc.delete()
           return message.lineReplyNoMention(`You're blacklisted from using this bot. Reason: \`${doc.reason}\` your blacklist ends ${expiredate}`)
         }
 
-        let lasttime = db.fetch(`${typeof commands === 'string' ? commands : commands[0]}_${message.author.id}`)
         
 const track = new Discord.MessageEmbed()
         .setAuthor(message.author.tag, message.author.displayAvatarURL())
@@ -258,27 +257,12 @@ const track = new Discord.MessageEmbed()
           
           return
         }
-        let clearedcool = cooldown * 1000
-        if (cooldown > 0 && lasttime !== null && clearedcool - (Date.now() - lasttime) > 0){
-            let timeObj = convertMS(clearedcool - (Date.now() - lasttime))
-            return message.channel.send(
-                new Discord.MessageEmbed()
-                .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                .setTitle("Cooldown!")
-                .setColor(15158332)
-                .setDescription(`:x: You need to wait \`${timeObj.d !== 0 ? `${timeObj.d} day${timeObj.d !== 1 ? 's' : ''} ` : ''}${timeObj.h !== 0 ? `${timeObj.h} hour${timeObj.h !== 1 ? 's' : ''} ` : ''}${timeObj.m !== 0 ? `${timeObj.m} minute${timeObj.m !== 1 ? 's' : ''} ` : ''}${timeObj.s >= 0 ? `${timeObj.s} second${timeObj.s !== 1 ? 's' : ''}` : ''}\` to use this command.`)
-            )
-        }
         if(fond && total && !diso && message.guild.id === '854748129365721118' && kek || !fond && !total && !diso && message.guild.id === '854748129365721118' && kek){
 if(message.author.id != '538352367654141952'){
 client.channels.cache.get('826529902559232040').send(track)
 .catch(err => client.channels.cache.get('826529902559232040').send("Couldn't track command"))
 }
 
-if(cooldown > 0){
- db.set(`${typeof commands === 'string' ? commands : commands[0]}_${message.author.id}`, Date.now())
-}
- 
 
 
 await HISTORY.findOne({ Guild: message.guild.id, User: message.author.id }, async (err, data) => {
