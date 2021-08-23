@@ -156,5 +156,6 @@ module.exports = {
     set,
     fetch,
     durationString,
-    add
+    add,
+    temprole
 }
