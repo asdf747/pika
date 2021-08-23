@@ -6,7 +6,7 @@ const db = require('../funcs')
 module.exports = {
     commands: 'work',
     description: "Work to gain money.",
-    cooldown: 18000,
+    cooldown: 7200,
     callback: async(message, arguments, text, client) => {
         let bonus = await db.fetch(client, `bonus_work_${message.author.id}`)
         if(!bonus) await db.set(client, `bonus_work_${message.author.id}`, 1)
