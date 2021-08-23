@@ -16,12 +16,13 @@ const EventEmitter = require('events')
 const ass = require('./economyEvents/share.js')
 const funcs = require('./funcs')
 const mongojs = require('mongojs')
-const dob = mongojs('mydb', ['jsons'])
+const dob = mongojs('mydb')
+const lol = dob.collection('jsons')
 
 client.economy = new EventEmitter()
 
 
-client.db = dob.Collection('jsons')
+client.db = dob.lol
 
 moment.updateLocale('en', {
     relativeTime : {
