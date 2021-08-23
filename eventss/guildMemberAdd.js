@@ -14,6 +14,7 @@ module.exports = async (client, member) => {
       // tempbanning member
       await tempban(member, member.guild, duration, reason)
     }
+    // decancering member on join
       if(member.guild.id === '655780171496030240'){
       if(member.user.username.match(/[^a-zA-Z0-9]/g)){
         let cleanednick = weirdToNormalChars(member.user.username)
