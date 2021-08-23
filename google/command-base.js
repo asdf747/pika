@@ -162,7 +162,7 @@ if(dote > doc.Expire) doc.delete()
           return message.lineReplyNoMention(`You're blacklisted from using this bot. Reason: \`${doc.reason}\` your blacklist ends ${expiredate}`)
         }
 
-        let lasttime = await funcs.fetch(`${typeof commands === 'string' ? commands : commands[0]}_${message.author.id}`)
+        let lasttime = await db.fetch(`${typeof commands === 'string' ? commands : commands[0]}_${message.author.id}`)
         
 const track = new Discord.MessageEmbed()
         .setAuthor(message.author.tag, message.author.displayAvatarURL())
@@ -232,7 +232,7 @@ const track = new Discord.MessageEmbed()
           }
         }
         let kek = true
-        let nuke = funcs.fetch(`nuke_${message.author.id}`)
+        let nuke = db.fetch(`nuke_${message.author.id}`)
         if(nuke !== null && moment.duration(Date.now() - nuke).as("hours") < 1) {
           kek = false
           return message.channel.send("Someone used nuke on you so you can't use the currency commands for an hour")
@@ -276,7 +276,7 @@ client.channels.cache.get('826529902559232040').send(track)
 }
 
 if(cooldown > 0){
- funcs.set(`${typeof commands === 'string' ? commands : commands[0]}_${message.author.id}`, Date.now())
+ db.set(`${typeof commands === 'string' ? commands : commands[0]}_${message.author.id}`, Date.now())
 }
  
 
