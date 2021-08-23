@@ -261,7 +261,7 @@ const track = new Discord.MessageEmbed()
             .setTitle("Cooldown!")
             .setTimestamp()
             .setColor(15158332)
-            .setDescription(`:x: You're on a cooldown you need to wait \`${timeObj.d !== 0 ? `${timeObj.d} day${timeObj.d !== 1 ? 's' : ''} ` : ''}${timeObj.h !== 0 ? `${timeObj.h} hour${timeObj.h !== 1 ? 's' : ''} ` : ''}${timeObj.m !== 0 ? `${timeObj.m} minute${timeObj.m !== 1 ? 's' : ''} ` : ''}${timeObj.s !== 0 ? `${timeObj.s} second${timeObj.s !== 1 ? 's' : ''}` : ''}\` to be able to use this command again`)
+            .setDescription(`:x: You're on a cooldown you need to wait \`${db.durationString(cool - (Date.now() - lasttime))}\` to be able to use this command again`)
           )
         }
         if(fond && total && !diso && message.guild.id === '854748129365721118' && kek || !fond && !total && !diso && message.guild.id === '854748129365721118' && kek){
