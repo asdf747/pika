@@ -143,7 +143,7 @@ async function temprole(guild, member, role, duration){
         End: new Date(Date.now() + duration)
     }).save().then(array => {
         schedule.scheduleJob(new Date(Date.now() + duration), function(){
-            mem.roles.remove(rol)
+            mem.roles.remove(rol, 'Delayed role')
             array.delete()
         })
     })
