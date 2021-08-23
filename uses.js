@@ -100,7 +100,7 @@ const db = require('./funcs')
 }
 
 async function note(client, message, arguments, economy){
-    let amount = Math.floor(Math.random() * 50000) + 1
+    let amount = Math.floor(Math.random() * 1000) + 1
     let uses = 1
     if(arguments[1] && Number(arguments[1]) && !arguments[1].includes('.') && Number(arguments[1]) >= 1) uses = Number(arguments[1])
     amount = amount * uses
