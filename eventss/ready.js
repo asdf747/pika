@@ -16,6 +16,7 @@ const schedule = require('node-schedule')
 const TEMP = require('../models/tempban')
 const db = require('../funcs')
 const no = require('../models/jsons')
+const temprole = require('../models/temprole')
 
 module.exports = async (client) => {
   let gos = await no.find()
@@ -55,7 +56,23 @@ function temp(client, temps){
   })
 }
 
+let temproles = await temprole.find()
+
+function temproles(client, temproles){
+  temproles.forEach(guild => {
+    schedule.scheduleJob(guild.End, async function(){
+      const mem = client.guilds.cache.get(guild.Guild).members.cache.get(guild.User)
+      const rol = client.guilds.cache.get(guild.Guild).roles.cache.get(guild.Role)
+      if(mem && rol){
+        mem.roles.remove(rol, 'Delayed role')
+      }
+      guild.delete()
+    })
+  })
+}
+
 await temp(client, temps)
+await temproles(client, temproles)
     
     console.log(`Set bot's activity to ${activity}`)
     loadCommands(client)

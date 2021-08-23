@@ -122,6 +122,33 @@ async function add(key, value){
     })
 }
 
+async function temprole(guild, member, role, duration){
+    const temprole = require('./models/temprole')
+    const schedule = require('node-schedule')
+    // checking if role exists
+    const rol = guild.roles.cache.get(role.id)
+    if(!rol) return console.log("Invalid role")
+    // checking if member exists
+    const mem = guild.members.cache.get(member.id)
+    if(!mem) return console.log("Invalid member")
+    if(isNaN(duration) || duration < 1) return console.log("Duration can't be less than 1 second")
+    // adding the role to the member
+    mem.roles.add(rol)
+    // creating a new database
+    await new temprole({
+        Guild: guild.id,
+        User: member.id,
+        Role: rol.id,
+        Start: new Date(),
+        End: new Date(Date.now() + duration)
+    }).save().then(array => {
+        schedule.scheduleJob(new Date(Date.now() + duration), function(){
+            mem.roles.remove(rol)
+            array.delete()
+        })
+    })
+}
+
 module.exports = {
     die,
     tempban,
