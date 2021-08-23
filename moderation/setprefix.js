@@ -17,10 +17,28 @@ module.exports = {
       }else{
         await db.set(`prefix_${message.guild.id}`, arguments[0])
       message.lineReplyNoMention(`Set prefix to \`${arguments[0]}\`.`)
-      const obj = { Guild: message.guild.id, Prefix: arguments[0] }
-      jsonfile.writeFile('../prefixes.json', obj, function (err) {
-        if (err) console.error(err)
-      })
+      const obj = {
+        Guild: message.guild.id,
+        Prefix: arguments[0]
+      }
+      const data = loadJSON('../prefix.json')
+
+      data.push(obj)
+
+      saveJSON('../prefix.json', data)
+      
       }
   }
+}
+
+async function loadJSON(filename){
+  return JSON.parse(
+    fs.existsSync(filename)
+    ? fs.readFileSync(filename).toString()
+    : '""'
+  )
+}
+
+async function saveJSON(filename, json){
+  return fs.writeFileSync(filename, JSON.stringify(json))
 }
