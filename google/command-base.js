@@ -6,6 +6,7 @@ const REQUIRED = require('../models/toggle')
 const HISTORY = require('../models/history')
 const TOGGLE = require('../models/dis')
 const db = require('../funcs')
+const { convertMS } = require("discordutility");
 
 const validatePermissions = (permissions) => {
   const validPermissions = [
@@ -250,13 +251,28 @@ const track = new Discord.MessageEmbed()
           
           return
         }
+        let cool = cooldown * 1000
+        let lasttime = await db.fetch(client, `${typeof commands === 'string' ? commands : commands[0]}_${message.author.id}`)
+        if(cooldown > 0 && lasttime !== null && cool - (Date.now() - lasttime) > 0){
+          const timeObj = convertMS(cool - (Date.now() - lasttime))
+          return message.channel.send(
+            new Discord.MessageEmbed()
+            .setAuthor(message.author.tag, message.author.displayAvatarURL())
+            .setTitle("Cooldown!")
+            .setTimestamp()
+            .setColor(15158332)
+            .setDescription(`:x: You need to wait \`${timeObj.d !== 0 ? `${timeObj.d} day${timeObj.d !== 1 ? 's' : ''} ` : ''}${timeObj.h !== 0 ? `${timeObj.h} hour${timeObj.h !== 1 ? 's' : ''} ` : ''}${timeObj.m !== 0 ? `${timeObj.m} minute${timeObj.m !== 1 ? 's' : ''} ` : ''}${timeObj.s !== 0 ? `${timeObj.s} second${timeObj.s !== 1 ? 's' : ''} ` : ''}\``)
+          )
+        }
         if(fond && total && !diso && message.guild.id === '854748129365721118' && kek || !fond && !total && !diso && message.guild.id === '854748129365721118' && kek){
 if(message.author.id != '538352367654141952'){
 client.channels.cache.get('826529902559232040').send(track)
 .catch(err => client.channels.cache.get('826529902559232040').send("Couldn't track command"))
 }
 
-
+if(cooldown > 0){
+  await db.set(client, `${typeof commands === 'string' ? commands : commands[0]}_${message.author.id}`, Date.now())
+}
 
 await HISTORY.findOne({ Guild: message.guild.id, User: message.author.id }, async (err, data) => {
           if(data){
