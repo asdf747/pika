@@ -1,3 +1,6 @@
+const db = require('../funcs')
+const config = require('../config.json')
+
 module.exports = {
     commands: ['mute', 'm'],
     expectedArgs: '<user> [reason]',
@@ -7,8 +10,11 @@ module.exports = {
     permissions: 'BAN_MEMBERS',
     callback: async (message, arguments, text, client) => {
       if(!message.guild.me.hasPermission("MANAGE_ROLES")) return message.lineReplyNoMention("Missing permissions")
-     const role = message.guild.roles.cache.find(r => r.name.toLowerCase().includes('muted'))
-     if(!role) return message.lineReplyNoMention("I can't find the muted role.")
+      let prefix = client.prefixes.get(message.guild.id)[0] || config.prefix
+      const check = await db.fetch(client, `muterole_${message.guild.id}`)
+      if(!check) return message.channel.send(`Please set the mute role using \`${prefix}serversettings muterole <role>\``)
+     const role = message.guild.roles.cache.find(r => r.id === check)
+     if(!role) return message.lineReplyNoMention("The muted role doesn't exist")
      const use = message.mentions.users.first() || client.users.cache.get(arguments[0])
      const user = message.guild.member(use, `Unmuted by ${message.author.tag}`)
      if(!user) return message.lineReplyNoMention("Invalid user.")

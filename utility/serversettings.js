@@ -12,9 +12,10 @@ module.exports = {
         if(!prefix) prefix = config.prefix
         const reactionlogs = await reaction.findOne({ Guild: message.guild.id })
         const msglogs = await msg.findOne({ Guild: message.guild.id })
-        const alt = await db.fetch(`alt_detector_${message.guild.id}`)
+        const alt = await db.fetch(client, `alt_detector_${message.guild.id}`)
+        const mute = await db.fetch(client, `muterole_${message.guild.id}`)
         if(arguments[0]){
-            let things = ['reactionlogs', 'messagelogs', 'altdetector', 'prefix']
+            let things = ['reactionlogs', 'messagelogs', 'altdetector', 'prefix', 'muterole']
             if(!things.includes(arguments[0].toLowerCase())) return message.channel.send("This settings doesn't exist")
             switch(arguments[0].toLowerCase()){
                 case "reactionlogs":
@@ -37,6 +38,18 @@ module.exports = {
                     await db.set(`alt_detector_${message.guild.id}`, value)
                     message.channel.send(`:white_check_mark: | Turned ${gaslo} alt detector system`)
                     break
+                case "muterole":
+                    if(!arguments[1]) return message.channel.send("Please enter a role")
+                    let role = message.guild.roles.cache.get(arguments[1])
+                    if(isNaN(arguments[1])) role = message.guild.roles.cache.find(r => r.name.toLowerCase().includes(arguments.slice(1).join(' ')))
+                    if(arguments[1].startsWith('<@&') && arguments[0].endsWith('>')){
+                        nomnom = arguments[1].replace('<@&','').replace('<@&','')
+                        role = message.guild.roles.cache.get(nomnom)
+                    }
+                    if(!role) return message.channel.send("Please enter a valid role")
+                    await db.set(client, `muterole_${message.guild.id}`, role.id)
+                    return message.channel.send({ content: `:white_check_mark: | Set the mute role to ${role.toString()}`, allowedMentions: {repliedUser: true} })
+                    break
             }
             return
         }
@@ -51,7 +64,8 @@ module.exports = {
                 { name: 'Prefix', value: `*\`${prefix}\`*`, inline: true },
                 { name: 'Reaction logs', value: `*${reactionlogs ? `<#${reactionlogs.Channel}>` : "Disabled"}*`, inline: true },
                 { name: 'Message logs', value: `*${msglogs ? `<#${msglogs.Channel}>` : "Disabled"}*`, inline: true },
-                { name: 'Alt detector', value: `*${!alt ? `Disabled` : "Enabled"}*`, inline: true }
+                { name: 'Alt detector', value: `*${!alt ? `Disabled` : "Enabled"}*`, inline: true },
+                { name: 'Mute role', value: `*${mute ? `<@&${mute}>` : "None"}*`, inline: true }
             )
         )
     }

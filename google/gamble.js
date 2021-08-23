@@ -15,12 +15,14 @@ module.exports = {
         if(author_wallet < 100) return message.channel.send("You need at least **100 coins** to gamble")
         if(amount < 100) return message.channel.send("You need at least **100 coins** to gamble")
         if(amount > author_wallet) return message.channel.send("You don't have that much coins")
+        if(amount > 250000) return message.channel.send(`You can't bet more than **250,000 coins**`)
         let betting_amount = amount
         if(['all', 'max'].includes(arguments[0].toLowerCase())) betting_amount = 250000
         if(['all', 'max'].includes(arguments[0].toLowerCase()) && author_wallet < 250000) betting_amount = author_wallet
+        if(arguments[0].toLowerCase() === 'half') betting_amount = author_wallet / 2
         let chances = []
         let winchance = 19
-        if(author_data && author_data.Inventory.find(item => item.Name.toLowerCase() === 'trophy') && author_data.Inventory.find(item => item.Name.toLowerCase() === 'trophy').Count >= 1) winchance = 25
+        if(author_data && author_data.Inventory.find(item => item.Name.toLowerCase() === 'trophy') && author_data.Inventory.find(item => item.Name.toLowerCase() === 'trophy').Count >= 1) winchance = 27
         for (let i = 0; i < 21; i++){
             chances.push('fail')
         }
@@ -42,7 +44,7 @@ module.exports = {
                 .setTimestamp()
                 .setDescription(`You won **${parseInt(winamount).toLocaleString("en-US")} coins**\n\n**Your balance:** ${parseInt(author_wallet + winamount).toLocaleString("en-US")}`)
 
-                if(winchance === 25) golga.setFooter("Mutliplier: x2")
+                if(winchance === 27) golga.setFooter("Mutliplier: x2")
                 return message.channel.send(golga)
                 break
             case "fail":
@@ -54,7 +56,7 @@ module.exports = {
                 .setTimestamp()
                 .setDescription(`You lost **${parseInt(betting_amount).toLocaleString("en-US")} coins**\n\n**Your balance:** ${parseInt(author_wallet - betting_amount).toLocaleString("en-US")}`)
 
-                if(winchance === 25) gelga.setFooter("Mutliplier: x2")
+                if(winchance === 27) gelga.setFooter("Mutliplier: x2")
                 return message.channel.send(gelga)
                 break
         }
