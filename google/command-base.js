@@ -100,7 +100,7 @@ module.exports = (client, commandOptions) => {
     let config = require('../config.json')
     let mod = require('../prefix.json')
     const dob = require('quick.db')
-    let prefixx = await dob.fetch(`prefix_${message.guild.id}`)
+    let prefixx = await db.fetch(`prefix_${message.guild.id}`)
     if(!prefixx) prefixx = config.prefix
 
 
@@ -162,7 +162,7 @@ if(dote > doc.Expire) doc.delete()
           return message.lineReplyNoMention(`You're blacklisted from using this bot. Reason: \`${doc.reason}\` your blacklist ends ${expiredate}`)
         }
 
-        let lasttime = await db.fetch(`${typeof commands === 'string' ? commands : commands[0]}_${message.author.id}`)
+        let lasttime = db.fetch(`${typeof commands === 'string' ? commands : commands[0]}_${message.author.id}`)
         
 const track = new Discord.MessageEmbed()
         .setAuthor(message.author.tag, message.author.displayAvatarURL())
