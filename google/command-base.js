@@ -5,7 +5,6 @@ const moment = require('moment')
 const REQUIRED = require('../models/toggle')
 const HISTORY = require('../models/history')
 const TOGGLE = require('../models/dis')
-const { convertMS } = require('discordutility')
 const db = require('../funcs')
 
 const validatePermissions = (permissions) => {
