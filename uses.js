@@ -154,11 +154,12 @@ async function bomb(client, message, arguments, economy){
 }
 
 async function cell(client, message, arguments, economy){
+    const { notify } = require('./funcs')
     const utils = require('utils-discord')
     const msg = await message.channel.send("**Options:**\n`a`: Notifications\n`e`: Exit")
     const collcot = await message.channel.awaitMessages(x => x.author.id === message.author.id, { time: 7000, max: 1 })
     if(!collcot.size && msg) msg.delete()
-    let choices = ['a', 'e']
+    let choices = ['a', 'b', 'e']
     let choice = collcot.first().content.toLowerCase()
     if(!choices.includes(choice)) return message.channel.send("This isn't even an option")
     switch(choice){
@@ -181,7 +182,19 @@ async function cell(client, message, arguments, economy){
         msg.delete()
         break
         case "e":
-            return message.channel.send('exited phone')
+            return message.channel.send('Exiting phone')
+            break
+        case "b":
+            let mem = await message.channel.awaitMessages(x => x.author.id === message.author.id, { time: 7000, max: 1 })
+            if(!mem.size) return message.channel.send("I guess you don't want to text someone today")
+            let membor = member.first().content
+            let member = mem.first().mentions.members.first() || message.guild.members.cache.get(membor)
+            if(!member) return message.channel.send("Does this member even exist in this server")
+            let tex = await message.channel.awaitMessages(x => x.author.id === message.author.id, { time: 7000, max: 1 })
+            if(!tex.size) return message.channel.send("I guess you don't want to text someone today")
+            let text = tex.first().content
+            await notify(member, "Text", `${message.author.tag} texted you ${text}`)
+            message.channel.send(`Sent your message to ${member.user.username}`)
             break
     }
     
