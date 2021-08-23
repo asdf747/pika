@@ -108,6 +108,7 @@ async function note(client, message, arguments, economy){
     return message.channel.send(`You used your note and got **${parseInt(amount).toLocaleString("en-US")} bank space**, Current bank space is **${parseInt(cock.Bank + amount).toLocaleString("en-US")}**`)
 }
 
+
 async function bomb(client, message, arguments, economy){
     const { MessageEmbed } = require('discord.js')
     await message.channel.send(`${message.author.username} dropped a coin bomb say \`collect\` to join`)
