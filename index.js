@@ -15,11 +15,12 @@ const backup = require("discord-backup");
 const EventEmitter = require('events')
 const ass = require('./economyEvents/share.js')
 const funcs = require('./funcs')
+const mongojs = require('mongojs')
 
 client.economy = new EventEmitter()
 
 
-client.db = require('./funcs')
+client.db = mongojs('mydb', ['jsons'])
 
 
 moment.updateLocale('en', {
