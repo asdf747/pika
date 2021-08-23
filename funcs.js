@@ -79,26 +79,30 @@ async function notify(member, Type, Description){
 }
 
 async function set(key, value){
-    let modl = require('./models/jsons')
-    await modl.findOne({ ID: key }, async (err, data) => {
-        if(data){
-            await modl.findOneAndUpdate({ ID: key }, { $set: {Data: value} })
+    client.db.findOne({
+        ID: key
+    }, function(err, doc) {
+        if(doc){
+            await client.db.update({ID: key}, {$set: {Data: value}})
+            client.db.save()
         }
-        if(!data){
-            await new modl({
-                ID: key,
-                Data: value
-            }).save()
+        if(!doc){
+            client.db.insert({ ID: key, Data: value })
+            client.db.save()
         }
     })
 }
 
 async function fetch(key){
-    const utils = require('utils-discord')
-    let modl = require('./models/jsons')
-    let gas = await modl.findOne({ ID: key })
-    if(!gas) return undefined
-    return gas.Data
+    client.findOne({ ID: key }, function(err, data) {
+        if(data){
+            return data.Data
+        }
+        if(!data){
+            return undefined
+        }
+        
+    })
 }
 
 module.exports = {
