@@ -86,12 +86,12 @@ const e = dob.collection('lol')
         ID: key
     }, async function(err, doc) {
         if(doc){
-            await e.update({ID: key}, {$set: {Data: value}})
-            e.save()
+            await e.findOne({ ID: key }).updateOne({$set: {Data: value}})
+            await e.save()
         }
         if(!doc){
-            e.insert({ ID: key, Data: value })
-            e.save()
+            await e.insert({ ID: key, Data: value })
+            await e.save()
         }
     })
 }
