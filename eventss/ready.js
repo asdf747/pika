@@ -63,12 +63,15 @@ let temproles = await temprole.find()
 function temprolesg(client, temproles){
   temproles.forEach(guild => {
     schedule.scheduleJob(guild.End, async function(){
+      let chk = await temprole.findOne({ _id: guild._id })
+      if(chk){
       const mem = client.guilds.cache.get(guild.Guild).members.cache.get(guild.User)
       const rol = client.guilds.cache.get(guild.Guild).roles.cache.get(guild.Role)
       if(mem && rol){
         mem.roles.remove(rol, 'Delayed role')
       }
       guild.delete()
+    }
     })
   })
 }
