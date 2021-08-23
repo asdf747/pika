@@ -19,12 +19,13 @@ const no = require('../models/jsons')
 
 module.exports = async (client) => {
   let gos = await no.find()
-  gos.filter(na => na.ID.startsWith('prefix_')).forEach(pref => {
+  await gos.filter(na => na.ID.startsWith('prefix_')).forEach(pref => {
     let nop = pref.ID.replace('prefix_','')
     let nopp = client.prefixes.get(nop) || []
     nopp.unshift({
       Prefix: pref.Data
     })
+    client.prefixes.set(nop, nopp);
   })
     console.log(`Logged in as ${client.user.username} (${client.user.id})`)
     client.user.setPresence({
