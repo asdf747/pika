@@ -102,7 +102,7 @@ module.exports = (client, commandOptions) => {
     const dob = require('quick.db')
     let prefixxo = await db.fetch(client, `prefix_${message.guild.id}`)
     let prefixx = config.prefix
-    if(prefixxo) prefixx = prefixxo.Data
+    if(prefixxo) prefixx = prefixxo
 
 
 
