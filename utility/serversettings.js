@@ -47,6 +47,8 @@ module.exports = {
                         role = message.guild.roles.cache.get(nomnom)
                     }
                     if(!role) return message.channel.send("Please enter a valid role")
+                    if(role.position >= message.guild.me.roles.highest.position) return message.channel.send("This role is higher than me")
+                    if(role.position >= message.member.roles.highest.position) return message.channel.send("This role is higher than you")
                     await db.set(client, `muterole_${message.guild.id}`, role.id)
                     return message.channel.send({ content: `:white_check_mark: | Set the mute role to ${role.toString()}`, allowedMentions: {repliedUser: true} })
                     break

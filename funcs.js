@@ -175,6 +175,17 @@ async function temprole(guild, member, role, duration){
     
 }
 
+async function getRole(guild, message, arguments, number){
+    let role = guild.roles.cache.get(arguments[number])
+    if(isNaN(role)) role = guild.roles.cache.find(r => r.name.toLowerCase().includes(arguments.slice(number).join(' ').toLowerCase()))
+    if(arguments[number].startsWith('<@&') && arguments[number].endsWith('>')){
+        nomnom = arguments[number].replace('<@&','').replace('>','')
+        role = guild.roles.cache.get(nomnom)
+    }
+    if(!role) role = undefined
+    return role
+}
+
 module.exports = {
     die,
     tempban,
@@ -183,5 +194,6 @@ module.exports = {
     fetch,
     durationString,
     add,
-    temprole
+    temprole,
+    getrole
 }

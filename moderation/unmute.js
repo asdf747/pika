@@ -27,7 +27,7 @@ module.exports = {
      if(user.roles.highest.position >= message.member.roles.highest.position) return message.lineReplyNoMention("You can't ummute this user.")
     user.roles.remove(role, reas)
     .then(Updated => message.lineReplyNoMention(`Unmuted **${use.tag}**. Reason: ${reaso}`))
-    .catch(err => message.lineReplyNoMention("I can't unmute this user.."))
+    .catch(err => message.lineReplyNoMention("I can't unmute this user."))
         
     }
 }

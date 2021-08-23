@@ -26,7 +26,7 @@ module.exports = {
      if(user.roles.highest.position >= message.member.roles.highest.position) return message.lineReplyNoMention("You can't mute this user.")
     user.roles.add(role, reas)
     .then(Updated => message.lineReplyNoMention(`Muted **${use.tag}**. Reason: ${reaso}`))
-    .catch(err => message.lineReplyNoMention("I can't mute this user.."))
+    .catch(err => message.lineReplyNoMention("I can't mute this user."))
         
     }
 }
