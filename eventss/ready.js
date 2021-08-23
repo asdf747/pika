@@ -58,7 +58,7 @@ function temp(client, temps){
 
 let temproles = await temprole.find()
 
-function temproles(client, temproles){
+function temprolesg(client, temproles){
   temproles.forEach(guild => {
     schedule.scheduleJob(guild.End, async function(){
       const mem = client.guilds.cache.get(guild.Guild).members.cache.get(guild.User)
@@ -72,7 +72,7 @@ function temproles(client, temproles){
 }
 
 await temp(client, temps)
-await temproles(client, temproles)
+await temprolesg(client, temproles)
     
     console.log(`Set bot's activity to ${activity}`)
     loadCommands(client)
