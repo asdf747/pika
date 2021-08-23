@@ -18,7 +18,7 @@ module.exports = {
       }else{
         await db.set(`prefix_${message.guild.id}`, arguments[0])
       message.lineReplyNoMention(`Set prefix to \`${arguments[0]}\`.`)
-      await db.set(`prefix_${message.guild.id}`, arguments[0])
+      await dob.set(`prefix_${message.guild.id}`, arguments[0])
       
       }
   }
