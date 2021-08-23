@@ -104,7 +104,8 @@ async function note(client, message, arguments, economy){
     let inv = await no.Inventory.find(item => item.Name === 'Note').Count
     let uses = 1
     if(arguments[1] && Number(arguments[1]) && !arguments[1].includes('.') && Number(arguments[1]) >= 1 && Number(arguments[1]) <= inv) uses = Number(arguments[1])
-    let amount = Math.floor(Math.random() * 5000) + 1 * uses
+    let pp = Math.floor(Math.random() * 5000) + 1
+    let amount = pp * uses
     await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Bank: parseInt(amount)} })
     await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Note" }, { $inc: {"Inventory.$.Count": -uses} })
     let cock = await economy.findOne({ id: message.author.id })
