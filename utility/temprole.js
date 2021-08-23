@@ -17,6 +17,7 @@ module.exports = {
         }
         if(!role) return message.channel.send("I can't find this role")
         if(role.position >= message.member.roles.highest.position) return message.channel.send("This role is higher than you")
+        if(role.position >= message.guild.me.roles.highest.position) return message.channel.send("This role is higher than me")
         const member = message.mentions.members.first() || message.guild.members.cache.get(arguments[0])
         if(!member) return message.channel.send('I can\'t find this member')
         const duration = ms(arguments[2])
