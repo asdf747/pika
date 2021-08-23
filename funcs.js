@@ -80,7 +80,7 @@ async function notify(member, Type, Description){
 
 async function set(client, key, value){
     const mongojs = require('mongojs')
-const dob = mongojs('mydb', ['lol'])
+const dob = mongojs('mongodb+srv://dbbb:fofo29112007@bot.ibj0v.mongodb.net/DiscordBot?retryWrites=true&w=majority', ['lol'])
 const e = dob.collection('lol')
     e.findOne({
         ID: key
@@ -98,7 +98,7 @@ const e = dob.collection('lol')
 
 async function fetch(client, key){
     const mongojs = require('mongojs')
-const dob = mongojs('mydb', ['lol'])
+const dob = mongojs('mongodb+srv://dbbb:fofo29112007@bot.ibj0v.mongodb.net/DiscordBot?retryWrites=true&w=majority', ['lol'])
 const e = dob.collection('lol')
     e.findOne({ ID: key }, function(err, data) {
         if(data){
