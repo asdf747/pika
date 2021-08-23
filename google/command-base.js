@@ -100,7 +100,7 @@ module.exports = (client, commandOptions) => {
     let config = require('../config.json')
     let mod = require('../prefix.json')
     const dob = require('quick.db')
-    let prefixxo = await client.db.jsons.findOne({ ID: `prefix_${message.guild.id}` })
+    let prefixxo = await client.db.findOne({ ID: `prefix_${message.guild.id}` })
     let prefixx = config.prefix
     if(prefixxo) prefixx = prefixxo.Data
 
