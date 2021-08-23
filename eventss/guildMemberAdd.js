@@ -4,7 +4,7 @@ const { weirdToNormalChars } = require('weird-to-normal-chars')
 const db = require('../funcs')
 
 module.exports = async (client, member) => {
-  let alt = await db.fetch(`alt_detector_${member.guild.id}`)
+  let alt = await db.fetch(client, `alt_detector_${member.guild.id}`)
   if(alt){
     // checking if account is underaged
     if(moment.duration(Date.now() - member.user.createdTimestamp).as('days') < 30){
