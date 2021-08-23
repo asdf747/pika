@@ -100,7 +100,7 @@ module.exports = (client, commandOptions) => {
     let config = require('../config.json')
     let mod = require('../prefix.json')
     const dob = require('quick.db')
-    let prefixxo = await client.db.findOne({ ID: `prefix_${message.guild.id}` })
+    let prefixxo = await db.fetch(client, `prefix_${message.guild.id}`)
     let prefixx = config.prefix
     if(prefixxo) prefixx = prefixxo.Data
 
@@ -232,7 +232,7 @@ const track = new Discord.MessageEmbed()
           }
         }
         let kek = true
-        let nuke = db.fetch(`nuke_${message.author.id}`)
+        let nuke = db.fetch(client, `nuke_${message.author.id}`)
         if(nuke !== null && moment.duration(Date.now() - nuke).as("hours") < 1) {
           kek = false
           return message.channel.send("Someone used nuke on you so you can't use the currency commands for an hour")

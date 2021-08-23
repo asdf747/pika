@@ -78,7 +78,7 @@ async function notify(member, Type, Description){
     })
 }
 
-async function set(key, value){
+async function set(client, key, value){
     client.db.findOne({
         ID: key
     }, async function(err, doc) {
@@ -93,7 +93,8 @@ async function set(key, value){
     })
 }
 
-async function fetch(key){
+async function fetch(client, key){
+    
     client.findOne({ ID: key }, function(err, data) {
         if(data){
             return data.Data
