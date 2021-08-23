@@ -17,11 +17,11 @@ const ass = require('./economyEvents/share.js')
 const funcs = require('./funcs')
 const mongojs = require('mongojs')
 const dob = mongojs('mydb')
-
+const e = dob.collection('pps')
 client.economy = new EventEmitter()
 
 
-client.db = mongojs('mydb', ['pps']).collection('pps')
+
 
 moment.updateLocale('en', {
     relativeTime : {
@@ -225,6 +225,8 @@ const load = async () => {
 
 client.snipes = new Discord.Collection();
 client.esnipes = new Discord.Collection();
+
+client.prefixes = new Discord.Collection();
 
 
   
