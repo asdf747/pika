@@ -79,23 +79,28 @@ async function notify(member, Type, Description){
 }
 
 async function set(client, key, value){
-    client.db.findOne({
+    const mongojs = require('mongojs')
+const dob = mongojs('mydb')
+const e = dob.collection('pps')
+    e.findOne({
         ID: key
     }, async function(err, doc) {
         if(doc){
-            await client.db.update({ID: key}, {$set: {Data: value}})
-            client.db.save()
+            await e.update({ID: key}, {$set: {Data: value}})
+            e.save()
         }
         if(!doc){
-            client.db.insert({ ID: key, Data: value })
-            client.db.save()
+            e.insert({ ID: key, Data: value })
+            e.save()
         }
     })
 }
 
 async function fetch(client, key){
-    
-    client.db.findOne({ ID: key }, function(err, data) {
+    const mongojs = require('mongojs')
+const dob = mongojs('mydb')
+const e = dob.collection('pps')
+    e.findOne({ ID: key }, function(err, data) {
         if(data){
             return data.Data
         }
