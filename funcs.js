@@ -81,8 +81,8 @@ async function notify(member, Type, Description){
 async function set(client, key, value){
     const mongojs = require('mongojs')
 const dob = mongojs('mydb', ['lol'])
-const e = dob
-    e.jsons.findOne({
+const e = dob.collection('lol')
+    e.lol.findOne({
         ID: key
     }, async function(err, doc) {
         if(doc){
@@ -99,8 +99,8 @@ const e = dob
 async function fetch(client, key){
     const mongojs = require('mongojs')
 const dob = mongojs('mydb', ['lol'])
-const e = dob
-    e.jsons.findOne({ ID: key }, function(err, data) {
+const e = dob.collection('lol')
+    e.findOne({ ID: key }, function(err, data) {
         if(data){
             return data.Data
         }
