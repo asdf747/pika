@@ -18,13 +18,14 @@ const db = require('../funcs')
 const no = require('../models/jsons')
 
 module.exports = async (client) => {
-  await no.find(e => e.ID.startsWith('prefix_')).forEach(prefix => {
-    let nop = client.prefixes.get(prefix.Guild) || []
-    nop.unshift({
-      Prefix: prefix.Data
+  let gos = await no.find()
+  gos.filter(no => no.ID.startsWith('prefix_')).forEach(pref => {
+    let nop = pref.ID.replace('prefix_','')
+    let no = client.prefixes.get(nop) || []
+    no.unshift({
+      Prefix: pref.Data
     })
   })
-
     console.log(`Logged in as ${client.user.username} (${client.user.id})`)
     client.user.setPresence({
   activity: {
