@@ -100,9 +100,7 @@ module.exports = (client, commandOptions) => {
     let config = require('../config.json')
     let mod = require('../prefix.json')
     const dob = require('quick.db')
-    let prefixxo = db.fetch(client, `prefix_${message.guild.id}`)
-    let prefixx = config.prefix
-    if(prefixxo) prefixx = prefixxo
+    let prefixx = onfig.prefix
 
 
 
