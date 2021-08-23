@@ -135,18 +135,37 @@ async function temprole(guild, member, role, duration){
     // adding the role to the member
     mem.roles.add(rol)
     // creating a new database
-    await new temprole({
-        Guild: guild.id,
-        User: member.id,
-        Role: rol.id,
-        Start: new Date(),
-        End: new Date(Date.now() + duration)
-    }).save().then(array => {
-        schedule.scheduleJob(new Date(Date.now() + duration), function(){
-            mem.roles.remove(rol, 'Delayed role')
-            array.delete()
-        })
+    await temprole.findOne({ Guild: guild.id, User: member.id, Role: rol.id }, async (err, data) => {
+        if(data){
+            data.delete()
+            await new temprole({
+                Guild: guild.id,
+                User: member.id,
+                Role: rol.id,
+                Start: new Date(),
+                End: new Date(Date.now() + duration)
+            }).save().then(array => {
+                schedule.scheduleJob(new Date(Date.now() + duration), function(){
+                    mem.roles.remove(rol, 'Delayed role')
+                    array.delete()
+                })
+            })
+        }if(!data){
+            await new temprole({
+                Guild: guild.id,
+                User: member.id,
+                Role: rol.id,
+                Start: new Date(),
+                End: new Date(Date.now() + duration)
+            }).save().then(array => {
+                schedule.scheduleJob(new Date(Date.now() + duration), function(){
+                    mem.roles.remove(rol, 'Delayed role')
+                    array.delete()
+                })
+            })
+        }
     })
+    
 }
 
 module.exports = {

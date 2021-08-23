@@ -50,8 +50,10 @@ let temps = await TEMP.find()
 function temp(client, temps){
   temps.forEach(user => {
     schedule.scheduleJob(user.End, async function(){
+      if(user){
       client.guilds.cache.get(user.Guild).members.unban(user.User, 'Automatic unban from tempban')
       user.delete()
+      }
     })
   })
 }
