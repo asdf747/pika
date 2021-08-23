@@ -97,8 +97,9 @@ module.exports = (client, commandOptions) => {
     if(message.channel.type === 'dm') return
     if (message.author.bot) return;
     let config = require('../config.json')
-    let prefixx = await client.prefixes.get(message.guild.id)
-    if(!prefixx){prefixx = config.prefix}
+    let prefixxp = await client.prefixes.get(message.guild.id)
+    let prefixx = config,prefix
+    if(prefixxp){prefixx = prefixxp.Prefix}
 
 
 
