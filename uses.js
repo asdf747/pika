@@ -110,7 +110,7 @@ async function note(client, message, arguments, economy){
     await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Note" }, { $inc: {"Inventory.$.Count": -uses} })
     let cock = await economy.findOne({ id: message.author.id })
  
-    return message.channel.send(`You used ${Number(uses).toLocaleString("en-US")} note and got **${parseInt(amount).toLocaleString("en-US")} bank space**, Current bank space is **${parseInt(cock.Bank + amount).toLocaleString("en-US")}**`)
+    return message.channel.send(`You used ${Number(uses).toLocaleString("en-US")} note and got **${parseInt(amount).toLocaleString("en-US")} bank space**, Current bank space is **${parseInt(cock.Bank).toLocaleString("en-US")}**`)
 }
 
 
