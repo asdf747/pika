@@ -95,7 +95,7 @@ async function set(client, key, value){
 
 async function fetch(client, key){
     
-    client.findOne({ ID: key }, function(err, data) {
+    client.db.findOne({ ID: key }, function(err, data) {
         if(data){
             return data.Data
         }
