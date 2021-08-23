@@ -8,8 +8,7 @@ module.exports = {
     commands: ['serversettings', 'guildsettings'],
     permissions: "ADMINISTRATOR",
     callback: async(message, arguments, text, client) => {
-        let prefix = await db.fetch(`prefix_${message.guild.id}`)
-        if(!prefix) prefix = config.prefix
+        let prefix = await client.prefixes.get(message.guild.id)[0].Prefix || config.prefix
         const reactionlogs = await reaction.findOne({ Guild: message.guild.id })
         const msglogs = await msg.findOne({ Guild: message.guild.id })
         const alt = await db.fetch(client, `alt_detector_${message.guild.id}`)
