@@ -601,8 +601,8 @@ module.exports = {
 
       const sendMenu = await message.channel.send(gall, select)
 
-      const filter = ( button ) => button.clicker.user.id === message.author.id
-      let collector = sendMenu.createMenuCollector({ time: 60000 })
+      const filter = ( button ) => Number(button.clicker.user.id)
+      let collector = sendMenu.createMenuCollector(filter, { time: 60000 })
 
       collector.on('collect', (b) => {
         if(b.click.user.id !== message.author.id) return b.reply.send("You can't use this menu", true)
