@@ -192,16 +192,16 @@ async function cell(client, message, arguments, economy){
             break
         case "b":
             await message.channel.send('Who do you want to text')
-            let mem = await message.channel.awaitMessages(x => x.author.id === message.author.id, { time: 7000, max: 1 })
+            let mem = await message.channel.awaitMessages(x => x.author.id === message.author.id, { time: 15000, max: 1 })
             if(!mem.size) return message.channel.send("I guess you don't want to text someone today")
             let membor = mem.first().content
             let member = mem.first().mentions.members.first() || message.guild.members.cache.get(membor)
             if(!member) return message.channel.send("Does this member even exist in this server")
             await message.channel.send("What do you want to text him")
-            let tex = await message.channel.awaitMessages(x => x.author.id === message.author.id, { time: 7000, max: 1 })
+            let tex = await message.channel.awaitMessages(x => x.author.id === message.author.id, { time: 15000, max: 1 })
             if(!tex.size) return message.channel.send("I guess you don't want to text someone today")
             let text = tex.first().content
-            await notify(member, "Text", `${message.author.tag} texted you ${text}`)
+            await notify(member, "Text", `${message.author.tag} texted you: ${text}`)
             message.channel.send(`Sent your message to ${member.user.username}`)
             break
     }
