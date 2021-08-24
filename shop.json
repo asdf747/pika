@@ -140,5 +140,17 @@
         "Image": "https://cdn.discordapp.com/emojis/878984902018736129.png?v=1",
         "Useable": false
         
+    },
+    {
+        "Name": "Diamond Crate",
+        "ID": ["diamond"],
+        "Price": "???",
+        "Sell": "???",
+        "Description": "Still working on it",
+        "Shop": false,
+        "Emoji": "<:diamond_box:879663642872782888>",
+        "Image": "https://cdn.discordapp.com/emojis/879663642872782888.png?v=1",
+        "Useable": false
+        
     }
 ]
