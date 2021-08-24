@@ -117,7 +117,7 @@ FieldsEmbed.build();
         }
         data.Afks.push(obj)
         data.save()
-        if(message.member.roles.highest.position < message.guild.me.roles.highest.position) message.member.setNickname(`[AFK] ${message.member.displayName}`)
+        if(message.member.roles.highest.position < message.guild.me.roles.highest.position && message.member.displayName.length <= 26) message.member.setNickname(`[AFK] ${message.member.displayName}`)
         message.channel.send(`${message.author} I set your AFK: ${msg}`)
       }if(!data){
       await new AFK({
@@ -130,7 +130,7 @@ FieldsEmbed.build();
           }
         ]
       }).save()
-      if(message.member.roles.highest.position < message.guild.me.roles.highest.position) message.member.setNickname(`[AFK] ${message.member.displayName}`)
+      if(message.member.roles.highest.position < message.guild.me.roles.highest.position && message.member.displayName.length <= 26) message.member.setNickname(`[AFK] ${message.member.displayName}`)
       message.channel.send(`${message.author} I set your AFK: ${msg}`)
       }
     })
