@@ -31,7 +31,7 @@ module.exports = {
                 await uses.cell(client, message, arguments, economy)
                 break
             case "diamond":
-                await uses.diamond(client, client, message, arguments, economy)
+                await uses.diamond(client, message, arguments, economy)
                 break
         }
     }
