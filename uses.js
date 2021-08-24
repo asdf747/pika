@@ -277,25 +277,25 @@ async function diamond(client, message, arguments, economy) {
     let prize = prizes[Math.floor(Math.random() * Math.floor(prizes.length))]
     let lo = emojis.findIndex(e => e === prize)
     let emoji = emojis[lo]
-    let amount = Math.floor(Math.random() * 3) + 1
+    let mount = Math.floor(Math.random() * 3) + 1
     // checking if user has the item in their inventory
     let data = await economy.findOne({ id: message.author.id })
     let inv = await data.Inventory.find(item => item.Name === prize)
     if (inv) {
         await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Diamond crate" }, { $inc: { "Inventory.$.Count": -1 } })
-        await economy.updateOne({ "id": message.author.id, "Inventory.Name": prize }, { $inc: { "Inventory.$.Count": amount } })
+        await economy.updateOne({ "id": message.author.id, "Inventory.Name": prize }, { $inc: { "Inventory.$.Count": mount } })
          return message.channel.send(
             new MessageEmbed()
                 .setTitle("Opened crate")
                 .setAuthor(message.author.tag, message.author.displayAvatarURL())
                 .setTimestamp()
-                .setDescription(`You opened the diamond crate and got **${amount} ${emoji} ${prize}${amount !== 1 ? 's' : ''}**`)
+                .setDescription(`You opened the diamond crate and got **${mount} ${emoji} ${prize}${mount !== 1 ? 's' : ''}**`)
                 .setColor("GREEN")
         )
     }
     let obj = {
         Name: prize,
-        Count: amount
+        Count: mount
     }
     data.Inventory.push(obj)
     data.save()
@@ -305,7 +305,7 @@ async function diamond(client, message, arguments, economy) {
             .setTitle("Opened crate")
             .setAuthor(message.author.tag, message.author.displayAvatarURL())
             .setTimestamp()
-            .setDescription(`You opened the <:diamond_box:879663642872782888> diamond crate and got **${amount} ${emoji} ${prize}${amount !== 1 ? 's' : ''}**`)
+            .setDescription(`You opened the <:diamond_box:879663642872782888> diamond crate and got **${mount} ${emoji} ${prize}${mount !== 1 ? 's' : ''}**`)
             .setColor("GREEN")
     )
 
