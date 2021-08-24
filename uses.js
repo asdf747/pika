@@ -295,7 +295,7 @@ async function diamond(client, message, arguments, economy) {
     }
     let ob = {
         Name: prize,
-        Count: mount
+        Count: parseInt(mount)
     }
     await dat.Inventory.push(ob)
     await dat.save()
