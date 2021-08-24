@@ -44,7 +44,7 @@ module.exports = {
                 .setTimestamp()
                 .setDescription(`You won **${parseInt(winamount).toLocaleString("en-US")} coins**\n\n**Your balance:** ${parseInt(author_wallet + winamount).toLocaleString("en-US")}`)
 
-                if(winchance === 27) golga.setFooter("Mutliplier: x2")
+                if(winchance === 27) golga.setFooter("Luck: x2")
                 return message.channel.send(golga)
                 break
             case "fail":
@@ -56,7 +56,7 @@ module.exports = {
                 .setTimestamp()
                 .setDescription(`You lost **${parseInt(betting_amount).toLocaleString("en-US")} coins**\n\n**Your balance:** ${parseInt(author_wallet - betting_amount).toLocaleString("en-US")}`)
 
-                if(winchance === 27) gelga.setFooter("Mutliplier: x2")
+                if(winchance === 27) gelga.setFooter("Luck: x2")
                 return message.channel.send(gelga)
                 break
         }
