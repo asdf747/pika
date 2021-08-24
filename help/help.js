@@ -605,7 +605,7 @@ module.exports = {
       let collector = sendMenu.createMenuCollector(filter, { time: 60000 })
 
       collector.on('collect', (b) => {
-        if(b.click.user.id !== message.author.id) return b.reply.send("You can't use this menu", true)
+        if(b.clicker.user.id !== message.author.id) return b.reply.send("You can't use this menu", true)
         collector.resetTimer()
         if(b.values[0] === 'moderation'){
           sendMenu.edit(
