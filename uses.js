@@ -279,8 +279,8 @@ async function diamond(client, message, arguments, economy) {
     let emoji = emojis[le]
     let mount = Math.floor(Math.random() * 3) + 1
     // checking if user has the item in their inventory
-    let data = await economy.findOne({ id: message.author.id })
-    let inv = await data.Inventory.find(item => item.Name === prize)
+    let dat = await economy.findOne({ id: message.author.id })
+    let inv = await dat.Inventory.find(item => item.Name === prize)
     if (inv) {
         await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Diamond crate" }, { $inc: {"Inventory.$.Count": -1} })
         await economy.updateOne({ "id": message.author.id, "Inventory.Name": prize }, { $inc: {"Inventory.$.Count": parseInt(mount)} })
@@ -297,8 +297,8 @@ async function diamond(client, message, arguments, economy) {
         Name: prize,
         Count: mount
     }
-    data.Inventory.push(obj)
-    data.save()
+    dat.Inventory.push(obj)
+    dat.save()
     await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Diamond crate" }, { $inc: {"Inventory.$.Count": -1} })
     return message.channel.send(
         new MessageEmbed()
