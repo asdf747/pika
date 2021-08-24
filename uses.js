@@ -55,7 +55,7 @@ async function lucky(client, message, arguments, economy) {
         case "unlucky":
             await economy.findOne({ id: message.author.id }, async (err, data) => {
                 if (data) {
-                    let ass = data.Inventory.find(item => item.Name.toLowerCase() === 'Ynlucky cookie')
+                    let ass = data.Inventory.find(item => item.Name.toLowerCase() === 'Unlucky cookie')
                     if (ass) {
                         await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Unlucky cookie" }, { $inc: { "Inventory.$.Count": amount } })
                         return message.channel.send(
