@@ -177,7 +177,7 @@
         ],
         "Price": 250000,
         "Sell": 100000,
-        "Description": "Still working on it",
+        "Description": "A diamond crate that gives you random items",
         "Shop": true,
         "Emoji": "<:diamond_box:879663642872782888>",
         "Image": "https://cdn.discordapp.com/emojis/879663642872782888.png?v=1",
