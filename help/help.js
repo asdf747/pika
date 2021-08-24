@@ -602,9 +602,10 @@ module.exports = {
       const sendMenu = await message.channel.send(gall, select)
 
       const filter = ( button ) => button.clicker.user.id === message.author.id
-      let collector = sendMenu.createMenuCollector(filter, { time: 60000 })
+      let collector = sendMenu.createMenuCollector({ time: 60000 })
 
       collector.on('collect', (b) => {
+        if(b.click.user.id !== message.author.id) return b.reply.send("You can't use this menu", true)
         collector.resetTimer()
         if(b.values[0] === 'moderation'){
           sendMenu.edit(
@@ -697,90 +698,6 @@ module.exports = {
           )
         }
         b.reply.defer()
-      })
-      collector.on('end', egg => {
-        let ooption1 = new MessageMenuOption()
-      .setLabel("Moderation commands")
-      .setEmoji('🔨')
-      .setValue("moderation")
-      .setDescription('Shows the moderation commands.')
-      .setDisabled(true)
-
-      let ooption2 = new MessageMenuOption()
-      .setLabel("Owner commands")
-      .setEmoji('👑')
-      .setValue("owner")
-      .setDescription('Shows the moderation commands.')
-      .setDisabled(true)
-
-      let ooption3 = new MessageMenuOption()
-      .setLabel("Utility commands")
-      .setEmoji('🛠️')
-      .setValue("utility")
-      .setDescription('Shows the utility commands.')
-      .setDisabled(true)
-
-      let ooption4 = new MessageMenuOption()
-      .setLabel("Misc commands")
-      .setEmoji('📁')
-      .setValue("misc")
-      .setDescription('Shows the misc commands.')
-      .setDisabled(true)
-
-      let ooption5 = new MessageMenuOption()
-      .setLabel("Whitelisted users commands")
-      .setValue("whitelist")
-      .setDescription('Shows the whitelisted users commands.')
-      .setDisabled(true)
-
-      let ooption6 = new MessageMenuOption()
-      .setLabel("Fun commands")
-      .setValue("fun")
-      .setEmoji('🥳')
-      .setDescription('Shows the fun commands.')
-      .setDisabled(true)
-
-      let ooption7 = new MessageMenuOption()
-      .setLabel("Donations commands")
-      .setEmoji('🎉')
-      .setValue("donation")
-      .setDescription('Shows the Donations commands.')
-      .setDisabled(true)
-
-      let ooption8 = new MessageMenuOption()
-      .setLabel("Guild only commands")
-      .setValue("guild")
-      .setEmoji('❌')
-      .setDescription('Shows the guild only commands.')
-      .setDisabled(true)
-
-      let ooption9 = new MessageMenuOption()
-      .setLabel("Guild only commands")
-      .setValue("google")
-      .setEmoji('❌')
-      .setDescription('Shows the guild only commands.')
-      .setDisabled(true)
-
-      let soelect = new MessageMenu()
-      .setID("selector")
-      .setPlaceholder("Select a group")
-      .addOption(option1)
-      .addOption(option3)
-      .addOption(option4)
-      .addOption(option6)
-      if(message.author.id === '538352367654141952') soelect.addOption(ooption2)
-      if(message.guild.id === '655780171496030240' && message.member.hasPermission('BAN_MEMBERS')) soelect.addOption(ooption8)
-      if(message.member.roles.cache.some(r => (r.id === '783745136873439302' || r.id === '783745205684666419'))) soelect.addOption(ooption7)
-      if(whitelisted) soelect.addOption(ooption5)
-      if(message.guild.id === '854748129365721118') soelect.addOption(ooption9)
-
-      const ggall = new MessageEmbed()
-        .setTitle("Help menu")
-        .setDescription(`Use \`${prefix}help\` with a command to get the command's info\n\nSelect a group from the drop menu.`)
-        .setColor("GREEN")
-        .setFooter(client.user.username, client.user.displayAvatarURL())
-        .setFooter(`Prefix: ${prefix}`)
-        sendMenu.edit(ggall, soelect)
       })
 
 
