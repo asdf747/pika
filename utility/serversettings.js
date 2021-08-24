@@ -35,7 +35,7 @@ module.exports = {
                     let gaslo = 'off'
                     if (arguments[1].toLowerCase() === 'true') value = true
                     if (arguments[1].toLowerCase() === 'true') gaslo = 'on'
-                    await db.set(`alt_detector_${message.guild.id}`, value)
+                    await db.set(client, `alt_detector_${message.guild.id}`, value)
                     message.channel.send(`:white_check_mark: | Turned ${gaslo} alt detector system`)
                     break
                 case "muterole":
@@ -60,7 +60,7 @@ module.exports = {
                     let gasloo = 'off'
                     if (arguments[1].toLowerCase() === 'true') valuee = true
                     if (arguments[1].toLowerCase() === 'true') gasloo = 'on'
-                    await db.set(`decancer_${message.guild.id}`, valuee)
+                    await db.set(client, `decancer_${message.guild.id}`, valuee)
                     message.channel.send(`:white_check_mark: | Turned ${gasloo} decancer system`)
                     break
             }
