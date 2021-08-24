@@ -27,7 +27,7 @@ module.exports = {
         for (let i = 0; i < 10; i++){
             prizes.push('Lucky crate')
         }
-        let prize = prizes[Math.floor(Math.random() * prizes.length)]
+        let prize = prizes[Math.floor(Math.random() * Math.floor(prizes.length))]
         let count = Math.floor(Math.random() * 2) + 1
         if(prize === 'Lucky crate') emoji = '<:emoji_12:877912311719927839>'
         if(prize === 'PP') emoji = '<:penis:877589942140813333>'
