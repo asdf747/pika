@@ -1,4 +1,5 @@
 async function lucky(client, message, arguments, economy) {
+    const { MessageEmbed } = require('discord.js')
     let prizes = []
     for (let i = 0; i < 30; i++) {
         prizes.push('pp')
@@ -282,9 +283,9 @@ async function diamond(client, message, arguments, economy) {
     let dat = await economy.findOne({ id: message.author.id })
     let inv = await dat.Inventory.find(item => item.Name === prize)
     if (inv) {
-        await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Diamond crate" }, { $inc: {"Inventory.$.Count": -1} })
-        await economy.updateOne({ "id": message.author.id, "Inventory.Name": prize }, { $inc: {"Inventory.$.Count": parseInt(mount)} })
-         return message.channel.send(
+        await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Diamond crate" }, { $inc: { "Inventory.$.Count": -1 } })
+        await economy.updateOne({ "id": message.author.id, "Inventory.Name": prize }, { $inc: { "Inventory.$.Count": parseInt(mount) } })
+        return message.channel.send(
             new MessageEmbed()
                 .setTitle("Opened crate")
                 .setAuthor(message.author.tag, message.author.displayAvatarURL())
@@ -299,7 +300,7 @@ async function diamond(client, message, arguments, economy) {
     }
     await dat.Inventory.push(ob)
     await dat.save()
-    await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Diamond crate" }, { $inc: {"Inventory.$.Count": -1} })
+    await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Diamond crate" }, { $inc: { "Inventory.$.Count": -1 } })
     return message.channel.send(
         new MessageEmbed()
             .setTitle("Opened crate")
