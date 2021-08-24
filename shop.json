@@ -1,7 +1,10 @@
 [
     {
         "Name": "PP",
-        "ID": ["pp", "penis"],
+        "ID": [
+            "pp",
+            "penis"
+        ],
         "Price": 69,
         "Sell": "???",
         "Description": "Something that neon doesn't have",
@@ -12,7 +15,10 @@
     },
     {
         "Name": "Lucky crate",
-        "ID": ["lucky", "crate"],
+        "ID": [
+            "lucky",
+            "crate"
+        ],
         "Price": 45000,
         "Sell": 10000,
         "Description": "A crate that gives a random item",
@@ -20,11 +26,17 @@
         "Emoji": "<:emoji_12:877912311719927839>",
         "Image": "https://cdn.discordapp.com/emojis/877912311719927839.png?v=1",
         "Useable": true,
-        "Items": ["Note", "PP", "Unlucky cookie"]
+        "Items": [
+            "Note",
+            "PP",
+            "Unlucky cookie"
+        ]
     },
     {
         "Name": "Unlucky cookie",
-        "ID": ["unlucky"],
+        "ID": [
+            "unlucky"
+        ],
         "Price": "???",
         "Sell": "???",
         "Description": "Use it and mention someone to prevent them from robbing or joining heists for 15 minutes.",
@@ -35,7 +47,10 @@
     },
     {
         "Name": "Note",
-        "ID": ["note", "bank"],
+        "ID": [
+            "note",
+            "bank"
+        ],
         "Price": "???",
         "Sell": "???",
         "Description": "Use it to get more bank space.",
@@ -43,11 +58,12 @@
         "Emoji": "<:emoji_14:877958079826759792>",
         "Image": "https://cdn.discordapp.com/emojis/877958079826759792.png?v=1",
         "Useable": true
-        
     },
     {
         "Name": "Trophy",
-        "ID": ["trophy"],
+        "ID": [
+            "trophy"
+        ],
         "Price": "???",
         "Sell": 50000,
         "Description": "Gives you a multiplier in gambling",
@@ -55,11 +71,13 @@
         "Emoji": "<:trophy:878198091075977266>",
         "Image": "https://cdn.discordapp.com/emojis/878198091075977266.png?v=1",
         "Useable": false
-        
     },
     {
         "Name": "Coin bomb",
-        "ID": ["coin", "bomb"],
+        "ID": [
+            "coin",
+            "bomb"
+        ],
         "Price": 1000,
         "Sell": "???",
         "Description": "Use this to give coins to poor people",
@@ -67,11 +85,12 @@
         "Emoji": "<:emoji_17:878290323183403038>",
         "Image": "https://cdn.discordapp.com/emojis/878290323183403038.png?v=1",
         "Useable": true
-        
     },
     {
         "Name": "Octopus",
-        "ID": ["octopus"],
+        "ID": [
+            "octopus"
+        ],
         "Price": "???",
         "Sell": 12000,
         "Description": "You can get this octopus from the diving command",
@@ -79,11 +98,13 @@
         "Emoji": "<:octopus:878378232699842590>",
         "Image": "https://cdn.discordapp.com/emojis/878378232699842590.png?v=1",
         "Useable": false
-        
     },
     {
         "Name": "Diving mask",
-        "ID": ["diving", "mask"],
+        "ID": [
+            "diving",
+            "mask"
+        ],
         "Price": 10000,
         "Sell": 1000,
         "Description": "Buy this to use the dive command.",
@@ -91,11 +112,13 @@
         "Emoji": ":diving_mask:",
         "Image": "https://media.discordapp.net/attachments/854749236578877440/878374334773743616/1f93f.png",
         "Useable": false
-        
     },
     {
         "Name": "Common fish",
-        "ID": ["common", "fish"],
+        "ID": [
+            "common",
+            "fish"
+        ],
         "Price": "???",
         "Sell": 2000,
         "Description": "You can get this common fish from the diving command",
@@ -103,11 +126,12 @@
         "Emoji": "<:common_fish:878382462919643176>",
         "Image": "https://www.emojibase.com/resources/img/emojis/apple/1f41f.png",
         "Useable": false
-        
     },
     {
         "Name": "Rare fish",
-        "ID": ["rare"],
+        "ID": [
+            "rare"
+        ],
         "Price": "???",
         "Sell": 5000,
         "Description": "You can get this rare fish from the diving command",
@@ -115,11 +139,14 @@
         "Emoji": "<:rare_fish:878383125560979477>",
         "Image": "https://cdn.discordapp.com/emojis/878383125560979477.png?v=1",
         "Useable": false
-        
     },
     {
         "Name": "Cellphone",
-        "ID": ["cell", "phone"],
+        "ID": [
+            "cellphone",
+            "cell",
+            "phone"
+        ],
         "Price": 1000,
         "Sell": 500,
         "Description": "Use this cellphone to get access to notifications",
@@ -127,11 +154,14 @@
         "Emoji": "<:emoji_29:878984815016296469>",
         "Image": "https://cdn.discordapp.com/emojis/878984815016296469.png?v=1",
         "Useable": true
-        
     },
     {
         "Name": "Laptop",
-        "ID": ["laptop", "lap", "top"],
+        "ID": [
+            "laptop",
+            "lap",
+            "top"
+        ],
         "Price": "???",
         "Sell": "???",
         "Description": "Still working on it",
@@ -139,19 +169,25 @@
         "Emoji": "<:emoji_30:878984902018736129>",
         "Image": "https://cdn.discordapp.com/emojis/878984902018736129.png?v=1",
         "Useable": false
-        
     },
     {
         "Name": "Diamond Crate",
-        "ID": ["diamond"],
-        "Price": "???",
-        "Sell": "???",
+        "ID": [
+            "diamond"
+        ],
+        "Price": 250000,
+        "Sell": 100000,
         "Description": "Still working on it",
-        "Shop": false,
+        "Shop": true,
         "Emoji": "<:diamond_box:879663642872782888>",
         "Image": "https://cdn.discordapp.com/emojis/879663642872782888.png?v=1",
-        "Useable": false,
-        "Items": ["Lucky crate", "Trophy", "PP", "Unlucky cookie", "Cellphone"]
-        
+        "Useable": true,
+        "Items": [
+            "Lucky crate",
+            "Trophy",
+            "PP",
+            "Unlucky cookie",
+            "Cellphone"
+        ]
     }
 ]
