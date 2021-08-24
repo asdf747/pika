@@ -128,5 +128,17 @@
         "Image": "https://cdn.discordapp.com/emojis/878984815016296469.png?v=1",
         "Useable": true
         
+    },
+    {
+        "Name": "Laptop",
+        "ID": ["laptop", "lap", "top"],
+        "Price": "???",
+        "Sell": "???",
+        "Description": "Still working on it",
+        "Shop": false,
+        "Emoji": "<:emoji_30:878984902018736129>",
+        "Image": "https://cdn.discordapp.com/emojis/878984902018736129.png?v=1",
+        "Useable": false
+        
     }
 ]
