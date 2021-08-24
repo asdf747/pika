@@ -293,12 +293,12 @@ async function diamond(client, message, arguments, economy) {
                 .setColor("GREEN")
         )
     }
-    let obj = {
+    let ob = {
         Name: prize,
         Count: mount
     }
-    dat.Inventory.push(obj)
-    dat.save()
+    await dat.Inventory.push(ob)
+    await dat.save()
     await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Diamond crate" }, { $inc: {"Inventory.$.Count": -1} })
     return message.channel.send(
         new MessageEmbed()
