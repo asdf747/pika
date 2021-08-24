@@ -274,9 +274,9 @@ async function diamond(client, message, arguments, economy) {
         prizes.push('Trophy')
         emojis.push('<:trophy:878198091075977266>')
     }
-    let prize = prizes[Math.floor(Math.random() * Math.floor(prizes.length))]
-    let lo = emojis.findIndex(e => e === prize)
-    let emoji = emojis[lo]
+    let le = Math.floor(Math.random() * Math.floor(prizes.length))
+    let prize = prizes[le]
+    let emoji = emojis[le]
     let mount = Math.floor(Math.random() * 3) + 1
     // checking if user has the item in their inventory
     let data = await economy.findOne({ id: message.author.id })
