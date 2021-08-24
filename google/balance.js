@@ -8,15 +8,15 @@ module.exports = {
     const user = message.mentions.users.first() || client.users.cache.get(arguments[0]) || message.author
 
     await bal.findOne({ id: user.id }, async (err, data) => {
-      if(data){
+      if (data) {
         message.channel.send(
           new MessageEmbed()
-          .setTitle(`${user.username}${user.username.endsWith('s') ? '\'' : '\'s'} balance`)
-          .setDescription(`**Wallet:** ${parseInt(data.Wallet).toLocaleString("en-US")}\n**Bank:** ${parseInt(data.InBank).toLocaleString("en-US")}${message.author.id === user.id ? `/${parseInt(data.Bank).toLocaleString("en-US")}` : ''}`)
-          .setTimestamp()
-          .setColor("BLUE")
+            .setDescription(`**Wallet:** ${parseInt(data.Wallet).toLocaleString("en-US")}\n**Bank:** ${parseInt(data.InBank).toLocaleString("en-US")}${message.author.id === user.id ? `/${parseInt(data.Bank).toLocaleString("en-US")}` : ''}\n**Total:** ${parseInt(data.Wallet + data.InBank).toLocaleString("en-Us")}`)
+            .setTimestamp()
+            .setColor("BLUE")
+            .setAuthor(`${user.username}${user.username.endsWith('s') ? '\'' : '\'s'} balance`, message.author.displayAvatarURL())
         )
-      } else if(!data){
+      } else if (!data) {
         await new bal({
           id: user.id,
           Wallet: 500,
@@ -26,10 +26,10 @@ module.exports = {
 
         message.channel.send(
           new MessageEmbed()
-          .setTitle(`${user.username}${user.username.endsWith('s') ? '\'' : '\'s'} balance`)
-          .setDescription(`**Wallet:** 500\n**Bank:** 0${message.author.id === user.id ? '/100' : ''}`)
-          .setTimestamp()
-          .setColor("BLUE")
+            .setDescription(`**Wallet:** 500\n**Bank:** 0${message.author.id === user.id ? '/100' : ''}\n**Total:** 500`)
+            .setTimestamp()
+            .setColor("BLUE")
+            .setAuthor(`${user.username}${user.username.endsWith('s') ? '\'' : '\'s'} balance`, message.author.displayAvatarURL())
         )
 
       }
