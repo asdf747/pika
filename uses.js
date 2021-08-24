@@ -282,8 +282,8 @@ async function diamond(client, message, arguments, economy) {
     let data = await economy.findOne({ id: message.author.id })
     let inv = await data.Inventory.find(item => item.Name === prize)
     if (inv) {
-        await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Diamond crate" }, { $inc: { "Inventory.$.Count": -1 } })
-        await economy.updateOne({ "id": message.author.id, "Inventory.Name": prize }, { $inc: { "Inventory.$.Count": mount } })
+        await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Diamond crate" }, { $inc: {"Inventory.$.Count": -1} })
+        await economy.updateOne({ "id": message.author.id, "Inventory.Name": prize }, { $inc: {"Inventory.$.Count": parseInt(mount)} })
          return message.channel.send(
             new MessageEmbed()
                 .setTitle("Opened crate")
@@ -299,7 +299,7 @@ async function diamond(client, message, arguments, economy) {
     }
     data.Inventory.push(obj)
     data.save()
-    await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Diamond crate" }, { $inc: { "Inventory.$.Count": -1 } })
+    await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Diamond crate" }, { $inc: {"Inventory.$.Count": -1} })
     return message.channel.send(
         new MessageEmbed()
             .setTitle("Opened crate")
