@@ -150,7 +150,8 @@
         "Shop": false,
         "Emoji": "<:diamond_box:879663642872782888>",
         "Image": "https://cdn.discordapp.com/emojis/879663642872782888.png?v=1",
-        "Useable": false
+        "Useable": false,
+        "Items": ["Lucky crate", "Trophy", "PP", "Unlucky cookie", "Cellphone"]
         
     }
 ]
