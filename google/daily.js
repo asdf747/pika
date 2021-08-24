@@ -18,11 +18,11 @@ module.exports = {
         await economy.findOne({ id: message.author.id }, async(err, data) => {
             if(data){
                 await economy.findOneAndUpdate({ id: message.author.id }, { $inc: {Wallet: amount} })
-                if(data.Inventory.find(item => item.Name.toLowerCase() === 'lucky box') && data.Inventory.find(item => item.Name.toLowerCase() === 'lucky box').Count >= 1){
-                    await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Lucky box" }, { $inc: {"Inventory.$.Count": 1} })
+                if(data.Inventory.find(item => item.Name.toLowerCase() === 'lucky box') && data.Inventory.find(item => item.Name.toLowerCase() === 'lucky crate').Count >= 1){
+                    await economy.updateOne({ "id": message.author.id, "Inventory.Name": "Lucky crate" }, { $inc: {"Inventory.$.Count": 1} })
                 }else {
                     let obj = {
-                        Name: "Lucky box",
+                        Name: "Lucky crate",
                         Count: 1
                     }
                     data.Inventory.push(obj)
@@ -32,7 +32,7 @@ module.exports = {
                 message.channel.send(
                     new MessageEmbed()
                     .setTitle("Claimed daily")
-                    .setDescription(`You've claimed your daily and got **${amount.toLocaleString("en-US")}** and **1 <:emoji_12:877912311719927839> lucky box**`)
+                    .setDescription(`You've claimed your daily and got **${amount.toLocaleString("en-US")}** and **1 <:emoji_12:877912311719927839> Lucky crate**`)
                     .setFooter(`Streak: ${bonus / 2000} (+${bonus})`)
                     .setColor("BLUE")
                 )
@@ -56,7 +56,7 @@ module.exports = {
                     message.channel.send(
                         new MessageEmbed()
                         .setTitle("Claimed daily")
-                        .setDescription(`You've claimed your daily and got **${amount.toLocaleString("en-US")}** and **1 <:emoji_12:877912311719927839> lucky box**`)
+                        .setDescription(`You've claimed your daily and got **${amount.toLocaleString("en-US")}** and **1 <:emoji_12:877912311719927839> Lucky crate**`)
                         .setFooter(`Streak: ${bonus / 2000} (+${bonus})`)
                         .setColor("BLUE")
                     )
