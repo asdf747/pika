@@ -5,6 +5,7 @@ const db = require('../funcs')
 
 module.exports = async (client, member) => {
   let alt = await db.fetch(client, `alt_detector_${member.guild.id}`)
+  let decancer = await db.fetch(client, `decancer_${member.guild.id}`)
   if(alt){
     // checking if account is underaged
     if(moment.duration(Date.now() - member.user.createdTimestamp).as('days') < 30){
@@ -15,7 +16,7 @@ module.exports = async (client, member) => {
       await tempban(member, member.guild, duration, reason)
     }
     // decancering member on join
-      if(member.guild.id === '655780171496030240'){
+      if(decancer){
       if(member.user.username.match(/[^a-zA-Z0-9]/g)){
         let cleanednick = weirdToNormalChars(member.user.username)
         member.setNickname(cleanednick.replace(/[^a-zA-Z0-9]/g, ''), 'member has special characters in their username')
