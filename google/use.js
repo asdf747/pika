@@ -8,13 +8,13 @@ module.exports = {
     minArgs: 1,
     expectedArgs: '<item>',
     cooldown: 6,
-    callback: async(message, arguments, text, client) => {
+    callback: async (message, arguments, text, client) => {
         let item = items.find(item => item.ID.includes(arguments[0].toLowerCase()))
-        if(!item) return message.channel.send("This item doesn't exist.")
+        if (!item) return message.channel.send("This item doesn't exist.")
         let doc = await economy.findOne({ id: message.author.id })
-        if(!doc || !doc.Inventory.find(ite => ite.Name.toLowerCase() === item.Name.toLowerCase()) || doc.Inventory.find(ite => ite.Name.toLowerCase() === item.Name.toLowerCase()).Count < 1) return message.channel.send("You don't own this item")
-        if(!item.Useable) return message.channel.send("You can't use this item.")
-        switch(item.ID[0]){
+        if (!doc || !doc.Inventory.find(ite => ite.Name.toLowerCase() === item.Name.toLowerCase()) || doc.Inventory.find(ite => ite.Name.toLowerCase() === item.Name.toLowerCase()).Count < 1) return message.channel.send("You don't own this item")
+        if (!item.Useable) return message.channel.send("You can't use this item.")
+        switch (item.ID[0]) {
             case "lucky":
                 await uses.lucky(client, message, arguments, economy);
                 break
@@ -29,6 +29,9 @@ module.exports = {
                 break
             case "cell":
                 await uses.cell(client, message, arguments, economy)
+                break
+            case "diamond":
+                await uses.diamond(client, client, message, arguments, economy)
                 break
         }
     }
