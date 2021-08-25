@@ -7,11 +7,19 @@ module.exports = {
     minArgs: 1,
     permissions: "ADMINISTRATOR",
     subCommands: 'remove list',
-    expectedArgs: 'create role_id = emoji[split by ,] [channel]',
+    expectedArgs: 'create [channel] role_id = emoji[split by ,]',
     callback: async (message, arguments, text, client) => {
         if (arguments[0].toLowerCase() === 'create') {
+            let lol = 1
+            let channel = message.channel
             if (!arguments[1]) return message.channel.send(":x: Invalid arguments")
-            let roles = arguments.slice(1).join('').split(',')
+            if(arguments[1].startsWith('<#') && arguments[1].endsWith('>')){
+                lol = 2
+                nomnom = arguments[1].replace('<#','').replace('>','')
+                channel = message.guild.channels.cache.get(nomnom)
+            }
+            if(!channel) return message.channel.send(":x: This channel doesn't exist")
+            let roles = arguments.slice(lol).join('').split(',')
             if (roles.length > 9) return message.channel.send("Reaction roles can't be more than 9 roles")
             let invalidRoles = []
             let invaidEmojis = []
@@ -42,11 +50,6 @@ module.exports = {
             if (high_roles_member.length) return message.channel.send(`:x: Role${high_roles_member.length !== 1 ? 's' : ''} number ${high_roles_member.map(e => e)} ${high_roles_member.length !== 1 ? 'are' : 'is'} higher than you`)
             if (invaidEmojis.length) return message.channel.send(`:x: Emoji${invaidEmojis.length !== 1 ? 's' : ''} number ${invaidEmojis.map(e => e)} ${invaidEmojis.length !== 1 ? 'are' : 'is'} invalid`)
             let channel = message.channel
-            if (arguments[arguments.slice(1).length].startsWith('<#') && arguments[arguments.slice(1).length].endsWith('>')) {
-                nmonom = arguments[arguments.slice(1).length].replace('<#', '').replace('>', '')
-                channel = message.guild.channels.cache.get(nmonom)
-            }
-            if (!channel) return message.channel.send(`:x: That channel doesn't exist`) // return if channel doesn't exist
             let msg = await channel.send(
                 new MessageEmbed()
                     .setTitle("Reaction Roles")
