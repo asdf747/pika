@@ -50,7 +50,7 @@ module.exports = {
             color: "BLUE",
             title: "Censored words",
             perPage: 8,
-            header: `${data.Words.length} censored word${data.Words.length !== 1 ? 's' : ''}`
+            header: `**${data.Words.length} censored word${data.Words.length !== 1 ? 's' : ''}**`
           }
 
           embedPages(client, message, data.Words, options)
