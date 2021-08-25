@@ -337,7 +337,7 @@ module.exports = {
         }
         if (isNaN(arguments[2])) role = message.guild.roles.cache.find(e => e.name.toLowerCase().includes(arguments[2]))
         if (!role) return message.channel.send(`This role doesn't exist.`)
-      } else if (arguments.slice(2).join(' ').includes(',')) {
+      } else if (arguments[2].includes(',')) {
         let roles = arguments.slice(2).join(' ').split(',')
         let wrong = false
         let invalis = []
@@ -360,7 +360,7 @@ module.exports = {
             Command: allcmds[ind],
             Roles: []
           }
-          arguments.slice(2).join(' ').split(',').forEach((r, i) => {
+          arguments[2].split(',').forEach((r, i) => {
             let rol = message.guild.roles.cache.get(r)
             if (isNaN(r)) rol = message.guild.roles.cache.find(rr => rr.name.toLowerCase().includes(r.toLowerCase()))
             if (r.startsWith('<@&') && r.endsWith('>')) {
