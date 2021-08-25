@@ -29,14 +29,14 @@ module.exports = {
             if (arguments[2] && arguments[2].startsWith('<#') && arguments[2].endsWith('>')) {
                 ch = arguments[2].replace('<#', '').replace('>')
                 channel = message.guild.channels.cache.get(ch)
-            } else if (Number(arguments[2])) channel = messsag.guild.roles.cache.get(arguments[2])
+            } else if (Number(arguments[2])) channel = message.guild.roles.cache.get(arguments[2])
             if (!channel) return message.channel.send("This channel doesn't exist.")
             let mas = 0
             channel.send(
                 new MessageEmbed()
                     .setTitle(`Role${roles.length !== 1 ? 's' : ''} member count.`)
                     .setDescription(`${roles.map(role => {
-                        return `${message.guild.roles.cache.get(role) ? `<@&${message.guild.roles.cache.get(role).id}> - ${message.guild.roles.cache.get(role).members.size}` : 'Unknown role.'}`
+                        return `${message.guild.roles.cache.get(role) ? `<@&${message.guild.roles.cache.get(role).id}> - ${Number(message.guild.roles.cache.get(role).members.size)}` : 'Unknown role.'}`
                     }).join('\n')}`)
             ).then(async msg => {
                 await new COUNT({
@@ -57,7 +57,7 @@ module.exports = {
                             new MessageEmbed()
                                 .setTitle(`Role${roles.length !== 1 ? 's' : ''} member count.`)
                                 .setDescription(`${roles.map(role => {
-                                    return `${message.guild.roles.cache.get(role) ? `<@&${message.guild.roles.cache.get(role).id}> - ${message.guild.roles.cache.get(role).members.size}` : 'Unknown role.'}`
+                                    return `${message.guild.roles.cache.get(role) ? `<@&${message.guild.roles.cache.get(role).id}> - ${Number(message.guild.roles.cache.get(role).members.size).toLocaleString("en-US")}` : 'Unknown role.'}`
                                 }).join('\n')}`)
                         )
                     })

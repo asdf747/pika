@@ -91,7 +91,7 @@ module.exports = async (client) => {
               new Discord.MessageEmbed()
                 .setTitle(`Role${count.Roles.length !== 1 ? 's' : ''} member count.`)
                 .setDescription(`${count.Roles.map(role => {
-                  return `${client.guilds.cache.get(count.Guild).roles.cache.get(role) ? `<@&${client.guilds.cache.get(count.Guild).roles.cache.get(role).id}> - ${client.guilds.cache.get(count.Guild).roles.cache.get(role).members.size}` : 'Unknown role.'}`
+                  return `${client.guilds.cache.get(count.Guild).roles.cache.get(role) ? `<@&${client.guilds.cache.get(count.Guild).roles.cache.get(role).id}> - ${Number(client.guilds.cache.get(count.Guild).roles.cache.get(role).members.size).toLocaleString("en-US")}` : 'Unknown role.'}`
                 }).join('\n')}`)
             )
           })
