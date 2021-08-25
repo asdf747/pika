@@ -146,7 +146,7 @@ let fond = false
             
           }
         })
-       if(fond && !total) return;
+       if(fond && !total) return message.react('⚠️')
         
 
         const dote = new Date()
@@ -202,7 +202,7 @@ const track = new Discord.MessageEmbed()
           }
           }
         }
-        if(diso) return;
+        if(diso) return message.react('⚠️')
 
         for (const permission of permissions) {
           

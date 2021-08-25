@@ -8,7 +8,7 @@ module.exports = {
     minArgs: 1,
     expectedArgs: 'create <roles[split by ,]> [channel]',
     permissions: "ADMINISTRATOR",
-    description: 'Create a role counter embed that updates every 30 minutes',
+    description: 'Creates a role member counter embed that updates every 30 minutes',
     subCommands: 'remove list',
     callback: async (message, arguments, text, client) => {
         if (arguments[0].toLowerCase() === 'create') {
