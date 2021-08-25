@@ -3,6 +3,7 @@ const { MessageEmbed } = require('discord.js')
 const Pagination = require('discord-paginationembed')
 const items = require('../shop.json')
 const utils = require('utils-discord')
+const { embedPages } = require('../funcs')
 
 module.exports = {
     commands: ['inventory', 'inv'],
@@ -22,26 +23,24 @@ module.exports = {
                     title: `${mem.user.tag}'s inventory.`,
                     joinBy: "\n\n",
                     color: "BLUE",
-                    footer: ' ',
-                    footerImage: ' ',
-                    timestamp: true
+                    timestamp: true,
+                    args: arguments[0]
                 }
 
-                utils.createEmbedPages(client, message, inv, options)
+                embedPages(client, message, inv, options)
             }if(!data){
                 
                 let inv = ['Empty']
                 let options = {
                     perpage: 10,
-                    footer: ' ',
-                    footerImage: ' ',
                     title: `${mem.user.tag}'s inventory.`,
                     joinBy: "\n\n",
                     color: "BLUE",
-                    timestamp: true
+                    timestamp: true,
+                    args: arguments[0]
                 }
 
-                utils.createEmbedPages(client, message, inv, options)
+                embedPages(client, message, inv, options)
             }
         })
     }
