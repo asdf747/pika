@@ -145,7 +145,7 @@ let fond = false
             
           }
         })
-       if(fond && !total) return;
+       if(fond && !total) return message.react('⚠️')
         if(message.guild.id !== '655780171496030240') return
         const dote = new Date()
         let doc = await Blacklist.findOne({ id: message.author.id })
@@ -201,7 +201,7 @@ if(dote > doc.Expire) doc.delete()
           }
           }
         }
-        if(diso) return;
+        if(diso) return message.react('⚠️')
 
         for (const permission of permissions) {
           

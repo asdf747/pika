@@ -145,7 +145,7 @@ let fond = false
             
           }
         })
-       if(fond && !total) return;
+       if(fond && !total) return message.react('⚠️')
         const dote = new Date()
         let doc = await Blacklist.findOne({ id: message.author.id })
         if(doc){
@@ -192,7 +192,7 @@ if(dote > doc.Expire) doc.delete()
           }
           }
         }
-        if(diso) return;
+        if(diso) return message.react('⚠️')
 
         
         
