@@ -84,8 +84,9 @@ module.exports = async (client) => {
     counts.forEach(count => {
       schedule.scheduleJob("*/30 * * * *", async function () {
         if (client.guilds.cache.get(count.Guild).channels.cache.get(count.Channel) && client.guilds.cache.get(count.Guild).channels.cache.get(count.Channel).messages.fetch(count.Message)) {
-          let msg = await client.guilds.cache.get(count.Guild).channels.cache.get(count.Channel).messages.fetch(count.Message)
-          if (msg) {
+         client.guilds.cache.get(count.Guild).channels.cache.get(count.Channel).messages.fetch(count.Message).then(msg => {
+
+         
             msg.edit(
               new Discord.MessageEmbed()
                 .setTitle(`Role${count.Roles.length !== 1 ? 's' : ''} member count.`)
@@ -93,7 +94,8 @@ module.exports = async (client) => {
                   return `${client.guilds.cache.get(count.Guild).roles.cache.get(role) ? `<@&${client.guilds.cache.get(count.Guild).roles.cache.get(role).id}> - ${client.guilds.cache.get(count.Guild).roles.cache.get(role).members.size}` : 'Unknown role.'}`
                 }).join('\n')}`)
             )
-          }
+          })
+          
         }
       })
     })
