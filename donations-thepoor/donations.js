@@ -26,7 +26,7 @@ module.exports = {
           .setDescription(`:x: This user doesn't have any donation logged in this server.`)
           .setColor(15158332)
         )
-        const thing = data.Donations.map(
+        const thing = data.Donations.reverse().map(
           (w, i) => 
           `**${i + 1}. Logger:** ${w.Logger}\n**Donation:** ${w.Donation}\nLogged on ${moment(w.Date).format('LLLL')} [${moment(w.Date, "YYYYMMDD").fromNow()}]`
         )
