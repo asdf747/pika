@@ -18,6 +18,7 @@ const db = require('../funcs')
 const no = require('../models/jsons')
 const temprole = require('../models/temprole')
 const COUNT = require('../models/rolecount')
+const reactionrol = require('../models/reactionroles')
 
 module.exports = async (client) => {
   let gos = await no.find()
@@ -101,9 +102,48 @@ module.exports = async (client) => {
     })
   }
 
+  let reactionroles = await reactionrol.find()
+
+  async function reactionrole(client, reactionroles) {
+    reactionroles.forEach(async reactionrolee => {
+        let msg = await client.guilds.cache.get(reactionrolee.Guild).channels.cache.get(reactionrolee.Channel).messages.fetch(reactionrolee.Message)
+        if(msg) {
+        const collector = msg.createReactionCollector((reaction, user) => Number(user.id), { dispose: true })
+        collector.on('collect', async (r, u) => {
+          let findemoji = reactionrolee.Roles.find(e => e.Emoji === r.emoji.toString())
+          if (findemoji) {
+            const rolo = client.guilds.cache.get(reactionrolee.Guild).roles.cache.get(findemoji.Role)
+            if (rolo) {
+              const member = client.guilds.cache.get(reactionrolee.Guild).members.cache.get(u.id)
+              if (member) {
+                member.roles.add(rolo)
+
+              }
+            }
+          }
+        })
+        collector.on('remove', async (r, u) => {
+          let findemoji = reactionrolee.Roles.find(e => e.Emoji === r.emoji.toString())
+          if (findemoji) {
+            const rolo = client.guilds.cache.get(reactionrolee.Guild).roles.cache.get(findemoji.Role)
+            if (rolo) {
+              const member = client.guilds.cache.get(reactionrolee.Guild).members.cache.get(u.id)
+              if (member) {
+                member.roles.remove(rolo)
+
+              }
+            }
+          }
+        })
+      }
+    })
+  }
+
+
   await temp(client, temps)
   await temprolesg(client, temproles)
   await count(client, counts)
+  await reactionrole(client, reactionroles)
 
   console.log(`Set bot's activity to ${activity}`)
   loadCommands(client)
