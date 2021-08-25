@@ -309,7 +309,6 @@ module.exports = {
       allalias.push(aliases)
 
     }
-
     let findcmd = allcmds.find(e => e === arguments.join(' ').toLowerCase())
     let ind = allcmds.findIndex(e => e === arguments.join(' ').toLowerCase())
     if (!findcmd) {
