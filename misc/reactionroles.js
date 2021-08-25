@@ -31,8 +31,8 @@ module.exports = {
                 if (rolgo.position >= message.guild.me.roles.highest.position) high_roles.push(i + 1)
                 if (rolgo.position >= message.member.roles.highest.position) high_roles_member.push(i + 1)
                 if (rolgo) valid_roles.push(rolgo.id)
-                if (!emoji) invaidEmojis.push(roleo[1])
-                if (emoji) emojis.push(i + 1)
+                if (!emoji) invaidEmojis.push(i + 1)
+                if (emoji) emojis.push(roleo[1])
             })
             if (problem) return message.channel.send(":x: Couldn't create reaction roles")
             // return if there's an invalid role or emoji
