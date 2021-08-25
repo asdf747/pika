@@ -26,8 +26,8 @@ module.exports = {
                 if (roleo.length > 2) return problem = true
                 const rolgo = message.guild.roles.cache.find(r => r.id === roleo[0])
                 const emoji = /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])/gi.test(
-                    roleo[1]
-                ) || client.emojis.cache.find(em => em.toString() === roleo[1])
+                    roleo[1].split(' ')[0]
+                ) || client.emojis.cache.find(em => em.toString() === roleo[1].split(' ')[0])
                 if (!rolgo) return invalidRoles.push(i + 1)
                 if (rolgo.position >= message.guild.me.roles.highest.position) high_roles.push(i + 1)
                 if (rolgo.position >= message.member.roles.highest.position) high_roles_member.push(i + 1)
