@@ -48,7 +48,7 @@ module.exports = {
                 message.channel.send(":white_check_mark: | Created Role member counter.")
                 mas = msg.id
             })
-            schedule.scheduleJob("*/30 * * * *", function () {
+            schedule.scheduleJob("*/30 * * * *", async function () {
                 if (message.guild.channels.cache.get(channel.id) && message.guild.channels.cache.get(channel.id).messages.fetch(mas)) {
                     let msg = await message.guild.channels.cache.get(channel.id).messages.fetch(mas)
                     if (msg) {

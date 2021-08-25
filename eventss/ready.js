@@ -82,7 +82,7 @@ module.exports = async (client) => {
 
   async function count(client, counts) {
     counts.forEach(count => {
-      schedule.scheduleJob("*/30 * * * *", function () {
+      schedule.scheduleJob("*/30 * * * *", async function () {
         if (client.guilds.cache.get(count.Guild).channels.cache.get(count.Channel) && client.guilds.cache.get(count.Guild).channels.cache.get(count.Channel).messages.fetch(count.Message)) {
           let msg = await client.guilds.cache.get(count.Guild).channels.cache.get(count.Channel).messages.fetch(count.Message)
           if (msg) {
