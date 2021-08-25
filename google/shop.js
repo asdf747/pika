@@ -39,7 +39,7 @@ module.exports = {
             title: `Shop`,
             joinBy: "\n\n",
             color: "BLUE",
-            args: arguments[0]
+            args: arguments[0],
             timestamp: true
         }
 
