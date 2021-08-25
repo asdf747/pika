@@ -2,9 +2,9 @@ const { MessageEmbed } = require('discord.js')
 
 module.exports = {
   commands: 'react',
-  description: 'Reacts to a message using ID.',
+  description: 'Reacts to a message using message ID.',
   minArgs: 2,
-  expectedArgs: '[channel] <message_ID> <emojis>',
+  expectedArgs: '[channel] <message_ID> <emojis[split by ,]>',
   callback: async (message, arguments, text, client) => {
     let checker = 0
     if(arguments[0].startsWith('<#') && arguments[0].endsWith('>')) checker = 1
@@ -29,12 +29,16 @@ if(!channel) return message.channel.send(
   .setDescription(':x: This channel doesn\'t exist.')
 )
 message.delete()
-
+let kong = await channel.messages.fetch(arguments[checker])
+if(!kong) return message.channel.send(
+  new MessageEmbed()
+  .setAuthor(message.author.username, message.author.displayAvatarURL())
+  .setColor(15158332)
+  .setDescription(`:x: An error has occured!\n\n\`Unknown message\``)
+)
 mojis.forEach(emoji => {
   let moji = emoji.replace(/\s/g, '')
-channel.messages.fetch(arguments[checker])
-.then(msg => msg.react(moji)
-)
+kong.react(moji)
 })
 
 
@@ -49,7 +53,13 @@ if(!channel) return message.channel.send(
   .setColor(15158332)
   .setDescription(':x: This channel doesn\'t exist.')
 )
-
+let kong = await channel.messages.fetch(arguments[checker])
+if(!kong) return message.channel.send(
+  new MessageEmbed()
+  .setAuthor(message.author.username, message.author.displayAvatarURL())
+  .setColor(15158332)
+  .setDescription(`:x: An error has occured!\n\n\`Unknown message\``)
+)
 channel.messages.fetch(arguments[checker])
 .then(msg => msg.react(emojis[0])
 .then(message.delete())
