@@ -37,7 +37,7 @@ module.exports = {
                     .setTitle(`Role${roles.length !== 1 ? 's' : ''} member count.`)
                     .setDescription(`${roles.map(role => {
                         return `${message.guild.roles.cache.get(role) ? `<@&${message.guild.roles.cache.get(role).id}> - ${message.guild.roles.cache.get(role).members.size}` : 'Unknown role.'}`
-                    })}`)
+                    }).join('\n')}`)
             ).then(async msg => {
                 await new COUNT({
                     Guild: message.guild.id,
@@ -73,7 +73,7 @@ module.exports = {
             let list = await COUNT.find({ Guild: message.guild.id })
             if (!list.length) return message.channel.send("The list is empty.")
             let listing = list.map((v, i) => {
-                return `**${i + 1}.** ${v.Message}\n**Channel:** <#${message.guild.channels.cache.get(v.Channel).id}>\n**ID:** ${v.Message}\n**Link:** [Click here](https://discord.com/channels/${v.Guild}/${v.Channel}/${v.Message})`
+                return `**${i + 1}.** ${v.Message}\n**Channel:** <#${message.guild.channels.cache.get(v.Channel).id}>\n**Link:** [Click here](https://discord.com/channels/${v.Guild}/${v.Channel}/${v.Message})`
             })
 
             let options = {
