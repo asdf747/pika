@@ -5,6 +5,7 @@ const { embedPages } = require('../funcs')
 module.exports = {
     commands: ['reactionroles', 'rr'],
     minArgs: 1,
+    permissions: "ADMINISTRATOR",
     subCommands: 'remove list',
     expectedArgs: 'create role_id = emoji[split by ,] [channel]',
     callback: async (message, arguments, text, client) => {
