@@ -20,6 +20,7 @@ module.exports = {
       .setTitle("Donations leaderboard.")
       .setDescription(lb)
       .setFooter(message.guild.name, message.guild.iconURL())
+      .setColor("BLUE")
     )
   }
 }
