@@ -3,7 +3,7 @@ const Pagination = require('discord-paginationembed')
 const { MessageEmbed } = require('discord.js')
 const economy = require('../models/economy')
 const utils = require('utils-discord')
-
+const { embedPages } = require('../funcs')
 module.exports = {
     commands: 'shop',
     callback: async(message, arguments, text, client) => {
@@ -39,11 +39,10 @@ module.exports = {
             title: `Shop`,
             joinBy: "\n\n",
             color: "BLUE",
-            footer: ' ',
-            footerImage: ' ',
+            args: arguments[0]
             timestamp: true
         }
 
-        utils.createEmbedPages(client, message, items, options)
+        embedPages(client, message, items, options)
     }
 }
