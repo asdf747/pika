@@ -12,6 +12,7 @@ const db = require('quick.db')
 const config = require('../config.json')
 const { MessageMenu, MessageMenuOption } = require('discord-buttons')
 const REQUIRED = require('../models/dis')
+const { embedPages } = require('../funcs')
 
 module.exports = {
   commands: 'disable',
@@ -19,6 +20,7 @@ module.exports = {
   description: 'Disables a command.',
   minArgs: 1,
   expectedArgs: '<command>',
+  subCommands: 'list',
   callback: async (message, arguments, text, client) => {
     let allcmds = []
     let allalias = []
@@ -268,7 +270,23 @@ module.exports = {
       googleonly.push(mainCommand)
 
     }
-
+    if (arguments[0].toLowerCase() === 'list') {
+      await REQUIRED.findOne({ Guild: message.guild.id }, async (err, data) => {
+        if (data) {
+          let list = data.Cmds.filter(e => e.Disabled).map((w, i) => `**${i+1}. ${w.Command}**`)
+          if(!list.length) return message.channel.send("The list is empty")
+          let options = {
+            title: "Disabled commands",
+            color: "BLUE",
+            joinBy: '\n\n'
+          }
+          embedPages(client, message, list, options)
+        }if(!data){
+          message.channel.send("The list is empty")
+        }
+      })
+      return
+    }
     let findcmd = allcmds.find(e => e === arguments.join(' ').toLowerCase())
     let ind = allcmds.findIndex(e => e === arguments.join(' ').toLowerCase())
     if (!findcmd) {
