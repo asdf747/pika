@@ -8,7 +8,7 @@ module.exports = {
   permissionError: "You can't use this command.",
   description: 'Fetches invites or bans',
   callback: async (message, arguments, text, client) => {
-    const guild = message.guild
+    const { guild } = message
 
 if(arguments[0].toLowerCase() === "bans"){
 guild.fetchBans().then(bans => message.lineReplyNoMention(
@@ -16,6 +16,7 @@ guild.fetchBans().then(bans => message.lineReplyNoMention(
   .setTitle("Fetched bans!")
   .setDescription(`**${bans.size}** total ban(s).`)
   .setTimestamp()
+  .setColor("BLUE")
 ))
 
 }
@@ -25,11 +26,14 @@ guild.fetchInvites().then(invites => message.lineReplyNoMention(
   .setTitle("Fetched bans!")
   .setDescription(`**${invites.size}** total invite(s).`)
   .setTimestamp()
+  .setColor("BLUE")
 ))
 } else if(arguments[0].toLowerCase() === "info"){
   const info = new MessageEmbed()
   .setTitle("Fetch types")
   .setDescription(`**Bans**\n**Invites**`)
+  .setTimestamp()
+  .setColor("BLUE")
   message.lineReplyNoMention(info)
 }
 else return message.lineReplyNoMention("Invalid argument.")
