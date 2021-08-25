@@ -84,9 +84,9 @@ module.exports = async (client) => {
     counts.forEach(count => {
       schedule.scheduleJob("*/30 * * * *", async function () {
         if (client.guilds.cache.get(count.Guild).channels.cache.get(count.Channel) && client.guilds.cache.get(count.Guild).channels.cache.get(count.Channel).messages.fetch(count.Message)) {
-         client.guilds.cache.get(count.Guild).channels.cache.get(count.Channel).messages.fetch(count.Message).then(msg => {
+          client.guilds.cache.get(count.Guild).channels.cache.get(count.Channel).messages.fetch(count.Message).then(msg => {
 
-         
+
             msg.edit(
               new Discord.MessageEmbed()
                 .setTitle(`Role${count.Roles.length !== 1 ? 's' : ''} member count.`)
@@ -95,7 +95,7 @@ module.exports = async (client) => {
                 }).join('\n')}`)
             )
           })
-          
+
         }
       })
     })
@@ -120,18 +120,6 @@ module.exports = async (client) => {
 
   getUsers()
 
-  schedule.scheduleJob('*/30 * * * *', function () {
-    client.channels.cache.get('809824294216400926').messages.fetch('875397922215297034').then(msg => {
-      const roles = '783741126422560809,783741208270077975,783741256458567700,783744934259458105,790259557490360400,783741322007281705,823943599183233095,783741544107737099,785341759634276364,798636723185778738,798618716102590464,798636849877876746,783741061406392360,799132388302913556,786213668517314571,792749154128101386,795200451137634315,786205466258702386'
-      msg.edit(
-        new Discord.MessageEmbed()
-          .setTitle("Roles member count.")
-          .setDescription(roles.split(',').map(role => {
-            return `**<@&${client.guilds.cache.get('655780171496030240').roles.cache.get(role).id}>** - ${parseInt(client.guilds.cache.get('655780171496030240').roles.cache.get(role).members.size).toLocaleString("en-US")}`
-          }))
-      )
-    })
-  })
 
 
 }
