@@ -7,19 +7,11 @@ module.exports = {
     minArgs: 1,
     permissions: "ADMINISTRATOR",
     subCommands: 'remove list',
-    expectedArgs: 'create [channel] role_id = emoji[split by ,]',
+    expectedArgs: 'create role_id = emoji[split by ,] [channel]',
     callback: async (message, arguments, text, client) => {
         if (arguments[0].toLowerCase() === 'create') {
-            let lol = 1
-            let channel = message.channel
             if (!arguments[1]) return message.channel.send(":x: Invalid arguments")
-            if(arguments[1].startsWith('<#') && arguments[1].endsWith('>')){
-                lol = 2
-                nomnom = arguments[1].replace('<#','').replace('>','')
-                channel = message.guild.channels.cache.get(nomnom)
-            }
-            if(!channel) return message.channel.send(":x: This channel doesn't exist")
-            let roles = arguments.slice(lol).join('').split(',')
+            let roles = arguments.slice(1).join('').split(',')
             if (roles.length > 9) return message.channel.send("Reaction roles can't be more than 9 roles")
             let invalidRoles = []
             let invaidEmojis = []
@@ -35,13 +27,13 @@ module.exports = {
                 const rolgo = message.guild.roles.cache.find(r => r.id === roleo[0])
                 const emoji = /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])/gi.test(
                     roleo[1].split(' ')[0]
-                ) || client.emojis.cache.find(em => em.toString() === `${roleo[1].split(' ')[0]}`)
+                ) || client.emojis.cache.find(em => em.toString() === `${roleo[1].split(' ')[0].toString()}`)
                 if (!rolgo) return invalidRoles.push(i + 1)
                 if (rolgo.position >= message.guild.me.roles.highest.position) high_roles.push(i + 1)
                 if (rolgo.position >= message.member.roles.highest.position) high_roles_member.push(i + 1)
                 if (rolgo) valid_roles.push(rolgo.id)
                 if (!emoji) invaidEmojis.push(i + 1)
-                if (emoji) emojis.push(roleo[1].split(' ')[0])
+                if (emoji) emojis.push(roleo[1].split(' ')[0].toString())
             })
             if (problem) return message.channel.send(":x: Couldn't create reaction roles")
             // return if there's an invalid role or emoji
@@ -49,6 +41,12 @@ module.exports = {
             if (high_roles.length) return message.channel.send(`:x: Role${high_roles.length !== 1 ? 's' : ''} number ${high_roles.map(e => e)} ${high_roles.length !== 1 ? 'are' : 'is'} higher than me`)
             if (high_roles_member.length) return message.channel.send(`:x: Role${high_roles_member.length !== 1 ? 's' : ''} number ${high_roles_member.map(e => e)} ${high_roles_member.length !== 1 ? 'are' : 'is'} higher than you`)
             if (invaidEmojis.length) return message.channel.send(`:x: Emoji${invaidEmojis.length !== 1 ? 's' : ''} number ${invaidEmojis.map(e => e)} ${invaidEmojis.length !== 1 ? 'are' : 'is'} invalid`)
+            let channel = message.channel
+            if (arguments[arguments.slice(1).length].startsWith('<#') && arguments[arguments.slice(1).length].endsWith('>')) {
+                nmonom = arguments[arguments.slice(1).length].replace('<#', '').replace('>', '')
+                channel = message.guild.channels.cache.get(nmonom)
+            }
+            if (!channel) return message.channel.send(`:x: That channel doesn't exist`) // return if channel doesn't exist
             let msg = await channel.send(
                 new MessageEmbed()
                     .setTitle("Reaction Roles")
