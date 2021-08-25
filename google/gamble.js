@@ -20,6 +20,7 @@ module.exports = {
         if (['all', 'max'].includes(arguments[0].toLowerCase())) betting_amount = 250000
         if (['all', 'max'].includes(arguments[0].toLowerCase()) && author_wallet < 250000) betting_amount = author_wallet
         if (arguments[0].toLowerCase() === 'half') betting_amount = author_wallet / 2
+        if (arguments[0].toLowerCase() === 'half' && author_wallet > 250000) betting_amount = 250000 / 2
         let chances = []
         let winchance = 19
         if (author_data && author_data.Inventory.find(item => item.Name.toLowerCase() === 'trophy') && author_data.Inventory.find(item => item.Name.toLowerCase() === 'trophy').Count >= 1) winchance = 27
