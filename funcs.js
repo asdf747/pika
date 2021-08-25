@@ -186,6 +186,128 @@ async function getRole(guild, message, arguments, number){
     return role
 }
 
+async function embedPages(client, message, array, options) {
+    if (!typeof options === 'object') return console.log("Options must be an array")
+    const { MessageEmbed } = require('discord.js')
+    let footer = options.footer || ''
+    title = options.title || ''
+    footerImage = options.footerImage || null
+    color = options.color || null
+    perPage = options.perPage || 5
+    thumbnail = options.thumbnail || null
+    header = options.header || ''
+    fields = options.fields || []
+    joinBy = options.joinBy || '\n'
+    image = options.image || null
+    author = options.author || ''
+    authorImage = options.authorImage || null
+    args = options.args || false
+    timestamp = options.timestamp || false
+    user = options.user || message.author
+    emojis = options.emojis || {
+        first_track: '⏮️',
+        previous_track: '◀',
+        next_track: '▶',
+        last_track: '⏭️',
+        delete: '🗑',
+        jump_to: '↗️'
+    }
+
+    let page = parseInt(args) ? args : 1;
+    parseInt(args) <= Math.ceil(array.length / perPage) ? page : page = 1;
+
+    let first = !isNaN(parseInt(args)) && !args.includes('.') ? perPage * (parseInt(page) - 1) : 0;
+    let second = !isNaN(parseInt(args)) && !args.includes('.') ? perPage * parseInt(page) : perPage;
+    let embed = new MessageEmbed()
+        .setTitle(title)
+        .setFooter(`${footer.length ? `${footer} |` : ''} Page: ${page}/${Math.ceil(array.length / perPage)}`, footerImage)
+        .setColor(color)
+        .setThumbnail(thumbnail)
+        .addFields(fields)
+        .setDescription(`${header ? `${header}\n` : ""}${array.slice(first, second).join(joinBy)}`)
+        .setAuthor(author, authorImage)
+
+    if(timestamp) embed.setTimestamp()
+    let msg = await message.channel.send(embed)
+    if(args === false){
+    await msg.react(emojis.first_track)
+    await msg.react(emojis.previous_track)
+    if (args === false && Math.ceil(array.length / perPage) > 3) await msg.react(emojis.jump_to)
+    await msg.react(emojis.next_track)
+    await msg.react(emojis.last_track)
+    await msg.react(emojis.delete)
+
+    const collector = msg.createReactionCollector((reaction, member) => member.id === user.id, {
+        time: 120000
+    });
+
+    collector.on('collect', async r => {
+        collector.resetTimer()
+        const reactionadd = array.slice(first + perPage, second + perPage).length;
+        const reactionremove = array.slice(first - perPage, second - perPage).length;
+        if (r.emoji.toString() === emojis.next_track && reactionadd !== 0) {
+            page++
+            r.users.remove(message.author.id);
+
+            first += perPage;
+            second += perPage;
+            embed.setDescription(`${header ? `${header}\n` : ""}${array.slice(first, second).join(joinBy)}`);
+            embed.setFooter(`${footer.length ? `${footer} |` : ''} Page: ${page}/${Math.ceil(array.length / perPage)}`, footerImage);
+            msg.edit(embed)
+        } else if (r.emoji.toString() === emojis.previous_track && reactionremove !== 0) {
+            r.users.remove(message.author.id);
+            page--
+            first -= perPage;
+            second -= perPage;
+            embed.setDescription(`${header ? `${header}\n` : ""}${array.slice(first, second).join(joinBy)}`);
+            embed.setFooter(`${footer.length ? `${footer} |` : ''} Page: ${page}/${Math.ceil(array.length / perPage)}`, footerImage);
+            msg.edit(embed)
+        } else if (r.emoji.toString() === emojis.first_track) {
+            r.users.remove(message.author.id);
+            page = 1;
+            first = 0;
+            second = perPage;
+            embed.setDescription(`${header ? `${header}\n` : ""}${array.slice(first, second).join(joinBy)}`);
+            embed.setFooter(`${footer.length ? `${footer} |` : ''} Page: ${page}/${Math.ceil(array.length / perPage)}`, footerImage);
+            msg.edit(embed)
+        } else if (r.emoji.toString() === emojis.last_track) {
+            r.users.remove(message.author.id);
+            page = Math.ceil(array.length / perPage);
+            first = (page * perPage) - perPage;
+            second = page * perPage;
+            embed.setDescription(`${header ? `${header}\n` : ""}${array.slice(first, second).join(joinBy)}`);
+            embed.setFooter(`${footer.length ? `${footer} |` : ''} Page: ${page}/${Math.ceil(array.length / perPage)}`, footerImage);
+            msg.edit(embed)
+        } else if (r.emoji.toString() === emojis.delete) {
+            msg.reactions.removeAll();
+        } else if (r.emoji.toString() === emojis.jump_to) {
+            if (args === false && Math.ceil(array.length / perPage) > 3) {
+                r.users.remove(message.author.id)
+                let mesg = await message.channel.send(`${message.author.toString()} Enter a page number`)
+                let coll = await message.channel.awaitMessages(x => x.author.id === message.author.id, { time: 10000, max: 1 })
+                if (!coll.size) mesg.delete()
+                if (Number(coll.first().content) && !coll.first().content.includes('.') && Math.ceil(array.length / perPage) >= Number(coll.first().content)) {
+                    mesg.delete()
+                    page = Number(coll.first().content)
+                    first = perPage * (parseInt(page) - 1)
+                    second = perPage * parseInt(page)
+                    embed.setDescription(`${header ? `${header}\n` : ""}${array.slice(first, second).join(joinBy)}`);
+                    embed.setFooter(`${footer.length ? `${footer} |` : ''} Page: ${page}/${Math.ceil(array.length / perPage)}`, footerImage);
+                    msg.edit(embed)
+                    coll.first().delete()
+                }else {
+                    mesg.delete()
+                    coll.first().delete()
+                }
+            }
+        }
+    })
+    collector.on('end', (_, reason) => {
+        if (reason === "time") msg.reactions.removeAll();
+    })
+}
+}
+
 module.exports = {
     die,
     tempban,
@@ -195,5 +317,6 @@ module.exports = {
     durationString,
     add,
     temprole,
-    getRole
+    getRole,
+    embedPages
 }
