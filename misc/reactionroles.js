@@ -49,7 +49,6 @@ module.exports = {
             if (high_roles.length) return message.channel.send(`:x: Role${high_roles.length !== 1 ? 's' : ''} number ${high_roles.map(e => e)} ${high_roles.length !== 1 ? 'are' : 'is'} higher than me`)
             if (high_roles_member.length) return message.channel.send(`:x: Role${high_roles_member.length !== 1 ? 's' : ''} number ${high_roles_member.map(e => e)} ${high_roles_member.length !== 1 ? 'are' : 'is'} higher than you`)
             if (invaidEmojis.length) return message.channel.send(`:x: Emoji${invaidEmojis.length !== 1 ? 's' : ''} number ${invaidEmojis.map(e => e)} ${invaidEmojis.length !== 1 ? 'are' : 'is'} invalid`)
-            let channel = message.channel
             let msg = await channel.send(
                 new MessageEmbed()
                     .setTitle("Reaction Roles")
