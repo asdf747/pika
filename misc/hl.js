@@ -1,5 +1,6 @@
 const HL = require('../models/highlight')
 const Pagination = require('discord-paginationembed')
+const { embedPages } = require('../funcs')
 
 module.exports = {
   commands: ['highlight', 'hl'],
@@ -7,16 +8,16 @@ module.exports = {
   expectedArgs: 'add [word]',
   subCommands: 'remove ignore list',
   callback: async (message, arguments, text, client) => {
-    if(arguments[0].toLowerCase() === 'add'){
+    if (arguments[0].toLowerCase() === 'add') {
       const Word = arguments.slice(1).join(' ')
-      if(!Word) return message.channel.send("Please specify a word.")
+      if (!Word) return message.channel.send("Please specify a word.")
       await HL.findOne({ Guild: message.guild.id }, async (err, data) => {
-        if(data){
+        if (data) {
           let kas = false
           data.Hls.filter(l => l.Owner === message.author.id).map((v, i) => {
-            if(v.Word.toLowerCase() === Word.toLowerCase() && v.Owner === message.author.id) kas = true
+            if (v.Word.toLowerCase() === Word.toLowerCase() && v.Owner === message.author.id) kas = true
           })
-          if(kas) return message.channel.send("This is already highlighted.")
+          if (kas) return message.channel.send("This is already highlighted.")
           let obj = {
             Word,
             Owner: message.author.id
@@ -24,7 +25,7 @@ module.exports = {
           data.Hls.push(obj)
           data.save()
           message.channel.send(`:white_check_mark: | Added ${Word} to your highlights.`)
-        }if(!data){
+        } if (!data) {
           await new HL({
             Guild: message.guild.id,
             Hls: [
@@ -37,76 +38,71 @@ module.exports = {
           message.channel.send(`:white_check_mark: | Added ${Word} to your highlights.`)
         }
       })
-    }else if(arguments[0].toLowerCase() === 'remove'){
+    } else if (arguments[0].toLowerCase() === 'remove') {
       const Word = arguments.slice(1).join(' ')
-      if(!Word) return message.channel.send("Please specify a word.")
+      if (!Word) return message.channel.send("Please specify a word.")
       await HL.findOne({ Guild: message.guild.id }, async (err, data) => {
-        if(data){
+        if (data) {
           let jas = false
           let numo = 0
           data.Hls.map((v, i) => {
-            if(v.Word.toLowerCase() === Word.toLowerCase() && v.Owner === message.author.id) {
+            if (v.Word.toLowerCase() === Word.toLowerCase() && v.Owner === message.author.id) {
               jas = true
               numo = i
               data.Hls.splice(i, 1)
-          data.save()
-              }
+              data.save()
+            }
           })
-          if(jas){
-          
-          message.channel.send(`:white_check_mark: | Removed ${Word} from your highlights.`)
+          if (jas) {
+
+            message.channel.send(`:white_check_mark: | Removed ${Word} from your highlights.`)
           }
-          if(!jas) return message.channel.send("This word isn't highlighted.")
-        }if(!data){
+          if (!jas) return message.channel.send("This word isn't highlighted.")
+        } if (!data) {
           message.channel.send("You don't have any highlights.")
         }
       })
-    }else if(arguments[0].toLowerCase() === 'list'){
+    } else if (arguments[0].toLowerCase() === 'list') {
       await HL.findOne({ Guild: message.guild.id }, async (err, data) => {
-        if(data){
+        if (data) {
           const list = data.Hls.filter(ass => ass.Owner === message.author.id).map((e, i) => `${e.Word}`)
-          if(!list.length) return message.channel.send("You don't have anything highlighted.")
+          if (!list.length) return message.channel.send("You don't have anything highlighted.")
           const ignoreuser = data.IgnoredUsers.filter(ass => ass.Owner === message.author.id).map((e, i) => `<@${e.ID}>`)
           const ignorechannel = data.IgnoredChannels.filter(ass => ass.Owner === message.author.id).map((e, i) => `<#${e.ID}>`)
-          const FieldsEmbed = new Pagination.FieldsEmbed()
-    .setArray(list)
-    .setAuthorizedUsers([message.author.id])
-    .setChannel(message.channel)
-    .setElementsPerPage(25)
-    .setPageIndicator(true)
-    .formatField('List: ', el => el);
+          let options = {
+            color: "BLUE",
+            title: "Highlights",
+            fields: [],
+            perPage: 25
+          }
 
-FieldsEmbed.embed
-  .setTitle("Highlights")
+          if (ignoreuser.length) options.fields.push({ name: 'Ignored users', value: ignoreuser, inline: true })
 
-  if(ignoreuser.length) FieldsEmbed.embed
-  .addField('Ignored users', ignoreuser)
+          if (ignorechannel.length) options.fields.push({ name: 'Ignored channels', value: ignorechannel, inline: true })
 
-  if(ignorechannel.length) FieldsEmbed.embed
-  .addField('Ignored channels', ignorechannel)
+          embedPages(client, message, list, options)
 
-FieldsEmbed.build();
-        }if(!data){
+        } if (!data) {
           message.channel.send("You don't have anything highlighted.")
         }
       })
-    }else if(arguments[0].toLowerCase() === 'ignore'){
+    } else if (arguments[0].toLowerCase() === 'ignore') {
       let type = 'member'
       let thing = message.mentions.members.first() || message.guild.members.cache.get(arguments[1])
-      if(!thing){
+      if (!thing) {
         type = 'channel'
         thing = message.mentions.channels.first() || message.guild.channels.cache.get(arguments[1])
       }
-      if(!thing) return message.channel.send('Invalid argument.')
-      if(type === 'member'){
+      if (!thing) return message.channel.send('Invalid argument.')
+      if (type === 'member') {
         await HL.findOne({ Guild: message.guild.id }, async (err, data) => {
-          
-          if(data){
+
+          if (data) {
             let las = false
             data.IgnoredUsers.filter(e => e.Owner === message.author.id).map((v, i) => {
-              if(v.ID === thing.id) las = true
+              if (v.ID === thing.id) las = true
             })
-            if(las) return message.channel.send("You're already ignoring this member.")
+            if (las) return message.channel.send("You're already ignoring this member.")
             let obj = {
               ID: thing.id,
               Owner: message.author.id
@@ -114,7 +110,7 @@ FieldsEmbed.build();
             data.IgnoredUsers.push(obj)
             data.save()
             message.channel.send(`:white_check_mark: | Ignored **${thing.user.tag}**`)
-          }if(!data){
+          } if (!data) {
             await new HL({
               Guild: message.guild.id,
               IgnoredUsers: [
@@ -127,14 +123,14 @@ FieldsEmbed.build();
             message.channel.send(`:white_check_mark: | Ignored **${thing.user.tag}**`)
           }
         })
-      }else if(type === 'channel'){
+      } else if (type === 'channel') {
         await HL.findOne({ Guild: message.guild.id }, async (err, data) => {
-          if(data){
+          if (data) {
             let las = false
             data.IgnoredChannels.filter(e => e.Owner === message.author.id).map((v, i) => {
-              if(v.ID === thing.id) las = true
+              if (v.ID === thing.id) las = true
             })
-            if(las) return message.channel.send("You're already ignoring this channel.")
+            if (las) return message.channel.send("You're already ignoring this channel.")
             let obj = {
               ID: thing.id,
               Owner: message.author.id
@@ -142,7 +138,7 @@ FieldsEmbed.build();
             data.IgnoredChannels.push(obj)
             data.save()
             message.channel.send(`:white_check_mark: | Ignored **#${thing.name}**`)
-          }if(!data){
+          } if (!data) {
             await new HL({
               Guild: message.guild.id,
               IgnoredChannels: [
@@ -156,65 +152,65 @@ FieldsEmbed.build();
           }
         })
       }
-    }else if(arguments[0].toLowerCase() === 'unignore'){
-let type = 'member'
+    } else if (arguments[0].toLowerCase() === 'unignore') {
+      let type = 'member'
       let thing = message.mentions.members.first() || message.guild.members.cache.get(arguments[1])
-      if(!thing){
+      if (!thing) {
         type = 'channel'
         thing = message.mentions.channels.first() || message.guild.channels.cache.get(arguments[1])
       }
-      if(!thing) return message.channel.send('Invalid argument.')
-      if(type === 'member'){
+      if (!thing) return message.channel.send('Invalid argument.')
+      if (type === 'member') {
         await HL.findOne({ Guild: message.guild.id }, async (err, data) => {
-          if(data){
+          if (data) {
             let igo = data.IgnoredUsers.filter(v => v.Owner === message.author.id)
-            if(!igo.length) return message.channel.send('You\'re not ignoring any member.')
+            if (!igo.length) return message.channel.send('You\'re not ignoring any member.')
             let her = false
             data.IgnoredUsers.map((v, i) => {
-              if(v.ID === thing.id && v.Owner === message.author.id) {
+              if (v.ID === thing.id && v.Owner === message.author.id) {
                 her = true
                 data.IgnoredUsers.splice(i, 1)
                 data.save()
               }
             })
-            if(!her) return message.channel.send("You're not ignoring this member.")
-            if(her) message.channel.send(`:white_check_mark: | Unignored **${thing.user.tag}**`)
-          }if(!data){
+            if (!her) return message.channel.send("You're not ignoring this member.")
+            if (her) message.channel.send(`:white_check_mark: | Unignored **${thing.user.tag}**`)
+          } if (!data) {
             message.channel.send('You\'re not ignoring any member.')
           }
         })
       }
-      if(type === 'channel'){
+      if (type === 'channel') {
         await HL.findOne({ Guild: message.guild.id }, async (err, data) => {
-          if(data){
+          if (data) {
             let igo = data.IgnoredChannels.filter(v => v.Owner === message.author.id)
-            if(!igo.length) return message.channel.send('You\'re not ignoring any channel.')
+            if (!igo.length) return message.channel.send('You\'re not ignoring any channel.')
             let her = false
             data.IgnoredChannels.map((v, i) => {
-              if(v.ID === thing.id && v.Owner === message.author.id) {
+              if (v.ID === thing.id && v.Owner === message.author.id) {
                 her = true
                 data.IgnoredChannels.splice(i, 1)
                 data.save()
               }
             })
-            if(!her) return message.channel.send("You're not ignoring this channel.")
-            if(her) message.channel.send(`:white_check_mark: | Unignored **#${thing.name}**`)
-          }if(!data){
+            if (!her) return message.channel.send("You're not ignoring this channel.")
+            if (her) message.channel.send(`:white_check_mark: | Unignored **#${thing.name}**`)
+          } if (!data) {
             message.channel.send('You\'re not ignoring any channel.')
           }
         })
       }
-    }else {
-    
+    } else {
+
       const Word = arguments.slice(0).join(' ')
-      if(!Word) return message.channel.send("Please specify a word.")
+      if (!Word) return message.channel.send("Please specify a word.")
       await HL.findOne({ Guild: message.guild.id }, async (err, data) => {
-        if(data){
+        if (data) {
           let kas = false
           data.Hls.filter(a => a.Owner === message.author.id).map((v, i) => {
-            if(v.Word.toLowerCase() === Word.toLowerCase()) kas = true
+            if (v.Word.toLowerCase() === Word.toLowerCase()) kas = true
           })
-          if(kas) return message.channel.send("This is already highlighted.")
+          if (kas) return message.channel.send("This is already highlighted.")
           let obj = {
             Word,
             Owner: message.author.id
@@ -222,7 +218,7 @@ let type = 'member'
           data.Hls.push(obj)
           data.save()
           message.channel.send(`:white_check_mark: | Added ${Word} to your highlights.`)
-        }if(!data){
+        } if (!data) {
           await new HL({
             Guild: message.guild.id,
             Hls: [
