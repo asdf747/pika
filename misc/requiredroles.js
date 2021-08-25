@@ -12,6 +12,7 @@ const db = require('quick.db')
 const config = require('../config.json')
 const { MessageMenu, MessageMenuOption } = require('discord-buttons')
 const REQUIRED = require('../models/toggle')
+const { embedPages } = require('../funcs')
 
 module.exports = {
   commands: 'requiredroles',
@@ -467,6 +468,18 @@ module.exports = {
           message.channel.send("There isn't any command added.")
         }
       })
+    } else if (arguments[0].toLowerCase() === 'list') {
+      let list = await REQUIRED.findOne({ Guild: message.guild.id })
+      if (!list) return message.channel.send("The list is empty")
+      const reqs = list.Cmds.reverse().map((w, i) => `**${i + 1}. Command: ${w.Command}**\n**Roles:** ${w.Roles.map(a => `<@&${a}>`).join(', ')}`)
+      let options = {
+        title: "Commands that have required roles",
+        thumbnail: message.guild.iconURL || null,
+        perPage: 7,
+        joinBy: '\n\n',
+        color: "BLUE"
+      }
+      embedPages(client, message, reqs, options)
     }
 
 
