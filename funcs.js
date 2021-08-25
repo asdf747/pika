@@ -230,7 +230,7 @@ async function embedPages(client, message, array, options) {
     if(timestamp) embed.setTimestamp()
     let msg = await message.channel.send(embed)
     if(array.length > perPage){
-    if(args === false){
+    if(!args === false) return
     await msg.react(emojis.first_track)
     await msg.react(emojis.previous_track)
     if (args === false && Math.ceil(array.length / perPage) > 3) await msg.react(emojis.jump_to)
@@ -308,7 +308,7 @@ async function embedPages(client, message, array, options) {
     })
 }
 }
-}
+
 
 module.exports = {
     die,
