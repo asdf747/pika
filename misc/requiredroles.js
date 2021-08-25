@@ -20,7 +20,7 @@ module.exports = {
   description: 'Adds required roles to a command',
   permissions: 'ADMINISTRATOR',
   expectedArgs: 'add <command> <roles>',
-  subCommands: 'remove',
+  subCommands: 'remove list',
   callback: async (message, arguments, text, client) => {
     let allcmds = []
     let allalias = []
