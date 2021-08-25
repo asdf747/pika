@@ -7,9 +7,6 @@ module.exports = {
   expectedArgs: 'add [word]',
   subCommands: 'remove ignore list',
   callback: async (message, arguments, text, client) => {
-    if(message.guild.id === '655780171496030240'){
-      if(!message.member.roles.cache.some(r => r.id === '783766428897378314')) return message.channel.send(`You need "${message.guild.roles.cache.get('783766428897378314').name}" to run this command`)
-    }
     if(arguments[0].toLowerCase() === 'add'){
       const Word = arguments.slice(1).join(' ')
       if(!Word) return message.channel.send("Please specify a word.")
