@@ -203,8 +203,7 @@ async function bomb(client, message, arguments, economy) {
 }
 
 async function cell(client, message, arguments, economy) {
-    const { notify } = require('./funcs')
-    const utils = require('utils-discord')
+    const { notify, embedPages } = require('./funcs')
     const msg = await message.channel.send("**Options:**\n`a`: Notifications\n`b`: Text someone\n`e`: Exit")
     const collcot = await message.channel.awaitMessages(x => x.author.id === message.author.id, { time: 7000, max: 1 })
     if (!collcot.size && msg) msg.delete()
@@ -222,12 +221,10 @@ async function cell(client, message, arguments, economy) {
                 title: `${message.author.tag}'s notifications`,
                 joinBy: "\n\n",
                 color: "BLUE",
-                footer: ' ',
-                footerImage: ' ',
                 timestamp: true
             }
 
-            utils.createEmbedPages(client, message, notifs_array, options)
+            embedPages(client, message, notifs_array, options)
             msg.delete()
             break
         case "e":
