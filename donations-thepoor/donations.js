@@ -33,7 +33,7 @@ module.exports = {
         let options = {
           perPage: 7,
           joinBy: '\n\n',
-          header: `${data.Donations.length} donation${data.Donations.length !== 1 ? 's' : ''}.`,
+          header: `**${data.Donations.length} donation${data.Donations.length !== 1 ? 's' : ''}.**`,
           title: `${member.user.tag}'s donations.`,
           footer: `ID: ${member.user.id}`,
           color: "BLUE"
