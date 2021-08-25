@@ -24,7 +24,6 @@ module.exports = {
                     joinBy: "\n\n",
                     color: "BLUE",
                     timestamp: true,
-                    args: arguments[0]
                 }
 
                 embedPages(client, message, inv, options)
@@ -37,7 +36,6 @@ module.exports = {
                     joinBy: "\n\n",
                     color: "BLUE",
                     timestamp: true,
-                    args: arguments[0]
                 }
 
                 embedPages(client, message, inv, options)
