@@ -27,13 +27,13 @@ module.exports = {
                 const rolgo = message.guild.roles.cache.find(r => r.id === roleo[0])
                 const emoji = /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])/gi.test(
                     roleo[1].split(' ')[0]
-                ) || client.emojis.cache.find(em => em.toString() === roleo[1].split(' ')[0])
+                ) || client.emojis.cache.find(em => em.toString() === `${roleo[1].split(' ')[0]}`)
                 if (!rolgo) return invalidRoles.push(i + 1)
                 if (rolgo.position >= message.guild.me.roles.highest.position) high_roles.push(i + 1)
                 if (rolgo.position >= message.member.roles.highest.position) high_roles_member.push(i + 1)
                 if (rolgo) valid_roles.push(rolgo.id)
                 if (!emoji) invaidEmojis.push(i + 1)
-                if (emoji) emojis.push(roleo[1])
+                if (emoji) emojis.push(roleo[1].split(' ')[0])
             })
             if (problem) return message.channel.send(":x: Couldn't create reaction roles")
             // return if there's an invalid role or emoji
