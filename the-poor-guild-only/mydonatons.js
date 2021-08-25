@@ -19,22 +19,23 @@ module.exports = {
           .setColor(15158332))
         const thing = data.Donations.map(
           (w, i) =>
-            `\`${i + 1}\` | **Logger:** ${w.Logger}\n**Donation:** ${w.Donation}\nLogged on ${moment(w.Date).format('LLLL')} [${moment(w.Date, "YYYYMMDD").fromNow()}]`
+            `**${i + 1}. Logger:** ${w.Logger}\n**Donation:** ${w.Donation}\nLogged on ${moment(w.Date).format('LLLL')} [${moment(w.Date, "YYYYMMDD").fromNow()}]`
         )
 
         let options = {
           perPage: 7,
           joinBy: '\n\n',
-          color: 65535,
+          color: "BLUE",
           footer: `ID: ${member.user.id}`,
           title: `${member.user.tag}'s donations.`,
-          header: `${data.Donations.length} donations.\n`
+          header: `**${data.Donations.length} donation${data.Donations.length !== 1 ? 's' : ''}.**`
         }
         embedPages(client, message, thing, options)
       } if (!data) {
         message.channel.send(
           new MessageEmbed()
             .setAuthor(message.author.username, message.author.displayAvatarURL())
+            .setTitle("No donations yet")
             .setDescription(`:x: You don't have any donation logged in this server.`)
             .setColor(15158332))
       }

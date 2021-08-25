@@ -2,6 +2,7 @@ const sche = require('../models/donations')
 const { MessageEmbed } = require('discord.js')
 const Pagination = require('discord-paginationembed');
 const moment = require('moment')
+const { embedPages } = require('../funcs')
 
 module.exports = {
   commands: ['donations', 'dono'],
@@ -27,26 +28,22 @@ module.exports = {
         )
         const thing = data.Donations.map(
           (w, i) => 
-          `\`${i + 1}\` | **Logger:** ${w.Logger}\n**Donation:** ${w.Donation}\nLogged on ${moment(w.Date).format('LLLL')} [${moment(w.Date, "YYYYMMDD").fromNow()}]`
+          `**${i + 1}. Logger:** ${w.Logger}\n**Donation:** ${w.Donation}\nLogged on ${moment(w.Date).format('LLLL')} [${moment(w.Date, "YYYYMMDD").fromNow()}]`
         )
-    const FieldsEmbed = new Pagination.FieldsEmbed()
-    .setArray(thing)
-    .setAuthorizedUsers([message.author.id])
-    .setChannel(message.channel)
-    .setElementsPerPage(8)
-    .setPageIndicator(true)
-    .formatField(`${data.Donations.length} donation${data.Donations.length !== 1 ? 's' : ''}.`, el => el);
-
-FieldsEmbed.embed
-  .setTitle(`${member.user.tag}'s donations.`)
-  .setColor(65535)
-  .setFooter(`ID: ${member.user.id}`)
-
-FieldsEmbed.build();
+        let options = {
+          perPage: 7,
+          joinBy: '\n\n',
+          header: `${data.Donations.length} donation${data.Donations.length !== 1 ? 's' : ''}.`,
+          title: `${member.user.tag}'s donations.`,
+          footer: `ID: ${member.user.id}`,
+          color: "BLUE"
+        }
+        embedPages(client, message, thing, options)
       } if(!data){
         message.channel.send(
           new MessageEmbed()
           .setAuthor(message.author.username, message.author.displayAvatarURL())
+          .setTitle("No donations yet")
           .setDescription(`:x: This user doesn't have any donation logged in this server.`)
           .setColor(15158332)
         )
