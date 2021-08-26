@@ -40,7 +40,8 @@
     "weird-to-normal-chars": "^1.6.0",
     "replace-special-characters": "^1.2.5",
     "keyv": "^4.0.3",
-    "mongojs": "^3.1.0"
+    "mongojs": "^3.1.0",
+    "discord-listing-embed-pages": "^1.0.0"
   },
   "devDependencies": {
     "node": "^16.6.1"
