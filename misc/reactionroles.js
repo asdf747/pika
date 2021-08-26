@@ -25,6 +25,7 @@ module.exports = {
                 const roleo = role.split('=')
                 if (roleo.length > 2) return problem = true
                 const rolgo = message.guild.roles.cache.find(r => r.id === roleo[0])
+                if(!roleo[1]) return problem = true
                 const emoji = /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])/gi.test(
                     `${roleo[1].split('>')[0].toString()}>`
                 ) || client.emojis.cache.find(em => em.toString() === `${roleo[1].split('>')[0].toString()}>`)
