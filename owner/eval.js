@@ -7,14 +7,14 @@ const day = require('dayjs')
 
 module.exports = {
   commands: 'eval',
-  description: 'Executes JavaScript code.',
+  description: 'Executes a JavaScript code.',
   minArgs: 1,
   expectedArgs: '<script>',
   callback: async (message, arguments, text, client) => {
     const code = arguments.slice(0).join(" ")
 
     try {
-      const result = eval(code)
+      const result = await eval(code)
       let output = result
       if(typeof result !== 'string'){
         output = inspect(result)
