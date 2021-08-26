@@ -6,7 +6,7 @@ module.exports = {
     description: "Displays all the guild emojis.",
     permissions: "MANAGE_EMOJIS",
     callback: async (message, arguments, text, client) => {
-        const emojis = message.guild.emojis.cache.sort((a, b) => b.createdTimestamp - a.createdTimestamp).map(emoji => {
+        const emojis = message.guild.emojis.cache.sort((a, b) => b.createdTimestamp - a.createdTimestamp).map(async emoji => {
             let author = await emoji.fetchAuthor()
             `${emoji.toString()}\n**Name:** ${emoji.name}\n**Animated:** ${emoji.animated}\n**Creator:** ${author.author.tag}\n**Created at:** ${moment(emoji.createdTimestamp).format('l')}`
         })
