@@ -32,23 +32,6 @@ module.exports = async (client, message) => {
   }
 
 
-  if (message.author.id != '538352367654141952') {
-    if (message.content.toLowerCase().includes("confis")) {
-      client.channels.cache.get('842970314022584332').send(
-        new Discord.MessageEmbed()
-          .setTitle("Confis was mentioned.")
-          .setDescription(`**User:** ${message.author.tag}\n**Channel:** #${message.channel.name}\n**Message:** ${message.content}\n**MessageURL:** [message](${message.url})`)
-          .setTimestamp()
-      )
-        .catch(err => client.channels.cache.get('842970314022584332').send(`**${err}**`))
-    }
-  }
-
-  // if(message.channel.id === "818842687460343848"){
-  // client.channels.cache.get('860903231193743380').send(`**${message.author.tag}:** ${message.content}`)
-  // }
-
-
   let doc = await BL.findOne({ Guild: message.guild.id })
   if (doc) {
     if (message.guild.id === "655780171496030240") {
