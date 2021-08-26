@@ -12,6 +12,7 @@ module.exports = {
         if(!member) return message.channel.send(":x: I can't find this member")
         if(!member.displayName.match(/[^a-zA-Z0-9]/g)) return message.channel.send(":x: This user is already decancered")
         if(member.roles.highest.position >= message.guild.me.roles.highest.position) return message.channel.send(':x: This member is higher than me')
+        if(member.roles.highest.position >= message.member.roles.highest.position) return message.channel.send(":x: This user is higher than you")
         let cleaned = weirdToNormalChars(member.displayName).replace(/[^a-zA-Z0-9]/g, '')
         if(!cleaned.length) cleaned = 'idk'
         member.setNickname(cleaned, 'Decancered')
