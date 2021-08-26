@@ -105,7 +105,7 @@ module.exports = {
         } else if (arguments[0].toLowerCase() === 'list') {
             let data = await reactionroles.find({ Guild: message.guild.id })
             if (!data || !data.length) return message.channel.send("The list is empty")
-            const list = data.map((w, i) => `**${i + 1}. ${w.Message}**\n**Channel:** <#${w.Channel}>\n**Link:** [Click here](https://discord.com/channels/${w.Guild}/${w.Channel}/${w.Message})`)
+            const list = data.map((w, i) => `**${i + 1}. ${w.Message}**\n**Channel:** <#${w.Channel}>\n**Roles count:** ${w.Roles.length}\n**Link:** [Click here](https://discord.com/channels/${w.Guild}/${w.Channel}/${w.Message})`)
             let options = {
                 color: "BLUE",
                 joinBy: '\n\n',
