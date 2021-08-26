@@ -52,7 +52,7 @@ module.exports = {
                 if (message.guild.channels.cache.get(channel.id) && message.guild.channels.cache.get(channel.id).messages.fetch(mas)) {
                     message.guild.channels.cache.get(channel.id).messages.fetch(mas).then(msg => {
 
-                    
+
                         msg.edit(
                             new MessageEmbed()
                                 .setTitle(`Role${roles.length !== 1 ? 's' : ''} member count.`)
@@ -61,7 +61,7 @@ module.exports = {
                                 }).join('\n')}`)
                         )
                     })
-                    
+
                 }
             })
         } else if (['remove', 'delete', '-'].includes(arguments[0].toLowerCase())) {

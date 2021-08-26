@@ -472,6 +472,7 @@ module.exports = {
       let list = await REQUIRED.findOne({ Guild: message.guild.id })
       if (!list) return message.channel.send("The list is empty")
       const reqs = list.Cmds.reverse().map((w, i) => `**${i + 1}. Command: ${w.Command}**\n**Roles:** ${w.Roles.map(a => `<@&${a}>`).join(', ')}`)
+      if (!reqs.length) return message.channel.send("The list is empty")
       let options = {
         title: "Commands that have required roles",
         thumbnail: message.guild.iconURL || null,
