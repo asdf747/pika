@@ -81,6 +81,7 @@ module.exports = {
                     { name: 'Mute role - `muterole`', value: `*${mute ? `<@&${mute}>` : "None"}*`, inline: true },
                     { name: 'Decancer on join - `decancer`', value: `*${decancer ? `Enabled` : "Disabled"}*`, inline: true }
                 )
+                .setDescription(`Use \`${prefix}serversettings <setting> <value>\` to change a setting value`)
         )
     }
 }
