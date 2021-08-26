@@ -17,6 +17,7 @@ module.exports = {
             let invaidEmojis = []
             let valid_roles = []
             let high_roles = []
+            let high_color = ''
             let high_roles_member = []
             let emojis = []
             let problem = false
@@ -35,6 +36,7 @@ module.exports = {
                 if (rolgo) valid_roles.push(rolgo.id)
                 if (!emoji) invaidEmojis.push(i + 1)
                 if (emoji) emojis.push(`${roleo[1].split('>')[0].toString()}>`)
+                if(!high_color.length) high_color = rolgo.hexColor
             })
             if (problem) return message.channel.send(":x: Couldn't create reaction roles")
             // return if there's an invalid role or emoji
@@ -52,6 +54,7 @@ module.exports = {
                 new MessageEmbed()
                     .setTitle("Reaction Roles")
                     .setDescription(valid_roles.map((r, i) => `<@&${r}> - ${emojis[i]}`).join('\n'))
+                    .setColor(high_color)
             )
             let gos = []
             valid_roles.forEach((idk, i) => {
