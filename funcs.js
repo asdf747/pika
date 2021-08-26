@@ -201,7 +201,6 @@ async function embedPages(client, message, array, options) {
     image = options.image || null
     author = options.author || ''
     authorImage = options.authorImage || null
-    args = options.args || false
     timestamp = options.timestamp || false
     user = options.user || message.author
     emojis = options.emojis || {
@@ -213,11 +212,10 @@ async function embedPages(client, message, array, options) {
         jump_to: '↗️'
     }
 
-    let page = parseInt(args) ? args : 1;
-    parseInt(args) <= Math.ceil(array.length / perPage) ? page : page = 1;
+    let page = 1;
 
-    let first = !isNaN(parseInt(args)) && !args.includes('.') ? perPage * (parseInt(page) - 1) : 0;
-    let second = !isNaN(parseInt(args)) && !args.includes('.') ? perPage * parseInt(page) : perPage;
+    let first = 0;
+    let second = perPage;
     let embed = new MessageEmbed()
         .setTitle(title)
         .setFooter(`${footer.length ? `${footer} |` : ''} Page: ${page}/${Math.ceil(array.length / perPage)}`, footerImage)
@@ -232,7 +230,7 @@ async function embedPages(client, message, array, options) {
     if (array.length > perPage) {
         await msg.react(emojis.first_track)
         await msg.react(emojis.previous_track)
-        if (args === false && Math.ceil(array.length / perPage) > 3) await msg.react(emojis.jump_to)
+        if (Math.ceil(array.length / perPage) > 3) await msg.react(emojis.jump_to)
         await msg.react(emojis.next_track)
         await msg.react(emojis.last_track)
         await msg.react(emojis.delete)
@@ -281,7 +279,7 @@ async function embedPages(client, message, array, options) {
             } else if (r.emoji.toString() === emojis.delete) {
                 msg.reactions.removeAll();
             } else if (r.emoji.toString() === emojis.jump_to) {
-                if (args === false && Math.ceil(array.length / perPage) > 3) {
+                if (Math.ceil(array.length / perPage) > 3) {
                     r.users.remove(message.author.id)
                     let mesg = await message.channel.send(`${message.author.toString()} Enter a page number`)
                     let coll = await message.channel.awaitMessages(x => x.author.id === message.author.id, { time: 10000, max: 1 })
