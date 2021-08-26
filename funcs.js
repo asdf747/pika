@@ -308,6 +308,26 @@ async function embedPages(client, message, array, options) {
     }
 }
 
+async function memberOrChannel(client, message, input){
+    let type = undefined
+    let member = message.guild.members.cache.get(input)
+    if(!member) member = message.guild.members.cache.find(m => m.user.username.toLowerCase() === input.toLowerCase())
+    if(input.startsWith('<@') && input.endsWith('>') || input.startsWith('<@!') && input.endsWith('>')){
+        lol = input.replace('<@','').replace('<@!','').replace('>','')
+        member = message.guild.members.cache.get(lol)
+    }
+    if(member) type = 'member'
+    if(!member){
+        let channel = message.guild.channels.cache.get(input)
+        if(input.startsWith('<#') && input.endsWith('>')){
+            nom = input.replace('<#','').replace('>','')
+            channel = message.guild.channels.cache.get(nom)
+        }
+        if(channel) type = 'chanell'
+    }
+    return type
+}
+
 
 module.exports = {
     die,
@@ -319,5 +339,6 @@ module.exports = {
     add,
     temprole,
     getRole,
-    embedPages
+    embedPages,
+    memberOrChannel
 }
