@@ -76,7 +76,10 @@ module.exports = {
                     if (rolo) {
                         const member = message.guild.members.cache.get(u.id)
                         if (member) {
-                            member.roles.add(rolo)
+                            if(!member.roles.cache.some(r => r.id === rolo.id)){
+                                member.roles.add(rolo)
+                            }
+                            
 
                         }
                     }
@@ -89,8 +92,12 @@ module.exports = {
                     const rolo = message.guild.roles.cache.get(valid_roles[ind])
                     if (rolo) {
                         const member = message.guild.members.cache.get(u.id)
-                        if (member) member.roles.remove(rolo)
+                        if (member) {
+                            if(member.roles.cache.some(r => r.id === rolo.id)){
+                            member.roles.remove(rolo)
+                        }
                     }
+                }
                 }
             })
 

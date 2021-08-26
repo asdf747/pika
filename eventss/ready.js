@@ -116,11 +116,12 @@ module.exports = async (client) => {
             if (rolo) {
               const member = client.guilds.cache.get(reactionrolee.Guild).members.cache.get(u.id)
               if (member) {
-                member.roles.add(rolo)
-
-              }
+                if(!member.roles.cache.some(r => r.id === rolo.id)){
+                    member.roles.add(rolo)
+                }
             }
           }
+        }
         })
         collector.on('remove', async (r, u) => {
           let findemoji = reactionrolee.Roles.find(e => e.Emoji === r.emoji.toString())
@@ -129,9 +130,10 @@ module.exports = async (client) => {
             if (rolo) {
               const member = client.guilds.cache.get(reactionrolee.Guild).members.cache.get(u.id)
               if (member) {
+                if(member.roles.cache.some(r => r.id === rolo.id)){
                 member.roles.remove(rolo)
-
-              }
+            }
+        }
             }
           }
         })
