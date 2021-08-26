@@ -29,7 +29,7 @@ module.exports = {
     if (!aroy.length) return message.channel.send('Nobody has this role yet.')
 
     let options = {
-      perPage: 13,
+      perPage: 7,
       color: role1.hexColor,
       title: `${role1.members.size} members`
     }
