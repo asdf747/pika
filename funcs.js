@@ -186,7 +186,7 @@ async function getRole(guild, message, arguments, number) {
     return role
 }
 
-async function embedPages(client, message, array, options) {
+async function embedPages(client, message, array, options = {}) {
     if (!typeof options === 'object') return console.log("Options must be an array")
     const { MessageEmbed } = require('discord.js')
     let footer = options.footer || ''
@@ -310,18 +310,18 @@ async function embedPages(client, message, array, options) {
 
 async function memberOrChannel(client, guild, input) {
     let type = undefined
-    let member = message.guild.members.cache.get(input)
-    if (!member) member = message.guild.members.cache.find(m => m.user.username.toLowerCase() === input.toLowerCase())
+    let member = guild.members.cache.get(input)
+    if (!member) member = guild.members.cache.find(m => m.user.username.toLowerCase() === input.toLowerCase())
     if (input.startsWith('<@') && input.endsWith('>') || input.startsWith('<@!') && input.endsWith('>')) {
         lol = input.replace('<@', '').replace('<@!', '').replace('>', '')
-        member = message.guild.members.cache.get(lol)
+        member = guild.members.cache.get(lol)
     }
     if (member) type = 'member'
     if (!member) {
-        let channel = message.guild.channels.cache.get(input)
+        let channel = guild.channels.cache.get(input)
         if (input.startsWith('<#') && input.endsWith('>')) {
             nom = input.replace('<#', '').replace('>', '')
-            channel = message.guild.channels.cache.get(nom)
+            channel = guild.channels.cache.get(nom)
         }
         if (channel) type = 'channel'
     }
