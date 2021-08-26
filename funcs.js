@@ -186,7 +186,7 @@ async function getRole(guild, message, arguments, number) {
     return role
 }
 
-async function embedPages(client, message, array, options = {}) {
+async function embedPages(client, message, array, options) {
     if (!typeof options === 'object') return console.log("Options must be an array")
     const { MessageEmbed } = require('discord.js')
     let footer = options.footer || ''
