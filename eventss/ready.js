@@ -108,7 +108,7 @@ module.exports = async (client) => {
     reactionroles.forEach(async reactionrolee => {
         let msg = await client.guilds.cache.get(reactionrolee.Guild).channels.cache.get(reactionrolee.Channel).messages.fetch(reactionrolee.Message)
         if(msg) {
-        const collector = msg.createReactionCollector((reaction, user) => Number(user.id), { dispose: true })
+        const collector = msg.createReactionCollector((reaction, user) => !user.bot, { dispose: true })
         collector.on('collect', async (r, u) => {
           let findemoji = reactionrolee.Roles.find(e => e.Emoji === r.emoji.toString())
           if (findemoji) {

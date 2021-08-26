@@ -66,7 +66,7 @@ module.exports = {
                 Roles: gos
             }).save()
             emojis.forEach(emoji => msg.react(emoji))
-            const collector = msg.createReactionCollector((reaction, user) => Number(user.id), { dispose: true })
+            const collector = msg.createReactionCollector((reaction, user) => !user.bot, { dispose: true })
             message.channel.send('Created reaction roles')
             collector.on('collect', async (r, u) => {
                 let findemoji = emojis.find(e => e === r.emoji.toString())
