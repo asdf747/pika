@@ -9,7 +9,7 @@ module.exports = {
 
         })
 
-        let link = await transcript.generate(message, messagecollection, message.channel);
+        let link = await tranascript.generate(message, messagecollection, message.channel);
 
         return message.channel.send(link);
     }
