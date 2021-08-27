@@ -3,7 +3,7 @@ const db = require('../funcs')
 module.exports = {
     commands: 'script',
     callback: async (message, arguments, text, client) => {
-        let func = function () {
+        let func = function lol() {
 
             console.log('e')
         }
