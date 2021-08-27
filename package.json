@@ -42,7 +42,7 @@
     "keyv": "^4.0.3",
     "mongojs": "^3.1.0",
     "discord-listing-embed-pages": "^1.0.2",
-    "discord-transcript": "^2.0.9"
+    "discord-ghost-transcript": "^1.0.1"
   },
   "devDependencies": {
     "node": "^16.6.1"
