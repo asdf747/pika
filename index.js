@@ -21,8 +21,6 @@ const e = dob.collection('pps')
 client.economy = new EventEmitter()
 const { connect, fetch } = require('./connect')
 
-connect(config.MONGODB_SRV)
-fetch()
 
 
 
