@@ -64,6 +64,7 @@ module.exports = (client, commandOptions) => {
     permissionsbot = [],
     description = '',
     requiredRoles = [],
+    cooldown = 0,
     callback,
   } = commandOptions
 
@@ -94,12 +95,12 @@ module.exports = (client, commandOptions) => {
   // Listen for messages
   client.on('message', async (message) => {
     const { member, content, guild } = message
-    if(message.channel.type === 'dm') return
+    if (message.channel.type === 'dm') return
     if (message.author.bot) return;
     let config = require('../config.json')
     let prefixxp = await client.prefixes.get(message.guild.id)
     let prefixx = config.prefix
-    if(prefixxp){prefixx = prefixxp[0].Prefix}
+    if (prefixxp) { prefixx = prefixxp[0].Prefix }
 
 
 
@@ -107,10 +108,10 @@ module.exports = (client, commandOptions) => {
 
 
 
-  
 
 
- 
+
+
 
 
     for (const alias of commands) {
@@ -122,108 +123,108 @@ module.exports = (client, commandOptions) => {
       ) {
         // A command has been ran
         let total = false
-let fond = false
+        let fond = false
         await REQUIRED.findOne({ Guild: message.guild.id }, async (err, data) => {
-          if(data){
+          if (data) {
             const mainCommand =
-        typeof commands === 'string'
-          ? commands
-          : commands[0]
-          
-          let findcmd = data.Cmds.find(e => e.Command === mainCommand)
-          if(findcmd) fond = true
-            if(findcmd){
+              typeof commands === 'string'
+                ? commands
+                : commands[0]
+
+            let findcmd = data.Cmds.find(e => e.Command === mainCommand)
+            if (findcmd) fond = true
+            if (findcmd) {
 
               findcmd.Roles.forEach(role => {
-                if(message.member.roles.cache.some(r => r.id === role)){
-                        total = true
-                      }
+                if (message.member.roles.cache.some(r => r.id === role)) {
+                  total = true
+                }
               })
-                
-              
+
+
             }
-            
+
           }
         })
-       if(fond && !total) return message.react('⚠️')
-        if(message.guild.id !== '655780171496030240') return
+        if (fond && !total) return message.react('⚠️')
+        if (message.guild.id !== '655780171496030240') return
         const dote = new Date()
         let doc = await Blacklist.findOne({ id: message.author.id })
-        if(doc){
-if(dote > doc.Expire) doc.delete()
+        if (doc) {
+          if (dote > doc.Expire) doc.delete()
         }
-        
-        if(doc) {
-      
+
+        if (doc) {
+
           const expiredate = moment(doc.Expire).fromNow()
           return message.lineReplyNoMention(`You're blacklisted from using this bot. Reason: \`${doc.reason}\` your blacklist ends ${expiredate}`)
         }
-        
-        const track = new Discord.MessageEmbed()
-        .setAuthor(message.author.tag, message.author.displayAvatarURL())
-        .setTitle(`${typeof commands === 'string' ? commands : commands[0]}`)
-        .setURL(`${message.url}`)
-        .setDescription(`\`\`\`${message}\`\`\``)
-        .setFooter(`ID: ${message.author.id}`)
-        .setTimestamp()
 
-        
-        if(category === 'gawandevent'){
+        const track = new Discord.MessageEmbed()
+          .setAuthor(message.author.tag, message.author.displayAvatarURL())
+          .setTitle(`${typeof commands === 'string' ? commands : commands[0]}`)
+          .setURL(`${message.url}`)
+          .setDescription(`\`\`\`${message}\`\`\``)
+          .setFooter(`ID: ${message.author.id}`)
+          .setTimestamp()
+
+
+        if (category === 'gawandevent') {
           let role11 = message.guild.roles.cache.get('783745136873439302')
           let role22 = message.guild.roles.cache.get('783745205684666419')
-          if(!message.member.roles.cache.some(r => (r.id === '783745136873439302' || r.id === '783745205684666419'))) return message.channel.send(`You need "${role11.name}" or "${role22.name}" to be able to use this command.`)
+          if (!message.member.roles.cache.some(r => (r.id === '783745136873439302' || r.id === '783745205684666419'))) return message.channel.send(`You need "${role11.name}" or "${role22.name}" to be able to use this command.`)
         }
-        if(category === 'afk'){
-            if(!member.roles.cache.some(r => (r.id === '846634087451590666' || r.id === '783925157168152606' || r.id === '784328545085554698' || r.id === '784335970333622304' || r.id === '786510942477221919' || r.id === '783745292590645269' || r.id === '792793362989187132' || r.id === '786951848891383839' || r.id === '822101979807088640' || r.id === '817393794835415111' || r.id === '794965963938070559' || r.id === '784335970333622304'))) return
+        if (category === 'afk') {
+          if (!member.roles.cache.some(r => (r.id === '846634087451590666' || r.id === '783925157168152606' || r.id === '784328545085554698' || r.id === '784335970333622304' || r.id === '786510942477221919' || r.id === '783745292590645269' || r.id === '792793362989187132' || r.id === '786951848891383839' || r.id === '822101979807088640' || r.id === '817393794835415111' || r.id === '794965963938070559' || r.id === '784335970333622304'))) return
         }
 
         // Ensure the user has the required permissions
-        if(type.toLowerCase() === 'guildonly'){
+        if (type.toLowerCase() === 'guildonly') {
           const check = client.guilds.cache.get(`${guildID}`)
-          if(!check) return console.log("Invalid guild ID.")
-            if(message.guild.id != `${guildID}`) return;
-          }
+          if (!check) return console.log("Invalid guild ID.")
+          if (message.guild.id != `${guildID}`) return;
+        }
 
 
-        if(disabled === true) return;
+        if (disabled === true) return;
 
         let diso = false
         let dop = await TOGGLE.findOne({ Guild: message.guild.id })
-        if(dop){
-          if(dop.Cmds.length){
-          const gas =
-        typeof commands === 'string'
-          ? commands
-          : commands[0]
-          let fino = dop.Cmds.find(e => e.Command === gas)
-          if(fino){
-            if(fino.Disabled === true) diso = true
-          }
+        if (dop) {
+          if (dop.Cmds.length) {
+            const gas =
+              typeof commands === 'string'
+                ? commands
+                : commands[0]
+            let fino = dop.Cmds.find(e => e.Command === gas)
+            if (fino) {
+              if (fino.Disabled === true) diso = true
+            }
           }
         }
-        if(diso) return message.react('⚠️')
+        if (diso) return message.react('⚠️')
 
         for (const permission of permissions) {
-          
+
           if (!member.hasPermission(permission)) {
             message.lineReply(
               new Discord.MessageEmbed()
-      .setAuthor(message.author.username, message.author.displayAvatarURL())
-      .setColor(15158332)
-      .setDescription(`:x: ${permissionError}`)
+                .setAuthor(message.author.username, message.author.displayAvatarURL())
+                .setColor(15158332)
+                .setDescription(`:x: ${permissionError}`)
             )
             return
           }
         }
 
         for (const permission of permissionsbot) {
-          
+
           if (!message.guild.me.hasPermission(permission)) {
             message.lineReply(
               new Discord.MessageEmbed()
-      .setAuthor(message.author.username, message.author.displayAvatarURL())
-      .setColor(15158332)
-      .setDescription(`:x: Missing permissions.`)
+                .setAuthor(message.author.username, message.author.displayAvatarURL())
+                .setColor(15158332)
+                .setDescription(`:x: Missing permissions.`)
             )
             return
           }
@@ -237,8 +238,8 @@ if(dote > doc.Expire) doc.delete()
             (role) => role.id === requiredRole
           )
 
-          if(!role) return;
-          
+          if (!role) return;
+
           if (!member.roles.cache.has(role.id)) {
             message.reply(
               `You must have the "${role.name}" role to use this command.`
@@ -246,7 +247,7 @@ if(dote > doc.Expire) doc.delete()
             return
           }
         }
-        
+
         const arguments = content.split(/[ ]+/)
         const args = arguments
 
@@ -257,66 +258,87 @@ if(dote > doc.Expire) doc.delete()
         ) {
           message.lineReplyNoMention(
             new Discord.MessageEmbed()
-      .setAuthor(message.author.username, message.author.displayAvatarURL())
-      .setColor("RED")
-      .setTimestamp()
-      .setFooter(message.guild.name)
-      .setThumbnail(message.guild.iconURL() || null)
-      .setDescription(`:x: Missing arguments please use the syntax below.\n\n\`\`\`${prefixx}${alias} ${expectedArgs}\`\`\`\n\n${description !== '' ? `**Description:**\n${description}\n\n` : ''}${subCommands.length ? `**Sub commands:**\n${subCommands.split(/[ ]+/).map(a => `\`${a}\``).join(' ')}\n\n` : ''}${permissions.length ? `**Required Permissions:**\n${permissions[0]}` : ''}`)
+              .setAuthor(message.author.username, message.author.displayAvatarURL())
+              .setColor("RED")
+              .setTimestamp()
+              .setFooter(message.guild.name)
+              .setThumbnail(message.guild.iconURL() || null)
+              .setDescription(`:x: Missing arguments please use the syntax below.\n\n\`\`\`${prefixx}${alias} ${expectedArgs}\`\`\`\n\n${description !== '' ? `**Description:**\n${description}\n\n` : ''}${subCommands.length ? `**Sub commands:**\n${subCommands.split(/[ ]+/).map(a => `\`${a}\``).join(' ')}\n\n` : ''}${permissions.length ? `**Required Permissions:**\n${permissions[0]}` : ''}`)
           )
-          
+
           return
         }
-        if(fond && total && !diso || !fond && !total && !diso){
-if(message.author.id != '538352367654141952'){
-client.channels.cache.get('826529902559232040').send(track)
-.catch(err => client.channels.cache.get('826529902559232040').send("Couldn't track command"))
-}
 
-await HISTORY.findOne({ Guild: message.guild.id, User: message.author.id }, async (err, data) => {
-          if(data){
-            const mon =
-        typeof commands === 'string'
-          ? commands
-          : commands[0]
-            let obj = {
-              Command: mon,
-              Args: arguments.join(' '),
-              Date: new Date()
-            }
-            data.Cmds.push(obj)
-            data.save()
-          }if(!data){
-            const mon =
-        typeof commands === 'string'
-          ? commands
-          : commands[0]
-            await new HISTORY({
-              Guild: message.guild.id,
-              User: message.author.id,
-              Cmds: [
-                {
-                  Command: mon,
-                  Args: arguments.join(' '),
-                  Date: new Date()
-                }
-              ]
-            }).save()
+        let cool = cooldown * 1000
+        let lasttime = await db.fetch(client, `${typeof commands === 'string' ? commands : commands[0]}_${message.author.id}`)
+        if (cooldown > 0 && lasttime !== null && cool - (Date.now() - lasttime) > 0) {
+          const timeObj = convertMS(cool - (Date.now() - lasttime))
+          let noa = await db.durationString(cool - (Date.now() - lasttime));
+          return message.channel.send(
+            new Discord.MessageEmbed()
+              .setAuthor(message.author.tag, message.author.displayAvatarURL())
+              .setTitle("Cooldown!")
+              .setTimestamp()
+              .setColor(15158332)
+              .setDescription(`:x: You're on a cooldown you need to wait \`${noa}\` to be able to use this command again`)
+          )
+
+        }
+
+        if (fond && total && !diso || !fond && !total && !diso) {
+          if (message.author.id != '538352367654141952') {
+            client.channels.cache.get('826529902559232040').send(track)
+              .catch(err => client.channels.cache.get('826529902559232040').send("Couldn't track command"))
           }
-        })
+
+          if(cooldown > 0){
+            await db.set(client, `${typeof commands === 'string' ? commands : commands[0]}_${message.author.id}`, Date.now())
+          }
+
+          await HISTORY.findOne({ Guild: message.guild.id, User: message.author.id }, async (err, data) => {
+            if (data) {
+              const mon =
+                typeof commands === 'string'
+                  ? commands
+                  : commands[0]
+              let obj = {
+                Command: mon,
+                Args: arguments.join(' '),
+                Date: new Date()
+              }
+              data.Cmds.push(obj)
+              data.save()
+            } if (!data) {
+              const mon =
+                typeof commands === 'string'
+                  ? commands
+                  : commands[0]
+              await new HISTORY({
+                Guild: message.guild.id,
+                User: message.author.id,
+                Cmds: [
+                  {
+                    Command: mon,
+                    Args: arguments.join(' '),
+                    Date: new Date()
+                  }
+                ]
+              }).save()
+            }
+          })
 
 
 
-        
-        callback(message, arguments, arguments.join(' '), client)
-}
+
+          callback(message, arguments, arguments.join(' '), client)
+        }
 
         return
       }
-      
+
     }
-    
+
   })
-  
-  
+
+
 }
