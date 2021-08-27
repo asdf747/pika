@@ -11,6 +11,7 @@ const HL = require('../models/highlight')
 const moment = require('moment')
 const AFK = require('../models/afks')
 const BOMB = require('../models/bomb')
+const AR = require('../models/autoresponse')
 
 
 module.exports = async (client, message) => {
@@ -79,6 +80,35 @@ module.exports = async (client, message) => {
 
 
   }
+
+
+
+  await AR.findOne({ Guild: message.guild.id }, async (err, data) => {
+    if (data) {
+      if (data.Ars.length) {
+        data.Ars.forEach(ar => {
+          if (message.content.toLowerCase().includes(ar.Trigger.toLowerCase())) {
+            if (ar.Response.length) {
+              message.channel.send(ar.Response
+                .replace(/(?<![A-Z]){user_username}(?![A-Z])/g, message.author.username)
+                .replace(/(?<![A-Z]){user_id}(?![A-Z])/g, message.author.id)
+                .replace(/(?<![A-Z]){user_mention}(?![A-Z])/g, message.author.toString())
+                .replace(/(?<![A-Z]){user}(?![A-Z])/g, message.author.toString())
+                .replace(/(?<![A-Z]){user_tag}(?![A-Z])/g, message.author.tag)
+                .replace(/(?<![A-Z]){user_nickname}(?![A-Z])/g, message.member.displayName)
+              )
+            }
+            if (ar.Emoji && ar.Emoji.length) {
+              ar.Emoji.forEach(emoji => {
+                if (client.emojis.cache.find(moj => moj.toString() === emoji)) message.react(`${emoji}`)
+
+              })
+            }
+          }
+        })
+      }
+    }
+  })
 
 
 
