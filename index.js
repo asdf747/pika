@@ -19,7 +19,6 @@ const mongojs = require('mongojs')
 const dob = mongojs('mydb')
 const e = dob.collection('pps')
 client.economy = new EventEmitter()
-const { connect, fetch } = require('./connect')
 
 
 
