@@ -1,4 +1,4 @@
-const { set } = require('../funcs')
+const db = require('../funcs')
 
 module.exports = {
     commands: 'script',
@@ -6,6 +6,6 @@ module.exports = {
         let action = async function(){
             message.channel.send('test')
         }
-        await set(client, 'test', action)
+        await db.set(client, 'test', action)
     }
 }
