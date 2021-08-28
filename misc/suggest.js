@@ -7,7 +7,7 @@ module.exports = {
     expectedArgs: "<suggestion>",
     descripton: "Suggests something",
     callback: async (message, arugments, text, client) => {
-        let suggestion = arguments.join(' ')
+        let suggestion = arguments.slice(0).join(' ')
         await suggest.findOne({ Guild: message.guild.id }, async (err, data) => {
             if (data) {
                 if(data.Channel === 'null') return message.channel.send("The suggestion channel isn't set yet")
