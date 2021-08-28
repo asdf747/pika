@@ -12,7 +12,7 @@ module.exports = {
         if(channel) channel = channel.id
         await suggest.findOne({ Guild: message.guild.id }, async(err, data) => {
             if(data){
-                await suggest.findOne({ Guild: message.guild.id }, { $set: {Channel: channel} })
+                await suggest.findOneAndUpdate({ Guild: message.guild.id }, { $set: {Channel: channel} })
                 message.channel.send(`Set the suggestion channel to **${channel ? channel.toString : 'none'}**`)
             }if(!data){
                 if(channel === 'null') return message.channel.send("The suggestion channel isn't even set")
