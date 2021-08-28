@@ -31,6 +31,7 @@ module.exports = {
                     msg.react('<a:TICK:881188150263816204>')
                     msg.react('<a:CROSS:881188274520072254>')
                 })
+                message.delete()
             } if (!data) {
                 return message.channel.send("The suggestion channel isn't set yet")
             }
