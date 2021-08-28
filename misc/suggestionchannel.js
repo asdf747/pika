@@ -9,7 +9,7 @@ module.exports = {
         let channel = message.mentions.channels.first()
         if(!channel && arguments[0] !== 'none') return message.channel.send("That channel doesn't exist")
         if(arguments[0] === 'none') channel = 'null'
-        await suggest.findOne({ Guild: message.guild.id }, async(err, data => {
+        await suggest.findOne({ Guild: message.guild.id }, async(err, data) => {
             if(data){
                 await suggest.findOne({ Guild: message.guild.id }, { $set: {Channel: `${channel ? channel.id : 'null'}`} })
                 message.channel.send(`Set the suggestion channel to **${channel ? channel.toString : 'none'}**`)
@@ -21,6 +21,6 @@ module.exports = {
                 }).save()
                 message.channel.send(`Set the suggestion channel to **${channel ? channel.toString() : 'none'}**`)
             }
-        }))
+        })
     }
 }
