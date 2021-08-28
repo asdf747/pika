@@ -25,7 +25,8 @@ module.exports = {
                         .setTitle(`New suggestion | Suggestion #${ID}`)
                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
                         .setFooter(`ID: ${message.author.id}`)
-                        .setDescription(`suggestion`)
+                        .setDescription(`${suggestion}`)
+                        .setColor("GREEN")
                 ).then(msg => {
                     msg.react('<a:TICK:881188150263816204>')
                     msg.react('<a:CROSS:881188274520072254>')
