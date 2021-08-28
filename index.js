@@ -39,8 +39,8 @@ const Dashboard = new DBD.Dashboard({
         id: '818876645401427989',
         secret: 'Xz8DyNaHyPoXClJH62iMZ_cAFdG6KcWY'
     },
-    redirectUri: 'https://pikaaa.herokuapp.com:3000/discord/callback',
-    domain: 'https://pikaaa.herokuapp.com:3000/',
+    redirectUri: 'http://localhost:8000/discord/callback',
+    domain: 'http://localhost:8000/',
     bot: client,
     theme: CaprihamTheme({
         privacypolicy: {
