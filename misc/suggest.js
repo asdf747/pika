@@ -6,7 +6,7 @@ module.exports = {
     minArgs: 1,
     expectedArgs: "<suggestion>",
     descripton: "Suggests something",
-    callback: async (message, arugments, text, client) => {
+    callback: async (message, arguments, text, client) => {
         let suggestion = arguments.slice(0).join(' ')
         await suggest.findOne({ Guild: message.guild.id }, async (err, data) => {
             if (data) {
