@@ -23,7 +23,6 @@ db.set(`esnipemsg_${newMessage.channel.id}`, oldMessage.content)
   client.esnipes.set(newMessage.channel.id, snipes);
   if(newMessage.guild.id === "818876705158594580") return
     if(newMessage.author.bot) return;
-    .catch(err => client.channels.cache.get('836514780931162124').send(`**${err}**`))
     let doc = await MessageLogs.findOne({ Guild: newMessage.guild.id })
     if(!doc) return;
     const channel = newMessage.guild.channels.cache.get(doc.Channel)
