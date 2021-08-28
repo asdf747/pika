@@ -10,7 +10,7 @@ module.exports = {
         let suggestion = arguments.slice(0).join(' ')
         await suggest.findOne({ Guild: message.guild.id }, async (err, data) => {
             if (data) {
-                if(message.guild.channels.cache.get(data.Channel)) return message.channel.send("The suggestion channel isn't set yet")
+                if(!message.guild.channels.cache.get(data.Channel)) return message.channel.send("The suggestion channel isn't set yet")
                 let ID = data.Suggestions.length + 1
                 let obj = {
                     ID,
