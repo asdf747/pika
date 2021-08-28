@@ -20,7 +20,9 @@ module.exports = {
                 }
                 data.Suggestions.push(obj)
                 data.save()
-                message.channel.send(
+                const channel = message.guild.channels.cache.get(data.Channel)
+                if(!channel) return message.channel.send("The suggestion channel is deleted")
+                channel.send(
                     new MessageEmbed()
                         .setTitle(`New suggestion | Suggestion #${ID}`)
                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
