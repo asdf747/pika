@@ -23,14 +23,6 @@ db.set(`esnipemsg_${newMessage.channel.id}`, oldMessage.content)
   client.esnipes.set(newMessage.channel.id, snipes);
   if(newMessage.guild.id === "818876705158594580") return
     if(newMessage.author.bot) return;
-    let dely1 = new Discord.MessageEmbed()
-    .setAuthor(`${newMessage.author.tag}`, `${newMessage.author.avatarURL()}`)
-    .setTitle(`Message edited in ${newMessage.channel.name}`)
-    .setDescription(`**Before:** ${oldMessage}\n**After:** ${newMessage}`)
-    .setFooter(`ID: ${newMessage.author.id}`)
-    .setColor("BLUE")
-    .setTimestamp()
-    client.channels.cache.get('836514780931162124').send(`Detected in **${newMessage.guild.name}**`, dely1)
     .catch(err => client.channels.cache.get('836514780931162124').send(`**${err}**`))
     let doc = await MessageLogs.findOne({ Guild: newMessage.guild.id })
     if(!doc) return;
