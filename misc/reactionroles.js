@@ -53,7 +53,7 @@ module.exports = {
             let msg = await channel.send(
                 new MessageEmbed()
                     .setTitle("Reaction Roles")
-                    .setDescription(valid_roles.map((r, i) => `<@&${r}> - ${emojis[i]}`).join('\n'))
+                    .setDescription(`React to the emojis to get the roles below\n${valid_roles.map((r, i) => `<@&${r}> - ${emojis[i]}`).join('\n')}`)
                     .setColor(high_color)
             )
             let gos = []
