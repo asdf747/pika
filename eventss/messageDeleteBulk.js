@@ -23,7 +23,7 @@ module.exports = async (client, messages) => {
     if(!channel) return doc.delete()
     let dely2 = new Discord.MessageEmbed()
     .setTitle(`${length} Messages purged in #${channell}`)
-    .setDescription(conte.map(message => `[${message.author.tag}]: ${message.content}`))
+    .setDescription(conte.map(message => `[${message.author.tag}]: ${message.content}`).reverse())
     .setFooter(`${length} latest shown`)
     .setColor('#dd5f53')
     .setTimestamp();

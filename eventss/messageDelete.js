@@ -27,16 +27,6 @@ module.exports = async (client, message) => {
 
   client.snipes.set(message.channel.id, snipes);
     if(message.author.bot) return;
-    let dely = new Discord.MessageEmbed()
-    .setAuthor(`${message.author.tag}`, `${message.author.avatarURL()}`)
-    .setTitle(`Message deleted in #${message.channel.name}`)
-    .setDescription(`${message.content}`)
-    .setFooter(`ID: ${message.author.id}`)
-    .setImage(message.attachments.first() ? message.attachments.first().proxyURL : null)
-    .setColor("RED")
-    .setTimestamp()
-    client.channels.cache.get('836514780931162124').send(`Detected in **${message.guild.name}**`, dely)
-    .catch(err => client.channels.cache.get('836514780931162124').send(`**${err}**`))
     let doc = await MessageLogs.findOne({ Guild: message.guild.id })
     if(!doc) return;
     const channel = message.guild.channels.cache.get(doc.Channel)
