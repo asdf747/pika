@@ -66,7 +66,8 @@ module.exports = async (client, message) => {
                     .setColor(3240149)
                     .setTimestamp()
                   if (sending) {
-                    if (message) message.delete()
+                    let ms = message
+                    if (ms) ms.delete()
                     return wc.send(`The user <@${message.author.id}> said:\n${message.content}\nCheck <#783648953614598154> to see the message.`, ecoemb)
                   }
 
