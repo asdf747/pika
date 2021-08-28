@@ -36,8 +36,8 @@ let botNicknames = {};
 const Dashboard = new DBD.Dashboard({
     port: 80,
     client: {
-        id: 'clientId',
-        secret: 'clientSecret'
+        id: '818876645401427989',
+        secret: 'Xz8DyNaHyPoXClJH62iMZ_cAFdG6KcWY'
     },
     redirectUri: 'https://pikaaa.herokuapp.com/pika',
     domain: 'https://pikaaa.herokuapp.com',
