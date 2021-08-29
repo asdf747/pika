@@ -11,7 +11,7 @@ module.exports = {
         let suggeston = await suggest.findOne({ Guild: message.guild.id })
         if (!suggeston) return message.channel.send("That suggestion id doesn't exist")
         let suggestion = suggeston.Suggestions.find(sug => sug.ID === parseInt(arguments[0]))
-        if (!suggeston) return message.channel.send("That suggestion id doesn't exist")
+        if (!suggestion) return message.channel.send("That suggestion id doesn't exist")
         let reason = 'No reason'
         if (arguments[1]) reason = arguments.slice(1).join(' ')
         message.channel.send(
