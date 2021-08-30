@@ -5,6 +5,7 @@ module.exports = {
   commands: ['messagelogs', 'messagelog'],
   description: 'Sets the message logs channel for guild',
   minArgs: 1,
+  permissions: 'ADMINISTRATOR',
   expectedArgs: '<channel/none>',
   callback: async (message, arguments, text, client) => {
     let channel = message.guild.channels.cache.get(arguments[0])

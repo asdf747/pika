@@ -6,7 +6,7 @@ const Pagination = require('discord-paginationembed')
 module.exports = {
   commands: ['reactionlogs', 'reactionlog'],
   description: 'Sets the channel for reaction logs.',
-  permissions: 'BAN_MEMBERS',
+  permissions: 'ADMINISTRATOR',
   permissionError: "You can't run this command.",
   minArgs: 1,
   expectedArgs: '<set/ignore/unignore> [channel/none]',
