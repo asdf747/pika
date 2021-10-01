@@ -34,7 +34,6 @@ module.exports = {
       if(!doc) return message.channel.send("There is no channel set.")
       let col = new WebhookClient(`${doc.ID}`, `${doc.TOKEN}`)
       doc.delete()
-      col.delete()
       message.channel.send(`Removed the reaction logs channel.`)
     } else{
       let channel = message.guild.channels.cache.get(arguments[1])
@@ -48,7 +47,6 @@ module.exports = {
       await ReactionLogs.findOne({ Guild: message.guild.id }, async (err, data) => {
         if(data){
           let gaos = new WebhookClient(`${data.ID}`, `${data.TOKEN}`)
-          if(gaos) gaos.delete()
           channel.createWebhook('Pika reaction logging', {
             avatar: client.user.displayAvatarURL()
           }).then(async webhook => {
